@@ -346,7 +346,7 @@ public class Empresa {
 
     private Mozo mayorVolumenVentaMozo(){
         Iterator<Mozo> it = mozos.iterator();
-        Mozo mozo, mayor;
+        Mozo mozo=null, mayor=null;
         double max = 0;
 
         while(it.hasNext()){
@@ -361,7 +361,7 @@ public class Empresa {
 
     private Mozo menorVolumenVentaMozo(){
         Iterator<Mozo> it = mozos.iterator();
-        Mozo mozo, menor;
+        Mozo mozo=null, menor=null;
         double min = 9999999;
 
         while(it.hasNext()){
@@ -374,10 +374,10 @@ public class Empresa {
         return menor;
     }
 
-    private float consumoPromedioMesa(int nroMesa) throws MesaNoExistenteException{
+    private double consumoPromedioMesa(int nroMesa) throws MesaNoExistenteException{
         Iterator<Mesa> it = mesas.iterator();
         boolean sale = false;
-        Mesa mesa;
+        Mesa mesa=null;
 
         while(it.hasNext() && !sale) {
             mesa = it.next();
@@ -386,7 +386,7 @@ public class Empresa {
             }
         }
         if(sale)
-            return mesa.getVentas / mesa.getCantCierres();
+            return mesa.getVentas() / mesa.getCantCuentasCerradas();
         else
             throw new MesaNoExistenteException();
 
@@ -396,7 +396,7 @@ public class Empresa {
 
         Iterator<Mozo> it = mozos.iterator();
         boolean sale = false;
-        Mozo mozo;
+        Mozo mozo=null;
 
         while(it.hasNext() && !sale) {
             mozo = it.next();

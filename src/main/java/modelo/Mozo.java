@@ -13,6 +13,16 @@ public class Mozo {
     private EstadoMozo estadoMozo;
     private String id;
 
+    private double ventas;
+
+    public double getVentas() {
+        return ventas;
+    }
+
+    public void setVentas(double ventas) {
+        this.ventas = ventas;
+    }
+
     public Mozo(String nombreCompleto, Date fechaNacimiento, int cantidadHijos) {
         this.nombreCompleto = nombreCompleto;
         this.fechaNacimiento = fechaNacimiento;

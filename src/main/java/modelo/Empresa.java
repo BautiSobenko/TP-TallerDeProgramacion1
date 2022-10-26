@@ -101,4 +101,8 @@ public class Empresa {
             this.mozos = new HashSet<>();
         }
     }
+
+    private void altaOperario(Operario operario){
+
+    }
 }

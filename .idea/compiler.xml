@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="tp-taller-de-programacion1" />
+        <module name="TP-TallerDeProgramacion1" />
       </profile>
     </annotationProcessing>
   </component>

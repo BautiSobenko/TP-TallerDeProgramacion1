@@ -2,10 +2,7 @@ package modelo;
 
 import enums.EstadoMesa;
 import enums.EstadoMozo;
-import exceptions.CierreMesaConEstadoLibreException;
-import exceptions.MesaNoExistenteException;
-import exceptions.MozoExistenteException;
-import exceptions.MozoNoExistenteException;
+import excepciones.*;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaXML;
 
@@ -23,9 +20,6 @@ public class Empresa {
     private double sueldoBasico;
 
     private Operario usuarioLogueado;
-
-
-
 
     public static Empresa getEmpresa() {
         if (empresa == null) {
@@ -189,7 +183,7 @@ public class Empresa {
         }
     }
 
-    private void altaOperario(Operario operario) throws operarioExistenteException {
+    private void altaOperario(Operario operario) throws OperarioExistenteException {
         Iterator<Operario> it = operarios.iterator();
         boolean sale = false;
         Operario op;
@@ -203,10 +197,10 @@ public class Empresa {
         if(!sale)
             this.operarios.add(operario);
         else
-            throw new operarioExistenteException();
+            throw new OperarioExistenteException();
     }
 
-    private void modificarOperario(Operario operario) throws operarioNoExistenteException {
+    private void modificarOperario(Operario operario) throws OperarioNoExistenteException {
 
         Iterator<Operario> it = operarios.iterator();
         boolean sale = false;
@@ -223,10 +217,10 @@ public class Empresa {
             operarios.add(operario);
         }
         else
-            throw new operarioNoExistenteException();
+            throw new OperarioNoExistenteException();
     }
 
-    private void bajaOperario(String nombre) throws operarioNoExistenteException {
+    private void bajaOperario(String nombre) throws OperarioNoExistenteException {
 
         Iterator<Operario> it = operarios.iterator();
         boolean sale = false;
@@ -241,10 +235,10 @@ public class Empresa {
         if(sale)
             it.remove();
         else
-            throw new operarioNoExistenteException();
+            throw new OperarioNoExistenteException();
     }
 
-    private void altaProducto(Producto producto) throws productoExistenteException {
+    private void altaProducto(Producto producto) throws ProductoExistenteException {
         Iterator<Producto> it = productos.iterator();
         boolean sale = false;
         Producto prod;
@@ -258,10 +252,10 @@ public class Empresa {
         if(!sale)
             this.productos.add(producto);
         else
-            throw new productoExistenteException();
+            throw new ProductoExistenteException();
     }
 
-    private void modificaProducto(Producto producto) throws productoNoExistenteException {
+    private void modificaProducto(Producto producto) throws ProductoNoExistenteException {
         Iterator<Producto> it = productos.iterator();
         boolean sale = false;
         Producto prod;
@@ -277,10 +271,10 @@ public class Empresa {
             this.productos.add(producto);
         }
         else
-            throw new productoNoExistenteException();
+            throw new ProductoNoExistenteException();
     }
 
-    private void bajaProducto(String id) throws productoNoExistenteException {
+    private void bajaProducto(String id) throws ProductoNoExistenteException {
         Iterator<Producto> it = productos.iterator();
         boolean sale = false;
         Producto prod;
@@ -294,10 +288,10 @@ public class Empresa {
         if(sale)
             it.remove();
         else
-            throw new productoNoExistenteException();
+            throw new ProductoNoExistenteException();
     }
 
-    private void altaMesa(Mesa mesa) throws mesaExistenteException {
+    private void altaMesa(Mesa mesa) throws MesaExistenteException {
         Iterator<Mesa> it = mesas.iterator();
         boolean sale = false;
         Mesa m;
@@ -311,10 +305,10 @@ public class Empresa {
         if(!sale)
             this.mesas.add(mesa);
         else
-            throw new mesaExistenteException();
+            throw new MesaExistenteException();
     }
 
-    private void modificaMesa(Mesa mesa) throws mesaNoExistenteException {
+    private void modificaMesa(Mesa mesa) throws MesaNoExistenteException {
         Iterator<Mesa> it = mesas.iterator();
         boolean sale = false;
         Mesa m;
@@ -330,10 +324,10 @@ public class Empresa {
             this.mesas.add(mesa);
         }
         else
-            throw new mesaNoExistenteException();
+            throw new MesaNoExistenteException();
     }
 
-    private void bajaMesa(int nroMesa) throws mesaNoExistenteException {
+    private void bajaMesa(int nroMesa) throws MesaNoExistenteException {
         Iterator<Mesa> it = mesas.iterator();
         boolean sale = false;
         Mesa m;
@@ -347,19 +341,19 @@ public class Empresa {
         if(sale)
             it.remove();
         else
-            throw new mesaNoExistenteException();
+            throw new MesaNoExistenteException();
     }
 
     private Mozo mayorVolumenVentaMozo(){
         Iterator<Mozo> it = mozos.iterator();
-        Mozo m, mayor;
+        Mozo mozo, mayor;
         double max = 0;
 
         while(it.hasNext()){
-            m = it.next();
-            if(m.getVentas()>max){
-                mayor = m;
-                max = m.getVentas();
+            mozo = it.next();
+            if(mozo.getVentas()>max){
+                mayor = mozo;
+                max = mozo.getVentas();
             }
         }
         return mayor;
@@ -367,34 +361,34 @@ public class Empresa {
 
     private Mozo menorVolumenVentaMozo(){
         Iterator<Mozo> it = mozos.iterator();
-        Mozo m, menor;
+        Mozo mozo, menor;
         double min = 9999999;
 
         while(it.hasNext()){
-            m = it.next();
-            if(m.getVentas()<min){
-                menor = m;
-                min = m.getVentas();
+            mozo = it.next();
+            if(mozo.getVentas()<min){
+                menor = mozo;
+                min = mozo.getVentas();
             }
         }
         return menor;
     }
 
-    private float consumoPromedioMesa(int nroMesa) throws mesaNoExistenteException{
+    private float consumoPromedioMesa(int nroMesa) throws MesaNoExistenteException{
         Iterator<Mesa> it = mesas.iterator();
         boolean sale = false;
-        Mesa m;
+        Mesa mesa;
 
         while(it.hasNext() && !sale) {
-            m = it.next();
-            if(m.getNroMesa() == nroMesa){
+            mesa = it.next();
+            if(mesa.getNroMesa() == nroMesa){
                 sale = true;
             }
         }
         if(sale)
-            return m.getVentas / m.getCantCierres();
+            return mesa.getVentas / mesa.getCantCierres();
         else
-            throw new mesaNoExistenteException();
+            throw new MesaNoExistenteException();
 
     }
 
@@ -402,16 +396,16 @@ public class Empresa {
 
         Iterator<Mozo> it = mozos.iterator();
         boolean sale = false;
-        Mozo mo;
+        Mozo mozo;
 
         while(it.hasNext() && !sale) {
-            mo = it.next();
-            if(mo.getId() == id){
+            mozo = it.next();
+            if(mozo.getId() == id){
                 sale = true;
             }
         }
         if(sale)
-            return this.sueldoBasico * (1 + 0.05 * mo.getCantidadHijos());
+            return this.sueldoBasico * (1 + 0.05 * mozo.getCantidadHijos());
         else
             throw new MozoNoExistenteException();
     }

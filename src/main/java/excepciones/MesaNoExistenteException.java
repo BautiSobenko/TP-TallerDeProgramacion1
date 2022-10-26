@@ -1,4 +1,4 @@
-package Exceptions;
+package excepciones;
 
 public class MesaNoExistenteException extends Exception{
     public MesaNoExistenteException() {

@@ -1,12 +1,10 @@
 package modelo;
 
 import enums.EstadoMozo;
-import exceptions.CierreMesaConEstadoLibreException;
-import exceptions.MesaNoExistenteException;
-import exceptions.MozoExistenteException;
-import exceptions.MozoNoExistenteException;
-
-import java.util.Iterator;
+import excepciones.CierreMesaConEstadoLibreException;
+import excepciones.MesaNoExistenteException;
+import excepciones.MozoExistenteException;
+import excepciones.MozoNoExistenteException;
 
 public class Operario {
 

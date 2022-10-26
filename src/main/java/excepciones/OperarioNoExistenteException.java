@@ -1,4 +1,4 @@
-package Exceptions;
+package excepciones;
 
 public class OperarioNoExistenteException extends Exception{
     public OperarioNoExistenteException() {

@@ -12,6 +12,9 @@ import java.util.*;
 public class Empresa {
 
     private static Empresa empresa = null;
+
+    private Operario admin;
+
     private String nombre;
     private Set<Mozo> mozos;
     private Set<Mesa> mesas;
@@ -28,7 +31,11 @@ public class Empresa {
         return empresa;
     }
 
-    private Empresa() {
+    private Empresa() { //Terminar de tratar al admin y su logeo
+        if(admin.getPassword() == "admin1234") {
+            this.admin.setPassword("Hola");
+
+        }
         cargarMesas();
         cargarMozos();
         cargarProductos();

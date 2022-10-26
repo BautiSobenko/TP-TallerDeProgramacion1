@@ -7,6 +7,7 @@ public class Mesa {
     private int cantSillas;
     private EstadoMesa estadoMesa;
     private Mozo mozoAsignado;
+    private Cuenta comanda;
 
     public Mesa(int nroMesa, int cantSillas) {
         this.nroMesa = nroMesa;
@@ -44,5 +45,13 @@ public class Mesa {
 
     public void setMozoAsignado(Mozo mozoAsignado) {
         this.mozoAsignado = mozoAsignado;
+    }
+
+    public Cuenta getComanda() {
+        return comanda;
+    }
+
+    public void setComanda(Cuenta comanda) {
+        this.comanda = comanda;
     }
 }

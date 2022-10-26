@@ -1,5 +1,13 @@
 package modelo;
 
+import enums.EstadoMozo;
+import exceptions.CierreMesaConEstadoLibreException;
+import exceptions.MesaNoExistenteException;
+import exceptions.MozoExistenteException;
+import exceptions.MozoNoExistenteException;
+
+import java.util.Iterator;
+
 public class Operario {
 
     private String nombreCompleto;
@@ -16,6 +24,69 @@ public class Operario {
 
     public static Operario admin() {
         return new Operario("admin", "admin", "admin1234");
+    }
+
+
+    public void altaMozo(Mozo mozo) throws MozoExistenteException {
+
+        try {
+
+            Empresa.getEmpresa().addMozo(mozo);
+
+        }catch(MozoExistenteException exc){
+            throw exc;
+        }
+
+    }
+
+    public void modificarMozo(Mozo mozo) throws MozoNoExistenteException {
+
+        try {
+
+            Empresa.getEmpresa().modMozo(mozo);
+
+        }catch(MozoNoExistenteException exc){
+            throw exc;
+        }
+
+    }
+
+    public void bajaMozo(Mozo mozo) throws MozoNoExistenteException {
+
+        try {
+
+            Empresa.getEmpresa().modMozo(mozo);
+
+        }catch(MozoNoExistenteException exc){
+            throw exc;
+        }
+
+    }
+
+    public void modEstadoMozo(Mozo mozo, EstadoMozo nuevoEstado) throws MozoNoExistenteException {
+
+        try {
+
+            Empresa.getEmpresa().modEstadoMozo(mozo, nuevoEstado);
+
+        } catch (MozoNoExistenteException exc) {
+            throw exc;
+        }
+
+    }
+
+    public void cierreMesa(Mesa mesa) throws MesaNoExistenteException, CierreMesaConEstadoLibreException {
+
+        try {
+
+            Empresa.getEmpresa().cerrarMesa(mesa);
+
+        }catch (MesaNoExistenteException exc) {
+            throw exc;
+        } catch (CierreMesaConEstadoLibreException exc) {
+            throw exc;
+        }
+
     }
 
     public String getNombreCompleto() {
@@ -49,4 +120,7 @@ public class Operario {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
+
+
+
 }

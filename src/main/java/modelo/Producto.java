@@ -54,5 +54,6 @@ public class Producto {
         return stock;
     }
 
+    
 
 }

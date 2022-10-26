@@ -1,10 +1,17 @@
 package modelo;
 
+import enums.EstadoMesa;
+import enums.EstadoMozo;
+import exceptions.CierreMesaConEstadoLibreException;
+import exceptions.MesaNoExistenteException;
+import exceptions.MozoExistenteException;
+import exceptions.MozoNoExistenteException;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaXML;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Empresa {
@@ -32,6 +39,86 @@ public class Empresa {
         cargarMozos();
         cargarProductos();
         cargarOperarios();
+    }
+
+    public void addMozo(Mozo mozo) throws MozoExistenteException {
+
+        boolean existeMozo = this.mozos.stream().anyMatch(m -> m.getId().equalsIgnoreCase(mozo.getId()) );
+        if( !existeMozo )
+            throw new MozoExistenteException();
+        else
+            this.mozos.add(mozo);
+
+    }
+
+    public void modMozo(Mozo mozo) throws MozoNoExistenteException {
+
+        boolean existeMozo = this.mozos.stream().anyMatch(m -> m.getId().equalsIgnoreCase(mozo.getId()) );
+        if( !existeMozo )
+            throw new MozoNoExistenteException();
+        else{
+            this.mozos.remove(mozo);
+            this.mozos.add(mozo);
+        }
+    }
+
+    public void bajaMozo(Mozo mozo) throws MozoNoExistenteException {
+
+        boolean existeMozo = this.mozos.stream().anyMatch(m -> m.getId().equalsIgnoreCase(mozo.getId()) );
+        if( !existeMozo )
+            throw new MozoNoExistenteException();
+        else
+            this.mozos.remove(mozo);
+
+    }
+
+    public void modEstadoMozo(Mozo mozo, EstadoMozo nuevoEstado) throws MozoNoExistenteException {
+
+        boolean existeMozo = this.mozos.stream().anyMatch(m -> m.getId().equalsIgnoreCase(mozo.getId()) );
+        if( !existeMozo )
+            throw new MozoNoExistenteException();
+        else
+            mozo.setEstadoMozo(nuevoEstado);
+
+    }
+
+    public void asignarMozoMesa(Mozo mozo, Mesa mesa) throws MozoNoExistenteException, MesaNoExistenteException {
+
+        boolean existeMozo = this.mozos.stream().anyMatch(m -> m.getId().equalsIgnoreCase(mozo.getId()) );
+        boolean existeMesa;
+
+        if( !existeMozo )
+            throw new MozoNoExistenteException();
+        else{
+            existeMesa = this.mesas.stream().anyMatch(m -> m.getNroMesa() == mesa.getNroMesa());
+            if( !existeMesa )
+                throw new MesaNoExistenteException();
+            else
+                mesa.setMozoAsignado(mozo);
+        }
+
+    }
+
+    public double cerrarMesa(Mesa mesa) throws MesaNoExistenteException, CierreMesaConEstadoLibreException {
+        boolean existeMesa = this.mesas.stream().anyMatch(m -> m.getNroMesa() == mesa.getNroMesa());
+        if( !existeMesa )
+            throw new MesaNoExistenteException();
+        else{
+            if( mesa.getEstadoMesa() == EstadoMesa.LIBRE ){
+                throw new CierreMesaConEstadoLibreException();
+            }else{
+                List<Pedido> pedidosMesa = mesa.getComanda().getPedidos();
+                double totalMesa = pedidosMesa.stream()
+                        .mapToDouble(p -> p.getProducto().getPrecio())
+                        .sum();
+                return totalMesa;
+
+            }
+        }
+    }
+
+    public void login(String username, String password){
+
     }
 
     private void cargarOperarios() {
@@ -101,4 +188,6 @@ public class Empresa {
             this.mozos = new HashSet<>();
         }
     }
+
+
 }

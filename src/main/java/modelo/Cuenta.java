@@ -13,7 +13,6 @@ public class Cuenta {
     private Instant apertura;
     private Instant cierre;
 
-
     public Cuenta() {
         pedidos = new ArrayList<>();
         estadoPedido = EstadoComanda.ABIERTA;

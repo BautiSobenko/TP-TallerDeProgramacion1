@@ -3,14 +3,13 @@ package modelo;
 import enums.EstadoMesa;
 
 public class Mesa {
+
     private int nroMesa;
     private int cantSillas;
     private EstadoMesa estadoMesa;
     private Mozo mozoAsignado;
     private Cuenta comanda;
-
     private double Ventas;
-
     private int cantCuentasCerradas;
 
     public Mesa(int nroMesa, int cantSillas) {

@@ -1,7 +1,5 @@
 package modelo;
 
-import enums.EstadoMesa;
-import enums.EstadoMozo;
 import excepciones.*;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaXML;
@@ -31,11 +29,7 @@ public class Empresa {
         return empresa;
     }
 
-    private Empresa() { //Terminar de tratar al admin y su logeo
-        if(admin.getPassword() == "admin1234") {
-            this.admin.setPassword("Hola");
-
-        }
+    private Empresa() {
         cargarMesas();
         cargarMozos();
         cargarProductos();
@@ -127,12 +121,12 @@ public class Empresa {
 
     private Mozo mayorVolumenVentaMozo(){
         Iterator<Mozo> it = mozos.iterator();
-        Mozo mozo, mayor;
+        Mozo mozo, mayor = null;
         double max = 0;
 
         while(it.hasNext()){
             mozo = it.next();
-            if(mozo.getVentas()>max){
+            if(mozo.getVentas() > max){
                 mayor = mozo;
                 max = mozo.getVentas();
             }
@@ -142,12 +136,12 @@ public class Empresa {
 
     private Mozo menorVolumenVentaMozo(){
         Iterator<Mozo> it = mozos.iterator();
-        Mozo mozo=null, menor=null;
+        Mozo mozo, menor = null;
         double min = 9999999;
 
         while(it.hasNext()){
             mozo = it.next();
-            if(mozo.getVentas()<min){
+            if(mozo.getVentas() < min){
                 menor = mozo;
                 min = mozo.getVentas();
             }
@@ -155,19 +149,19 @@ public class Empresa {
         return menor;
     }
 
-    private float consumoPromedioMesa(int nroMesa) throws MesaNoExistenteException{
+    private double consumoPromedioMesa(int nroMesa) throws MesaNoExistenteException{
         Iterator<Mesa> it = mesas.iterator();
-        boolean sale = false;
-        Mesa mesa=null;
+        boolean encontreMesa = false;
+        Mesa mesa = null;
 
-        while(it.hasNext() && !sale) {
+        while(it.hasNext() && !encontreMesa) {
             mesa = it.next();
             if(mesa.getNroMesa() == nroMesa){
-                sale = true;
+                encontreMesa = true;
             }
         }
-        if(sale)
-            return mesa.getVentas / mesa.getCantCierres();
+        if(encontreMesa)
+            return mesa.getVentas() / mesa.getCantCuentasCerradas();
         else
             throw new MesaNoExistenteException();
 

@@ -12,6 +12,7 @@ public class Mozo {
     private int cantidadHijos;
     private EstadoMozo estadoMozo;
     private String id;
+    private double ventas;
 
     public Mozo(String nombreCompleto, Date fechaNacimiento, int cantidadHijos) {
         this.nombreCompleto = nombreCompleto;
@@ -19,6 +20,18 @@ public class Mozo {
         this.cantidadHijos = cantidadHijos;
         this.estadoMozo = EstadoMozo.ACTIVO;
         this.id = UUID.randomUUID().toString();
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public double getVentas() {
+        return ventas;
+    }
+
+    public void setVentas(double ventas) {
+        this.ventas = ventas;
     }
 
     public String getNombreCompleto() {

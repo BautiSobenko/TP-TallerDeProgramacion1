@@ -1,9 +1,6 @@
 package persistencia;
 
-import modelo.Mesa;
-
 import java.io.IOException;
-import java.util.Set;
 
 public interface IPersistencia<E> {
 

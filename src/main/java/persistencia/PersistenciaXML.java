@@ -1,13 +1,10 @@
 package persistencia;
 
-import modelo.Mesa;
-
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Set;
 
 public class PersistenciaXML implements IPersistencia {
     private XMLEncoder xmlEncoder;
@@ -40,7 +37,7 @@ public class PersistenciaXML implements IPersistencia {
     }
 
     @Override
-    public void escribir(Set<Mesa> objeto) throws IOException {
+    public void escribir(Object objeto) throws IOException {
         xmlEncoder.writeObject(objeto);
     }
 

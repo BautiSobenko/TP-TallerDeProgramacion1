@@ -42,4 +42,6 @@ public class CierreMesa extends Cuenta{
     public void setTotal(Float total) {
         this.total = total;
     }
+
+
 }

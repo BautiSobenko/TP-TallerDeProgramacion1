@@ -35,84 +35,19 @@ public class Empresa {
         cargarOperarios();
     }
 
-    public void addMozo(Mozo mozo) throws MozoExistenteException {
+    public void login(String username, String password) throws CredencialesInvalidasException {
+        Optional<Operario> logueado = operarios.stream()
+                .filter(operario -> operario.getPassword().equals(password) && operario.getUsername().equals(username)).findFirst();
 
-        boolean existeMozo = this.mozos.stream().anyMatch(m -> m.getId().equalsIgnoreCase(mozo.getId()) );
-        if( !existeMozo )
-            throw new MozoExistenteException();
-        else
-            this.mozos.add(mozo);
-
-    }
-
-    public void modMozo(Mozo mozo) throws MozoNoExistenteException {
-
-        boolean existeMozo = this.mozos.stream().anyMatch(m -> m.getId().equalsIgnoreCase(mozo.getId()) );
-        if( !existeMozo )
-            throw new MozoNoExistenteException();
-        else{
-            this.mozos.remove(mozo);
-            this.mozos.add(mozo);
+        if (logueado.isPresent()) {
+            usuarioLogueado = logueado.get();
+        } else {
+            throw new CredencialesInvalidasException();
         }
     }
 
-    public void bajaMozo(Mozo mozo) throws MozoNoExistenteException {
-
-        boolean existeMozo = this.mozos.stream().anyMatch(m -> m.getId().equalsIgnoreCase(mozo.getId()) );
-        if( !existeMozo )
-            throw new MozoNoExistenteException();
-        else
-            this.mozos.remove(mozo);
-
-    }
-
-    public void modEstadoMozo(Mozo mozo, EstadoMozo nuevoEstado) throws MozoNoExistenteException {
-
-        boolean existeMozo = this.mozos.stream().anyMatch(m -> m.getId().equalsIgnoreCase(mozo.getId()) );
-        if( !existeMozo )
-            throw new MozoNoExistenteException();
-        else
-            mozo.setEstadoMozo(nuevoEstado);
-
-    }
-
-    public void asignarMozoMesa(Mozo mozo, Mesa mesa) throws MozoNoExistenteException, MesaNoExistenteException {
-
-        boolean existeMozo = this.mozos.stream().anyMatch(m -> m.getId().equalsIgnoreCase(mozo.getId()) );
-        boolean existeMesa;
-
-        if( !existeMozo )
-            throw new MozoNoExistenteException();
-        else{
-            existeMesa = this.mesas.stream().anyMatch(m -> m.getNroMesa() == mesa.getNroMesa());
-            if( !existeMesa )
-                throw new MesaNoExistenteException();
-            else
-                mesa.setMozoAsignado(mozo);
-        }
-
-    }
-
-    public double cerrarMesa(Mesa mesa) throws MesaNoExistenteException, CierreMesaConEstadoLibreException {
-        boolean existeMesa = this.mesas.stream().anyMatch(m -> m.getNroMesa() == mesa.getNroMesa());
-        if( !existeMesa )
-            throw new MesaNoExistenteException();
-        else{
-            if( mesa.getEstadoMesa() == EstadoMesa.LIBRE ){
-                throw new CierreMesaConEstadoLibreException();
-            }else{
-                List<Pedido> pedidosMesa = mesa.getComanda().getPedidos();
-                double totalMesa = pedidosMesa.stream()
-                        .mapToDouble(p -> p.getProducto().getPrecio())
-                        .sum();
-                return totalMesa;
-
-            }
-        }
-    }
-
-    public void login(String username, String password){
-
+    public void logout() {
+        usuarioLogueado = null;
     }
 
     private void cargarOperarios() {
@@ -183,167 +118,6 @@ public class Empresa {
         }
     }
 
-    private void altaOperario(Operario operario) throws OperarioExistenteException {
-        Iterator<Operario> it = operarios.iterator();
-        boolean sale = false;
-        Operario op;
-
-        while(it.hasNext() && !sale) {
-            op = it.next();
-            if(op.getNombreCompleto() == operario.getNombreCompleto()){
-                sale = true;
-            }
-        }
-        if(!sale)
-            this.operarios.add(operario);
-        else
-            throw new OperarioExistenteException();
-    }
-
-    private void modificarOperario(Operario operario) throws OperarioNoExistenteException {
-
-        Iterator<Operario> it = operarios.iterator();
-        boolean sale = false;
-        Operario op;
-
-        while(it.hasNext() && !sale) {
-            op = it.next();
-            if(op.getNombreCompleto() == operario.getNombreCompleto()){
-                sale = true;
-            }
-        }
-        if(sale) {
-            it.remove();
-            operarios.add(operario);
-        }
-        else
-            throw new OperarioNoExistenteException();
-    }
-
-    private void bajaOperario(String nombre) throws OperarioNoExistenteException {
-
-        Iterator<Operario> it = operarios.iterator();
-        boolean sale = false;
-        Operario op;
-
-        while(it.hasNext() && !sale) {
-            op = it.next();
-            if(op.getNombreCompleto() == nombre){
-                sale = true;
-            }
-        }
-        if(sale)
-            it.remove();
-        else
-            throw new OperarioNoExistenteException();
-    }
-
-    private void altaProducto(Producto producto) throws ProductoExistenteException {
-        Iterator<Producto> it = productos.iterator();
-        boolean sale = false;
-        Producto prod;
-
-        while(it.hasNext() && !sale) {
-            prod = it.next();
-            if(prod.getId() == producto.getId()){
-                sale = true;
-            }
-        }
-        if(!sale)
-            this.productos.add(producto);
-        else
-            throw new ProductoExistenteException();
-    }
-
-    private void modificaProducto(Producto producto) throws ProductoNoExistenteException {
-        Iterator<Producto> it = productos.iterator();
-        boolean sale = false;
-        Producto prod;
-
-        while(it.hasNext() && !sale) {
-            prod = it.next();
-            if(prod.getId() == producto.getId()){
-                sale = true;
-            }
-        }
-        if(sale) {
-            it.remove();
-            this.productos.add(producto);
-        }
-        else
-            throw new ProductoNoExistenteException();
-    }
-
-    private void bajaProducto(String id) throws ProductoNoExistenteException {
-        Iterator<Producto> it = productos.iterator();
-        boolean sale = false;
-        Producto prod;
-
-        while(it.hasNext() && !sale) {
-            prod = it.next();
-            if(prod.getId() == id){
-                sale = true;
-            }
-        }
-        if(sale)
-            it.remove();
-        else
-            throw new ProductoNoExistenteException();
-    }
-
-    private void altaMesa(Mesa mesa) throws MesaExistenteException {
-        Iterator<Mesa> it = mesas.iterator();
-        boolean sale = false;
-        Mesa m;
-
-        while(it.hasNext() && !sale) {
-            m = it.next();
-            if(m.getNroMesa() == mesa.getNroMesa()){
-                sale = true;
-            }
-        }
-        if(!sale)
-            this.mesas.add(mesa);
-        else
-            throw new MesaExistenteException();
-    }
-
-    private void modificaMesa(Mesa mesa) throws MesaNoExistenteException {
-        Iterator<Mesa> it = mesas.iterator();
-        boolean sale = false;
-        Mesa m;
-
-        while(it.hasNext() && !sale) {
-            m = it.next();
-            if(m.getNroMesa() == mesa.getNroMesa()){
-                sale = true;
-            }
-        }
-        if(sale) {
-            it.remove();
-            this.mesas.add(mesa);
-        }
-        else
-            throw new MesaNoExistenteException();
-    }
-
-    private void bajaMesa(int nroMesa) throws MesaNoExistenteException {
-        Iterator<Mesa> it = mesas.iterator();
-        boolean sale = false;
-        Mesa m;
-
-        while(it.hasNext() && !sale) {
-            m = it.next();
-            if(m.getNroMesa() == nroMesa){
-                sale = true;
-            }
-        }
-        if(sale)
-            it.remove();
-        else
-            throw new MesaNoExistenteException();
-    }
-
     private Mozo mayorVolumenVentaMozo(){
         Iterator<Mozo> it = mozos.iterator();
         Mozo mozo, mayor;
@@ -377,7 +151,7 @@ public class Empresa {
     private float consumoPromedioMesa(int nroMesa) throws MesaNoExistenteException{
         Iterator<Mesa> it = mesas.iterator();
         boolean sale = false;
-        Mesa mesa;
+        Mesa mesa = null;
 
         while(it.hasNext() && !sale) {
             mesa = it.next();
@@ -396,11 +170,11 @@ public class Empresa {
 
         Iterator<Mozo> it = mozos.iterator();
         boolean sale = false;
-        Mozo mozo;
+        Mozo mozo = null;
 
         while(it.hasNext() && !sale) {
             mozo = it.next();
-            if(mozo.getId() == id){
+            if(mozo.getId().equals(id)){
                 sale = true;
             }
         }
@@ -408,5 +182,65 @@ public class Empresa {
             return this.sueldoBasico * (1 + 0.05 * mozo.getCantidadHijos());
         else
             throw new MozoNoExistenteException();
+    }
+
+    public static void setEmpresa(Empresa empresa) {
+        Empresa.empresa = empresa;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Set<Mozo> getMozos() {
+        return mozos;
+    }
+
+    public void setMozos(Set<Mozo> mozos) {
+        this.mozos = mozos;
+    }
+
+    public Set<Mesa> getMesas() {
+        return mesas;
+    }
+
+    public void setMesas(Set<Mesa> mesas) {
+        this.mesas = mesas;
+    }
+
+    public Set<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(Set<Producto> productos) {
+        this.productos = productos;
+    }
+
+    public Set<Operario> getOperarios() {
+        return operarios;
+    }
+
+    public void setOperarios(Set<Operario> operarios) {
+        this.operarios = operarios;
+    }
+
+    public double getSueldoBasico() {
+        return sueldoBasico;
+    }
+
+    public void setSueldoBasico(double sueldoBasico) {
+        this.sueldoBasico = sueldoBasico;
+    }
+
+    public Operario getUsuarioLogueado() {
+        return usuarioLogueado;
+    }
+
+    public void setUsuarioLogueado(Operario usuarioLogueado) {
+        this.usuarioLogueado = usuarioLogueado;
     }
 }

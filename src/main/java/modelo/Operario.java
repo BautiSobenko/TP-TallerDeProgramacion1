@@ -1,10 +1,9 @@
 package modelo;
 
 import enums.EstadoMozo;
-import excepciones.CierreMesaConEstadoLibreException;
-import excepciones.MesaNoExistenteException;
-import excepciones.MozoExistenteException;
-import excepciones.MozoNoExistenteException;
+import excepciones.*;
+import negocio.GestionDeMozos;
+import negocio.GestionDeMesas;
 
 public class Operario {
 
@@ -25,65 +24,33 @@ public class Operario {
     }
 
 
-    public void altaMozo(Mozo mozo) throws MozoExistenteException {
+    public void altaMozo(Mozo mozo) throws MozoExistenteException, PermisoDenegadoException {
 
-        try {
-
-            Empresa.getEmpresa().addMozo(mozo);
-
-        }catch(MozoExistenteException exc){
-            throw exc;
-        }
+        GestionDeMozos.get().altaMozo(mozo);
 
     }
 
-    public void modificarMozo(Mozo mozo) throws MozoNoExistenteException {
+    public void modificarMozo(Mozo mozo) throws MozoNoExistenteException, PermisoDenegadoException {
 
-        try {
-
-            Empresa.getEmpresa().modMozo(mozo);
-
-        }catch(MozoNoExistenteException exc){
-            throw exc;
-        }
+        GestionDeMozos.get().modificarMozo(mozo);
 
     }
 
-    public void bajaMozo(Mozo mozo) throws MozoNoExistenteException {
+    public void bajaMozo(Mozo mozo) throws MozoNoExistenteException, PermisoDenegadoException {
 
-        try {
-
-            Empresa.getEmpresa().modMozo(mozo);
-
-        }catch(MozoNoExistenteException exc){
-            throw exc;
-        }
+        GestionDeMozos.get().bajaMozo(mozo);
 
     }
 
     public void modEstadoMozo(Mozo mozo, EstadoMozo nuevoEstado) throws MozoNoExistenteException {
 
-        try {
-
-            Empresa.getEmpresa().modEstadoMozo(mozo, nuevoEstado);
-
-        } catch (MozoNoExistenteException exc) {
-            throw exc;
-        }
+        GestionDeMozos.get().modEstadoMozo(mozo, nuevoEstado);
 
     }
 
-    public void cierreMesa(Mesa mesa) throws MesaNoExistenteException, CierreMesaConEstadoLibreException {
+    public double cierreMesa(Mesa mesa) throws MesaNoExistenteException, CierreMesaConEstadoLibreException {
 
-        try {
-
-            Empresa.getEmpresa().cerrarMesa(mesa);
-
-        }catch (MesaNoExistenteException exc) {
-            throw exc;
-        } catch (CierreMesaConEstadoLibreException exc) {
-            throw exc;
-        }
+        return GestionDeMesas.get().cerrarMesa(mesa);
 
     }
 

@@ -1,8 +1,12 @@
 package persistencia;
 
+import modelo.Mesa;
+
 import java.io.IOException;
+import java.util.Set;
 
 public interface IPersistencia<E> {
+
     void abrirInput(String nombre) throws IOException;
 
     void abrirOutput(String nombre) throws IOException;
@@ -14,4 +18,5 @@ public interface IPersistencia<E> {
     void escribir(E objeto) throws IOException;
 
     E leer() throws IOException, ClassNotFoundException;
+
 }

@@ -12,6 +12,9 @@ import java.util.*;
 public class Empresa {
 
     private static Empresa empresa = null;
+
+    private Operario admin;
+
     private String nombre;
     private Set<Mozo> mozos;
     private Set<Mesa> mesas;
@@ -28,7 +31,11 @@ public class Empresa {
         return empresa;
     }
 
-    private Empresa() {
+    private Empresa() { //Terminar de tratar al admin y su logeo
+        if(admin.getPassword() == "admin1234") {
+            this.admin.setPassword("Hola");
+
+        }
         cargarMesas();
         cargarMozos();
         cargarProductos();
@@ -135,7 +142,7 @@ public class Empresa {
 
     private Mozo menorVolumenVentaMozo(){
         Iterator<Mozo> it = mozos.iterator();
-        Mozo mozo, menor;
+        Mozo mozo=null, menor=null;
         double min = 9999999;
 
         while(it.hasNext()){
@@ -151,7 +158,7 @@ public class Empresa {
     private float consumoPromedioMesa(int nroMesa) throws MesaNoExistenteException{
         Iterator<Mesa> it = mesas.iterator();
         boolean sale = false;
-        Mesa mesa = null;
+        Mesa mesa=null;
 
         while(it.hasNext() && !sale) {
             mesa = it.next();

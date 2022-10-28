@@ -86,6 +86,16 @@ public class Operario {
         this.activo = activo;
     }
 
+    public boolean validaContrasena(String contrasena) throws ContrasenaIncorrectaException {
+        boolean ingreso = false;
+        if (contrasena.equals(this.password))
+            ingreso = true;
+        else {
+            throw new ContrasenaIncorrectaException(contrasena, "contrasena incorrecta");
+        }
+        return ingreso;
+    }
+
 
 
 }

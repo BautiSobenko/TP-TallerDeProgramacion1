@@ -36,16 +36,6 @@ public class Empresa {
         cargarOperarios();
     }
 
-    public void login(String username, String password) throws CredencialesInvalidasException {
-        Optional<Operario> logueado = operarios.stream()
-                .filter(operario -> operario.getPassword().equals(password) && operario.getUsername().equals(username)).findFirst();
-
-        if (logueado.isPresent()) {
-            usuarioLogueado = logueado.get();
-        } else {
-            throw new CredencialesInvalidasException();
-        }
-    }
 
     public void logout() {
         usuarioLogueado = null;
@@ -243,5 +233,27 @@ public class Empresa {
 
     public void setUsuarioLogueado(Operario usuarioLogueado) {
         this.usuarioLogueado = usuarioLogueado;
+    }
+
+    public Operario login(String username, String password) throws UsuarioIncorrectoException, ContrasenaIncorrectaException {
+
+        Optional<Operario> candidato = operarios.stream()
+                .filter(x -> x.getUsername().equalsIgnoreCase(username)).findAny();
+
+        if (candidato.isPresent()) {
+            candidato.get().validaContrasena(password);
+            this.usuarioLogueado = candidato.get();
+            return candidato.get();
+        }
+
+        if(this.admin!=null) {
+            if (this.admin.getUsername().equalsIgnoreCase(username)) {
+                this.admin.validaContrasena(password);
+                this.usuarioLogueado = this.admin;
+                return admin;
+            }
+        }
+
+        throw new UsuarioIncorrectoException("Usuario no encontrado", username);
     }
 }

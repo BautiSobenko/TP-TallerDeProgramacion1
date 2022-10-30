@@ -30,13 +30,13 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 	private JPanel contentPane;
 	private JTextField usernameField;
 	private JButton loginButton;
-	private JButton registrarseButton;
 	private ActionListener actionListener;
 	private String username;
 	private String contrasena;
 	private JPasswordField contrasenaField;
 
 	public VistaLogin() {
+		setTitle("Administracion Gastronomica");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 235, 235);
 		contentPane = new JPanel();
@@ -63,7 +63,7 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 		panel_1.add(usernameField);
 		usernameField.setColumns(20);
 
-		JLabel lblNewLabel_1 = new JLabel("Contrase\u00F1a:");
+		JLabel lblNewLabel_1 = new JLabel("Password:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel_1.setVerticalAlignment(SwingConstants.BOTTOM);
 		panelCentro.add(lblNewLabel_1);
@@ -80,18 +80,13 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 
 		JPanel panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
-		panelSur.setLayout(new GridLayout(2, 1, 0, 0));
+		panelSur.setLayout(new BorderLayout(0, 0));
 
 		loginButton = new JButton("Entrar");
 		loginButton.setActionCommand("LOGIN");
 		loginButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		loginButton.setEnabled(false);
 		panelSur.add(loginButton);
-
-		registrarseButton = new JButton("Registrarse");
-		registrarseButton.setActionCommand("REGISTRAR");
-		registrarseButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panelSur.add(registrarseButton);
 
 		this.setVisible(true);
 	}
@@ -122,7 +117,6 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.loginButton.addActionListener(actionListener);
-		this.registrarseButton.addActionListener(actionListener);
 		this.actionListener = actionListener;
 	}
 

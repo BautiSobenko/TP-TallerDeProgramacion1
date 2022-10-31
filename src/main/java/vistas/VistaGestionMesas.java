@@ -12,9 +12,15 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-public class VistaGestionMesas {
+public class VistaGestionMesas implements IGenerica{
 
 	private JFrame frmGestionDeMozos;
+	JButton btnAltaMesa;
+	JButton btnModificarMesa;
+	JButton btnBajaMesa;
+	JButton btnAsignarMozo;
+	JButton btnAceptar;
+	JButton btnVolver;
 
 	/**
 	 * Launch the application.
@@ -62,37 +68,49 @@ public class VistaGestionMesas {
 		JList listMesas = new JList();
 		scrollPane.setViewportView(listMesas);
 		
-		JButton btnAltaMesa = new JButton("Alta Mesa");
+		btnAltaMesa = new JButton("Alta Mesa");
 		btnAltaMesa.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAltaMesa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
 		btnAltaMesa.setBounds(276, 46, 130, 32);
 		frmGestionDeMozos.getContentPane().add(btnAltaMesa);
 		
-		JButton btnBajaMesa = new JButton("Baja Mesa");
+		btnBajaMesa = new JButton("Baja Mesa");
 		btnBajaMesa.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnBajaMesa.setBounds(276, 101, 130, 32);
 		frmGestionDeMozos.getContentPane().add(btnBajaMesa);
 		
-		JButton btnModificarMesa = new JButton("Modificar Mesa");
+		btnModificarMesa = new JButton("Modificar Mesa");
 		btnModificarMesa.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnModificarMesa.setBounds(276, 156, 130, 32);
 		frmGestionDeMozos.getContentPane().add(btnModificarMesa);
 		
-		JButton btnVolver = new JButton("Volver");
+		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
 		btnVolver.setBounds(26, 211, 89, 32);
 		frmGestionDeMozos.getContentPane().add(btnVolver);
 		
-		JButton btnAsignarMozo = new JButton("Asignar Mozo");
+		btnAsignarMozo = new JButton("Asignar Mozo");
 		btnAsignarMozo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAsignarMozo.setBounds(276, 211, 130, 30);
 		frmGestionDeMozos.getContentPane().add(btnAsignarMozo);
+	}
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+		
+		
+	}
+
+	@Override
+	public void mostrar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void esconder() {
+		// TODO Auto-generated method stub
+		
 	}
 }

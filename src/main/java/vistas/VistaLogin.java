@@ -27,6 +27,25 @@ import javax.swing.JMenuItem;
 
 public class VistaLogin extends JFrame implements KeyListener, ILogin {
 
+	private JFrame panelCentro;
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VistaLogin window = new VistaLogin();
+					//window.panelCentro.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	
 	private JPanel contentPane;
 	private JTextField usernameField;
 	private JButton loginButton;
@@ -36,6 +55,7 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 	private JPasswordField passwordField;
 
 	public VistaLogin() {
+		
 		setTitle("Administracion Gastronomica");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 391, 240);
@@ -74,6 +94,7 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 		passwordField = new JPasswordField();
 		passwordField.setColumns(20);
 		passwordField.setBounds(5, 110, 357, 25);
+		passwordField.addKeyListener(this);
 		panelCentro.add(passwordField);
 
 		JPanel panelSur = new JPanel();
@@ -93,9 +114,12 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 	}
 
 	public void keyReleased(KeyEvent e) {
+		System.out.println("Entro");
 		this.username = this.usernameField.getText();
 		this.contrasena = new String(this.passwordField.getPassword());
 
+		if(username.length() > 0 && contrasena.length() > 0)
+			System.out.println("Funciona");
 		this.loginButton.setEnabled(username.length() > 0 && contrasena.length() > 0);
 	}
 

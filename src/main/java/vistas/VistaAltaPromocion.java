@@ -55,10 +55,10 @@ public class VistaAltaPromocion {
 		frmAltaDeMozo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAltaDeMozo.getContentPane().setLayout(null);
 		
-		JLabel lblNombrePromoción = new JLabel("Nombre promocion");
-		lblNombrePromoción.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNombrePromoción.setBounds(23, 15, 126, 21);
-		frmAltaDeMozo.getContentPane().add(lblNombrePromoción);
+		JLabel lblNombrePromocion = new JLabel("Nombre promocion");
+		lblNombrePromocion.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNombrePromocion.setBounds(23, 15, 126, 21);
+		frmAltaDeMozo.getContentPane().add(lblNombrePromocion);
 		
 		txtNombrePromocion = new JTextField();
 		txtNombrePromocion.setBounds(197, 11, 192, 32);

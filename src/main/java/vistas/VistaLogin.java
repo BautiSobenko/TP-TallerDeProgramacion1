@@ -37,7 +37,6 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 			public void run() {
 				try {
 					VistaLogin window = new VistaLogin();
-					//window.panelCentro.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -102,9 +101,9 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 		panelSur.setLayout(new BorderLayout(0, 0));
 
 		loginButton = new JButton("Entrar");
-		loginButton.setEnabled(false);
 		loginButton.setActionCommand("LOGIN");
 		loginButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		loginButton.setEnabled(false);
 		panelSur.add(loginButton);
 
 		this.setVisible(true);
@@ -114,7 +113,6 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 	}
 
 	public void keyReleased(KeyEvent e) {
-		System.out.println("Entro");
 		this.username = this.usernameField.getText();
 		this.contrasena = new String(this.passwordField.getPassword());
 

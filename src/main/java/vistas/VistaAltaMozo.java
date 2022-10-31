@@ -13,11 +13,11 @@ import java.awt.event.ActionEvent;
 public class VistaAltaMozo {
 
 	private JFrame frmAltaDeMozo;
-	private JTextField textField;
-	private JButton btnRegistrar;
+	private JTextField txtNombre;
+	private JButton btnAceptar;
 	private JButton btnVolver;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtFechaNacimiento;
+	private JTextField txtCantHijos;
 
 	/**
 	 * Launch the application.
@@ -47,53 +47,53 @@ public class VistaAltaMozo {
 	 */
 	private void initialize() {
 		frmAltaDeMozo = new JFrame();
-		frmAltaDeMozo.setTitle("Alta de mozo");
+		frmAltaDeMozo.setTitle("Nuevo Mozo");
 		frmAltaDeMozo.setBounds(100, 100, 450, 300);
 		frmAltaDeMozo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAltaDeMozo.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Nombre completo");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(39, 24, 110, 21);
-		frmAltaDeMozo.getContentPane().add(lblNewLabel);
+		JLabel lblNombre = new JLabel("Nombre completo");
+		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNombre.setBounds(39, 24, 110, 21);
+		frmAltaDeMozo.getContentPane().add(lblNombre);
 		
 		JLabel lblFechaDeNacimiento = new JLabel("Fecha de nacimiento");
 		lblFechaDeNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFechaDeNacimiento.setBounds(39, 83, 126, 20);
 		frmAltaDeMozo.getContentPane().add(lblFechaDeNacimiento);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Cantidad de Hijos");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_1.setBounds(39, 138, 126, 32);
-		frmAltaDeMozo.getContentPane().add(lblNewLabel_1_1);
+		JLabel lblCantHijos = new JLabel("Cantidad de Hijos");
+		lblCantHijos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblCantHijos.setBounds(39, 138, 126, 32);
+		frmAltaDeMozo.getContentPane().add(lblCantHijos);
 		
-		textField = new JTextField();
-		textField.setBounds(200, 20, 184, 32);
-		frmAltaDeMozo.getContentPane().add(textField);
-		textField.setColumns(10);
+		txtNombre = new JTextField();
+		txtNombre.setBounds(200, 20, 184, 32);
+		frmAltaDeMozo.getContentPane().add(txtNombre);
+		txtNombre.setColumns(10);
 		
-		btnRegistrar = new JButton("Aceptar");
-		btnRegistrar.addActionListener(new ActionListener() {
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnRegistrar.setBounds(274, 218, 110, 32);
-		frmAltaDeMozo.getContentPane().add(btnRegistrar);
+		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAceptar.setBounds(274, 218, 110, 32);
+		frmAltaDeMozo.getContentPane().add(btnAceptar);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnVolver.setBounds(39, 218, 110, 32);
 		frmAltaDeMozo.getContentPane().add(btnVolver);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(200, 80, 184, 32);
-		frmAltaDeMozo.getContentPane().add(textField_1);
+		txtFechaNacimiento = new JTextField();
+		txtFechaNacimiento.setColumns(10);
+		txtFechaNacimiento.setBounds(200, 80, 184, 32);
+		frmAltaDeMozo.getContentPane().add(txtFechaNacimiento);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(200, 140, 184, 32);
-		frmAltaDeMozo.getContentPane().add(textField_2);
+		txtCantHijos = new JTextField();
+		txtCantHijos.setColumns(10);
+		txtCantHijos.setBounds(200, 140, 184, 32);
+		frmAltaDeMozo.getContentPane().add(txtCantHijos);
 	}
 }

@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 public class VistaGestionOperarios {
 
 	private JFrame frmGestionDeMozos;
+	private JButton btnAltaOperario;
 
 	/**
 	 * Launch the application.
@@ -49,45 +50,45 @@ public class VistaGestionOperarios {
 		frmGestionDeMozos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmGestionDeMozos.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Listado de operarios");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(72, 21, 130, 14);
-		frmGestionDeMozos.getContentPane().add(lblNewLabel);
+		JLabel lblListaOperarios = new JLabel("Listado de operarios");
+		lblListaOperarios.setHorizontalAlignment(SwingConstants.CENTER);
+		lblListaOperarios.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblListaOperarios.setBounds(72, 21, 130, 14);
+		frmGestionDeMozos.getContentPane().add(lblListaOperarios);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(26, 46, 221, 142);
 		frmGestionDeMozos.getContentPane().add(scrollPane);
 		
-		JList list = new JList();
-		scrollPane.setViewportView(list);
+		JList listOperarios = new JList();
+		scrollPane.setViewportView(listOperarios);
 		
-		JButton btnNewButton = new JButton("Alta Operario");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton.addActionListener(new ActionListener() {
+		btnAltaOperario = new JButton("Alta Operario");
+		btnAltaOperario.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAltaOperario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(276, 46, 141, 32);
-		frmGestionDeMozos.getContentPane().add(btnNewButton);
+		btnAltaOperario.setBounds(276, 46, 141, 32);
+		frmGestionDeMozos.getContentPane().add(btnAltaOperario);
 		
-		JButton btnNewButton_1 = new JButton("Baja Operario");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton_1.setBounds(276, 101, 141, 32);
-		frmGestionDeMozos.getContentPane().add(btnNewButton_1);
+		JButton btnBajaOperario = new JButton("Baja Operario");
+		btnBajaOperario.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnBajaOperario.setBounds(276, 101, 141, 32);
+		frmGestionDeMozos.getContentPane().add(btnBajaOperario);
 		
-		JButton btnNewButton_2 = new JButton("Modificar Operario");
-		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton_2.setBounds(276, 156, 141, 32);
-		frmGestionDeMozos.getContentPane().add(btnNewButton_2);
+		JButton btnModificarOperario = new JButton("Modificar Operario");
+		btnModificarOperario.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnModificarOperario.setBounds(276, 156, 141, 32);
+		frmGestionDeMozos.getContentPane().add(btnModificarOperario);
 		
-		JButton btnNewButton_3 = new JButton("Volver");
-		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton_3.addActionListener(new ActionListener() {
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_3.setBounds(26, 211, 89, 32);
-		frmGestionDeMozos.getContentPane().add(btnNewButton_3);
+		btnVolver.setBounds(26, 211, 89, 32);
+		frmGestionDeMozos.getContentPane().add(btnVolver);
 	}
 }

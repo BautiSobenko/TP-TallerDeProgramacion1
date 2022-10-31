@@ -49,45 +49,45 @@ public class VistaGestionMozos {
 		frmGestionDeMozos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmGestionDeMozos.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Listado de mozos");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(83, 21, 111, 14);
-		frmGestionDeMozos.getContentPane().add(lblNewLabel);
+		JLabel lblListadoMozos = new JLabel("Listado de mozos");
+		lblListadoMozos.setHorizontalAlignment(SwingConstants.CENTER);
+		lblListadoMozos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblListadoMozos.setBounds(83, 21, 111, 14);
+		frmGestionDeMozos.getContentPane().add(lblListadoMozos);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(26, 46, 221, 142);
 		frmGestionDeMozos.getContentPane().add(scrollPane);
 		
-		JList list = new JList();
-		scrollPane.setViewportView(list);
+		JList listMozos = new JList();
+		scrollPane.setViewportView(listMozos);
 		
-		JButton btnNewButton = new JButton("Alta Mozo");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnAltaMozo = new JButton("Alta Mozo");
+		btnAltaMozo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAltaMozo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(276, 46, 130, 32);
-		frmGestionDeMozos.getContentPane().add(btnNewButton);
+		btnAltaMozo.setBounds(276, 46, 130, 32);
+		frmGestionDeMozos.getContentPane().add(btnAltaMozo);
 		
-		JButton btnNewButton_1 = new JButton("Baja Mozo");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton_1.setBounds(276, 101, 130, 32);
-		frmGestionDeMozos.getContentPane().add(btnNewButton_1);
+		JButton btnBajaMozo = new JButton("Baja Mozo");
+		btnBajaMozo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnBajaMozo.setBounds(276, 101, 130, 32);
+		frmGestionDeMozos.getContentPane().add(btnBajaMozo);
 		
-		JButton btnNewButton_2 = new JButton("Modificar Mozo");
-		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton_2.setBounds(276, 156, 130, 32);
-		frmGestionDeMozos.getContentPane().add(btnNewButton_2);
+		JButton btnModificarMozo = new JButton("Modificar Mozo");
+		btnModificarMozo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnModificarMozo.setBounds(276, 156, 130, 32);
+		frmGestionDeMozos.getContentPane().add(btnModificarMozo);
 		
-		JButton btnNewButton_3 = new JButton("Volver");
-		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton_3.addActionListener(new ActionListener() {
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_3.setBounds(26, 211, 89, 32);
-		frmGestionDeMozos.getContentPane().add(btnNewButton_3);
+		btnVolver.setBounds(26, 211, 89, 32);
+		frmGestionDeMozos.getContentPane().add(btnVolver);
 	}
 }

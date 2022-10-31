@@ -16,14 +16,14 @@ import javax.swing.JPasswordField;
 public class VistaAltaOperario {
 
 	private JFrame frmAltaDeMozo;
-	private JTextField textField;
-	private JButton btnRegistrar;
+	private JTextField txtNombre;
+	private JButton btnAceptar;
 	private JButton btnVolver;
-	private JTextField textField_1;
-	private JRadioButton rdbtnNewRadioButton;
-	private JRadioButton rdbtnNewRadioButton_1;
-	private JLabel lblContrasea;
-	private JPasswordField passwordField;
+	private JTextField txtNombreUsuario;
+	private JRadioButton rdbtnOperarioActivo;
+	private JRadioButton rdbtnOperarioNoActivo;
+	private JLabel lblPassword;
+	private JPasswordField txtPassword;
 
 	/**
 	 * Launch the application.
@@ -53,67 +53,68 @@ public class VistaAltaOperario {
 	 */
 	private void initialize() {
 		frmAltaDeMozo = new JFrame();
-		frmAltaDeMozo.setTitle("Alta de operario");
+		frmAltaDeMozo.setTitle("Nuevo Operario");
 		frmAltaDeMozo.setBounds(100, 100, 450, 300);
 		frmAltaDeMozo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAltaDeMozo.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Nombre completo");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(39, 24, 110, 21);
-		frmAltaDeMozo.getContentPane().add(lblNewLabel);
+		JLabel lblNombre = new JLabel("Nombre completo");
+		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNombre.setBounds(39, 24, 110, 21);
+		frmAltaDeMozo.getContentPane().add(lblNombre);
 		
-		JLabel lblFechaDeNacimiento = new JLabel("Nombre de usuario");
-		lblFechaDeNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblFechaDeNacimiento.setBounds(39, 68, 126, 20);
-		frmAltaDeMozo.getContentPane().add(lblFechaDeNacimiento);
+		JLabel lblNombreUsuario = new JLabel("Nombre de usuario");
+		lblNombreUsuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNombreUsuario.setBounds(39, 68, 126, 20);
+		frmAltaDeMozo.getContentPane().add(lblNombreUsuario);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Estado");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_1.setBounds(39, 149, 126, 32);
-		frmAltaDeMozo.getContentPane().add(lblNewLabel_1_1);
+		JLabel lblEstado = new JLabel("Estado");
+		lblEstado.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblEstado.setBounds(39, 149, 126, 32);
+		frmAltaDeMozo.getContentPane().add(lblEstado);
 		
-		textField = new JTextField();
-		textField.setBounds(200, 20, 184, 32);
-		frmAltaDeMozo.getContentPane().add(textField);
-		textField.setColumns(10);
+		txtNombre = new JTextField();
+		txtNombre.setBounds(200, 20, 184, 32);
+		frmAltaDeMozo.getContentPane().add(txtNombre);
+		txtNombre.setColumns(10);
 		
-		btnRegistrar = new JButton("Aceptar");
-		btnRegistrar.addActionListener(new ActionListener() {
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnRegistrar.setBounds(274, 205, 110, 32);
-		frmAltaDeMozo.getContentPane().add(btnRegistrar);
+		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAceptar.setBounds(274, 205, 110, 32);
+		frmAltaDeMozo.getContentPane().add(btnAceptar);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnVolver.setBounds(39, 205, 110, 32);
 		frmAltaDeMozo.getContentPane().add(btnVolver);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(200, 64, 184, 32);
-		frmAltaDeMozo.getContentPane().add(textField_1);
+		txtNombreUsuario = new JTextField();
+		txtNombreUsuario.setColumns(10);
+		txtNombreUsuario.setBounds(200, 64, 184, 32);
+		frmAltaDeMozo.getContentPane().add(txtNombreUsuario);
 		
-		rdbtnNewRadioButton = new JRadioButton("Activo");
-		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnNewRadioButton.setBounds(201, 154, 72, 23);
-		frmAltaDeMozo.getContentPane().add(rdbtnNewRadioButton);
+		rdbtnOperarioActivo = new JRadioButton("Activo");
+		rdbtnOperarioActivo.setSelected(true);
+		rdbtnOperarioActivo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		rdbtnOperarioActivo.setBounds(201, 154, 72, 23);
+		frmAltaDeMozo.getContentPane().add(rdbtnOperarioActivo);
 		
-		rdbtnNewRadioButton_1 = new JRadioButton("No Activo");
-		rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnNewRadioButton_1.setBounds(299, 154, 85, 23);
-		frmAltaDeMozo.getContentPane().add(rdbtnNewRadioButton_1);
+		rdbtnOperarioNoActivo = new JRadioButton("No Activo");
+		rdbtnOperarioNoActivo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		rdbtnOperarioNoActivo.setBounds(299, 154, 85, 23);
+		frmAltaDeMozo.getContentPane().add(rdbtnOperarioNoActivo);
 		
-		lblContrasea = new JLabel("Contrase\u00F1a");
-		lblContrasea.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblContrasea.setBounds(39, 111, 126, 20);
-		frmAltaDeMozo.getContentPane().add(lblContrasea);
+		lblPassword = new JLabel("Contrase\u00F1a");
+		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblPassword.setBounds(39, 111, 126, 20);
+		frmAltaDeMozo.getContentPane().add(lblPassword);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(200, 107, 184, 32);
-		frmAltaDeMozo.getContentPane().add(passwordField);
+		txtPassword = new JPasswordField();
+		txtPassword.setBounds(200, 107, 184, 32);
+		frmAltaDeMozo.getContentPane().add(txtPassword);
 	}
 }

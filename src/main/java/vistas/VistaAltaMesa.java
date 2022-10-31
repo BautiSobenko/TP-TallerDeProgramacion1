@@ -15,12 +15,12 @@ import javax.swing.JRadioButton;
 public class VistaAltaMesa {
 
 	private JFrame frmAltaDeMozo;
-	private JTextField textField;
-	private JButton btnRegistrar;
+	private JTextField txtNumeroMesa;
+	private JButton btnAceptar;
 	private JButton btnVolver;
-	private JTextField textField_1;
-	private JRadioButton rdbtnNewRadioButton;
-	private JRadioButton rdbtnNewRadioButton_1;
+	private JTextField txtCantSillas;
+	private JRadioButton rdbtnMesaLibre;
+	private JRadioButton rdbtnMesaOcupada;
 
 	/**
 	 * Launch the application.
@@ -50,58 +50,59 @@ public class VistaAltaMesa {
 	 */
 	private void initialize() {
 		frmAltaDeMozo = new JFrame();
-		frmAltaDeMozo.setTitle("Alta de mesa");
+		frmAltaDeMozo.setTitle("Nueva Mesa");
 		frmAltaDeMozo.setBounds(100, 100, 450, 300);
 		frmAltaDeMozo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAltaDeMozo.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Numero de mesa");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(39, 24, 110, 21);
-		frmAltaDeMozo.getContentPane().add(lblNewLabel);
+		JLabel lblNumeroMesa = new JLabel("Numero de mesa");
+		lblNumeroMesa.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNumeroMesa.setBounds(39, 24, 110, 21);
+		frmAltaDeMozo.getContentPane().add(lblNumeroMesa);
 		
-		JLabel lblFechaDeNacimiento = new JLabel("Cantidad de sillas\r\n");
-		lblFechaDeNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblFechaDeNacimiento.setBounds(39, 83, 126, 20);
-		frmAltaDeMozo.getContentPane().add(lblFechaDeNacimiento);
+		JLabel lblCantSillas = new JLabel("Cantidad de sillas\r\n");
+		lblCantSillas.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblCantSillas.setBounds(39, 83, 126, 20);
+		frmAltaDeMozo.getContentPane().add(lblCantSillas);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Estado");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_1.setBounds(39, 138, 126, 32);
-		frmAltaDeMozo.getContentPane().add(lblNewLabel_1_1);
+		JLabel lblEstadoMesa = new JLabel("Estado");
+		lblEstadoMesa.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblEstadoMesa.setBounds(39, 138, 126, 32);
+		frmAltaDeMozo.getContentPane().add(lblEstadoMesa);
 		
-		textField = new JTextField();
-		textField.setBounds(200, 20, 184, 32);
-		frmAltaDeMozo.getContentPane().add(textField);
-		textField.setColumns(10);
+		txtNumeroMesa = new JTextField();
+		txtNumeroMesa.setBounds(200, 20, 184, 32);
+		frmAltaDeMozo.getContentPane().add(txtNumeroMesa);
+		txtNumeroMesa.setColumns(10);
 		
-		btnRegistrar = new JButton("Aceptar");
-		btnRegistrar.addActionListener(new ActionListener() {
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnRegistrar.setBounds(274, 205, 110, 32);
-		frmAltaDeMozo.getContentPane().add(btnRegistrar);
+		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAceptar.setBounds(274, 205, 110, 32);
+		frmAltaDeMozo.getContentPane().add(btnAceptar);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnVolver.setBounds(39, 205, 110, 32);
 		frmAltaDeMozo.getContentPane().add(btnVolver);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(200, 80, 184, 32);
-		frmAltaDeMozo.getContentPane().add(textField_1);
+		txtCantSillas = new JTextField();
+		txtCantSillas.setColumns(10);
+		txtCantSillas.setBounds(200, 80, 184, 32);
+		frmAltaDeMozo.getContentPane().add(txtCantSillas);
 		
-		rdbtnNewRadioButton = new JRadioButton("Libre");
-		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnNewRadioButton.setBounds(200, 143, 72, 23);
-		frmAltaDeMozo.getContentPane().add(rdbtnNewRadioButton);
+		rdbtnMesaLibre = new JRadioButton("Libre");
+		rdbtnMesaLibre.setSelected(true);
+		rdbtnMesaLibre.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		rdbtnMesaLibre.setBounds(200, 143, 72, 23);
+		frmAltaDeMozo.getContentPane().add(rdbtnMesaLibre);
 		
-		rdbtnNewRadioButton_1 = new JRadioButton("Ocupada");
-		rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnNewRadioButton_1.setBounds(303, 143, 81, 23);
-		frmAltaDeMozo.getContentPane().add(rdbtnNewRadioButton_1);
+		rdbtnMesaOcupada = new JRadioButton("Ocupada");
+		rdbtnMesaOcupada.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		rdbtnMesaOcupada.setBounds(303, 143, 81, 23);
+		frmAltaDeMozo.getContentPane().add(rdbtnMesaOcupada);
 	}
 }

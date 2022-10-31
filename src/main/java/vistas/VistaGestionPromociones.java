@@ -49,40 +49,40 @@ public class VistaGestionPromociones {
 		frmGestionDeMozos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmGestionDeMozos.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Listado de promociones");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(65, 21, 145, 14);
-		frmGestionDeMozos.getContentPane().add(lblNewLabel);
+		JLabel lblListaPromos = new JLabel("Listado de promociones");
+		lblListaPromos.setHorizontalAlignment(SwingConstants.CENTER);
+		lblListaPromos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblListaPromos.setBounds(65, 21, 145, 14);
+		frmGestionDeMozos.getContentPane().add(lblListaPromos);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(26, 46, 221, 142);
 		frmGestionDeMozos.getContentPane().add(scrollPane);
 		
-		JList list = new JList();
-		scrollPane.setViewportView(list);
+		JList listPromos = new JList();
+		scrollPane.setViewportView(listPromos);
 		
-		JButton btnNewButton = new JButton("Alta Promocion");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnAltaPromo = new JButton("Alta Promocion");
+		btnAltaPromo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAltaPromo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(276, 74, 130, 32);
-		frmGestionDeMozos.getContentPane().add(btnNewButton);
+		btnAltaPromo.setBounds(276, 74, 130, 32);
+		frmGestionDeMozos.getContentPane().add(btnAltaPromo);
 		
-		JButton btnNewButton_1 = new JButton("Baja Promocion");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton_1.setBounds(276, 128, 130, 32);
-		frmGestionDeMozos.getContentPane().add(btnNewButton_1);
+		JButton btnBajaPromo = new JButton("Baja Promocion");
+		btnBajaPromo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnBajaPromo.setBounds(276, 128, 130, 32);
+		frmGestionDeMozos.getContentPane().add(btnBajaPromo);
 		
-		JButton btnNewButton_3 = new JButton("Volver");
-		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton_3.addActionListener(new ActionListener() {
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_3.setBounds(22, 207, 89, 32);
-		frmGestionDeMozos.getContentPane().add(btnNewButton_3);
+		btnVolver.setBounds(22, 207, 89, 32);
+		frmGestionDeMozos.getContentPane().add(btnVolver);
 	}
 }

@@ -11,16 +11,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JToggleButton;
 import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
+import javax.swing.SwingConstants;
 
 public class VistaAltaPromocion {
 
 	private JFrame frmAltaDeMozo;
-	private JTextField textField;
-	private JButton btnRegistrar;
+	private JTextField txtNombrePromocion;
+	private JButton btnAceptar;
 	private JButton btnVolver;
-	private JTextField textField_1;
-	private JRadioButton rdbtnNewRadioButton;
-	private JRadioButton rdbtnNewRadioButton_1;
+	private JLabel lblFormaDePago;
 
 	/**
 	 * Launch the application.
@@ -50,58 +50,105 @@ public class VistaAltaPromocion {
 	 */
 	private void initialize() {
 		frmAltaDeMozo = new JFrame();
-		frmAltaDeMozo.setTitle("Alta de mesa");
+		frmAltaDeMozo.setTitle("Promocion temporal");
 		frmAltaDeMozo.setBounds(100, 100, 450, 300);
 		frmAltaDeMozo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAltaDeMozo.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Numero de mesa");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(39, 24, 110, 21);
-		frmAltaDeMozo.getContentPane().add(lblNewLabel);
+		JLabel lblNombrePromoción = new JLabel("Nombre promocion");
+		lblNombrePromoción.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNombrePromoción.setBounds(23, 15, 126, 21);
+		frmAltaDeMozo.getContentPane().add(lblNombrePromoción);
 		
-		JLabel lblFechaDeNacimiento = new JLabel("Cantidad de sillas\r\n");
-		lblFechaDeNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblFechaDeNacimiento.setBounds(39, 83, 126, 20);
-		frmAltaDeMozo.getContentPane().add(lblFechaDeNacimiento);
+		txtNombrePromocion = new JTextField();
+		txtNombrePromocion.setBounds(197, 11, 192, 32);
+		frmAltaDeMozo.getContentPane().add(txtNombrePromocion);
+		txtNombrePromocion.setColumns(10);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Estado");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_1.setBounds(39, 138, 126, 32);
-		frmAltaDeMozo.getContentPane().add(lblNewLabel_1_1);
-		
-		textField = new JTextField();
-		textField.setBounds(200, 20, 184, 32);
-		frmAltaDeMozo.getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		btnRegistrar = new JButton("Aceptar");
-		btnRegistrar.addActionListener(new ActionListener() {
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnRegistrar.setBounds(274, 205, 110, 32);
-		frmAltaDeMozo.getContentPane().add(btnRegistrar);
+		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAceptar.setBounds(304, 218, 110, 32);
+		frmAltaDeMozo.getContentPane().add(btnAceptar);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnVolver.setBounds(39, 205, 110, 32);
+		btnVolver.setBounds(23, 218, 110, 32);
 		frmAltaDeMozo.getContentPane().add(btnVolver);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(200, 80, 184, 32);
-		frmAltaDeMozo.getContentPane().add(textField_1);
+		lblFormaDePago = new JLabel("Formas de pago");
+		lblFormaDePago.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblFormaDePago.setBounds(23, 56, 126, 21);
+		frmAltaDeMozo.getContentPane().add(lblFormaDePago);
 		
-		rdbtnNewRadioButton = new JRadioButton("Libre");
-		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnNewRadioButton.setBounds(200, 143, 72, 23);
-		frmAltaDeMozo.getContentPane().add(rdbtnNewRadioButton);
+		JCheckBox chckbxEfectivo = new JCheckBox("Efectivo");
+		chckbxEfectivo.setBounds(197, 56, 72, 23);
+		frmAltaDeMozo.getContentPane().add(chckbxEfectivo);
 		
-		rdbtnNewRadioButton_1 = new JRadioButton("Ocupada");
-		rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnNewRadioButton_1.setBounds(303, 143, 81, 23);
-		frmAltaDeMozo.getContentPane().add(rdbtnNewRadioButton_1);
+		JCheckBox chckbxTarjeta = new JCheckBox("Tarjeta");
+		chckbxTarjeta.setBounds(197, 82, 72, 23);
+		frmAltaDeMozo.getContentPane().add(chckbxTarjeta);
+		
+		JCheckBox chckbxMercadoPago = new JCheckBox("Mercado Pago");
+		chckbxMercadoPago.setBounds(300, 56, 97, 23);
+		frmAltaDeMozo.getContentPane().add(chckbxMercadoPago);
+		
+		JCheckBox chckbxCuentaDNI = new JCheckBox("Cuenta DNI");
+		chckbxCuentaDNI.setBounds(300, 82, 97, 23);
+		frmAltaDeMozo.getContentPane().add(chckbxCuentaDNI);
+		
+		JLabel lblFormaDePago_1 = new JLabel("Dias Promo");
+		lblFormaDePago_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblFormaDePago_1.setBounds(23, 111, 97, 24);
+		frmAltaDeMozo.getContentPane().add(lblFormaDePago_1);
+		
+		JCheckBox chckbxLunes = new JCheckBox("Lunes");
+		chckbxLunes.setBounds(117, 111, 60, 23);
+		frmAltaDeMozo.getContentPane().add(chckbxLunes);
+		
+		JCheckBox chckbxJueves = new JCheckBox("Jueves");
+		chckbxJueves.setBounds(117, 137, 60, 23);
+		frmAltaDeMozo.getContentPane().add(chckbxJueves);
+		
+		JCheckBox chckbxMartes = new JCheckBox("Martes");
+		chckbxMartes.setBounds(197, 111, 60, 23);
+		frmAltaDeMozo.getContentPane().add(chckbxMartes);
+		
+		JCheckBox chckbxViernes = new JCheckBox("Viernes");
+		chckbxViernes.setBounds(197, 137, 60, 23);
+		frmAltaDeMozo.getContentPane().add(chckbxViernes);
+		
+		JCheckBox chckbxMiercoles = new JCheckBox("Miercoles");
+		chckbxMiercoles.setBounds(272, 111, 72, 23);
+		frmAltaDeMozo.getContentPane().add(chckbxMiercoles);
+		
+		JCheckBox chckbxSabado = new JCheckBox("Sabado");
+		chckbxSabado.setBounds(272, 137, 61, 23);
+		frmAltaDeMozo.getContentPane().add(chckbxSabado);
+		
+		JCheckBox chckbxDomingo = new JCheckBox("Domingo");
+		chckbxDomingo.setBounds(347, 123, 67, 23);
+		frmAltaDeMozo.getContentPane().add(chckbxDomingo);
+		
+		JCheckBox chckbxPromoActiva = new JCheckBox("");
+		chckbxPromoActiva.setBounds(74, 180, 27, 23);
+		frmAltaDeMozo.getContentPane().add(chckbxPromoActiva);
+		
+		JLabel lblFormaDePago_1_1 = new JLabel("Activa");
+		lblFormaDePago_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblFormaDePago_1_1.setBounds(23, 180, 45, 21);
+		frmAltaDeMozo.getContentPane().add(lblFormaDePago_1_1);
+		
+		JCheckBox chckbxPromoAcumulable = new JCheckBox("");
+		chckbxPromoAcumulable.setBounds(218, 180, 27, 23);
+		frmAltaDeMozo.getContentPane().add(chckbxPromoAcumulable);
+		
+		JLabel lblFormaDePago_1_1_1 = new JLabel("Acumulable");
+		lblFormaDePago_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblFormaDePago_1_1_1.setBounds(140, 180, 72, 21);
+		frmAltaDeMozo.getContentPane().add(lblFormaDePago_1_1_1);
 	}
 }

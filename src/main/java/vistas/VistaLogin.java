@@ -33,12 +33,12 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 	private ActionListener actionListener;
 	private String username;
 	private String contrasena;
-	private JPasswordField contrasenaField;
+	private JPasswordField passwordField;
 
 	public VistaLogin() {
 		setTitle("Administracion Gastronomica");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 235, 235);
+		setBounds(100, 100, 391, 240);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -46,37 +46,35 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 
 		JPanel panelCentro = new JPanel();
 		contentPane.add(panelCentro, BorderLayout.CENTER);
-		panelCentro.setLayout(new GridLayout(4, 1, 0, 0));
+		panelCentro.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Username:");
+		lblNewLabel.setBounds(0, 5, 505, 30);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		panelCentro.add(lblNewLabel);
 
 		JPanel panel_1 = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) panel_1.getLayout();
-		flowLayout_1.setAlignment(FlowLayout.LEFT);
+		panel_1.setBounds(0, 42, 505, 41);
 		panelCentro.add(panel_1);
 
 		usernameField = new JTextField();
+		usernameField.setBounds(5, 0, 358, 25);
 		usernameField.addKeyListener(this);
+		panel_1.setLayout(null);
 		panel_1.add(usernameField);
 		usernameField.setColumns(20);
 
 		JLabel lblNewLabel_1 = new JLabel("Password:");
+		lblNewLabel_1.setBounds(0, 85, 505, 20);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel_1.setVerticalAlignment(SwingConstants.BOTTOM);
 		panelCentro.add(lblNewLabel_1);
-
-		JPanel panel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-		flowLayout.setAlignment(FlowLayout.LEFT);
-		panelCentro.add(panel);
-
-		contrasenaField = new JPasswordField();
-		contrasenaField.addKeyListener(this);
-		contrasenaField.setColumns(20);
-		panel.add(contrasenaField);
+		
+		passwordField = new JPasswordField();
+		passwordField.setColumns(20);
+		passwordField.setBounds(5, 110, 357, 25);
+		panelCentro.add(passwordField);
 
 		JPanel panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
@@ -96,7 +94,7 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 
 	public void keyReleased(KeyEvent e) {
 		this.username = this.usernameField.getText();
-		this.contrasena = new String(this.contrasenaField.getPassword());
+		this.contrasena = new String(this.passwordField.getPassword());
 
 		this.loginButton.setEnabled(username.length() > 0 && contrasena.length() > 0);
 	}
@@ -147,7 +145,7 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 	@Override
 	public void limpiaCampos() {
 		this.usernameField.setText("");
-		this.contrasenaField.setText("");
+		this.passwordField.setText("");
 		this.username = null;
 		this.contrasena = null;
 	}

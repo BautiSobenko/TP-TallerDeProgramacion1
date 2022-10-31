@@ -10,4 +10,6 @@ public interface IGenerica {
 
 	void esconder();
 	
+	void limpia();
+	
 }

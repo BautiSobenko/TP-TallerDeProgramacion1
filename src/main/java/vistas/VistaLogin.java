@@ -81,9 +81,9 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 		panelSur.setLayout(new BorderLayout(0, 0));
 
 		loginButton = new JButton("Entrar");
+		loginButton.setEnabled(false);
 		loginButton.setActionCommand("LOGIN");
 		loginButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		loginButton.setEnabled(false);
 		panelSur.add(loginButton);
 
 		this.setVisible(true);

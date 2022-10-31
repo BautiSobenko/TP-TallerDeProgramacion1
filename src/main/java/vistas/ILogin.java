@@ -3,6 +3,7 @@ package vistas;
 import java.awt.event.ActionListener;
 
 public interface ILogin {
+	
 	String getUsername();
 
 	String getContrasena();

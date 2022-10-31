@@ -8,20 +8,22 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class VistaAltaMozo {
+public class VistaAltaMozo extends JFrame implements IGenerica, KeyListener{
 
 	private JFrame frmAltaDeMozo;
-	private JTextField txtNombre;
 	private JButton btnAceptar;
 	private JButton btnVolver;
+	private JTextField txtNombre;
 	private JTextField txtFechaNacimiento;
 	private JTextField txtCantHijos;
+	
+	private String nombre = null;
+	private String fechaNacimiento = null;
+	private String cantHijos = null;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -35,16 +37,10 @@ public class VistaAltaMozo {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public VistaAltaMozo() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frmAltaDeMozo = new JFrame();
 		frmAltaDeMozo.setTitle("Nuevo Mozo");
@@ -71,12 +67,9 @@ public class VistaAltaMozo {
 		txtNombre.setBounds(200, 20, 184, 32);
 		frmAltaDeMozo.getContentPane().add(txtNombre);
 		txtNombre.setColumns(10);
+		txtNombre.addKeyListener(this);
 		
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAceptar.setBounds(274, 218, 110, 32);
 		frmAltaDeMozo.getContentPane().add(btnAceptar);
@@ -89,11 +82,76 @@ public class VistaAltaMozo {
 		txtFechaNacimiento = new JTextField();
 		txtFechaNacimiento.setColumns(10);
 		txtFechaNacimiento.setBounds(200, 80, 184, 32);
+		txtFechaNacimiento.addKeyListener(this);
 		frmAltaDeMozo.getContentPane().add(txtFechaNacimiento);
 		
 		txtCantHijos = new JTextField();
 		txtCantHijos.setColumns(10);
 		txtCantHijos.setBounds(200, 140, 184, 32);
+		txtCantHijos.addKeyListener(this);
 		frmAltaDeMozo.getContentPane().add(txtCantHijos);
+		
+		limpia();
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		this.nombre = this.txtNombre.getText();
+		this.fechaNacimiento = this.txtFechaNacimiento.getText();
+		this.cantHijos = this.txtCantHijos.getText();
+		if( nombre.length() > 0 && 
+			fechaNacimiento.length() > 0 &&
+			cantHijos.length() > 0) {
+			
+			this.btnAceptar.setEnabled(true);
+		}
+	}
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+		this.btnAceptar.addActionListener(actionListener);
+		this.btnVolver.addActionListener(actionListener);
+	}
+
+	@Override
+	public void mostrar() {
+		this.setVisible(true);
+	}
+
+	@Override
+	public void esconder() {
+		this.setVisible(false);
+	}
+
+	@Override
+	public void limpia() {
+		this.btnAceptar.setEnabled(false);
+		this.txtNombre.setText("");
+		this.txtFechaNacimiento.setText("");
+		this.txtCantHijos.setText("");
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public String getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public String getCantHijos() {
+		return cantHijos;
 	}
 }

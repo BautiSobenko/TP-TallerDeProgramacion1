@@ -6,32 +6,26 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.KeyListener;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import javax.swing.JPasswordField;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-
 public class VistaLogin extends JFrame implements KeyListener, ILogin {
 
-	private JFrame panelCentro;
-	
-	/**
-	 * Launch the application.
-	 */
+	private JPanel contentPane;
+	private JTextField usernameField;
+	private JButton loginButton;
+	private ActionListener actionListener;
+	private String username;
+	private String contrasena;
+	private JPasswordField passwordField;
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -43,15 +37,6 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 			}
 		});
 	}
-	
-	
-	private JPanel contentPane;
-	private JTextField usernameField;
-	private JButton loginButton;
-	private ActionListener actionListener;
-	private String username;
-	private String contrasena;
-	private JPasswordField passwordField;
 
 	public VistaLogin() {
 		

@@ -8,9 +8,12 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class VistaAltaProducto {
+public class VistaAltaProducto extends JFrame implements IGenerica, KeyListener {
 
 	private JFrame frmAltaDeMozo;
 	private JTextField txtNombre;
@@ -19,10 +22,12 @@ public class VistaAltaProducto {
 	private JTextField txtPrecioCosto;
 	private JTextField txtPrecioVenta;
 	private JTextField txtStockInicial;
+	
+	private String nombre;
+	private String precioCosto;
+	private String precioVenta;
+	private String stockInicial;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -36,16 +41,10 @@ public class VistaAltaProducto {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public VistaAltaProducto() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frmAltaDeMozo = new JFrame();
 		frmAltaDeMozo.setTitle("Nuevo Producto");
@@ -72,12 +71,9 @@ public class VistaAltaProducto {
 		txtNombre.setBounds(200, 20, 184, 32);
 		frmAltaDeMozo.getContentPane().add(txtNombre);
 		txtNombre.setColumns(10);
+		txtNombre.addKeyListener(this);
 		
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAceptar.setBounds(274, 218, 110, 32);
 		frmAltaDeMozo.getContentPane().add(btnAceptar);
@@ -90,11 +86,13 @@ public class VistaAltaProducto {
 		txtPrecioCosto = new JTextField();
 		txtPrecioCosto.setColumns(10);
 		txtPrecioCosto.setBounds(200, 63, 184, 32);
+		txtPrecioCosto.addKeyListener(this);
 		frmAltaDeMozo.getContentPane().add(txtPrecioCosto);
 		
 		txtPrecioVenta = new JTextField();
 		txtPrecioVenta.setColumns(10);
 		txtPrecioVenta.setBounds(200, 108, 184, 32);
+		txtPrecioVenta.addKeyListener(this);
 		frmAltaDeMozo.getContentPane().add(txtPrecioVenta);
 		
 		JLabel lblStockInicial = new JLabel("Stock Inicial");
@@ -105,6 +103,83 @@ public class VistaAltaProducto {
 		txtStockInicial = new JTextField();
 		txtStockInicial.setColumns(10);
 		txtStockInicial.setBounds(200, 155, 184, 32);
+		txtStockInicial.addKeyListener(this);
 		frmAltaDeMozo.getContentPane().add(txtStockInicial);
+		
+		limpia();
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		this.nombre = this.txtNombre.getText();
+		this.precioCosto = this.txtPrecioCosto.getText();
+		this.precioVenta = this.txtPrecioVenta.getText();
+		this.stockInicial = this.txtStockInicial.getText();
+		
+		if( nombre.length() > 0 &&
+			precioCosto.length() > 0 &&
+			precioVenta.length() > 0 &&
+			stockInicial.length() > 0) {
+			
+			this.btnAceptar.setEnabled(true);
+			
+		}
+		
+	}
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+		this.btnAceptar.addActionListener(actionListener);
+		this.btnVolver.addActionListener(actionListener);
+	}
+
+	@Override
+	public void mostrar() {
+		this.setVisible(true);
+		
+	}
+
+	@Override
+	public void esconder() {
+		this.setVisible(false);
+		
+	}
+
+	@Override
+	public void limpia() {
+		this.btnAceptar.setEnabled(false);
+		this.txtNombre.setText("");
+		this.txtPrecioCosto.setText("");
+		this.txtPrecioVenta.setText("");
+		this.txtStockInicial.setText("");
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public String getPrecioCosto() {
+		return precioCosto;
+	}
+
+	public String getPrecioVenta() {
+		return precioVenta;
+	}
+
+	public String getStockInicial() {
+		return stockInicial;
 	}
 }

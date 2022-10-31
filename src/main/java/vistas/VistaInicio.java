@@ -15,9 +15,7 @@ import java.awt.event.ActionEvent;
 public class VistaInicio {
 
 	private JFrame frmInicioOperario;
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -31,16 +29,10 @@ public class VistaInicio {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public VistaInicio() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frmInicioOperario = new JFrame();
 		frmInicioOperario.setTitle("Inicio Operario");

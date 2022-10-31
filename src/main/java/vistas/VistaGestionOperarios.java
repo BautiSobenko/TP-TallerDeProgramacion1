@@ -17,9 +17,6 @@ public class VistaGestionOperarios {
 	private JFrame frmGestionDeMozos;
 	private JButton btnAltaOperario;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -33,16 +30,10 @@ public class VistaGestionOperarios {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public VistaGestionOperarios() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frmGestionDeMozos = new JFrame();
 		frmGestionDeMozos.setTitle("Gestion de Operarios");

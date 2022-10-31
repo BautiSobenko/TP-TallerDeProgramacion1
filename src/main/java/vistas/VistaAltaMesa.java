@@ -13,8 +13,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JToggleButton;
 import javax.swing.JRadioButton;
 
 public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener, MouseListener{
@@ -31,10 +29,7 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener, Mou
 	private String numeroMesa = null;
 	private String cantSillas = null;
 	private String estado = null;
-	
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -48,16 +43,10 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener, Mou
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public VistaAltaMesa() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frmAltaDeMozo = new JFrame();
 		frmAltaDeMozo.setTitle("Nueva Mesa");
@@ -142,6 +131,8 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener, Mou
 	@Override
 	public void limpia() {
 		this.btnAceptar.setEnabled(false);
+		this.txtNumeroMesa.setText("");
+		this.txtCantSillas.setText("");
 	}
 
 	@Override
@@ -179,18 +170,27 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener, Mou
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		this.estado = this.grupoEstado.getSelection().getActionCommand();
-		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+	}
+
+	public String getNumeroMesa() {
+		return numeroMesa;
+	}
+
+	public String getCantSillas() {
+		return cantSillas;
+	}
+
+	public String getEstado() {
+		return estado;
 	}
 }

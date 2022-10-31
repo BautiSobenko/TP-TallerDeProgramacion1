@@ -8,23 +8,35 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JToggleButton;
-import javax.swing.JRadioButton;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JCheckBox;
-import javax.swing.SwingConstants;
 
-public class VistaAltaPromocion {
+public class VistaAltaPromocion extends JFrame implements IGenerica, KeyListener, MouseListener{
 
 	private JFrame frmAltaDeMozo;
 	private JTextField txtNombrePromocion;
 	private JButton btnAceptar;
 	private JButton btnVolver;
 	private JLabel lblFormaDePago;
+	private JCheckBox chckbxEfectivo;
+	private JCheckBox chckbxTarjeta;
+	private JCheckBox chckbxMercadoPago;
+	private JCheckBox chckbxCuentaDNI;
+	private JCheckBox chckbxLunes;
+	private JCheckBox chckbxMartes;
+	private JCheckBox chckbxMiercoles;
+	private JCheckBox chckbxJueves;
+	private JCheckBox chckbxViernes;
+	private JCheckBox chckbxSabado;
+	private JCheckBox chckbxDomingo;
+	private JCheckBox chckbxPromoActiva;
+	private JCheckBox chckbxPromoAcumulable;
+	
+	private String nombre = "";
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -38,16 +50,10 @@ public class VistaAltaPromocion {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public VistaAltaPromocion() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frmAltaDeMozo = new JFrame();
 		frmAltaDeMozo.setTitle("Promocion temporal");
@@ -64,12 +70,10 @@ public class VistaAltaPromocion {
 		txtNombrePromocion.setBounds(197, 11, 192, 32);
 		frmAltaDeMozo.getContentPane().add(txtNombrePromocion);
 		txtNombrePromocion.setColumns(10);
+		txtNombrePromocion.addKeyListener(this);
 		
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAceptar.setBounds(304, 218, 110, 32);
 		frmAltaDeMozo.getContentPane().add(btnAceptar);
@@ -84,20 +88,24 @@ public class VistaAltaPromocion {
 		lblFormaDePago.setBounds(23, 56, 126, 21);
 		frmAltaDeMozo.getContentPane().add(lblFormaDePago);
 		
-		JCheckBox chckbxEfectivo = new JCheckBox("Efectivo");
+		chckbxEfectivo = new JCheckBox("Efectivo");
 		chckbxEfectivo.setBounds(197, 56, 72, 23);
+		chckbxEfectivo.addMouseListener(this);
 		frmAltaDeMozo.getContentPane().add(chckbxEfectivo);
 		
-		JCheckBox chckbxTarjeta = new JCheckBox("Tarjeta");
+		chckbxTarjeta = new JCheckBox("Tarjeta");
 		chckbxTarjeta.setBounds(197, 82, 72, 23);
+		chckbxTarjeta.addMouseListener(this);
 		frmAltaDeMozo.getContentPane().add(chckbxTarjeta);
 		
-		JCheckBox chckbxMercadoPago = new JCheckBox("Mercado Pago");
+		chckbxMercadoPago = new JCheckBox("Mercado Pago");
 		chckbxMercadoPago.setBounds(300, 56, 97, 23);
+		chckbxMercadoPago.addMouseListener(this);
 		frmAltaDeMozo.getContentPane().add(chckbxMercadoPago);
 		
-		JCheckBox chckbxCuentaDNI = new JCheckBox("Cuenta DNI");
+		chckbxCuentaDNI = new JCheckBox("Cuenta DNI");
 		chckbxCuentaDNI.setBounds(300, 82, 97, 23);
+		chckbxCuentaDNI.addMouseListener(this);
 		frmAltaDeMozo.getContentPane().add(chckbxCuentaDNI);
 		
 		JLabel lblFormaDePago_1 = new JLabel("Dias Promo");
@@ -105,35 +113,42 @@ public class VistaAltaPromocion {
 		lblFormaDePago_1.setBounds(23, 111, 97, 24);
 		frmAltaDeMozo.getContentPane().add(lblFormaDePago_1);
 		
-		JCheckBox chckbxLunes = new JCheckBox("Lunes");
+		chckbxLunes = new JCheckBox("Lunes");
 		chckbxLunes.setBounds(117, 111, 60, 23);
+		chckbxLunes.addMouseListener(this);
 		frmAltaDeMozo.getContentPane().add(chckbxLunes);
 		
-		JCheckBox chckbxJueves = new JCheckBox("Jueves");
+		chckbxJueves = new JCheckBox("Jueves");
 		chckbxJueves.setBounds(117, 137, 60, 23);
+		chckbxJueves.addMouseListener(this);
 		frmAltaDeMozo.getContentPane().add(chckbxJueves);
 		
-		JCheckBox chckbxMartes = new JCheckBox("Martes");
+		chckbxMartes = new JCheckBox("Martes");
 		chckbxMartes.setBounds(197, 111, 60, 23);
+		chckbxMartes.addMouseListener(this);
 		frmAltaDeMozo.getContentPane().add(chckbxMartes);
 		
-		JCheckBox chckbxViernes = new JCheckBox("Viernes");
+		chckbxViernes = new JCheckBox("Viernes");
 		chckbxViernes.setBounds(197, 137, 60, 23);
+		chckbxViernes.addMouseListener(this);
 		frmAltaDeMozo.getContentPane().add(chckbxViernes);
 		
-		JCheckBox chckbxMiercoles = new JCheckBox("Miercoles");
+		chckbxMiercoles = new JCheckBox("Miercoles");
 		chckbxMiercoles.setBounds(272, 111, 72, 23);
+		chckbxMiercoles.addMouseListener(this);
 		frmAltaDeMozo.getContentPane().add(chckbxMiercoles);
 		
-		JCheckBox chckbxSabado = new JCheckBox("Sabado");
+		chckbxSabado = new JCheckBox("Sabado");
 		chckbxSabado.setBounds(272, 137, 61, 23);
+		chckbxSabado.addMouseListener(this);
 		frmAltaDeMozo.getContentPane().add(chckbxSabado);
 		
-		JCheckBox chckbxDomingo = new JCheckBox("Domingo");
+		chckbxDomingo = new JCheckBox("Domingo");
 		chckbxDomingo.setBounds(347, 123, 67, 23);
+		chckbxDomingo.addMouseListener(this);
 		frmAltaDeMozo.getContentPane().add(chckbxDomingo);
 		
-		JCheckBox chckbxPromoActiva = new JCheckBox("");
+		chckbxPromoActiva = new JCheckBox("");
 		chckbxPromoActiva.setBounds(74, 180, 27, 23);
 		frmAltaDeMozo.getContentPane().add(chckbxPromoActiva);
 		
@@ -142,7 +157,7 @@ public class VistaAltaPromocion {
 		lblFormaDePago_1_1.setBounds(23, 180, 45, 21);
 		frmAltaDeMozo.getContentPane().add(lblFormaDePago_1_1);
 		
-		JCheckBox chckbxPromoAcumulable = new JCheckBox("");
+		chckbxPromoAcumulable = new JCheckBox("");
 		chckbxPromoAcumulable.setBounds(218, 180, 27, 23);
 		frmAltaDeMozo.getContentPane().add(chckbxPromoAcumulable);
 		
@@ -150,5 +165,143 @@ public class VistaAltaPromocion {
 		lblFormaDePago_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFormaDePago_1_1_1.setBounds(140, 180, 72, 21);
 		frmAltaDeMozo.getContentPane().add(lblFormaDePago_1_1_1);
+		
+		limpia();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		this.btnAceptar.setEnabled(( this.chckbxEfectivo.isSelected()    ||
+									 this.chckbxTarjeta.isSelected()     ||
+									 this.chckbxMercadoPago.isSelected() ||
+									 this.chckbxCuentaDNI.isSelected() )
+									 &&
+								   ( this.chckbxLunes.isSelected()       || 
+									 this.chckbxMartes.isSelected()      || 
+									 this.chckbxMiercoles.isSelected()   || 
+									 this.chckbxJueves.isSelected()      || 
+									 this.chckbxViernes.isSelected()     || 
+									 this.chckbxSabado.isSelected()      || 
+									 this.chckbxDomingo.isSelected() )
+									 && 
+									 this.nombre.length() > 0 );
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		this.nombre = this.txtNombrePromocion.getText();
+		
+		this.btnAceptar.setEnabled(( this.chckbxEfectivo.isSelected()    ||
+									 this.chckbxTarjeta.isSelected()     ||
+									 this.chckbxMercadoPago.isSelected() ||
+									 this.chckbxCuentaDNI.isSelected() )
+									 &&
+								   ( this.chckbxLunes.isSelected()       || 
+									 this.chckbxMartes.isSelected()      || 
+									 this.chckbxMiercoles.isSelected()   || 
+									 this.chckbxJueves.isSelected()      || 
+									 this.chckbxViernes.isSelected()     || 
+									 this.chckbxSabado.isSelected()      || 
+									 this.chckbxDomingo.isSelected() )
+									 && 
+									 this.nombre.length() > 0 );
+		
+		
+		
+	}
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+		this.btnAceptar.addActionListener(actionListener);	
+		this.btnVolver.addActionListener(actionListener);
+		
+		this.chckbxEfectivo.addActionListener(actionListener);
+		this.chckbxTarjeta.addActionListener(actionListener);
+		this.chckbxMercadoPago.addActionListener(actionListener);
+		this.chckbxCuentaDNI.addActionListener(actionListener);
+		
+		this.chckbxLunes.addActionListener(actionListener);
+		this.chckbxMartes.addActionListener(actionListener);
+		this.chckbxMiercoles.addActionListener(actionListener);
+		this.chckbxJueves.addActionListener(actionListener);
+		this.chckbxViernes.addActionListener(actionListener);
+		this.chckbxSabado.addActionListener(actionListener);
+		this.chckbxDomingo.addActionListener(actionListener);
+		
+		this.chckbxPromoActiva.addActionListener(actionListener);
+		this.chckbxPromoAcumulable.addActionListener(actionListener);
+	}
+
+	@Override
+	public void mostrar() {
+		this.setVisible(true);
+		
+	}
+
+	@Override
+	public void esconder() {
+		this.setVisible(false);
+		
+	}
+
+	@Override
+	public void limpia() {
+		this.txtNombrePromocion.setText("");
+		this.btnAceptar.setEnabled(false);
+		
+		this.chckbxEfectivo.setSelected(false);
+		this.chckbxTarjeta.setSelected(false);
+		this.chckbxMercadoPago.setSelected(false);
+		this.chckbxCuentaDNI.setSelected(false);
+		
+		this.chckbxLunes.setSelected(false);
+		this.chckbxMartes.setSelected(false);
+		this.chckbxMiercoles.setSelected(false);
+		this.chckbxJueves.setSelected(false);
+		this.chckbxViernes.setSelected(false);
+		this.chckbxSabado.setSelected(false);
+		this.chckbxDomingo.setSelected(false);
+		
+		this.chckbxPromoActiva.setSelected(false);
+		this.chckbxPromoAcumulable.setSelected(false);
+	}
+
+	public String getNombre() {
+		return nombre;
 	}
 }

@@ -16,9 +16,6 @@ public class VistaGestionPromociones {
 
 	private JFrame frmGestionDeMozos;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -32,16 +29,10 @@ public class VistaGestionPromociones {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public VistaGestionPromociones() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frmGestionDeMozos = new JFrame();
 		frmGestionDeMozos.setTitle("Gestion de promociones");

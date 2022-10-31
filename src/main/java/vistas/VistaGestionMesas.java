@@ -153,7 +153,6 @@ public class VistaGestionMesas extends JFrame implements IGenerica, MouseListene
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -162,4 +161,5 @@ public class VistaGestionMesas extends JFrame implements IGenerica, MouseListene
 		this.btnModificarMesa.setEnabled(false);
 		this.btnAsignarMozo.setEnabled(false);
 	}
+
 }

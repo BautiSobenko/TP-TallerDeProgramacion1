@@ -15,7 +15,6 @@ import java.awt.event.ActionEvent;
 public class VistaInicio {
 
 	private JFrame frmInicioOperario;
-
 	/**
 	 * Launch the application.
 	 */

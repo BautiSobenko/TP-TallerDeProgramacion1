@@ -30,9 +30,8 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener, Mou
 	
 	private String numeroMesa = null;
 	private String cantSillas = null;
-	private String estado = null; 
-
-
+	private String estado = null;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -179,7 +178,7 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener, Mou
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		this.estado = this.grupoEstado.getSelection().getActionCommand();
 		
 	}
 

@@ -118,8 +118,6 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 		this.username = this.usernameField.getText();
 		this.contrasena = new String(this.passwordField.getPassword());
 
-		if(username.length() > 0 && contrasena.length() > 0)
-			System.out.println("Funciona");
 		this.loginButton.setEnabled(username.length() > 0 && contrasena.length() > 0);
 	}
 

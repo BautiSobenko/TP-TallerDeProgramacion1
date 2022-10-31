@@ -17,7 +17,7 @@ import javax.swing.SwingConstants;
 
 import modelo.Operario;
 
-public class VistaGestionOperarios implements MouseListener{
+public class VistaGestionOperarios extends JFrame implements MouseListener,IGenerica{
 
 	private JFrame frmGestionDeMozos;
 	private JButton btnAltaOperario,btnBajaOperario,btnModificarOperario,btnVolver;
@@ -73,7 +73,6 @@ public class VistaGestionOperarios implements MouseListener{
 		
 		btnAltaOperario = new JButton("Alta Operario");
 		btnAltaOperario.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAltaOperario.addActionListener(actionListener);
 		btnAltaOperario.setBounds(276, 46, 141, 32);
 		frmGestionDeMozos.getContentPane().add(btnAltaOperario);
 		
@@ -88,11 +87,9 @@ public class VistaGestionOperarios implements MouseListener{
 		btnModificarOperario.setBounds(276, 156, 141, 32);
 		btnModificarOperario.setEnabled(false);
 		frmGestionDeMozos.getContentPane().add(btnModificarOperario);
-		btnVolver.addActionListener(actionListener);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnVolver.addActionListener(actionListener);
 		btnVolver.setBounds(26, 211, 89, 32);
 		frmGestionDeMozos.getContentPane().add(btnVolver);
 	}
@@ -128,5 +125,35 @@ public class VistaGestionOperarios implements MouseListener{
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+		// TODO Auto-generated method stub
+		this.actionListener = actionListener;
+		btnAltaOperario.addActionListener(actionListener);
+		btnModificarOperario.addActionListener(actionListener);
+		btnBajaOperario.addActionListener(actionListener);
+		btnVolver.addActionListener(actionListener);
+	}
+
+	@Override
+	public void mostrar() {
+		// TODO Auto-generated method stub
+		this.setVisible(true);
+	}
+
+	@Override
+	public void esconder() {
+		// TODO Auto-generated method stub
+		this.setVisible(false);
+		this.limpia();
+	}
+
+	@Override
+	public void limpia() {
+		// TODO Auto-generated method stub
+		this.btnBajaOperario.setEnabled(false);
+		this.btnModificarOperario.setEnabled(false);
 	}
 }

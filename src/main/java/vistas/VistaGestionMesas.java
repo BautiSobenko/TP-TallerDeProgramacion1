@@ -115,7 +115,7 @@ public class VistaGestionMesas extends JFrame implements IGenerica, MouseListene
 	@Override
 	public void esconder() {
 		this.setVisible(false);
-		
+		this.limpia();
 	}
 	
 	public void setModel(DefaultListModel<Mesa> model) {

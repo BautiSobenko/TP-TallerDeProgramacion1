@@ -5,14 +5,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JToggleButton;
 import javax.swing.JRadioButton;
 
-public class VistaAltaMesa {
+public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener, MouseListener{
 
 	private JFrame frmAltaDeMozo;
 	private JTextField txtNumeroMesa;
@@ -21,7 +26,12 @@ public class VistaAltaMesa {
 	private JTextField txtCantSillas;
 	private JRadioButton rdbtnMesaLibre;
 	private JRadioButton rdbtnMesaOcupada;
-
+	private ButtonGroup grupoEstado;
+	
+	private String numeroMesa = null;
+	private String cantSillas = null;
+	private String estado = null;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -74,12 +84,9 @@ public class VistaAltaMesa {
 		txtNumeroMesa.setBounds(200, 20, 184, 32);
 		frmAltaDeMozo.getContentPane().add(txtNumeroMesa);
 		txtNumeroMesa.setColumns(10);
+		txtNumeroMesa.addKeyListener(this);
 		
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAceptar.setBounds(274, 205, 110, 32);
 		frmAltaDeMozo.getContentPane().add(btnAceptar);
@@ -93,16 +100,97 @@ public class VistaAltaMesa {
 		txtCantSillas.setColumns(10);
 		txtCantSillas.setBounds(200, 80, 184, 32);
 		frmAltaDeMozo.getContentPane().add(txtCantSillas);
+		txtCantSillas.addKeyListener(this);
 		
 		rdbtnMesaLibre = new JRadioButton("Libre");
 		rdbtnMesaLibre.setSelected(true);
 		rdbtnMesaLibre.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		rdbtnMesaLibre.setBounds(200, 143, 72, 23);
+		rdbtnMesaLibre.addMouseListener(this);
 		frmAltaDeMozo.getContentPane().add(rdbtnMesaLibre);
 		
 		rdbtnMesaOcupada = new JRadioButton("Ocupada");
 		rdbtnMesaOcupada.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		rdbtnMesaOcupada.setBounds(303, 143, 81, 23);
+		rdbtnMesaOcupada.addMouseListener(this);
 		frmAltaDeMozo.getContentPane().add(rdbtnMesaOcupada);
+		
+		grupoEstado = new ButtonGroup();
+		grupoEstado.add(rdbtnMesaLibre);
+		grupoEstado.add(rdbtnMesaOcupada);
+		
+		limpia();
+		
+	}
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+		this.btnAceptar.addActionListener(actionListener);
+		this.btnVolver.addActionListener(actionListener);
+	}
+
+	@Override
+	public void mostrar() {
+		this.setVisible(true);
+	}
+
+	@Override
+	public void esconder() {
+		this.setVisible(false);
+	}
+
+	@Override
+	public void limpia() {
+		this.btnAceptar.setEnabled(false);
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		this.numeroMesa = txtNumeroMesa.getText();
+		this.cantSillas = txtCantSillas.getText();
+		
+		this.btnAceptar.setEnabled( this.numeroMesa.length() > 0 && this.cantSillas.length() > 0 );
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		this.estado = this.grupoEstado.getSelection().getActionCommand();
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

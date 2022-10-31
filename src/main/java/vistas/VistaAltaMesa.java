@@ -27,6 +27,11 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener, Mou
 	private JRadioButton rdbtnMesaLibre;
 	private JRadioButton rdbtnMesaOcupada;
 	private ButtonGroup grupoEstado;
+	
+	private String numeroMesa = null;
+	private String cantSillas = null;
+	private String estado = null; 
+
 
 	/**
 	 * Launch the application.
@@ -154,8 +159,10 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener, Mou
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		this.btnAceptar.setEnabled(txtCantSillas.getText().length() > 0 && txtNumeroMesa.getText().length() > 0);
+		this.numeroMesa = txtNumeroMesa.getText();
+		this.cantSillas = txtCantSillas.getText();
 		
+		this.btnAceptar.setEnabled( this.numeroMesa.length() > 0 && this.cantSillas.length() > 0 );
 	}
 
 	@Override

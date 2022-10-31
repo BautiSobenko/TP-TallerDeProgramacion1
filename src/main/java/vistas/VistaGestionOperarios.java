@@ -8,14 +8,19 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-public class VistaGestionOperarios {
+import modelo.Operario;
+
+public class VistaGestionOperarios extends JFrame implements MouseListener,IGenerica{
 
 	private JFrame frmGestionDeMozos;
-	private JButton btnAltaOperario;
+	private JButton btnAltaOperario,btnBajaOperario,btnModificarOperario,btnVolver;
+	private JList<Operario> listaOperarios;
+	private ActionListener actionListener;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -51,35 +56,88 @@ public class VistaGestionOperarios {
 		scrollPane.setBounds(26, 46, 221, 142);
 		frmGestionDeMozos.getContentPane().add(scrollPane);
 		
-		JList listOperarios = new JList();
-		scrollPane.setViewportView(listOperarios);
+		listaOperarios = new JList();
+		scrollPane.setViewportView(listaOperarios);
+		listaOperarios.addMouseListener(this);
 		
 		btnAltaOperario = new JButton("Alta Operario");
 		btnAltaOperario.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAltaOperario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnAltaOperario.setBounds(276, 46, 141, 32);
 		frmGestionDeMozos.getContentPane().add(btnAltaOperario);
 		
-		JButton btnBajaOperario = new JButton("Baja Operario");
+		btnBajaOperario = new JButton("Baja Operario");
 		btnBajaOperario.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnBajaOperario.setBounds(276, 101, 141, 32);
+		btnBajaOperario.setEnabled(false);
 		frmGestionDeMozos.getContentPane().add(btnBajaOperario);
 		
-		JButton btnModificarOperario = new JButton("Modificar Operario");
+		btnModificarOperario = new JButton("Modificar Operario");
 		btnModificarOperario.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnModificarOperario.setBounds(276, 156, 141, 32);
+		btnModificarOperario.setEnabled(false);
 		frmGestionDeMozos.getContentPane().add(btnModificarOperario);
 		
-		JButton btnVolver = new JButton("Volver");
+		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnVolver.setBounds(26, 211, 89, 32);
 		frmGestionDeMozos.getContentPane().add(btnVolver);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		if(this.listaOperarios.getSelectedValue()!=null) {
+			this.btnBajaOperario.setEnabled(true);
+			this.btnModificarOperario.setEnabled(true);
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+		this.actionListener = actionListener;
+		btnAltaOperario.addActionListener(actionListener);
+		btnModificarOperario.addActionListener(actionListener);
+		btnBajaOperario.addActionListener(actionListener);
+		btnVolver.addActionListener(actionListener);
+	}
+
+	@Override
+	public void mostrar() {
+		this.setVisible(true);
+	}
+
+	@Override
+	public void esconder() {
+		this.setVisible(false);
+		this.limpia();
+	}
+
+	@Override
+	public void limpia() {
+		this.btnBajaOperario.setEnabled(false);
+		this.btnModificarOperario.setEnabled(false);
 	}
 }

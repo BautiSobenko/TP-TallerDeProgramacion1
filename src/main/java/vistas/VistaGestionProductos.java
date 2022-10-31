@@ -8,13 +8,18 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import modelo.Producto;
 
-public class VistaGestionProductos {
+public class VistaGestionProductos extends JFrame implements IGenerica,MouseListener{
 
 	private JFrame frmGestionDeMozos;
+	private JButton btnAltaProducto,btnBajaProducto,btnModificarProducto,btnVolver;
+	private JList<Producto> listaProductos;
+	private ActionListener actionListener;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -50,35 +55,88 @@ public class VistaGestionProductos {
 		scrollPane.setBounds(26, 46, 221, 142);
 		frmGestionDeMozos.getContentPane().add(scrollPane);
 		
-		JList listProductos = new JList();
-		scrollPane.setViewportView(listProductos);
+		listaProductos = new JList();
+		scrollPane.setViewportView(listaProductos);
+		listaProductos.addMouseListener(this);
 		
-		JButton btnAltaProducto = new JButton("Alta Producto");
+		btnAltaProducto = new JButton("Alta Producto");
 		btnAltaProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAltaProducto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnAltaProducto.setBounds(270, 46, 147, 32);
 		frmGestionDeMozos.getContentPane().add(btnAltaProducto);
 		
-		JButton btnBajaProducto = new JButton("Baja Producto");
+		btnBajaProducto = new JButton("Baja Producto");
 		btnBajaProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnBajaProducto.setBounds(270, 101, 147, 32);
+		btnBajaProducto.setEnabled(false);
 		frmGestionDeMozos.getContentPane().add(btnBajaProducto);
 		
-		JButton btnModificarProducto = new JButton("Modificar Producto");
+		btnModificarProducto = new JButton("Modificar Producto");
 		btnModificarProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnModificarProducto.setBounds(270, 156, 147, 32);
+		btnModificarProducto.setEnabled(false);
 		frmGestionDeMozos.getContentPane().add(btnModificarProducto);
 		
-		JButton btnVolver = new JButton("Volver");
+		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnVolver.setBounds(26, 211, 89, 32);
 		frmGestionDeMozos.getContentPane().add(btnVolver);
+	}
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+		this.actionListener = actionListener;
+		btnAltaProducto.addActionListener(actionListener);
+		btnModificarProducto.addActionListener(actionListener);
+		btnBajaProducto.addActionListener(actionListener);
+		btnVolver.addActionListener(actionListener);
+	}
+
+	@Override
+	public void mostrar() {
+		this.setVisible(true);
+	}
+
+	@Override
+	public void esconder() {
+		this.setVisible(false);
+		this.limpia();
+	}
+
+	@Override
+	public void limpia() {
+		this.btnBajaProducto.setEnabled(false);
+		this.btnModificarProducto.setEnabled(false);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		if(this.listaProductos.getSelectedValue()!=null) {
+			this.btnBajaProducto.setEnabled(true);
+			this.btnModificarProducto.setEnabled(true);
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

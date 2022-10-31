@@ -1,7 +1,6 @@
 package vistas;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -115,7 +114,7 @@ public class VistaGestionMesas extends JFrame implements IGenerica, MouseListene
 	@Override
 	public void esconder() {
 		this.setVisible(false);
-		
+		this.limpia();
 	}
 	
 	public void setModel(DefaultListModel<Mesa> model) {

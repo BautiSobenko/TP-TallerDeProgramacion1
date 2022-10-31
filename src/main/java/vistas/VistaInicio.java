@@ -5,16 +5,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import javax.swing.JButton;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-public class VistaInicio {
+public class VistaInicio extends JFrame implements IGenerica {
 
 	private JFrame frmInicioOperario;
+	private JButton btnApertura,btnCerrarSesion,btnGestionPromos;
+	private JButton btnGestionProductos,btnGestionMesas,btnGestionOperarios,btnGestionMozos;
+	private ActionListener actionListener;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -58,7 +58,7 @@ public class VistaInicio {
 		panelGrid.add(panelMo);
 		panelMo.setLayout(null);
 		
-		JButton btnGestionMozos = new JButton("Gestionar Mozos");
+		btnGestionMozos = new JButton("Gestionar Mozos");
 		btnGestionMozos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnGestionMozos.setBounds(41, 11, 170, 80);
 		panelMo.add(btnGestionMozos);
@@ -68,7 +68,7 @@ public class VistaInicio {
 		panelMo_1.setLayout(null);
 		panelGrid.add(panelMo_1);
 		
-		JButton btnGestionOperarios = new JButton("Gestionar Operarios");
+		btnGestionOperarios = new JButton("Gestionar Operarios");
 		btnGestionOperarios.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnGestionOperarios.setBounds(41, 11, 170, 80);
 		panelMo_1.add(btnGestionOperarios);
@@ -78,7 +78,7 @@ public class VistaInicio {
 		panelMo_2.setLayout(null);
 		panelGrid.add(panelMo_2);
 		
-		JButton btnGestionMesas = new JButton("Gestionar Mesas");
+		btnGestionMesas = new JButton("Gestionar Mesas");
 		btnGestionMesas.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnGestionMesas.setBounds(41, 11, 170, 80);
 		panelMo_2.add(btnGestionMesas);
@@ -88,7 +88,7 @@ public class VistaInicio {
 		panelMo_3.setLayout(null);
 		panelGrid.add(panelMo_3);
 		
-		JButton btnGestionProductos = new JButton("Gestionar Productos");
+		btnGestionProductos = new JButton("Gestionar Productos");
 		btnGestionProductos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnGestionProductos.setBounds(41, 11, 170, 80);
 		panelMo_3.add(btnGestionProductos);
@@ -98,11 +98,7 @@ public class VistaInicio {
 		panelMo_4.setLayout(null);
 		panelGrid.add(panelMo_4);
 		
-		JButton btnGestionPromos = new JButton("Gestionar Promociones");
-		btnGestionPromos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnGestionPromos = new JButton("Gestionar Promociones");
 		btnGestionPromos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnGestionPromos.setBounds(169, 11, 173, 80);
 		panelMo_4.add(btnGestionPromos);
@@ -112,14 +108,44 @@ public class VistaInicio {
 		panelGral.add(panelSur);
 		panelSur.setLayout(null);
 		
-		JButton btnCerrarSesion = new JButton("Cerrar Sesion");
+		btnCerrarSesion = new JButton("Cerrar Sesion");
 		btnCerrarSesion.setBounds(0, 11, 260, 42);
 		btnCerrarSesion.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panelSur.add(btnCerrarSesion);
 		
-		JButton btnApertura = new JButton("Abrir Local");
+		btnApertura = new JButton("Abrir Local");
 		btnApertura.setBounds(256, 11, 260, 42);
 		btnApertura.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panelSur.add(btnApertura);
+	}
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+		// TODO Auto-generated method stub
+		this.actionListener = actionListener;
+		this.btnGestionOperarios.addActionListener(actionListener);
+		this.btnGestionMesas.addActionListener(actionListener);
+		this.btnGestionProductos.addActionListener(actionListener);
+		this.btnCerrarSesion.addActionListener(actionListener);
+		this.btnGestionMesas.addActionListener(actionListener);
+		this.btnGestionPromos.addActionListener(actionListener);
+	}
+
+	@Override
+	public void mostrar() {
+		// TODO Auto-generated method stub
+		this.setVisible(true);
+	}
+
+	@Override
+	public void esconder() {
+		// TODO Auto-generated method stub
+		this.setVisible(false);
+	}
+
+	@Override
+	public void limpia() {
+		// TODO Auto-generated method stub
+
 	}
 }

@@ -48,8 +48,6 @@ public class ControladorLogin implements ActionListener {
 			try {
 				if( logueado != null )
 					logueado = null;
-				//logueado = this.empresa.login(vistaLogin.getUsername(), vistaLogin.getContrasena());
-				//logueado = this.empresa.login();
 				logueado = this.empresa.login(vistaLogin.getUsername(), vistaLogin.getContrasena());
 			} catch (UsuarioIncorrectoException err) {
 				this.vistaLogin.usuarioNoEncontrado();

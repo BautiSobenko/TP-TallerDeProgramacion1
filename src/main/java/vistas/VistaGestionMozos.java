@@ -1,19 +1,16 @@
 package vistas;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Font;
-import javax.swing.SwingConstants;
-import modelo.Mozo;
 
-public class VistaGestionMozos extends JFrame implements IGenerica, MouseListener{
+import modelo.Mozo;
+import modelo.Operario;
+
+public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseListener{
 
 	private JFrame frmGestionDeMozos;
 	private JButton btnVolver,btnModificarMozo,btnBajaMozo,btnAltaMozo;
@@ -109,6 +106,16 @@ public class VistaGestionMozos extends JFrame implements IGenerica, MouseListene
 	}
 
 	@Override
+	public void success(String msg) {
+
+	}
+
+	@Override
+	public void failure(String msg) {
+
+	}
+
+	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 
@@ -138,5 +145,15 @@ public class VistaGestionMozos extends JFrame implements IGenerica, MouseListene
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void setModel(DefaultListModel<Operario> lista) {
+
+	}
+
+	@Override
+	public Object getSeleccion() {
+		return null;
 	}
 }

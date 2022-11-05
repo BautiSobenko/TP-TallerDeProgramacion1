@@ -5,15 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import javax.swing.JRadioButton;
 
 public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener{
 
@@ -108,6 +104,16 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener{
 		this.btnAceptar.setEnabled(false);
 		this.txtNumeroMesa.setText("");
 		this.txtCantSillas.setText("");
+	}
+
+	@Override
+	public void success(String msg) {
+
+	}
+
+	@Override
+	public void failure(String msg) {
+
 	}
 
 	@Override

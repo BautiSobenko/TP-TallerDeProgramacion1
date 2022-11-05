@@ -5,15 +5,12 @@ import excepciones.PermisoDenegadoException;
 import modelo.Empresa;
 import modelo.Operario;
 import negocio.GestionDeOperarios;
-import vistas.IGenerica;
 import vistas.IVistaGestion;
 import vistas.VistaGestionOperarios;
-import vistas.VistaInicio;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import java.util.Set;
 
 public class ControladorGestionOperario implements ActionListener {
@@ -27,10 +24,10 @@ public class ControladorGestionOperario implements ActionListener {
 
 
     private ControladorGestionOperario() {
-        this.vistaGestionOperarios = new VistaGestionOperarios();
+        vistaGestionOperarios = new VistaGestionOperarios();
         this.empresa = Empresa.getEmpresa();
-        this.vistaGestionOperarios.setActionListener(this);
-        this.gestionOp = gestionOp.get();
+        vistaGestionOperarios.setActionListener(this);
+        gestionOp = GestionDeOperarios.get();
     }
 
     public Empresa getEmpresa() {
@@ -48,7 +45,7 @@ public class ControladorGestionOperario implements ActionListener {
         ControladorGestionOperario.vistaGestionOperarios.setModel(lista);
 
         if( mostrar )
-            controladorGestionOperario.vistaGestionOperarios.mostrar();
+            vistaGestionOperarios.mostrar();
         return controladorGestionOperario;
     }
 
@@ -56,21 +53,23 @@ public class ControladorGestionOperario implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         String comando =  e.getActionCommand();
-        if(comando=="Alta Operario")
+        if(comando.equals("Alta Operario")) {
             //llama
-        else
-            if(comando=="Baja Operario"){
-                Operario op = (Operario) this.vistaGestionOperarios.getSeleccion();
+        }else
+            if( comando.equals("Baja Operario") ){
+                Operario op = (Operario) vistaGestionOperarios.getSeleccion();
                 try {
                     gestionOp.bajaOperario(op.getUsername());
+                    vistaGestionOperarios.success("Operario " + op.getUsername() + "dado de baja");
                 } catch (OperarioNoExistenteException | PermisoDenegadoException ignored) {}
             }
             else{
-                Operario op = (Operario) this.vistaGestionOperarios.getSeleccion();
+                Operario op = (Operario) vistaGestionOperarios.getSeleccion();
                 try {
                     gestionOp.bajaOperario(op.getUsername());
+                    ControladorAltaOperario controladorAltaOperario = ControladoAltaOperario.get();
+                    vistaGestionOperarios.success("Operario " + op.getUsername() + "modificado");
                 } catch (OperarioNoExistenteException | PermisoDenegadoException ignored) {}
-                //Llama controlador alta
             }
     }
 }

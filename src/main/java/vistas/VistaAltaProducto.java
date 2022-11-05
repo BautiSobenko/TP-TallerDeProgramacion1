@@ -10,8 +10,6 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class VistaAltaProducto extends JFrame implements IGenerica, KeyListener {
 
@@ -165,6 +163,16 @@ public class VistaAltaProducto extends JFrame implements IGenerica, KeyListener 
 		this.txtPrecioCosto.setText("");
 		this.txtPrecioVenta.setText("");
 		this.txtStockInicial.setText("");
+	}
+
+	@Override
+	public void success(String msg) {
+
+	}
+
+	@Override
+	public void failure(String msg) {
+
 	}
 
 	public String getNombre() {

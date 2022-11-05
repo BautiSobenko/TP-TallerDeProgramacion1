@@ -13,8 +13,9 @@ import java.awt.event.MouseListener;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import modelo.Mesa;
+import modelo.Operario;
 
-public class VistaGestionMesas extends JFrame implements IGenerica, MouseListener{
+public class VistaGestionMesas extends JFrame implements IVistaGestion, MouseListener{
 
 	private JFrame frmGestionDeMozos;
 	private JButton btnAltaMesa;
@@ -161,4 +162,23 @@ public class VistaGestionMesas extends JFrame implements IGenerica, MouseListene
 		this.btnAsignarMozo.setEnabled(false);
 	}
 
+	@Override
+	public void success(String msg) {
+
+	}
+
+	@Override
+	public void failure(String msg) {
+
+	}
+
+	@Override
+	public void setModel(DefaultListModel<Operario> lista) {
+
+	}
+
+	@Override
+	public Object getSeleccion() {
+		return null;
+	}
 }

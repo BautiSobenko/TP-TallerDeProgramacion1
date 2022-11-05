@@ -301,6 +301,16 @@ public class VistaAltaPromocion extends JFrame implements IGenerica, KeyListener
 		this.chckbxPromoAcumulable.setSelected(false);
 	}
 
+	@Override
+	public void success(String msg) {
+
+	}
+
+	@Override
+	public void failure(String msg) {
+
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

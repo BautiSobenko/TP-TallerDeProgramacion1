@@ -200,6 +200,16 @@ public class VistaAltaOperario extends JFrame implements IGenerica, KeyListener,
 		this.btnAceptar.setEnabled(false);
 	}
 
+	@Override
+	public void success(String msg) {
+
+	}
+
+	@Override
+	public void failure(String msg) {
+
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

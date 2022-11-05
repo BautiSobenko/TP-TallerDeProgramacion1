@@ -8,13 +8,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.ActionEvent;
 
 public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener {
 
@@ -149,6 +147,16 @@ public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener
 		this.btnAbrirMesa.setEnabled(false);
 		this.btnCargarPedido.setEnabled(false);
 		this.btnCerrarMesa.setEnabled(false);
+	}
+
+	@Override
+	public void success(String msg) {
+
+	}
+
+	@Override
+	public void failure(String msg) {
+
 	}
 
 	@Override

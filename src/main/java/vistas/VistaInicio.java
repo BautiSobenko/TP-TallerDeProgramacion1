@@ -148,4 +148,14 @@ public class VistaInicio extends JFrame implements IGenerica {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public void success(String msg) {
+
+	}
+
+	@Override
+	public void failure(String msg) {
+
+	}
 }

@@ -143,6 +143,16 @@ public class VistaAltaMozo extends JFrame implements IGenerica, KeyListener{
 		this.txtCantHijos.setText("");
 	}
 
+	@Override
+	public void success(String msg) {
+
+	}
+
+	@Override
+	public void failure(String msg) {
+
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

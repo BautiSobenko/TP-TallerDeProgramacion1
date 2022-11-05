@@ -11,5 +11,9 @@ public interface IGenerica {
 	void esconder();
 	
 	void limpia();
+
+	void success(String msg);
+
+	void failure(String msg);
 	
 }

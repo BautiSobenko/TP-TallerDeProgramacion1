@@ -2,20 +2,15 @@ package vistas;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Font;
-import javax.swing.SwingConstants;
 
 import modelo.Operario;
 
-public class VistaGestionOperarios extends JFrame implements MouseListener,IGenerica{
+public class VistaGestionOperarios extends JFrame implements MouseListener,IVistaGestion{
 
 	private JFrame frmGestionDeMozos;
 	private JButton btnAltaOperario,btnBajaOperario,btnModificarOperario,btnVolver;
@@ -139,5 +134,15 @@ public class VistaGestionOperarios extends JFrame implements MouseListener,IGene
 	public void limpia() {
 		this.btnBajaOperario.setEnabled(false);
 		this.btnModificarOperario.setEnabled(false);
+	}
+
+	@Override
+	public void setModel(DefaultListModel<Operario> lista) {
+		this.listaOperarios.setModel(lista);
+	}
+
+	@Override
+	public Object getSeleccion() {
+		return this.listaOperarios.getSelectedValue();
 	}
 }

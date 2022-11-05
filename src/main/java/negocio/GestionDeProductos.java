@@ -32,7 +32,7 @@ public class GestionDeProductos {
             persistencia.abrirOutput("productos.xml");
             persistencia.escribir(this.empresa.getProductos());
             persistencia.cerrarOutput();
-        } catch (IOException ignored) {
+        } catch (IOException e) {
 
         }
     }

@@ -13,11 +13,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 public class ControladorLogin implements ActionListener {
+
+	private static ControladorLogin controladorLogin = null;
 	private Empresa empresa;
 	private ILogin vistaLogin;
 	private Operario logueado;
-	private static ControladorLogin controladorLogin = null;
-	
+
 	private ControladorLogin() {
 		this.vistaLogin = new VistaLogin();
 		this.empresa = Empresa.getEmpresa();
@@ -65,8 +66,6 @@ public class ControladorLogin implements ActionListener {
 
 	}
 
-	
-	
 	public void setLogueado(Operario logueado) {
 		this.logueado = logueado;
 	}

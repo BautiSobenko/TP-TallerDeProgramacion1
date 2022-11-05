@@ -34,7 +34,7 @@ public class GestionDeMozos {
             persistencia.abrirOutput("mozos.xml");
             persistencia.escribir(this.empresa.getMozos());
             persistencia.cerrarOutput();
-        } catch (IOException ignored) {
+        } catch (IOException e) {
 
         }
     }

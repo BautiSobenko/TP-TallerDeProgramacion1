@@ -1,5 +1,6 @@
 package negocio;
 
+import dto.MesaDTO;
 import enums.EstadoMesa;
 import excepciones.CierreMesaConEstadoLibreException;
 import excepciones.MesaExistenteException;
@@ -39,25 +40,27 @@ public class GestionDeMesas {
             persistencia.abrirOutput("mesas.xml");
             persistencia.escribir(this.empresa.getMesas());
             persistencia.cerrarOutput();
-        } catch (IOException ignored) {
+        } catch (IOException e) {
 
         }
     }
 
-    private void altaMesa(Mesa mesa) throws MesaExistenteException {
+    public void altaMesa(MesaDTO mesa) throws MesaExistenteException {
 
         Set<Mesa> mesas = this.empresa.getMesas();
         boolean existeMesa = mesas.stream().anyMatch(m -> m.getNroMesa() == mesa.getNroMesa() );
 
+        Mesa mesaNueva = new Mesa(mesa.getNroMesa(),mesa.getCantSillas());
+
         if(!existeMesa){
-            mesas.add(mesa);
+            mesas.add(mesaNueva);
             persistirMesas();
         }
         else
             throw new MesaExistenteException();
     }
 
-    private void modificaMesa(Mesa mesa) throws MesaNoExistenteException {
+    public void modificaMesa(Mesa mesa) throws MesaNoExistenteException {
         Set<Mesa> mesas = this.empresa.getMesas();
         Iterator<Mesa> it = mesas.iterator();
 
@@ -80,7 +83,7 @@ public class GestionDeMesas {
             throw new MesaNoExistenteException();
     }
 
-    private void bajaMesa(int nroMesa) throws MesaNoExistenteException {
+    public void bajaMesa(int nroMesa) throws MesaNoExistenteException {
         Set<Mesa> mesas = this.empresa.getMesas();
         Optional<Mesa> mesa = mesas.stream().filter(m -> m.getNroMesa() == nroMesa).findFirst();
 

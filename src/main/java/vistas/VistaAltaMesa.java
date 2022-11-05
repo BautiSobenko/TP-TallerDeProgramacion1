@@ -15,20 +15,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JRadioButton;
 
-public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener, MouseListener{
+public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener{
 
 	private JFrame frmAltaDeMozo;
 	private JTextField txtNumeroMesa;
 	private JButton btnAceptar;
 	private JButton btnVolver;
 	private JTextField txtCantSillas;
-	private JRadioButton rdbtnMesaLibre;
-	private JRadioButton rdbtnMesaOcupada;
-	private ButtonGroup grupoEstado;
 	
 	private String numeroMesa = null;
 	private String cantSillas = null;
-	private String estado = null;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -61,13 +57,8 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener, Mou
 		
 		JLabel lblCantSillas = new JLabel("Cantidad de sillas\r\n");
 		lblCantSillas.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCantSillas.setBounds(39, 83, 126, 20);
+		lblCantSillas.setBounds(41, 124, 126, 20);
 		frmAltaDeMozo.getContentPane().add(lblCantSillas);
-		
-		JLabel lblEstadoMesa = new JLabel("Estado");
-		lblEstadoMesa.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblEstadoMesa.setBounds(39, 138, 126, 32);
-		frmAltaDeMozo.getContentPane().add(lblEstadoMesa);
 		
 		txtNumeroMesa = new JTextField();
 		txtNumeroMesa.setBounds(200, 20, 184, 32);
@@ -87,26 +78,9 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener, Mou
 		
 		txtCantSillas = new JTextField();
 		txtCantSillas.setColumns(10);
-		txtCantSillas.setBounds(200, 80, 184, 32);
+		txtCantSillas.setBounds(200, 120, 184, 32);
 		frmAltaDeMozo.getContentPane().add(txtCantSillas);
 		txtCantSillas.addKeyListener(this);
-		
-		rdbtnMesaLibre = new JRadioButton("Libre");
-		rdbtnMesaLibre.setSelected(true);
-		rdbtnMesaLibre.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnMesaLibre.setBounds(200, 143, 72, 23);
-		rdbtnMesaLibre.addMouseListener(this);
-		frmAltaDeMozo.getContentPane().add(rdbtnMesaLibre);
-		
-		rdbtnMesaOcupada = new JRadioButton("Ocupada");
-		rdbtnMesaOcupada.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnMesaOcupada.setBounds(303, 143, 81, 23);
-		rdbtnMesaOcupada.addMouseListener(this);
-		frmAltaDeMozo.getContentPane().add(rdbtnMesaOcupada);
-		
-		grupoEstado = new ButtonGroup();
-		grupoEstado.add(rdbtnMesaLibre);
-		grupoEstado.add(rdbtnMesaOcupada);
 		
 		limpia();
 		
@@ -126,6 +100,7 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener, Mou
 	@Override
 	public void esconder() {
 		this.setVisible(false);
+		this.limpia();
 	}
 
 	@Override
@@ -155,33 +130,6 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener, Mou
 		this.btnAceptar.setEnabled( this.numeroMesa.length() > 0 && this.cantSillas.length() > 0 );
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		this.estado = this.grupoEstado.getSelection().getActionCommand();
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-	}
-
 	public String getNumeroMesa() {
 		return numeroMesa;
 	}
@@ -190,7 +138,4 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener, Mou
 		return cantSillas;
 	}
 
-	public String getEstado() {
-		return estado;
-	}
 }

@@ -35,7 +35,7 @@ public class GestionDeOperarios {
             persistencia.abrirOutput("operarios.xml");
             persistencia.escribir(this.empresa.getOperarios());
             persistencia.cerrarOutput();
-        } catch (IOException ignored) {
+        } catch (IOException e) {
 
         }
     }

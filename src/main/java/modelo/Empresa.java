@@ -59,7 +59,7 @@ public class Empresa {
             operarios.add(Operario.admin());
             try {
                 persistencia.escribir(operarios);
-            } catch (IOException ignored){}
+            } catch (IOException e){}
 
         }
     }

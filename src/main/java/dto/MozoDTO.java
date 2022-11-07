@@ -7,13 +7,11 @@ public class MozoDTO {
     private String nombreCompleto;
     private Date fechaNacimiento;
     private int cantidadHijos;
-    private String id;
 
-    public MozoDTO(String nombreCompleto, Date fechaNacimiento, int cantidadHijos, String id) {
+    public MozoDTO(String nombreCompleto, Date fechaNacimiento, int cantidadHijos) {
         this.nombreCompleto = nombreCompleto;
         this.fechaNacimiento = fechaNacimiento;
         this.cantidadHijos = cantidadHijos;
-        this.id = id;
     }
 
     public String getNombreCompleto() {
@@ -40,11 +38,4 @@ public class MozoDTO {
         this.cantidadHijos = cantidadHijos;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 }

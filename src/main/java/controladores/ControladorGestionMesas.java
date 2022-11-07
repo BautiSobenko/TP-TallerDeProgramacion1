@@ -50,7 +50,7 @@ public class ControladorGestionMesas implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         String comando =  e.getActionCommand();
-        if(comando.equals("Alta Operario")) {
+        if(comando.equals("Alta Mesa")) {
             ControladorAltaMesa con = ControladorAltaMesa.getControladorAltaMesa();
         }else
         if( comando.equals("Baja Mesa") ){

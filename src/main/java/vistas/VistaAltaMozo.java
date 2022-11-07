@@ -2,10 +2,7 @@ package vistas;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -22,7 +19,7 @@ public class VistaAltaMozo extends JFrame implements IGenerica, KeyListener{
 	
 	private String nombre = null;
 	private String fechaNacimiento = null;
-	private String cantHijos = null;
+	private int cantHijos;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -108,14 +105,17 @@ public class VistaAltaMozo extends JFrame implements IGenerica, KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		this.nombre = this.txtNombre.getText();
-		this.fechaNacimiento = this.txtFechaNacimiento.getText();
-		this.cantHijos = this.txtCantHijos.getText();
-		if( nombre.length() > 0 && 
-			fechaNacimiento.length() > 0 &&
-			cantHijos.length() > 0) {
-			
-			this.btnAceptar.setEnabled(true);
+		try {
+			this.cantHijos=Integer.parseInt(this.txtCantHijos.getText());
+			this.nombre = this.txtNombre.getText();
+			this.fechaNacimiento = this.txtFechaNacimiento.getText();
+			if( nombre.length() > 0 && fechaNacimiento.length() > 0) {
+				this.btnAceptar.setEnabled(true);
+			}
+		}
+		catch(Exception exception) {
+			JOptionPane.showMessageDialog(null, "No ingreso correctamente la cantidad de hijos", "Error", JOptionPane.ERROR_MESSAGE);
+			this.txtCantHijos.setText("");
 		}
 	}
 
@@ -161,7 +161,7 @@ public class VistaAltaMozo extends JFrame implements IGenerica, KeyListener{
 		return fechaNacimiento;
 	}
 
-	public String getCantHijos() {
+	public int getCantHijos() {
 		return cantHijos;
 	}
 }

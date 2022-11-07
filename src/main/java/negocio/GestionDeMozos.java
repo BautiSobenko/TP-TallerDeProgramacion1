@@ -109,4 +109,7 @@ public class GestionDeMozos {
 
     }
 
+    public Set<Mozo> getMozos(){
+        return empresa.getMozos();
+    }
 }

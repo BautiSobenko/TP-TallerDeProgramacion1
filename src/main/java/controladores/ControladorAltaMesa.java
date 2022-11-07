@@ -13,7 +13,6 @@ public class ControladorAltaMesa implements ActionListener {
     private static ControladorAltaMesa controladorAltaMesa = null;
     private final GestionDeMesas gestionDeMesas;
     private final VistaAltaMesa vistaAltaMesa;
-    private Operario logueado;
 
     private ControladorAltaMesa() {
         this.vistaAltaMesa = new VistaAltaMesa();

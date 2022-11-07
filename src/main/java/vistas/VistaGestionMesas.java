@@ -172,10 +172,6 @@ public class VistaGestionMesas extends JFrame implements IVistaGestion, MouseLis
 
 	}
 
-	@Override
-	public void setModel(DefaultListModel<Operario> lista) {
-
-	}
 
 	@Override
 	public Object getSeleccion() {

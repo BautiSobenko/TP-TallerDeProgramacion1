@@ -16,7 +16,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JRadioButton;
 import javax.swing.JPasswordField;
 
-public class VistaAltaOperario extends JFrame implements IGenerica, KeyListener, MouseListener{
+public class VistaAltaOperario extends JFrame implements IAltaOperario, KeyListener, MouseListener{
 
 	private JFrame frmAltaDeMozo;
 	private JTextField txtNombre;

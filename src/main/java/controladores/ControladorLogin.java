@@ -59,7 +59,7 @@ public class ControladorLogin implements ActionListener {
 			if (logueado != null) {
 				this.vistaLogin.esconder();
 				this.vistaLogin.limpiaCampos();
-				//ControladorSesionAbierta
+				ControladorInicio con = ControladorInicio.getControladorInicio(true);
 			}
 
 	}

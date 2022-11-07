@@ -6,10 +6,7 @@ import excepciones.CierreMesaConEstadoLibreException;
 import excepciones.MesaExistenteException;
 import excepciones.MesaNoExistenteException;
 import excepciones.MozoNoExistenteException;
-import modelo.Empresa;
-import modelo.Mesa;
-import modelo.Mozo;
-import modelo.Pedido;
+import modelo.*;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaXML;
 
@@ -139,4 +136,7 @@ public class GestionDeMesas {
         }
     }
 
+    public Set<Mesa> getMesas(){
+        return this.empresa.getMesas();
+    }
 }

@@ -37,6 +37,7 @@ public class ControladorInicio implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
 
+        /*
         if(comando=="Gestionar Mozos")
             //Llama controlador gestion mozos
         else
@@ -57,5 +58,7 @@ public class ControladorInicio implements ActionListener {
                              else
                                  ControladorLogin controladorLogin = ControladorLogin.getControladorLogin(true);
 
+
+    */
     }
 }

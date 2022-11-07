@@ -39,15 +39,15 @@ public class ControladorAltaMesa implements ActionListener {
             MesaDTO mesaDTO = new MesaDTO(nroMesa, cantSilla);
             try {
                 gestionDeMesas.altaMesa(mesaDTO);
-                this.vistaAltaMesa.success();
+                this.vistaAltaMesa.success("La mesa se dio de alta con exito");
             } catch (MesaExistenteException ex) {
-                this.vistaAltaMesa.failure();
+                this.vistaAltaMesa.failure("La mesa ya se encuentra en el sistema");
             }
             this.vistaAltaMesa.esconder();
         }else if( comando.equalsIgnoreCase("Volver") ){
             this.vistaAltaMesa.esconder();
-            ControladorGestionMesas CMesas = ControladorGestionMesas.get(true);
         }
+        ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas(true);
     }
 
 }

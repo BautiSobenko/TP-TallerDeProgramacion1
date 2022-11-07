@@ -54,7 +54,7 @@ public class ControladorGestionOperario implements ActionListener {
 
         String comando =  e.getActionCommand();
         if(comando.equals("Alta Operario")) {
-            //llama
+            ControladorAltaOperario con = ControladorAltaOperario.getControladorAltaOperario(true);
         }else
             if( comando.equals("Baja Operario") ){
                 Operario op = (Operario) vistaGestionOperarios.getSeleccion();
@@ -67,9 +67,11 @@ public class ControladorGestionOperario implements ActionListener {
                 Operario op = (Operario) vistaGestionOperarios.getSeleccion();
                 try {
                     gestionOp.bajaOperario(op.getUsername());
-                    ControladorAltaOperario controladorAltaOperario = ControladoAltaOperario.get();
+                    ControladorAltaOperario controladorAltaOperario = ControladorAltaOperario.getControladorAltaOperario(true);
                     vistaGestionOperarios.success("Operario " + op.getUsername() + "modificado");
-                } catch (OperarioNoExistenteException | PermisoDenegadoException ignored) {}
+                } catch (OperarioNoExistenteException | PermisoDenegadoException ignored) {
+
+                }
             }
     }
 }

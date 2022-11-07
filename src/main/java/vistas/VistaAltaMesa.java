@@ -2,10 +2,7 @@ package vistas;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -108,12 +105,12 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener{
 
 	@Override
 	public void success(String msg) {
-
+		JOptionPane.showMessageDialog(this, msg);
 	}
 
 	@Override
 	public void failure(String msg) {
-
+		JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	@Override

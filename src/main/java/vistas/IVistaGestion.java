@@ -5,9 +5,9 @@ import modelo.Operario;
 
 import javax.swing.*;
 
-public interface IVistaGestion<E> extends IGenerica{
+public interface IVistaGestion extends IGenerica{
 	
-	public void setModel(DefaultListModel<E> lista);
+	public void setModel(DefaultListModel<?> lista);
 
 	public Object getSeleccion();
 

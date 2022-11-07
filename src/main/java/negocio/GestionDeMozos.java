@@ -1,5 +1,6 @@
 package negocio;
 
+import dto.MozoDTO;
 import enums.EstadoMozo;
 import excepciones.MozoExistenteException;
 import excepciones.MozoNoExistenteException;
@@ -39,16 +40,17 @@ public class GestionDeMozos {
         }
     }
 
-    public void altaMozo(Mozo mozo) throws MozoExistenteException, PermisoDenegadoException {
+    public void altaMozo(MozoDTO mozo) throws MozoExistenteException, PermisoDenegadoException {
 
         if (this.empresa.getUsuarioLogueado().getUsername().equals("admin")){
             Set<Mozo> mozos = this.empresa.getMozos();
 
-            boolean existeMozo = mozos.stream().anyMatch(m -> m.getId().equalsIgnoreCase(mozo.getId()) );
+            Mozo nuevoMozo = new Mozo(mozo.getNombreCompleto(),mozo.getFechaNacimiento(),mozo.getCantidadHijos());
+            boolean existeMozo = mozos.stream().anyMatch(m -> m.getNombreCompleto().equalsIgnoreCase(nuevoMozo.getNombreCompleto()) );
             if( existeMozo )
                 throw new MozoExistenteException();
             else{
-                mozos.add(mozo);
+                mozos.add(nuevoMozo);
                 this.empresa.setMozos(mozos);
                 persistirMozos();
             }
@@ -56,17 +58,18 @@ public class GestionDeMozos {
             throw new PermisoDenegadoException();
     }
 
-    public void modificarMozo(Mozo mozo) throws MozoNoExistenteException, PermisoDenegadoException {
+    public void modificarMozo(MozoDTO mozo) throws MozoNoExistenteException, PermisoDenegadoException {
 
         if (this.empresa.getUsuarioLogueado().getUsername().equals("admin")){
             Set<Mozo> mozos = this.empresa.getMozos();
 
-            boolean existeMozo = mozos.stream().anyMatch(m -> m.getId().equalsIgnoreCase(mozo.getId()) );
+            Mozo nuevoMozo = new Mozo(mozo.getNombreCompleto(),mozo.getFechaNacimiento(),mozo.getCantidadHijos());
+            boolean existeMozo = mozos.stream().anyMatch(m -> m.getNombreCompleto().equalsIgnoreCase(mozo.getNombreCompleto()) );
             if( !existeMozo )
                 throw new MozoNoExistenteException();
             else{
-                mozos.remove(mozo);
-                mozos.add(mozo);
+                mozos.remove(nuevoMozo);
+                mozos.add(nuevoMozo);
                 this.empresa.setMozos(mozos);
                 persistirMozos();
             }

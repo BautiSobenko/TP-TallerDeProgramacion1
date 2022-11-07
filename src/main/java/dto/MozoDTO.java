@@ -5,10 +5,10 @@ import java.util.Date;
 public class MozoDTO {
 
     private String nombreCompleto;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
     private int cantidadHijos;
 
-    public MozoDTO(String nombreCompleto, Date fechaNacimiento, int cantidadHijos) {
+    public MozoDTO(String nombreCompleto, String fechaNacimiento, int cantidadHijos) {
         this.nombreCompleto = nombreCompleto;
         this.fechaNacimiento = fechaNacimiento;
         this.cantidadHijos = cantidadHijos;
@@ -22,11 +22,11 @@ public class MozoDTO {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

@@ -1,12 +1,10 @@
 package controladores;
 
-import dto.MesaDTO;
+
 import dto.MozoDTO;
-import excepciones.MesaExistenteException;
-import modelo.Operario;
-import negocio.GestionDeMesas;
+import excepciones.MozoExistenteException;
+import excepciones.PermisoDenegadoException;
 import negocio.GestionDeMozos;
-import vistas.VistaAltaMesa;
 import vistas.VistaAltaMozo;
 
 import java.awt.event.ActionEvent;
@@ -42,9 +40,9 @@ public class ControladorAltaMozo implements ActionListener {
             MozoDTO mozoDTO = new MozoDTO(nombre,fecha,hijos);
             try {
                 gestionDeMozos.altaMozo(mozoDTO);
-                this.vistaAltaMozo.success("La mesa se dio de alta con exito");
-            } catch (MesaExistenteException ex) {
-                this.vistaAltaMozo.failure("La mesa ya se encuentra en el sistema");
+                this.vistaAltaMozo.success("El mozo se dio de alta con exito");
+            } catch (MozoExistenteException | PermisoDenegadoException ex) {
+                this.vistaAltaMozo.failure("El mozo ya se encuentra en el sistema");
             }
             this.vistaAltaMozo.esconder();
         }else if( comando.equalsIgnoreCase("Volver") ){

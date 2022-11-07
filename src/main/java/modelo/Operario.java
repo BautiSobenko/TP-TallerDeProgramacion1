@@ -1,5 +1,6 @@
 package modelo;
 
+import dto.MozoDTO;
 import enums.EstadoMozo;
 import excepciones.*;
 import negocio.GestionDeMozos;
@@ -24,13 +25,13 @@ public class Operario {
     }
 
 
-    public void altaMozo(Mozo mozo) throws MozoExistenteException, PermisoDenegadoException {
+    public void altaMozo(MozoDTO mozo) throws MozoExistenteException, PermisoDenegadoException {
 
         GestionDeMozos.get().altaMozo(mozo);
 
     }
 
-    public void modificarMozo(Mozo mozo) throws MozoNoExistenteException, PermisoDenegadoException {
+    public void modificarMozo(MozoDTO mozo) throws MozoNoExistenteException, PermisoDenegadoException {
 
         GestionDeMozos.get().modificarMozo(mozo);
 

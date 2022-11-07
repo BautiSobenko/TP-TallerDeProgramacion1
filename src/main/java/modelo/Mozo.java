@@ -8,13 +8,13 @@ import java.util.UUID;
 public class Mozo {
 
     private String nombreCompleto;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
     private int cantidadHijos;
     private EstadoMozo estadoMozo;
     private String id;
     private double ventas;
 
-    public Mozo(String nombreCompleto, Date fechaNacimiento, int cantidadHijos) {
+    public Mozo(String nombreCompleto, String fechaNacimiento, int cantidadHijos) {
         this.nombreCompleto = nombreCompleto;
         this.fechaNacimiento = fechaNacimiento;
         this.cantidadHijos = cantidadHijos;
@@ -42,11 +42,11 @@ public class Mozo {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

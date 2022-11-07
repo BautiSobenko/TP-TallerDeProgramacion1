@@ -50,7 +50,7 @@ public class ControladorGestionMozos implements ActionListener {
 
         String comando =  e.getActionCommand();
         if(comando.equals("Alta Mozo")) {
-           // ControladorAltaMozo con = ControladorAltaMesa.getControladorAltaMesa();
+           ControladorAltaMozo con = ControladorAltaMozo.getControladorAltaMozo();
         }else
         if( comando.equals("Baja Mozo") ){
             Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();

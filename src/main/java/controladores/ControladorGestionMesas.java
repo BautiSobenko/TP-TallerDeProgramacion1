@@ -35,11 +35,11 @@ public class ControladorGestionMesas implements ActionListener {
         if (controladorGestionMesas == null)
             controladorGestionMesas = new ControladorGestionMesas();
 
-        Set<Mesa> operarios = gestionDeMesas.getMesas();
-        DefaultListModel<Mesa> lista = new DefaultListModel<>();
-        operarios.forEach(lista::addElement);
+        Set<Mesa> mesas = gestionDeMesas.getMesas();
+        DefaultListModel<Mesa> listaMesas = new DefaultListModel<>();
+        mesas.forEach(listaMesas::addElement);
 
-        ControladorGestionMesas.vistaGestionMesas.setModel(lista);
+        ControladorGestionMesas.vistaGestionMesas.setModel(listaMesas);
 
         if( mostrar )
             vistaGestionMesas.mostrar();
@@ -51,22 +51,26 @@ public class ControladorGestionMesas implements ActionListener {
 
         String comando =  e.getActionCommand();
         if(comando.equals("Alta Mesa")) {
+            vistaGestionMesas.esconder();
             ControladorAltaMesa con = ControladorAltaMesa.getControladorAltaMesa();
         }else
-        if( comando.equals("Baja Mesa") ){
+            if( comando.equals("Baja Mesa") ){
             Mesa mesa = (Mesa) vistaGestionMesas.getSeleccion();
             try {
                 gestionDeMesas.bajaMesa(mesa.getNroMesa());
                 vistaGestionMesas.success("Mesa " + mesa.getNroMesa() + "dada de baja");
             } catch (MesaNoExistenteException ignored) {}
-        }
-        else{
+        } else
+            if( comando.equals("Modificar Mesa") ){
             Mesa mesa = (Mesa) vistaGestionMesas.getSeleccion();
             try {
                 gestionDeMesas.bajaMesa(mesa.getNroMesa());
-                ControladorAltaOperario controladorAltaOperario = ControladorAltaOperario.getControladorAltaOperario(true);
+                ControladorAltaMesa con = ControladorAltaMesa.getControladorAltaMesa();
                 vistaGestionMesas.success("Mesa " + mesa.getNroMesa() + "modificada");
             } catch (MesaNoExistenteException ignored) {}
+        } else{
+                vistaGestionMesas.esconder();
+                //!ControladorAsignarMozo ctrl = ControladorAsignarMozo.getControladorAsignarMozo();
         }
     }
 }

@@ -23,7 +23,6 @@ public class ControladorAltaOperario implements ActionListener {
         this.vistaAltaOperario.setActionListener(this);
     }
 
-
     public static ControladorAltaOperario getControladorAltaOperario(boolean mostrar) {
         if (controladorAltaOperario == null) {
             controladorAltaOperario = new ControladorAltaOperario();

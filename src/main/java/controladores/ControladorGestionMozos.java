@@ -1,14 +1,10 @@
 package controladores;
 
-import excepciones.MesaNoExistenteException;
 import excepciones.MozoNoExistenteException;
 import excepciones.PermisoDenegadoException;
-import modelo.Mesa;
 import modelo.Mozo;
-import negocio.GestionDeMesas;
 import negocio.GestionDeMozos;
 import vistas.IVistaGestion;
-import vistas.VistaGestionMesas;
 import vistas.VistaGestionMozos;
 
 import javax.swing.*;
@@ -34,14 +30,15 @@ public class ControladorGestionMozos implements ActionListener {
         if (controladorGestionMozos == null)
             controladorGestionMozos = new ControladorGestionMozos();
 
-        Set<Mozo> operarios = gestionDeMozos.getMozos();
-        DefaultListModel<Mozo> lista = new DefaultListModel<>();
-        operarios.forEach(lista::addElement);
+        Set<Mozo> mozos = gestionDeMozos.getMozos();
+        DefaultListModel<Mozo> listaMozos = new DefaultListModel<>();
+        mozos.forEach(listaMozos::addElement);
 
-        ControladorGestionMozos.vistaGestionMozos.setModel(lista);
+        ControladorGestionMozos.vistaGestionMozos.setModel(listaMozos);
 
         if( mostrar )
             vistaGestionMozos.mostrar();
+
         return controladorGestionMozos;
     }
 
@@ -50,7 +47,7 @@ public class ControladorGestionMozos implements ActionListener {
 
         String comando =  e.getActionCommand();
         if(comando.equals("Alta Mozo")) {
-           // ControladorAltaMozo con = ControladorAltaMesa.getControladorAltaMesa();
+           ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo();
         }else
         if( comando.equals("Baja Mozo") ){
             Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
@@ -63,7 +60,7 @@ public class ControladorGestionMozos implements ActionListener {
             Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
             try {
                 gestionDeMozos.bajaMozo(mozo);
-                //Llamada a alta
+                ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo();
                 vistaGestionMozos.success("Mozo " + mozo.getNombreCompleto() + " ha sido modificado");
             } catch (MozoNoExistenteException | PermisoDenegadoException ignored) {}
         }

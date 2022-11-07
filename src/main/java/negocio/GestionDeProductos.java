@@ -1,8 +1,10 @@
 package negocio;
 
+import dto.ProductoDTO;
 import excepciones.ProductoExistenteException;
 import excepciones.ProductoNoExistenteException;
 import modelo.Empresa;
+import modelo.Operario;
 import modelo.Producto;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaXML;
@@ -37,13 +39,14 @@ public class GestionDeProductos {
         }
     }
 
-    private void altaProducto(Producto producto) throws ProductoExistenteException {
+    public void altaProducto(ProductoDTO producto) throws ProductoExistenteException {
         Set<Producto> productos = this.empresa.getProductos();
         boolean existeProducto = productos.stream().anyMatch(p -> p.getId().equals(producto.getId()));
 
+        Producto productoNuevo = new Producto(producto.getNombre(), producto.getPrecio(), producto.getCosto(), producto.getStock());
 
         if(!existeProducto){
-            productos.add(producto);
+            productos.add(productoNuevo);
             this.empresa.setProductos(productos);
             persistirProductos();
         }
@@ -51,7 +54,7 @@ public class GestionDeProductos {
             throw new ProductoExistenteException();
     }
 
-    private void modificaProducto(Producto producto) throws ProductoNoExistenteException {
+    public void modificaProducto(ProductoDTO producto) throws ProductoNoExistenteException {
         Set<Producto> productos = this.empresa.getProductos();
         Iterator<Producto> it = productos.iterator();
 
@@ -74,7 +77,7 @@ public class GestionDeProductos {
             throw new ProductoNoExistenteException();
     }
 
-    private void bajaProducto(String id) throws ProductoNoExistenteException {
+    public void bajaProducto(String id) throws ProductoNoExistenteException {
         Set<Producto> productos = this.empresa.getProductos();
         Iterator<Producto> it = productos.iterator();
         boolean encontreProducto = false;
@@ -94,5 +97,11 @@ public class GestionDeProductos {
         else
             throw new ProductoNoExistenteException();
     }
+
+    public Set<Producto> getProductos(){
+        return this.empresa.getProductos();
+    }
+
+
 
 }

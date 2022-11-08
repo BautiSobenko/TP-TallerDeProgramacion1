@@ -63,13 +63,14 @@ public class GestionDeMozos {
         if (this.empresa.getUsuarioLogueado().getUsername().equals("admin")){
             Set<Mozo> mozos = this.empresa.getMozos();
 
-            Mozo nuevoMozo = new Mozo(mozo.getNombreCompleto(),mozo.getFechaNacimiento(),mozo.getCantidadHijos());
+            Mozo mozoMod = new Mozo(mozo.getNombreCompleto(),mozo.getFechaNacimiento(),mozo.getCantidadHijos());
+
             boolean existeMozo = mozos.stream().anyMatch(m -> m.getNombreCompleto().equalsIgnoreCase(mozo.getNombreCompleto()) );
             if( !existeMozo )
                 throw new MozoNoExistenteException();
             else{
-                mozos.remove(nuevoMozo);
-                mozos.add(nuevoMozo);
+                mozos.remove(mozoMod);
+                mozos.add(mozoMod);
                 this.empresa.setMozos(mozos);
                 persistirMozos();
             }

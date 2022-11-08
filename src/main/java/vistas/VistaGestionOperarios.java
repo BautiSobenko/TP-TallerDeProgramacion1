@@ -147,8 +147,8 @@ public class VistaGestionOperarios extends JFrame implements MouseListener,IVist
 	}
 
 	@Override
-	public void setModel(DefaultListModel<Operario> lista) {
-		this.listaOperarios.setModel(lista);
+	public void setModel(DefaultListModel<?> lista) {
+		this.listaOperarios.setModel((ListModel<Operario>) lista);
 	}
 
 	@Override

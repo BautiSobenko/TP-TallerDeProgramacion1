@@ -69,7 +69,8 @@ public class GestionDeProductos {
         }
         if(encontreProducto) {
             productos.remove(prod);
-            productos.add(producto);
+            Producto productoMod= new Producto(producto.getNombre(), producto.getPrecio(), producto.getCosto(), producto.getStock());
+            productos.add(productoMod);
             this.empresa.setProductos(productos);
             persistirProductos();
         }

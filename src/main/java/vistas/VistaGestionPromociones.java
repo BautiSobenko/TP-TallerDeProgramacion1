@@ -6,15 +6,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Font;
-
-import modelo.Operario;
-import modelo.Producto;
+import modelo.promociones.Promocion;
 
 public class VistaGestionPromociones extends JFrame implements IVistaGestion, MouseListener{
 
 	private JFrame frmGestionDeMozos;
 	private JButton btnAltaPromo,btnBajaPromo,btnVolver;
-	private JList<Producto> listaPromos;
+	private JList<Promocion> listaPromos;
 	private ActionListener actionListener;
 
 	public static void main(String[] args) {
@@ -137,8 +135,8 @@ public class VistaGestionPromociones extends JFrame implements IVistaGestion, Mo
 	}
 
 	@Override
-	public void setModel(DefaultListModel<Operario> lista) {
-
+	public void setModel(DefaultListModel<?> lista) {
+		this.listaPromos.setModel((ListModel<Promocion>) lista);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package controladores;
 
+import dto.OperarioDTO;
 import excepciones.OperarioExistenteException;
 import excepciones.PermisoDenegadoException;
 import modelo.Empresa;
@@ -44,8 +45,9 @@ public class ControladorAltaOperario implements ActionListener {
             String nombre = this.vistaAltaOperario.getNombre();
             String username = this.vistaAltaOperario.getUsername();
             String password = this.vistaAltaOperario.getPassword();
+            OperarioDTO operarioDTO = new OperarioDTO(nombre, username, password);
             try {
-                this.op.altaOperario(new Operario(nombre,username,password));
+                this.op.altaOperario(operarioDTO);
             } catch (OperarioExistenteException ex) {
                 throw new RuntimeException(ex);
             } catch (PermisoDenegadoException ex) {

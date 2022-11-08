@@ -1,17 +1,12 @@
 package vistas;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Font;
-import javax.swing.SwingConstants;
+
 import modelo.Mesa;
 import modelo.Operario;
 
@@ -117,10 +112,6 @@ public class VistaGestionMesas extends JFrame implements IVistaGestion, MouseLis
 		this.setVisible(false);
 		this.limpia();
 	}
-	
-	public void setModel(DefaultListModel<Mesa> model) {
-		this.listMesas.setModel(model);
-	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -172,6 +163,11 @@ public class VistaGestionMesas extends JFrame implements IVistaGestion, MouseLis
 
 	}
 
+
+	@Override
+	public void setModel(DefaultListModel<?> lista) {
+		this.listMesas.setModel((ListModel<Mesa>) lista);
+	}
 
 	@Override
 	public Object getSeleccion() {

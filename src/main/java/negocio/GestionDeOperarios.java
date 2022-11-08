@@ -1,5 +1,6 @@
 package negocio;
 
+import dto.OperarioDTO;
 import excepciones.MozoNoExistenteException;
 import excepciones.OperarioExistenteException;
 import excepciones.OperarioNoExistenteException;
@@ -40,7 +41,7 @@ public class GestionDeOperarios {
         }
     }
 
-    public void altaOperario(Operario operario) throws OperarioExistenteException, PermisoDenegadoException {
+    public void altaOperario(OperarioDTO operario) throws OperarioExistenteException, PermisoDenegadoException {
         if (this.empresa.getUsuarioLogueado().getUsername().equals("admin")){
             Set<Operario> operarios = this.empresa.getOperarios();
 
@@ -55,7 +56,8 @@ public class GestionDeOperarios {
                 }
             }
             if(!encontreOperario){
-                operarios.add(operario);
+                Operario opNuevo = new Operario(operario.getNombreCompleto(),operario.getUsername(),operario.getPassword());
+                operarios.add(opNuevo);
                 this.empresa.setOperarios(operarios);
                 persistirOperarios();
             } else
@@ -81,7 +83,8 @@ public class GestionDeOperarios {
             }
             if(encontreOperario) {
                 operarios.remove(op);
-                operarios.add(operario);
+                Operario opMod = new Operario(operario.getNombreCompleto(),operario.getUsername(),operario.getPassword());
+                operarios.add(opMod);
                 this.empresa.setOperarios(operarios);
                 persistirOperarios();
             }else

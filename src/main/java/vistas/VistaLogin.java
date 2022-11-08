@@ -22,9 +22,10 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 	private JTextField usernameField;
 	private JButton loginButton;
 	private ActionListener actionListener;
+	private JPasswordField passwordField;
+
 	private String username;
 	private String contrasena;
-	private JPasswordField passwordField;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -154,4 +155,5 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 		this.username = null;
 		this.contrasena = null;
 	}
+
 }

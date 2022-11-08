@@ -57,22 +57,24 @@ public class GestionDeMesas {
             throw new MesaExistenteException();
     }
 
-    public void modificaMesa(Mesa mesa) throws MesaNoExistenteException {
+    public void modificaMesa(MesaDTO mesa) throws MesaNoExistenteException {
         Set<Mesa> mesas = this.empresa.getMesas();
         Iterator<Mesa> it = mesas.iterator();
+
+        Mesa mesaMod = new Mesa(mesa.getNroMesa(),mesa.getCantSillas());
 
         boolean encontreMesa = false;
         Mesa m;
 
         while(it.hasNext() && !encontreMesa) {
             m = it.next();
-            if(m.getNroMesa() == mesa.getNroMesa()){
+            if(m.getNroMesa() == mesaMod.getNroMesa()){
                 encontreMesa = true;
             }
         }
         if(encontreMesa) {
             mesas.remove(it.next());
-            mesas.add(mesa);
+            mesas.add(mesaMod);
             this.empresa.setMesas(mesas);
             persistirMesas();
         }

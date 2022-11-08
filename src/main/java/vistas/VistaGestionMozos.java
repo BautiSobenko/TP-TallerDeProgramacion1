@@ -8,7 +8,6 @@ import java.awt.event.MouseListener;
 import java.awt.Font;
 
 import modelo.Mozo;
-import modelo.Operario;
 
 public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseListener{
 
@@ -148,8 +147,8 @@ public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseLis
 	}
 
 	@Override
-	public void setModel(DefaultListModel<Operario> lista) {
-
+	public void setModel(DefaultListModel<?> lista) {
+		this.listaMozos.setModel((ListModel<Mozo>) lista);
 	}
 
 	@Override

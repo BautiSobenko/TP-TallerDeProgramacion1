@@ -2,19 +2,13 @@ package vistas;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JRadioButton;
-import javax.swing.JPasswordField;
 
 public class VistaAltaOperario extends JFrame implements IAltaOperario, KeyListener, MouseListener{
 
@@ -201,12 +195,12 @@ public class VistaAltaOperario extends JFrame implements IAltaOperario, KeyListe
 
 	@Override
 	public void success(String msg) {
-
+		JOptionPane.showMessageDialog(this, msg, "Resultado exitoso", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	@Override
 	public void failure(String msg) {
-
+		JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	public String getNombre() {

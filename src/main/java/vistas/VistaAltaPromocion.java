@@ -2,17 +2,13 @@ package vistas;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JCheckBox;
 
 public class VistaAltaPromocion extends JFrame implements IGenerica, KeyListener, MouseListener{
 
@@ -302,12 +298,12 @@ public class VistaAltaPromocion extends JFrame implements IGenerica, KeyListener
 
 	@Override
 	public void success(String msg) {
-
+		JOptionPane.showMessageDialog(this, msg, "Resultado exitoso", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	@Override
 	public void failure(String msg) {
-
+		JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	public String getNombre() {

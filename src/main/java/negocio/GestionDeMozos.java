@@ -116,4 +116,15 @@ public class GestionDeMozos {
     public Set<Mozo> getMozos(){
         return empresa.getMozos();
     }
+
+    public String mozoMaxVentas(){
+        return this.empresa.mayorVolumenVentaMozo().getNombreCompleto();
+    }
+
+    public String mozoMinVentas(){
+        return  this.empresa.menorVolumenVentaMozo().getNombreCompleto();
+    }
+
+
+
 }

@@ -2,10 +2,7 @@ package vistas;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -22,9 +19,9 @@ public class VistaAltaProducto extends JFrame implements IGenerica, KeyListener 
 	private JTextField txtStockInicial;
 	
 	private String nombre;
-	private String precioCosto;
-	private String precioVenta;
-	private String stockInicial;
+	private float precioCosto;
+	private float precioVenta;
+	private int stockInicial;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -123,14 +120,21 @@ public class VistaAltaProducto extends JFrame implements IGenerica, KeyListener 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		this.nombre = this.txtNombre.getText();
-		this.precioCosto = this.txtPrecioCosto.getText();
-		this.precioVenta = this.txtPrecioVenta.getText();
-		this.stockInicial = this.txtStockInicial.getText();
-		
+		try {
+			this.precioCosto = Float.parseFloat(this.txtPrecioCosto.getText());
+			this.precioVenta = Float.parseFloat(this.txtPrecioVenta.getText());
+			this.stockInicial = Integer.parseInt(this.txtStockInicial.getText());
+		}
+		catch (Exception ex){
+			JOptionPane.showMessageDialog(null, "Ingreso mal algun valor numerico", "Error", JOptionPane.ERROR_MESSAGE);
+			this.txtPrecioCosto.setText("");
+			this.txtPrecioVenta.setText("");
+			this.txtStockInicial.setText("");
+		}
 		if( nombre.length() > 0 &&
-			precioCosto.length() > 0 &&
-			precioVenta.length() > 0 &&
-			stockInicial.length() > 0) {
+			precioCosto > 0 &&
+			precioVenta > 0 &&
+			stockInicial > 0) {
 			
 			this.btnAceptar.setEnabled(true);
 			
@@ -179,15 +183,15 @@ public class VistaAltaProducto extends JFrame implements IGenerica, KeyListener 
 		return nombre;
 	}
 
-	public String getPrecioCosto() {
+	public float getPrecioCosto() {
 		return precioCosto;
 	}
 
-	public String getPrecioVenta() {
+	public float getPrecioVenta() {
 		return precioVenta;
 	}
 
-	public String getStockInicial() {
+	public int getStockInicial() {
 		return stockInicial;
 	}
 }

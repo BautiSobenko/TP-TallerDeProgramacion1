@@ -1,17 +1,12 @@
 package vistas;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Font;
-import javax.swing.SwingConstants;
+
 import modelo.Mesa;
 import modelo.Operario;
 
@@ -118,8 +113,8 @@ public class VistaGestionMesas extends JFrame implements IVistaGestion, MouseLis
 		this.limpia();
 	}
 	
-	public void setModel(DefaultListModel<Mesa> model) {
-		this.listMesas.setModel(model);
+	public void setModel(DefaultListModel<?> model) {
+		this.listMesas.setModel((ListModel<Mesa>) model);
 	}
 
 	@Override

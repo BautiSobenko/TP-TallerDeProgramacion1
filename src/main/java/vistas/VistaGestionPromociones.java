@@ -137,8 +137,8 @@ public class VistaGestionPromociones extends JFrame implements IVistaGestion, Mo
 	}
 
 	@Override
-	public void setModel(DefaultListModel<Operario> lista) {
-
+	public void setModel(DefaultListModel<?> lista) {
+		this.listaPromos.setModel((ListModel<Producto>) lista);
 	}
 
 	@Override

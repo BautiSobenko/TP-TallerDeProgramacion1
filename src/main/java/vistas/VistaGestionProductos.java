@@ -148,8 +148,8 @@ public class VistaGestionProductos extends JFrame implements IVistaGestion, Mous
 	}
 
 	@Override
-	public void setModel(DefaultListModel<Operario> lista) {
-
+	public void setModel(DefaultListModel<?> lista) {
+		this.listaProductos.setModel((ListModel<Producto>) lista);
 	}
 
 	@Override

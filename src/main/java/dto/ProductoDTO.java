@@ -2,26 +2,16 @@ package dto;
 
 public class ProductoDTO {
 
-    private String id;
     private String nombre;
     private float precio;
     private float costo;
     private Integer stock;
 
-    public ProductoDTO(String id, String nombre, float precio, float costo, Integer stock) {
-        this.id = id;
+    public ProductoDTO(String nombre, float precio, float costo, Integer stock) {
         this.nombre = nombre;
         this.precio = precio;
         this.costo = costo;
         this.stock = stock;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getNombre() {

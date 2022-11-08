@@ -14,6 +14,9 @@ public class Mozo {
     private String id;
     private double ventas;
 
+    public Mozo() {
+    }
+
     public Mozo(String nombreCompleto, String fechaNacimiento, int cantidadHijos) {
         this.nombreCompleto = nombreCompleto;
         this.fechaNacimiento = fechaNacimiento;
@@ -70,5 +73,10 @@ public class Mozo {
         return id;
     }
 
-
+    @Override
+    public String toString() {
+        return "Nombre: " + nombreCompleto +
+                " | Cantidad de hijos: " + cantidadHijos +
+                " | Fecha de nacimiento: " +  fechaNacimiento;
+    }
 }

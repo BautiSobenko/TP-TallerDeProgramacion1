@@ -10,6 +10,9 @@ public class Producto {
     private float costo;
     private Integer stock;
 
+    public Producto() {
+    }
+
     public Producto(String nombre, float precio, float costo, Integer stock) {
         this.id = UUID.randomUUID().toString();
         this.nombre = nombre;

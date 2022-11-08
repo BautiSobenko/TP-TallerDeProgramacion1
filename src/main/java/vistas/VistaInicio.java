@@ -124,11 +124,11 @@ public class VistaInicio extends JFrame implements IGenerica {
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.actionListener = actionListener;
+		this.btnGestionMozos.addActionListener(actionListener);
 		this.btnGestionOperarios.addActionListener(actionListener);
 		this.btnGestionMesas.addActionListener(actionListener);
 		this.btnGestionProductos.addActionListener(actionListener);
 		this.btnCerrarSesion.addActionListener(actionListener);
-		this.btnGestionMesas.addActionListener(actionListener);
 		this.btnGestionPromos.addActionListener(actionListener);
 	}
 

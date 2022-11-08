@@ -141,6 +141,6 @@ public class VistaGestionPromociones extends JFrame implements IVistaGestion, Mo
 
 	@Override
 	public Object getSeleccion() {
-		return null;
+		return this.listaPromos.getSelectedValue();
 	}
 }

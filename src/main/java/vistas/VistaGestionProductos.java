@@ -153,6 +153,6 @@ public class VistaGestionProductos extends JFrame implements IVistaGestion, Mous
 
 	@Override
 	public Object getSeleccion() {
-		return null;
+		return this.listaProductos.getSelectedValue();
 	}
 }

@@ -153,6 +153,6 @@ public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseLis
 
 	@Override
 	public Object getSeleccion() {
-		return null;
+		return this.listaMozos.getSelectedValue();
 	}
 }

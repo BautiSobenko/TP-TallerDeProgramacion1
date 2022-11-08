@@ -8,6 +8,8 @@ public class Pedido {
     private int cantidad;
     private Instant fecha; // DD/MM/YYYY HH:MM:SS
 
+
+
     public Pedido(Producto producto, int cantidad) {
         this.producto = producto;
         this.cantidad = cantidad;
@@ -15,7 +17,6 @@ public class Pedido {
     }
 
     public Pedido() {
-        this.fecha = Instant.now();
     }
 
     public Producto getProducto() {

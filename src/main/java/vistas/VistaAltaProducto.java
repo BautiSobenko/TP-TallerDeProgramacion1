@@ -156,7 +156,7 @@ public class VistaAltaProducto extends JFrame implements IGenerica, KeyListener 
 	@Override
 	public void esconder() {
 		this.frmAltaDeProducto.setVisible(false);
-		
+		limpia();
 	}
 
 	@Override

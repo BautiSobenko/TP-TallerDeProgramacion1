@@ -33,7 +33,7 @@ public class GestionDeMozos {
         IPersistencia<Set<Mozo>> persistencia = new PersistenciaXML();
         try {
             persistencia.abrirOutput("mozos.xml");
-            persistencia.escribir(this.empresa.getMozos());
+            persistencia.escribir(this.getMozos());
             persistencia.cerrarOutput();
         } catch (IOException e) {
 

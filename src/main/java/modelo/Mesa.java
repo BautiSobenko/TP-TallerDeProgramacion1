@@ -12,6 +12,9 @@ public class Mesa {
     private double Ventas;
     private int cantCuentasCerradas;
 
+    public Mesa() {
+    }
+
     public Mesa(int nroMesa, int cantSillas) {
         this.nroMesa = nroMesa;
         this.cantSillas = cantSillas;
@@ -76,4 +79,9 @@ public class Mesa {
 
 
 
+    @Override
+    public String toString() {
+        return "Mesa: " + nroMesa +
+                "| Sillas: " + cantSillas;
+    }
 }

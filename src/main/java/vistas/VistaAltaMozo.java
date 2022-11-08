@@ -19,7 +19,7 @@ public class VistaAltaMozo extends JFrame implements IGenerica, KeyListener{
 	
 	private String nombre = null;
 	private String fechaNacimiento = null;
-	private int cantHijos;
+	private String cantHijos;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -105,19 +105,16 @@ public class VistaAltaMozo extends JFrame implements IGenerica, KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		try {
-			this.cantHijos=Integer.parseInt(this.txtCantHijos.getText());
-			this.nombre = this.txtNombre.getText();
-			this.fechaNacimiento = this.txtFechaNacimiento.getText();
-			if( nombre.length() > 0 && fechaNacimiento.length() > 0) {
-				this.btnAceptar.setEnabled(true);
-			}
-		}
-		catch(Exception exception) {
-			JOptionPane.showMessageDialog(null, "No ingreso correctamente la cantidad de hijos", "Error", JOptionPane.ERROR_MESSAGE);
-			this.txtCantHijos.setText("");
+
+		this.cantHijos = this.txtCantHijos.getText();
+		this.nombre = this.txtNombre.getText();
+		this.fechaNacimiento = this.txtFechaNacimiento.getText();
+		if( nombre.length() > 0 && fechaNacimiento.length() > 0 && cantHijos.length() > 0) {
+			this.btnAceptar.setEnabled(true);
 		}
 	}
+
+
 
 	@Override
 	public void setActionListener(ActionListener actionListener) {
@@ -133,6 +130,7 @@ public class VistaAltaMozo extends JFrame implements IGenerica, KeyListener{
 	@Override
 	public void esconder() {
 		this.frmAltaDeMozo.setVisible(false);
+		limpia();
 	}
 
 	@Override
@@ -161,7 +159,7 @@ public class VistaAltaMozo extends JFrame implements IGenerica, KeyListener{
 		return fechaNacimiento;
 	}
 
-	public int getCantHijos() {
+	public String getCantHijos() {
 		return cantHijos;
 	}
 }

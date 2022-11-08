@@ -275,6 +275,7 @@ public class VistaAltaPromocion extends JFrame implements IGenerica, KeyListener
 	@Override
 	public void esconder() {
 		this.frmAltaDePromocion.setVisible(false);
+		limpia();
 	}
 
 	@Override

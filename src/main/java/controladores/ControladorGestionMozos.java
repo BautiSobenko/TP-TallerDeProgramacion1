@@ -48,21 +48,36 @@ public class ControladorGestionMozos implements ActionListener {
         String comando =  e.getActionCommand();
         if(comando.equals("Alta Mozo")) {
            ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo();
-        }else
-        if( comando.equals("Baja Mozo") ){
+        }
+        else if( comando.equals("Baja Mozo") ){
             Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
             try {
                 gestionDeMozos.bajaMozo(mozo);
+                Set<Mozo> mozos = gestionDeMozos.getMozos();
+                DefaultListModel<Mozo> listaMozos = new DefaultListModel<>();
+                mozos.forEach(listaMozos::addElement);
                 vistaGestionMozos.success("Mozo " + mozo.getNombreCompleto() + "dado de baja");
             } catch (MozoNoExistenteException | PermisoDenegadoException ignored) {}
         }
-        else{
+        else if( comando.equals("Modificar Mozo") ){
             Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
             try {
                 gestionDeMozos.bajaMozo(mozo);
                 ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo();
+                Set<Mozo> mozos = gestionDeMozos.getMozos();
+                DefaultListModel<Mozo> listaMozos = new DefaultListModel<>();
+                mozos.forEach(listaMozos::addElement);
                 vistaGestionMozos.success("Mozo " + mozo.getNombreCompleto() + " ha sido modificado");
             } catch (MozoNoExistenteException | PermisoDenegadoException ignored) {}
         }
+        else if( comando.equals("Asignar Mozos") ) {
+            //!Realizar vista Asignar mozo
+            //!Realizar controlador Asignar mozo
+        }
+        else if( comando.equals("Volver") ) {
+            ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);
+            vistaGestionMozos.esconder();
+        }
+
     }
 }

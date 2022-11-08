@@ -169,6 +169,6 @@ public class VistaGestionMesas extends JFrame implements IVistaGestion, MouseLis
 
 	@Override
 	public Object getSeleccion() {
-		return null;
+		return this.listMesas.getSelectedValue();
 	}
 }

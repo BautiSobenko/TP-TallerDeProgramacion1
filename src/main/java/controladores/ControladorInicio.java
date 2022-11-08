@@ -38,28 +38,29 @@ public class ControladorInicio implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
 
-        /*
-        if(comando=="Gestionar Mozos")
-            //Llama controlador gestion mozos
-        else
-            if(comando=="Gestionar Operarios")
-                //llma cont gestion operaris
-            else
-                if(comando=="Gestionar Mesas")
-                    //llama controlador
-                else
-                    if(comando=="Gestionar Productos")
-                        //llama
-                    else
-                        if(comando=="Gestionar Promociones")
-                            //llama
-                        else
-                            if(comando=="Abrir Local")
-                                //llama
-                             else
-                                 ControladorLogin controladorLogin = ControladorLogin.getControladorLogin(true);
+        if(comando.equals("Gestionar Mozos")){
+            ControladorGestionMozos controladorGestionMozos = ControladorGestionMozos.getControladorGestionMozos(true);
+        }
+        else if(comando.equals("Gestionar Operarios")){
+            ControladorGestionOperario controladorGestionOperario = ControladorGestionOperario.getControladorGestionOperario(true);
+
+            }
+            else if(comando.equals("Gestionar Mesas")){
+                ControladorGestionMesas controladorGestionMesas = ControladorGestionMesas.getControladorGestionMesas(true);
+            }
+                else if(comando.equals("Gestionar Productos")){
+                    ControladorGestionProductos controladorGestionProductos = ControladorGestionProductos.getControladorGestionProductos(true);
+                    }
+                    else if(comando.equals("Gestionar Promociones")){
+                        //!ControladorGestionPromociones controladorGestionPromociones = ControladorGestionPromociones.getControladorGestionPromociones(true);
+                        }
+                        else if(comando.equals("Abrir Local")){
+                            //!ControladorLocalAbierto controladorLocalAbierto = ControladorLocalAbiero.getControladorLocalAbierto(true);
+                            }
+                             else if(comando.equals("Cerrar Sesion")){
+                                ControladorLogin controladorLogin = ControladorLogin.getControladorLogin(true);
+                            }
 
 
-    */
     }
 }

@@ -191,6 +191,7 @@ public class VistaAltaOperario extends JFrame implements IAltaOperario, KeyListe
 	@Override
 	public void esconder() {
 		this.frmAltaDeOperario.setVisible(false);
+		limpia();
 	}
 
 	@Override

@@ -100,9 +100,9 @@ public class Operario {
         return ingreso;
     }
 
-
-
-
-
-
+    @Override
+    public String toString() {
+        return "Nombre: " + nombreCompleto +
+                " | Activo: " + activo;
+    }
 }

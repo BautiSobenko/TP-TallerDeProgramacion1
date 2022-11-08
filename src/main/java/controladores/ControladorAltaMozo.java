@@ -35,7 +35,7 @@ public class ControladorAltaMozo implements ActionListener {
 
         if( comando.equalsIgnoreCase("Aceptar") ){
             String nombre = this.vistaAltaMozo.getNombre();
-            int hijos = this.vistaAltaMozo.getCantHijos();
+            int hijos = Integer.parseInt(this.vistaAltaMozo.getCantHijos());
             String fecha = this.vistaAltaMozo.getFechaNacimiento();
             MozoDTO mozoDTO = new MozoDTO(nombre,fecha,hijos);
             try {

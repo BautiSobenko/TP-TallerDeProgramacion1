@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.GridLayout;
 
 public class VistaInicio extends JFrame implements IGenerica {
 
@@ -38,9 +39,10 @@ public class VistaInicio extends JFrame implements IGenerica {
 		frmInicioOperario.setTitle("Inicio Operario");
 		frmInicioOperario.setBounds(100, 100, 532, 406);
 		frmInicioOperario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		frmInicioOperario.getContentPane().setLayout(new BorderLayout(0, 0));
+
 		JPanel panelGral = new JPanel();
-		frmInicioOperario.getContentPane().add(panelGral, BorderLayout.CENTER);
+		frmInicioOperario.getContentPane().add(panelGral);
 		panelGral.setLayout(null);
 		
 		JPanel panel2 = new JPanel();
@@ -121,7 +123,6 @@ public class VistaInicio extends JFrame implements IGenerica {
 
 	@Override
 	public void setActionListener(ActionListener actionListener) {
-		// TODO Auto-generated method stub
 		this.actionListener = actionListener;
 		this.btnGestionOperarios.addActionListener(actionListener);
 		this.btnGestionMesas.addActionListener(actionListener);
@@ -133,14 +134,12 @@ public class VistaInicio extends JFrame implements IGenerica {
 
 	@Override
 	public void mostrar() {
-		// TODO Auto-generated method stub
-		this.setVisible(true);
+		this.frmInicioOperario.setVisible(true);
 	}
 
 	@Override
 	public void esconder() {
-		// TODO Auto-generated method stub
-		this.setVisible(false);
+		this.frmInicioOperario.setVisible(true);
 	}
 
 	@Override

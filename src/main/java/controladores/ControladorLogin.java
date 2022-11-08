@@ -54,6 +54,7 @@ public class ControladorLogin implements ActionListener {
 					this.vistaLogin.esconder();
 					this.vistaLogin.limpiaCampos();
 					ControladorInicio con = ControladorInicio.getControladorInicio(true);
+					//ControladorAltaProducto ctrl = ControladorAltaProducto.getControladorAltaProducto();
 				}
 			} catch (UsuarioIncorrectoException err) {
 				this.vistaLogin.usuarioNoEncontrado();

@@ -10,7 +10,7 @@ import java.awt.event.KeyListener;
 
 public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener{
 
-	private JFrame frmAltaDeMozo;
+	private JFrame frmAltaDeMesa;
 	private JTextField txtNumeroMesa;
 	private JButton btnAceptar;
 	private JButton btnVolver;
@@ -24,7 +24,7 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener{
 			public void run() {
 				try {
 					VistaAltaMesa window = new VistaAltaMesa();
-					window.frmAltaDeMozo.setVisible(true);
+					window.frmAltaDeMesa.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -37,42 +37,42 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener{
 	}
 
 	private void initialize() {
-		frmAltaDeMozo = new JFrame();
-		frmAltaDeMozo.setTitle("Nueva Mesa");
-		frmAltaDeMozo.setBounds(100, 100, 450, 300);
-		frmAltaDeMozo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmAltaDeMozo.getContentPane().setLayout(null);
+		frmAltaDeMesa = new JFrame();
+		frmAltaDeMesa.setTitle("Nueva Mesa");
+		frmAltaDeMesa.setBounds(100, 100, 450, 300);
+		frmAltaDeMesa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAltaDeMesa.getContentPane().setLayout(null);
 		
 		JLabel lblNumeroMesa = new JLabel("Numero de mesa");
 		lblNumeroMesa.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNumeroMesa.setBounds(39, 24, 110, 21);
-		frmAltaDeMozo.getContentPane().add(lblNumeroMesa);
+		frmAltaDeMesa.getContentPane().add(lblNumeroMesa);
 		
 		JLabel lblCantSillas = new JLabel("Cantidad de sillas\r\n");
 		lblCantSillas.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblCantSillas.setBounds(41, 124, 126, 20);
-		frmAltaDeMozo.getContentPane().add(lblCantSillas);
+		frmAltaDeMesa.getContentPane().add(lblCantSillas);
 		
 		txtNumeroMesa = new JTextField();
 		txtNumeroMesa.setBounds(200, 20, 184, 32);
-		frmAltaDeMozo.getContentPane().add(txtNumeroMesa);
+		frmAltaDeMesa.getContentPane().add(txtNumeroMesa);
 		txtNumeroMesa.setColumns(10);
 		txtNumeroMesa.addKeyListener(this);
 		
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAceptar.setBounds(274, 205, 110, 32);
-		frmAltaDeMozo.getContentPane().add(btnAceptar);
+		frmAltaDeMesa.getContentPane().add(btnAceptar);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnVolver.setBounds(39, 205, 110, 32);
-		frmAltaDeMozo.getContentPane().add(btnVolver);
+		frmAltaDeMesa.getContentPane().add(btnVolver);
 		
 		txtCantSillas = new JTextField();
 		txtCantSillas.setColumns(10);
 		txtCantSillas.setBounds(200, 120, 184, 32);
-		frmAltaDeMozo.getContentPane().add(txtCantSillas);
+		frmAltaDeMesa.getContentPane().add(txtCantSillas);
 		txtCantSillas.addKeyListener(this);
 		
 		limpia();
@@ -87,12 +87,12 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener{
 
 	@Override
 	public void mostrar() {
-		this.setVisible(true);
+		this.frmAltaDeMesa.setVisible(true);
 	}
 
 	@Override
 	public void esconder() {
-		this.setVisible(false);
+		this.frmAltaDeMesa.setVisible(false);
 		this.limpia();
 	}
 

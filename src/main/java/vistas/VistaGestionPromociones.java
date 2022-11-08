@@ -10,7 +10,7 @@ import modelo.promociones.Promocion;
 
 public class VistaGestionPromociones extends JFrame implements IVistaGestion, MouseListener{
 
-	private JFrame frmGestionDeMozos;
+	private JFrame frmGestionDePromociones;
 	private JButton btnAltaPromo,btnBajaPromo,btnVolver;
 	private JList<Promocion> listaPromos;
 	private ActionListener actionListener;
@@ -20,7 +20,7 @@ public class VistaGestionPromociones extends JFrame implements IVistaGestion, Mo
 			public void run() {
 				try {
 					VistaGestionPromociones window = new VistaGestionPromociones();
-					window.frmGestionDeMozos.setVisible(true);
+					window.frmGestionDePromociones.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -33,21 +33,21 @@ public class VistaGestionPromociones extends JFrame implements IVistaGestion, Mo
 	}
 
 	private void initialize() {
-		frmGestionDeMozos = new JFrame();
-		frmGestionDeMozos.setTitle("Gestion de promociones");
-		frmGestionDeMozos.setBounds(100, 100, 450, 300);
-		frmGestionDeMozos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmGestionDeMozos.getContentPane().setLayout(null);
+		frmGestionDePromociones = new JFrame();
+		frmGestionDePromociones.setTitle("Gestion de promociones");
+		frmGestionDePromociones.setBounds(100, 100, 450, 300);
+		frmGestionDePromociones.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmGestionDePromociones.getContentPane().setLayout(null);
 		
 		JLabel lblListaPromos = new JLabel("Listado de promociones");
 		lblListaPromos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblListaPromos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblListaPromos.setBounds(65, 21, 145, 14);
-		frmGestionDeMozos.getContentPane().add(lblListaPromos);
+		frmGestionDePromociones.getContentPane().add(lblListaPromos);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(26, 46, 221, 142);
-		frmGestionDeMozos.getContentPane().add(scrollPane);
+		frmGestionDePromociones.getContentPane().add(scrollPane);
 		
 		listaPromos = new JList();
 		scrollPane.setViewportView(listaPromos);
@@ -57,17 +57,17 @@ public class VistaGestionPromociones extends JFrame implements IVistaGestion, Mo
 		btnAltaPromo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAltaPromo.addActionListener(actionListener);
 		btnAltaPromo.setBounds(276, 74, 130, 32);
-		frmGestionDeMozos.getContentPane().add(btnAltaPromo);
+		frmGestionDePromociones.getContentPane().add(btnAltaPromo);
 		
 		btnBajaPromo = new JButton("Baja Promocion");
 		btnBajaPromo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnBajaPromo.setBounds(276, 128, 130, 32);
-		frmGestionDeMozos.getContentPane().add(btnBajaPromo);
+		frmGestionDePromociones.getContentPane().add(btnBajaPromo);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnVolver.setBounds(22, 207, 89, 32);
-		frmGestionDeMozos.getContentPane().add(btnVolver);
+		frmGestionDePromociones.getContentPane().add(btnVolver);
 	}
 
 	@Override
@@ -80,12 +80,12 @@ public class VistaGestionPromociones extends JFrame implements IVistaGestion, Mo
 
 	@Override
 	public void mostrar() {
-		this.setVisible(true);
+		this.frmGestionDePromociones.setVisible(true);
 	}
 
 	@Override
 	public void esconder() {
-		this.setVisible(false);
+		this.frmGestionDePromociones.setVisible(false);
 		this.limpia();
 	}
 

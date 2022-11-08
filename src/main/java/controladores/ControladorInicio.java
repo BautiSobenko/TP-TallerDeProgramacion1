@@ -9,15 +9,15 @@ import java.awt.event.ActionListener;
 
 public class ControladorInicio implements ActionListener {
 
-    private IGenerica vistaInicio;
+    private VistaInicio vistaInicio;
     private Empresa empresa;
 
     private static ControladorInicio controladorInicio = null;
 
     private ControladorInicio() {
         this.vistaInicio = new VistaInicio();
-        this.empresa = Empresa.getEmpresa();
         this.vistaInicio.setActionListener(this);
+        this.empresa = Empresa.getEmpresa();
     }
 
     public Empresa getEmpresa() {
@@ -30,6 +30,7 @@ public class ControladorInicio implements ActionListener {
         }
         if( mostrar )
             controladorInicio.vistaInicio.mostrar();
+
         return controladorInicio;
     }
 

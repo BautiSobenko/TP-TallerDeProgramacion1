@@ -1,19 +1,18 @@
 package vistas;
 
+import modelo.Mesa;
+import modelo.Producto;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.SwingConstants;
 
 public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener {
 
@@ -25,6 +24,10 @@ public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener
 	private JButton btnMaxVentas;
 	private JButton btnMinVentas;
 	private JButton btnConsumoPromedio;
+
+	private Mesa mesaApertura,mesaCierre,mesaPedido;
+	private Producto productoElegido;
+	private int cantidad;
 
 	/**
 	 * Launch the application.
@@ -176,12 +179,12 @@ public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener
 
 	@Override
 	public void success(String msg) {
-
+		JOptionPane.showMessageDialog(this, msg, "Estadisticas", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	@Override
 	public void failure(String msg) {
-
+		JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	@Override
@@ -199,12 +202,20 @@ public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(this.comboBoxAbrir.getSelectedItem()!=null)
+		if(this.comboBoxAbrir.getSelectedItem()!=null) {
+			this.mesaApertura = (Mesa) this.comboBoxAbrir.getSelectedItem();
 			this.btnAbrirMesa.setEnabled(true);
-		if(this.comboBoxCantidad.getSelectedItem()!=null && this.comboBoxMesa.getSelectedItem()!=null && this.comboBoxProducto.getSelectedItem()!=null)
+		}
+		if(this.comboBoxCantidad.getSelectedItem()!=null && this.comboBoxMesa.getSelectedItem()!=null && this.comboBoxProducto.getSelectedItem()!=null) {
+			this.mesaPedido = (Mesa) this.comboBoxMesa.getSelectedItem();
+			this.productoElegido = (Producto) this.comboBoxProducto.getSelectedItem();
+			this.cantidad = (int) this.comboBoxCantidad.getSelectedItem();
 			this.btnCargarPedido.setEnabled(true);
-		if(this.comboBoxCerrar.getSelectedItem()!=null)
+		}
+		if(this.comboBoxCerrar.getSelectedItem()!=null) {
+			this.mesaCierre = (Mesa) this.comboBoxCerrar.getSelectedItem();
 			this.btnCerrarMesa.setEnabled(true);
+		}
 	}
 
 	@Override
@@ -217,5 +228,45 @@ public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Mesa getMesaApertura() {
+		return mesaApertura;
+	}
+
+	public void setMesaApertura(Mesa mesaApertura) {
+		this.mesaApertura = mesaApertura;
+	}
+
+	public Mesa getMesaCierre() {
+		return mesaCierre;
+	}
+
+	public void setMesaCierre(Mesa mesaCierre) {
+		this.mesaCierre = mesaCierre;
+	}
+
+	public Mesa getMesaPedido() {
+		return mesaPedido;
+	}
+
+	public void setMesaPedido(Mesa mesaPedido) {
+		this.mesaPedido = mesaPedido;
+	}
+
+	public Producto getProductoElegido() {
+		return productoElegido;
+	}
+
+	public void setProductoElegido(Producto productoElegido) {
+		this.productoElegido = productoElegido;
+	}
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
 	}
 }

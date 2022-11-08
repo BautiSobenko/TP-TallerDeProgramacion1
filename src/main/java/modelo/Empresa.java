@@ -115,7 +115,7 @@ public class Empresa {
         }
     }
 
-    private Mozo mayorVolumenVentaMozo(){
+    public Mozo mayorVolumenVentaMozo(){
         Iterator<Mozo> it = mozos.iterator();
         Mozo mozo, mayor = null;
         double max = 0;
@@ -130,7 +130,7 @@ public class Empresa {
         return mayor;
     }
 
-    private Mozo menorVolumenVentaMozo(){
+    public Mozo menorVolumenVentaMozo(){
         Iterator<Mozo> it = mozos.iterator();
         Mozo mozo, menor = null;
         double min = 9999999;
@@ -145,7 +145,7 @@ public class Empresa {
         return menor;
     }
 
-    private double consumoPromedioMesa(int nroMesa) throws MesaNoExistenteException{
+    public double consumoPromedioMesa(int nroMesa) throws MesaNoExistenteException{
         Iterator<Mesa> it = mesas.iterator();
         boolean encontreMesa = false;
         Mesa mesa = null;
@@ -163,7 +163,7 @@ public class Empresa {
 
     }
 
-    private double calculaSueldo(String id) throws MozoNoExistenteException{
+    public double calculaSueldo(String id) throws MozoNoExistenteException{
 
         Iterator<Mozo> it = mozos.iterator();
         boolean sale = false;

@@ -20,6 +20,9 @@ public class Operario {
         this.activo = true;
     }
 
+    public Operario() {
+    }
+
     public static Operario admin() {
         return new Operario("admin", "admin", "admin1234");
     }
@@ -96,6 +99,9 @@ public class Operario {
         }
         return ingreso;
     }
+
+
+
 
 
 

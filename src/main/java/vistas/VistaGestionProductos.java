@@ -8,7 +8,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Font;
 
-import modelo.Operario;
 import modelo.Producto;
 
 public class VistaGestionProductos extends JFrame implements IVistaGestion, MouseListener{

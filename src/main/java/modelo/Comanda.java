@@ -36,4 +36,6 @@ public class Comanda {
     public void setEstado(EstadoComanda estado) {
         this.estado = estado;
     }
+
+
 }

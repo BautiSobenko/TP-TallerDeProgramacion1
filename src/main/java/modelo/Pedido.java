@@ -38,4 +38,9 @@ public class Pedido {
         return fecha;
     }
 
+    public Pedido(Producto producto, int cantidad, Instant fecha) {
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.fecha = fecha;
+    }
 }

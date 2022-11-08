@@ -30,6 +30,7 @@ public class Empresa {
     }
 
     private Empresa() {
+        cargarAdmin();
         cargarMesas();
         cargarMozos();
         cargarProductos();
@@ -41,26 +42,31 @@ public class Empresa {
         usuarioLogueado = null;
     }
 
+    private void cargarAdmin(){
+        Operario admin = Operario.admin();
+        this.operarios = new HashSet<>();
+        this.operarios.add(admin);
+
+        IPersistencia persistencia = new PersistenciaXML();
+        try {
+            persistencia.abrirOutput("operarios.xml");
+            persistencia.escribir(this.operarios);
+            persistencia.cerrarOutput();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
     private void cargarOperarios() {
         IPersistencia<Set<Operario>> persistencia = new PersistenciaXML();
 
         try { // Archivo XML "Operarios" -> Empresa
             persistencia.abrirInput("operarios.xml");
             this.operarios = persistencia.leer();
-            if (operarios == null) {
-                operarios = new HashSet<>();
-                operarios.add(Operario.admin()); //cargar admin por default
-                persistencia.escribir(operarios);
-            }
             persistencia.cerrarInput();
-
         } catch (Exception err) {
             this.operarios = new HashSet<>();
-            operarios.add(Operario.admin());
-            try {
-                persistencia.escribir(operarios);
-            } catch (IOException e){}
-
         }
     }
 
@@ -255,5 +261,13 @@ public class Empresa {
         }
 
         throw new UsuarioIncorrectoException("Usuario no encontrado", username);
+    }
+
+    public Operario getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Operario admin) {
+        this.admin = admin;
     }
 }

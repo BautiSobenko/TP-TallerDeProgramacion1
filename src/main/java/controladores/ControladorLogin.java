@@ -50,17 +50,18 @@ public class ControladorLogin implements ActionListener {
 				if( logueado != null )
 					logueado = null;
 				logueado = this.empresa.login(vistaLogin.getUsername(), vistaLogin.getContrasena());
+				if (logueado != null) {
+					this.vistaLogin.esconder();
+					this.vistaLogin.limpiaCampos();
+					ControladorInicio con = ControladorInicio.getControladorInicio(true);
+				}
 			} catch (UsuarioIncorrectoException err) {
 				this.vistaLogin.usuarioNoEncontrado();
 			} catch (ContrasenaIncorrectaException err) {
 				this.vistaLogin.contrasenaIncorrecta();
 			}
 
-			if (logueado != null) {
-				this.vistaLogin.esconder();
-				this.vistaLogin.limpiaCampos();
-				ControladorInicio con = ControladorInicio.getControladorInicio(true);
-			}
+
 
 	}
 

@@ -8,7 +8,6 @@ import java.awt.event.MouseListener;
 import java.awt.Font;
 
 import modelo.Mozo;
-import modelo.Operario;
 
 public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseListener{
 

@@ -54,6 +54,7 @@ public class Producto {
         return stock;
     }
 
-    
-
+    public void setId(String id) {
+        this.id = id;
+    }
 }

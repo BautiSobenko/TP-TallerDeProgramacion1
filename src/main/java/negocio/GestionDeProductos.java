@@ -58,7 +58,6 @@ public class GestionDeProductos {
         Set<Producto> productos = this.empresa.getProductos();
         Iterator<Producto> it = productos.iterator();
 
-        Producto productoNuevo = new Producto(producto.getNombre(), producto.getPrecio(), producto.getCosto(), producto.getStock());
         boolean encontreProducto = false;
         Producto prod = null;
 
@@ -70,7 +69,8 @@ public class GestionDeProductos {
         }
         if(encontreProducto) {
             productos.remove(prod);
-            productos.add(productoNuevo);
+            Producto productoMod= new Producto(producto.getNombre(), producto.getPrecio(), producto.getCosto(), producto.getStock());
+            productos.add(productoMod);
             this.empresa.setProductos(productos);
             persistirProductos();
         }

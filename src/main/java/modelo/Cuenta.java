@@ -47,4 +47,8 @@ public class Cuenta {
     public void setCierre(Instant cierre) {
         this.cierre = cierre;
     }
+
+    public void setApertura(Instant apertura) {
+        this.apertura = apertura;
+    }
 }

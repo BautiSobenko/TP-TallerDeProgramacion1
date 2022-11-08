@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class VistaInicio extends JFrame implements IGenerica {
 
-	private JFrame frmInicioOperario;
+	JFrame frmInicioOperario;
 	private JButton btnApertura,btnCerrarSesion,btnGestionPromos;
 	private JButton btnGestionProductos,btnGestionMesas,btnGestionOperarios,btnGestionMozos;
 	private ActionListener actionListener;
@@ -100,7 +100,7 @@ public class VistaInicio extends JFrame implements IGenerica {
 		
 		btnGestionPromos = new JButton("Gestionar Promociones");
 		btnGestionPromos.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnGestionPromos.setBounds(169, 11, 173, 80);
+		btnGestionPromos.setBounds(169, 11, 190, 80);
 		panelMo_4.add(btnGestionPromos);
 		
 		JPanel panelSur = new JPanel();

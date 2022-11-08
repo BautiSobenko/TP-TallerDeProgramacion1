@@ -89,12 +89,12 @@ public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseLis
 
 	@Override
 	public void mostrar() {
-		this.setVisible(true);
+		this.frmGestionDeMozos.setVisible(true);
 	}
 
 	@Override
 	public void esconder() {
-		this.setVisible(false);
+		this.frmGestionDeMozos.setVisible(false);
 		this.limpia();
 	}
 

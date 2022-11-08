@@ -16,7 +16,7 @@ import javax.swing.JCheckBox;
 
 public class VistaAltaPromocion extends JFrame implements IGenerica, KeyListener, MouseListener{
 
-	private JFrame frmAltaDeMozo;
+	private JFrame frmAltaDePromocion;
 	private JTextField txtNombrePromocion;
 	private JButton btnAceptar;
 	private JButton btnVolver;
@@ -42,7 +42,7 @@ public class VistaAltaPromocion extends JFrame implements IGenerica, KeyListener
 			public void run() {
 				try {
 					VistaAltaPromocion window = new VistaAltaPromocion();
-					window.frmAltaDeMozo.setVisible(true);
+					window.frmAltaDePromocion.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -55,20 +55,20 @@ public class VistaAltaPromocion extends JFrame implements IGenerica, KeyListener
 	}
 
 	private void initialize() {
-		frmAltaDeMozo = new JFrame();
-		frmAltaDeMozo.setTitle("Promocion temporal");
-		frmAltaDeMozo.setBounds(100, 100, 450, 300);
-		frmAltaDeMozo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmAltaDeMozo.getContentPane().setLayout(null);
+		frmAltaDePromocion = new JFrame();
+		frmAltaDePromocion.setTitle("Promocion temporal");
+		frmAltaDePromocion.setBounds(100, 100, 450, 300);
+		frmAltaDePromocion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAltaDePromocion.getContentPane().setLayout(null);
 		
 		JLabel lblNombrePromocion = new JLabel("Nombre promocion");
 		lblNombrePromocion.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNombrePromocion.setBounds(23, 15, 126, 21);
-		frmAltaDeMozo.getContentPane().add(lblNombrePromocion);
+		frmAltaDePromocion.getContentPane().add(lblNombrePromocion);
 		
 		txtNombrePromocion = new JTextField();
 		txtNombrePromocion.setBounds(197, 11, 192, 32);
-		frmAltaDeMozo.getContentPane().add(txtNombrePromocion);
+		frmAltaDePromocion.getContentPane().add(txtNombrePromocion);
 		txtNombrePromocion.setColumns(10);
 		txtNombrePromocion.addKeyListener(this);
 		
@@ -76,95 +76,95 @@ public class VistaAltaPromocion extends JFrame implements IGenerica, KeyListener
 
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAceptar.setBounds(304, 218, 110, 32);
-		frmAltaDeMozo.getContentPane().add(btnAceptar);
+		frmAltaDePromocion.getContentPane().add(btnAceptar);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnVolver.setBounds(23, 218, 110, 32);
-		frmAltaDeMozo.getContentPane().add(btnVolver);
+		frmAltaDePromocion.getContentPane().add(btnVolver);
 		
 		lblFormaDePago = new JLabel("Formas de pago");
 		lblFormaDePago.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFormaDePago.setBounds(23, 56, 126, 21);
-		frmAltaDeMozo.getContentPane().add(lblFormaDePago);
+		frmAltaDePromocion.getContentPane().add(lblFormaDePago);
 		
 		chckbxEfectivo = new JCheckBox("Efectivo");
 		chckbxEfectivo.setBounds(197, 56, 72, 23);
 		chckbxEfectivo.addMouseListener(this);
-		frmAltaDeMozo.getContentPane().add(chckbxEfectivo);
+		frmAltaDePromocion.getContentPane().add(chckbxEfectivo);
 		
 		chckbxTarjeta = new JCheckBox("Tarjeta");
 		chckbxTarjeta.setBounds(197, 82, 72, 23);
 		chckbxTarjeta.addMouseListener(this);
-		frmAltaDeMozo.getContentPane().add(chckbxTarjeta);
+		frmAltaDePromocion.getContentPane().add(chckbxTarjeta);
 		
 		chckbxMercadoPago = new JCheckBox("Mercado Pago");
 		chckbxMercadoPago.setBounds(300, 56, 97, 23);
 		chckbxMercadoPago.addMouseListener(this);
-		frmAltaDeMozo.getContentPane().add(chckbxMercadoPago);
+		frmAltaDePromocion.getContentPane().add(chckbxMercadoPago);
 		
 		chckbxCuentaDNI = new JCheckBox("Cuenta DNI");
 		chckbxCuentaDNI.setBounds(300, 82, 97, 23);
 		chckbxCuentaDNI.addMouseListener(this);
-		frmAltaDeMozo.getContentPane().add(chckbxCuentaDNI);
+		frmAltaDePromocion.getContentPane().add(chckbxCuentaDNI);
 		
 		JLabel lblFormaDePago_1 = new JLabel("Dias Promo");
 		lblFormaDePago_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFormaDePago_1.setBounds(23, 111, 97, 24);
-		frmAltaDeMozo.getContentPane().add(lblFormaDePago_1);
+		frmAltaDePromocion.getContentPane().add(lblFormaDePago_1);
 		
 		chckbxLunes = new JCheckBox("Lunes");
 		chckbxLunes.setBounds(117, 111, 60, 23);
 		chckbxLunes.addMouseListener(this);
-		frmAltaDeMozo.getContentPane().add(chckbxLunes);
+		frmAltaDePromocion.getContentPane().add(chckbxLunes);
 		
 		chckbxJueves = new JCheckBox("Jueves");
 		chckbxJueves.setBounds(117, 137, 60, 23);
 		chckbxJueves.addMouseListener(this);
-		frmAltaDeMozo.getContentPane().add(chckbxJueves);
+		frmAltaDePromocion.getContentPane().add(chckbxJueves);
 		
 		chckbxMartes = new JCheckBox("Martes");
 		chckbxMartes.setBounds(197, 111, 60, 23);
 		chckbxMartes.addMouseListener(this);
-		frmAltaDeMozo.getContentPane().add(chckbxMartes);
+		frmAltaDePromocion.getContentPane().add(chckbxMartes);
 		
 		chckbxViernes = new JCheckBox("Viernes");
 		chckbxViernes.setBounds(197, 137, 60, 23);
 		chckbxViernes.addMouseListener(this);
-		frmAltaDeMozo.getContentPane().add(chckbxViernes);
+		frmAltaDePromocion.getContentPane().add(chckbxViernes);
 		
 		chckbxMiercoles = new JCheckBox("Miercoles");
 		chckbxMiercoles.setBounds(272, 111, 72, 23);
 		chckbxMiercoles.addMouseListener(this);
-		frmAltaDeMozo.getContentPane().add(chckbxMiercoles);
+		frmAltaDePromocion.getContentPane().add(chckbxMiercoles);
 		
 		chckbxSabado = new JCheckBox("Sabado");
 		chckbxSabado.setBounds(272, 137, 61, 23);
 		chckbxSabado.addMouseListener(this);
-		frmAltaDeMozo.getContentPane().add(chckbxSabado);
+		frmAltaDePromocion.getContentPane().add(chckbxSabado);
 		
 		chckbxDomingo = new JCheckBox("Domingo");
 		chckbxDomingo.setBounds(347, 123, 67, 23);
 		chckbxDomingo.addMouseListener(this);
-		frmAltaDeMozo.getContentPane().add(chckbxDomingo);
+		frmAltaDePromocion.getContentPane().add(chckbxDomingo);
 		
 		chckbxPromoActiva = new JCheckBox("");
 		chckbxPromoActiva.setBounds(74, 180, 27, 23);
-		frmAltaDeMozo.getContentPane().add(chckbxPromoActiva);
+		frmAltaDePromocion.getContentPane().add(chckbxPromoActiva);
 		
 		JLabel lblFormaDePago_1_1 = new JLabel("Activa");
 		lblFormaDePago_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFormaDePago_1_1.setBounds(23, 180, 45, 21);
-		frmAltaDeMozo.getContentPane().add(lblFormaDePago_1_1);
+		frmAltaDePromocion.getContentPane().add(lblFormaDePago_1_1);
 		
 		chckbxPromoAcumulable = new JCheckBox("");
 		chckbxPromoAcumulable.setBounds(218, 180, 27, 23);
-		frmAltaDeMozo.getContentPane().add(chckbxPromoAcumulable);
+		frmAltaDePromocion.getContentPane().add(chckbxPromoAcumulable);
 		
 		JLabel lblFormaDePago_1_1_1 = new JLabel("Acumulable");
 		lblFormaDePago_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFormaDePago_1_1_1.setBounds(140, 180, 72, 21);
-		frmAltaDeMozo.getContentPane().add(lblFormaDePago_1_1_1);
+		frmAltaDePromocion.getContentPane().add(lblFormaDePago_1_1_1);
 		
 		limpia();
 	}
@@ -269,14 +269,12 @@ public class VistaAltaPromocion extends JFrame implements IGenerica, KeyListener
 
 	@Override
 	public void mostrar() {
-		this.setVisible(true);
-		
+		this.frmAltaDePromocion.setVisible(true);
 	}
 
 	@Override
 	public void esconder() {
-		this.setVisible(false);
-		
+		this.frmAltaDePromocion.setVisible(false);
 	}
 
 	@Override

@@ -18,7 +18,7 @@ import javax.swing.JPasswordField;
 
 public class VistaAltaOperario extends JFrame implements IAltaOperario, KeyListener, MouseListener{
 
-	private JFrame frmAltaDeMozo;
+	private JFrame frmAltaDeOperario;
 	private JTextField txtNombre;
 	private JButton btnAceptar;
 	private JButton btnVolver;
@@ -38,7 +38,7 @@ public class VistaAltaOperario extends JFrame implements IAltaOperario, KeyListe
 			public void run() {
 				try {
 					VistaAltaOperario window = new VistaAltaOperario();
-					window.frmAltaDeMozo.setVisible(true);
+					window.frmAltaDeOperario.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -51,48 +51,48 @@ public class VistaAltaOperario extends JFrame implements IAltaOperario, KeyListe
 	}
 
 	private void initialize() {
-		frmAltaDeMozo = new JFrame();
-		frmAltaDeMozo.setTitle("Nuevo Operario");
-		frmAltaDeMozo.setBounds(100, 100, 450, 300);
-		frmAltaDeMozo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmAltaDeMozo.getContentPane().setLayout(null);
+		frmAltaDeOperario = new JFrame();
+		frmAltaDeOperario.setTitle("Nuevo Operario");
+		frmAltaDeOperario.setBounds(100, 100, 450, 300);
+		frmAltaDeOperario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAltaDeOperario.getContentPane().setLayout(null);
 		
 		JLabel lblNombre = new JLabel("Nombre completo");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNombre.setBounds(39, 24, 110, 21);
-		frmAltaDeMozo.getContentPane().add(lblNombre);
+		frmAltaDeOperario.getContentPane().add(lblNombre);
 		
 		JLabel lblNombreUsuario = new JLabel("Nombre de usuario");
 		lblNombreUsuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNombreUsuario.setBounds(39, 68, 126, 20);
-		frmAltaDeMozo.getContentPane().add(lblNombreUsuario);
+		frmAltaDeOperario.getContentPane().add(lblNombreUsuario);
 		
 		JLabel lblEstado = new JLabel("Estado");
 		lblEstado.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblEstado.setBounds(39, 149, 126, 32);
-		frmAltaDeMozo.getContentPane().add(lblEstado);
+		frmAltaDeOperario.getContentPane().add(lblEstado);
 		
 		txtNombre = new JTextField();
 		txtNombre.setBounds(200, 20, 184, 32);
-		frmAltaDeMozo.getContentPane().add(txtNombre);
+		frmAltaDeOperario.getContentPane().add(txtNombre);
 		txtNombre.setColumns(10);
 		txtNombre.addKeyListener(this);
 		
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAceptar.setBounds(274, 205, 110, 32);
-		frmAltaDeMozo.getContentPane().add(btnAceptar);
+		frmAltaDeOperario.getContentPane().add(btnAceptar);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnVolver.setBounds(39, 205, 110, 32);
-		frmAltaDeMozo.getContentPane().add(btnVolver);
+		frmAltaDeOperario.getContentPane().add(btnVolver);
 		
 		txtNombreUsuario = new JTextField();
 		txtNombreUsuario.setColumns(10);
 		txtNombreUsuario.setBounds(200, 64, 184, 32);
 		txtNombreUsuario.addKeyListener(this);
-		frmAltaDeMozo.getContentPane().add(txtNombreUsuario);
+		frmAltaDeOperario.getContentPane().add(txtNombreUsuario);
 		
 		this.grupoEstado = new ButtonGroup();
 		
@@ -101,23 +101,23 @@ public class VistaAltaOperario extends JFrame implements IAltaOperario, KeyListe
 		rdbtnOperarioActivo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		rdbtnOperarioActivo.setBounds(201, 154, 72, 23);
 		grupoEstado.add(rdbtnOperarioActivo);
-		frmAltaDeMozo.getContentPane().add(rdbtnOperarioActivo);
+		frmAltaDeOperario.getContentPane().add(rdbtnOperarioActivo);
 		
 		rdbtnOperarioNoActivo = new JRadioButton("No Activo");
 		rdbtnOperarioNoActivo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		rdbtnOperarioNoActivo.setBounds(299, 154, 85, 23);
 		grupoEstado.add(rdbtnOperarioNoActivo);
-		frmAltaDeMozo.getContentPane().add(rdbtnOperarioNoActivo);
+		frmAltaDeOperario.getContentPane().add(rdbtnOperarioNoActivo);
 		
 		lblPassword = new JLabel("Contrase\u00F1a");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPassword.setBounds(39, 111, 126, 20);
-		frmAltaDeMozo.getContentPane().add(lblPassword);
+		frmAltaDeOperario.getContentPane().add(lblPassword);
 		
 		txtPassword = new JPasswordField();
 		txtPassword.setBounds(200, 107, 184, 32);
 		txtPassword.addKeyListener(this);
-		frmAltaDeMozo.getContentPane().add(txtPassword);
+		frmAltaDeOperario.getContentPane().add(txtPassword);
 		
 		limpia();
 	}
@@ -185,14 +185,12 @@ public class VistaAltaOperario extends JFrame implements IAltaOperario, KeyListe
 
 	@Override
 	public void mostrar() {
-		this.setVisible(true);
-
-		
+		this.frmAltaDeOperario.setVisible(true);
 	}
 
 	@Override
 	public void esconder() {
-		this.setVisible(false);
+		this.frmAltaDeOperario.setVisible(false);
 	}
 
 	@Override

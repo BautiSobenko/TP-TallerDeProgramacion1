@@ -12,7 +12,7 @@ import modelo.Operario;
 
 public class VistaGestionOperarios extends JFrame implements MouseListener,IVistaGestion{
 
-	private JFrame frmGestionDeMozos;
+	private JFrame frmGestionDeOperarios;
 	private JButton btnAltaOperario,btnBajaOperario,btnModificarOperario,btnVolver;
 	private JList<Operario> listaOperarios;
 	private ActionListener actionListener;
@@ -22,7 +22,7 @@ public class VistaGestionOperarios extends JFrame implements MouseListener,IVist
 			public void run() {
 				try {
 					VistaGestionOperarios window = new VistaGestionOperarios();
-					window.frmGestionDeMozos.setVisible(true);
+					window.frmGestionDeOperarios.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -35,21 +35,21 @@ public class VistaGestionOperarios extends JFrame implements MouseListener,IVist
 	}
 
 	private void initialize() {
-		frmGestionDeMozos = new JFrame();
-		frmGestionDeMozos.setTitle("Gestion de Operarios");
-		frmGestionDeMozos.setBounds(100, 100, 450, 300);
-		frmGestionDeMozos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmGestionDeMozos.getContentPane().setLayout(null);
+		frmGestionDeOperarios = new JFrame();
+		frmGestionDeOperarios.setTitle("Gestion de Operarios");
+		frmGestionDeOperarios.setBounds(100, 100, 450, 300);
+		frmGestionDeOperarios.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmGestionDeOperarios.getContentPane().setLayout(null);
 		
 		JLabel lblListaOperarios = new JLabel("Listado de operarios");
 		lblListaOperarios.setHorizontalAlignment(SwingConstants.CENTER);
 		lblListaOperarios.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblListaOperarios.setBounds(72, 21, 130, 14);
-		frmGestionDeMozos.getContentPane().add(lblListaOperarios);
+		frmGestionDeOperarios.getContentPane().add(lblListaOperarios);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(26, 46, 221, 142);
-		frmGestionDeMozos.getContentPane().add(scrollPane);
+		frmGestionDeOperarios.getContentPane().add(scrollPane);
 		
 		listaOperarios = new JList();
 		scrollPane.setViewportView(listaOperarios);
@@ -58,24 +58,24 @@ public class VistaGestionOperarios extends JFrame implements MouseListener,IVist
 		btnAltaOperario = new JButton("Alta Operario");
 		btnAltaOperario.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAltaOperario.setBounds(276, 46, 141, 32);
-		frmGestionDeMozos.getContentPane().add(btnAltaOperario);
+		frmGestionDeOperarios.getContentPane().add(btnAltaOperario);
 		
 		btnBajaOperario = new JButton("Baja Operario");
 		btnBajaOperario.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnBajaOperario.setBounds(276, 101, 141, 32);
 		btnBajaOperario.setEnabled(false);
-		frmGestionDeMozos.getContentPane().add(btnBajaOperario);
+		frmGestionDeOperarios.getContentPane().add(btnBajaOperario);
 		
 		btnModificarOperario = new JButton("Modificar Operario");
 		btnModificarOperario.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnModificarOperario.setBounds(276, 156, 141, 32);
 		btnModificarOperario.setEnabled(false);
-		frmGestionDeMozos.getContentPane().add(btnModificarOperario);
+		frmGestionDeOperarios.getContentPane().add(btnModificarOperario);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnVolver.setBounds(26, 211, 89, 32);
-		frmGestionDeMozos.getContentPane().add(btnVolver);
+		frmGestionDeOperarios.getContentPane().add(btnVolver);
 	}
 
 	@Override
@@ -121,12 +121,13 @@ public class VistaGestionOperarios extends JFrame implements MouseListener,IVist
 
 	@Override
 	public void mostrar() {
-		this.setVisible(true);
+		this.frmGestionDeOperarios.setVisible(true);
+
 	}
 
 	@Override
 	public void esconder() {
-		this.setVisible(false);
+		this.frmGestionDeOperarios.setVisible(false);
 		this.limpia();
 	}
 

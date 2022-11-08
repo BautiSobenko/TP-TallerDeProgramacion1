@@ -127,12 +127,12 @@ public class VistaAltaMozo extends JFrame implements IGenerica, KeyListener{
 
 	@Override
 	public void mostrar() {
-		this.setVisible(true);
+		this.frmAltaDeMozo.setVisible(true);
 	}
 
 	@Override
 	public void esconder() {
-		this.setVisible(false);
+		this.frmAltaDeMozo.setVisible(false);
 	}
 
 	@Override

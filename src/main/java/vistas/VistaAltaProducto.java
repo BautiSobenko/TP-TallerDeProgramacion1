@@ -10,7 +10,7 @@ import java.awt.event.KeyListener;
 
 public class VistaAltaProducto extends JFrame implements IGenerica, KeyListener {
 
-	private JFrame frmAltaDeMozo;
+	private JFrame frmAltaDeProducto;
 	private JTextField txtNombre;
 	private JButton btnAceptar;
 	private JButton btnVolver;
@@ -28,7 +28,7 @@ public class VistaAltaProducto extends JFrame implements IGenerica, KeyListener 
 			public void run() {
 				try {
 					VistaAltaProducto window = new VistaAltaProducto();
-					window.frmAltaDeMozo.setVisible(true);
+					window.frmAltaDeProducto.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -41,65 +41,65 @@ public class VistaAltaProducto extends JFrame implements IGenerica, KeyListener 
 	}
 
 	private void initialize() {
-		frmAltaDeMozo = new JFrame();
-		frmAltaDeMozo.setTitle("Nuevo Producto");
-		frmAltaDeMozo.setBounds(100, 100, 450, 300);
-		frmAltaDeMozo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmAltaDeMozo.getContentPane().setLayout(null);
+		frmAltaDeProducto = new JFrame();
+		frmAltaDeProducto.setTitle("Nuevo Producto");
+		frmAltaDeProducto.setBounds(100, 100, 450, 300);
+		frmAltaDeProducto.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAltaDeProducto.getContentPane().setLayout(null);
 		
 		JLabel lblNombre = new JLabel("Nombre producto");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNombre.setBounds(39, 24, 110, 21);
-		frmAltaDeMozo.getContentPane().add(lblNombre);
+		frmAltaDeProducto.getContentPane().add(lblNombre);
 		
 		JLabel lblPrecioCosto = new JLabel("Precio Costo");
 		lblPrecioCosto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPrecioCosto.setBounds(39, 66, 126, 20);
-		frmAltaDeMozo.getContentPane().add(lblPrecioCosto);
+		frmAltaDeProducto.getContentPane().add(lblPrecioCosto);
 		
 		JLabel lblPrecioVenta = new JLabel("Precio Venta");
 		lblPrecioVenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPrecioVenta.setBounds(39, 106, 126, 32);
-		frmAltaDeMozo.getContentPane().add(lblPrecioVenta);
+		frmAltaDeProducto.getContentPane().add(lblPrecioVenta);
 		
 		txtNombre = new JTextField();
 		txtNombre.setBounds(200, 20, 184, 32);
-		frmAltaDeMozo.getContentPane().add(txtNombre);
+		frmAltaDeProducto.getContentPane().add(txtNombre);
 		txtNombre.setColumns(10);
 		txtNombre.addKeyListener(this);
 		
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAceptar.setBounds(274, 218, 110, 32);
-		frmAltaDeMozo.getContentPane().add(btnAceptar);
+		frmAltaDeProducto.getContentPane().add(btnAceptar);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnVolver.setBounds(39, 218, 110, 32);
-		frmAltaDeMozo.getContentPane().add(btnVolver);
+		frmAltaDeProducto.getContentPane().add(btnVolver);
 		
 		txtPrecioCosto = new JTextField();
 		txtPrecioCosto.setColumns(10);
 		txtPrecioCosto.setBounds(200, 63, 184, 32);
 		txtPrecioCosto.addKeyListener(this);
-		frmAltaDeMozo.getContentPane().add(txtPrecioCosto);
+		frmAltaDeProducto.getContentPane().add(txtPrecioCosto);
 		
 		txtPrecioVenta = new JTextField();
 		txtPrecioVenta.setColumns(10);
 		txtPrecioVenta.setBounds(200, 108, 184, 32);
 		txtPrecioVenta.addKeyListener(this);
-		frmAltaDeMozo.getContentPane().add(txtPrecioVenta);
+		frmAltaDeProducto.getContentPane().add(txtPrecioVenta);
 		
 		JLabel lblStockInicial = new JLabel("Stock Inicial");
 		lblStockInicial.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblStockInicial.setBounds(39, 153, 126, 32);
-		frmAltaDeMozo.getContentPane().add(lblStockInicial);
+		frmAltaDeProducto.getContentPane().add(lblStockInicial);
 		
 		txtStockInicial = new JTextField();
 		txtStockInicial.setColumns(10);
 		txtStockInicial.setBounds(200, 155, 184, 32);
 		txtStockInicial.addKeyListener(this);
-		frmAltaDeMozo.getContentPane().add(txtStockInicial);
+		frmAltaDeProducto.getContentPane().add(txtStockInicial);
 		
 		limpia();
 		
@@ -150,13 +150,12 @@ public class VistaAltaProducto extends JFrame implements IGenerica, KeyListener 
 
 	@Override
 	public void mostrar() {
-		this.setVisible(true);
-		
+		this.frmAltaDeProducto.setVisible(true);
 	}
 
 	@Override
 	public void esconder() {
-		this.setVisible(false);
+		this.frmAltaDeProducto.setVisible(false);
 		
 	}
 

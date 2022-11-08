@@ -41,9 +41,8 @@ public class GestionDeProductos {
 
     public void altaProducto(ProductoDTO producto) throws ProductoExistenteException {
         Set<Producto> productos = this.empresa.getProductos();
-        boolean existeProducto = productos.stream().anyMatch(p -> p.getId().equals(producto.getId()));
-
         Producto productoNuevo = new Producto(producto.getNombre(), producto.getPrecio(), producto.getCosto(), producto.getStock());
+        boolean existeProducto = productos.stream().anyMatch(p -> p.getId().equals(productoNuevo.getId()));
 
         if(!existeProducto){
             productos.add(productoNuevo);
@@ -57,19 +56,19 @@ public class GestionDeProductos {
     public void modificaProducto(ProductoDTO producto) throws ProductoNoExistenteException {
         Set<Producto> productos = this.empresa.getProductos();
         Iterator<Producto> it = productos.iterator();
+        Producto productoMod= new Producto(producto.getNombre(), producto.getPrecio(), producto.getCosto(), producto.getStock());
 
         boolean encontreProducto = false;
         Producto prod = null;
 
         while(it.hasNext() && !encontreProducto) {
             prod = it.next();
-            if(prod.getId().equals(producto.getId())){
+            if(prod.getId().equals(productoMod.getId())){
                 encontreProducto = true;
             }
         }
         if(encontreProducto) {
             productos.remove(prod);
-            Producto productoMod= new Producto(producto.getNombre(), producto.getPrecio(), producto.getCosto(), producto.getStock());
             productos.add(productoMod);
             this.empresa.setProductos(productos);
             persistirProductos();

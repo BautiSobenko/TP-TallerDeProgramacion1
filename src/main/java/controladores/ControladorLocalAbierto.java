@@ -30,6 +30,7 @@ public class ControladorLocalAbierto implements ActionListener {
             controladorLocalAbierto = new ControladorLocalAbierto();
         }
         controladorLocalAbierto.vistaLocalAbierto.mostrar();
+
         return controladorLocalAbierto;
     }
 
@@ -41,22 +42,23 @@ public class ControladorLocalAbierto implements ActionListener {
             //Muestro promedio\
         }
         else if(comando.equalsIgnoreCase("Mozo con menos ventas")){
-                this.vistaLocalAbierto.success("El moso con menos ventas es "+this.gestionDeMozos.mozoMinVentas());
+            this.vistaLocalAbierto.success("El moso con menos ventas es "+this.gestionDeMozos.mozoMinVentas());
         }
         else if(comando.equalsIgnoreCase("Mozo con mas Ventas")){
-                this.vistaLocalAbierto.success("El moso con mas ventas es "+this.gestionDeMozos.mozoMaxVentas());
+            this.vistaLocalAbierto.success("El moso con mas ventas es "+this.gestionDeMozos.mozoMaxVentas());
         }
         else if(comando.equalsIgnoreCase("Cerrar Mesa")){
-                this.vistaLocalAbierto.getMesaCierre().setEstadoMesa(EstadoMesa.LIBRE);
+            this.vistaLocalAbierto.getMesaCierre().setEstadoMesa(EstadoMesa.LIBRE);
         }
         else if(comando.equalsIgnoreCase("Cargar Pedido")){
 
         }
         else if(comando.equalsIgnoreCase("Abrir Mesa")){
-                this.vistaLocalAbierto.getMesaApertura().setEstadoMesa(EstadoMesa.OCUPADA);
+            this.vistaLocalAbierto.getMesaApertura().setEstadoMesa(EstadoMesa.OCUPADA);
         }
         else if(comando.equalsIgnoreCase("Cerrar Local")){
-                //CerrarLocal
+            this.vistaLocalAbierto.esconder();
+            ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);
         }
 
     }

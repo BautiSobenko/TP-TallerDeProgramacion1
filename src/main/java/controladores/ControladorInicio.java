@@ -43,23 +43,24 @@ public class ControladorInicio implements ActionListener {
         }
         else if(comando.equals("Gestionar Operarios")){
             ControladorGestionOperario controladorGestionOperario = ControladorGestionOperario.getControladorGestionOperario(true);
-
-            }
-            else if(comando.equals("Gestionar Mesas")){
-                ControladorGestionMesas controladorGestionMesas = ControladorGestionMesas.getControladorGestionMesas(true);
-            }
-                else if(comando.equals("Gestionar Productos")){
-                    ControladorGestionProductos controladorGestionProductos = ControladorGestionProductos.getControladorGestionProductos(true);
-                    }
-                    else if(comando.equals("Gestionar Promociones")){
-                        //!ControladorGestionPromociones controladorGestionPromociones = ControladorGestionPromociones.getControladorGestionPromociones(true);
-                        }
-                        else if(comando.equals("Abrir Local")){
-                            //!ControladorLocalAbierto controladorLocalAbierto = ControladorLocalAbiero.getControladorLocalAbierto(true);
-                            }
-                             else if(comando.equals("Cerrar Sesion")){
-                                ControladorLogin controladorLogin = ControladorLogin.getControladorLogin(true);
-                            }
+        }
+        else if(comando.equals("Gestionar Mesas")){
+            ControladorGestionMesas controladorGestionMesas = ControladorGestionMesas.getControladorGestionMesas(true);
+        }
+        else if(comando.equals("Gestionar Productos")){
+                ControladorGestionProductos controladorGestionProductos = ControladorGestionProductos.getControladorGestionProductos(true);
+        }
+        else if(comando.equals("Gestionar Promociones")){
+            //!ControladorGestionPromociones controladorGestionPromociones = ControladorGestionPromociones.getControladorGestionPromociones(true);
+        }
+        else if(comando.equals("Abrir Local")){
+            this.vistaInicio.esconder();
+            ControladorLocalAbierto controladorLocalAbierto = ControladorLocalAbierto.getControladorLocalAbierto();
+        }
+        else if(comando.equals("Cerrar Sesion")){
+            this.vistaInicio.esconder();
+            ControladorLogin controladorLogin = ControladorLogin.getControladorLogin(true);
+        }
 
 
     }

@@ -17,13 +17,13 @@ public class ControladorLogin implements ActionListener {
 	private static ControladorLogin controladorLogin = null;
 	private Empresa empresa;
 	private ILogin vistaLogin;
-	private Operario logueado;
+	private static Operario logueado;
 
 	private ControladorLogin() {
 		this.vistaLogin = new VistaLogin();
 		this.empresa = Empresa.getEmpresa();
 		this.vistaLogin.setActionListener(this);
-		logueado = null;
+
 	}
 
 	public Empresa getEmpresa() {
@@ -34,8 +34,11 @@ public class ControladorLogin implements ActionListener {
 		if (controladorLogin == null) {
 			controladorLogin = new ControladorLogin();
 		}
+		logueado = null;
+
 		if( mostrar )
 			controladorLogin.vistaLogin.mostrar();
+
 		return controladorLogin;
 	}
 	

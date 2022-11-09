@@ -130,6 +130,7 @@ public class VistaInicio extends JFrame implements IGenerica {
 		this.btnGestionProductos.addActionListener(actionListener);
 		this.btnCerrarSesion.addActionListener(actionListener);
 		this.btnGestionPromos.addActionListener(actionListener);
+		this.btnApertura.addActionListener(actionListener);
 	}
 
 	@Override
@@ -139,7 +140,7 @@ public class VistaInicio extends JFrame implements IGenerica {
 
 	@Override
 	public void esconder() {
-		this.frmInicioOperario.setVisible(true);
+		this.frmInicioOperario.setVisible(false);
 	}
 
 	@Override

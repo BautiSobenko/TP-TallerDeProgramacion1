@@ -134,8 +134,6 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 
 	@Override
 	public void entrar() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -146,12 +144,14 @@ public class VistaLogin extends JFrame implements KeyListener, ILogin {
 	@Override
 	public void esconder() {
 		this.setVisible(false);
+		limpiaCampos();
 	}
 
 	@Override
 	public void limpiaCampos() {
 		this.usernameField.setText("");
 		this.passwordField.setText("");
+		this.loginButton.setEnabled(false);
 		this.username = null;
 		this.contrasena = null;
 	}

@@ -158,20 +158,17 @@ public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener
 
 	@Override
 	public void mostrar() {
-		// TODO Auto-generated method stub
 		this.setVisible(true);
 	}
 
 	@Override
 	public void esconder() {
-		// TODO Auto-generated method stub
 		this.setVisible(false);
 		this.limpia();
 	}
 
 	@Override
 	public void limpia() {
-		// TODO Auto-generated method stub
 		this.btnAbrirMesa.setEnabled(false);
 		this.btnCargarPedido.setEnabled(false);
 		this.btnCerrarMesa.setEnabled(false);
@@ -189,19 +186,14 @@ public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		if(this.comboBoxAbrir.getSelectedItem()!=null) {
 			this.mesaApertura = (Mesa) this.comboBoxAbrir.getSelectedItem();
 			this.btnAbrirMesa.setEnabled(true);
@@ -220,14 +212,12 @@ public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	public Mesa getMesaApertura() {

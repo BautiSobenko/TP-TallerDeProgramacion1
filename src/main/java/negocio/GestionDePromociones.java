@@ -1,7 +1,10 @@
 package negocio;
 
 import dto.ProductoDTO;
+import dto.PromocionDTO;
+import dto.PromocionProductoDTO;
 import dto.PromocionTemporalDTO;
+import excepciones.OperarioExistenteException;
 import excepciones.ProductoExistenteException;
 import modelo.Empresa;
 import modelo.Operario;
@@ -13,6 +16,7 @@ import persistencia.IPersistencia;
 import persistencia.PersistenciaXML;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Set;
 
 public class GestionDePromociones {
@@ -46,26 +50,121 @@ public class GestionDePromociones {
         }
     }
 
-    public void altaProducto(PromocionDTO promocion) throws ProductoExistenteException {
+    public void altaPromocion(PromocionDTO promocion) throws ProductoExistenteException {
         Set<Promocion> promociones = this.getPromociones();
-        if(promocion instanceof PromocionTemporalDTO){
-            PromocionTemporal promoTemporal = new PromocionTemporal();
-        }
-        else if ( promocion instanceof PromocionFijaDTO ){
-            PromocionFija promoFija = new PromocionFija();
-        }
-        Producto productoNuevo = new Producto(producto.getNombre(), producto.getPrecio(), producto.getCosto(), producto.getStock());
-        boolean existePromo = promociones.stream().anyMatch(p -> p.getId().equals(productoNuevo.getId()));
 
-        if(!existeProducto){
-            productos.add(productoNuevo);
-            this.empresa.setProductos(productos);
-            persistirProductos();
+        Iterator<Promocion> it = promociones.iterator();
+        boolean encontrePromo = false;
+        Promocion op;
+
+        while(it.hasNext() && !encontrePromo) {
+            op = it.next();
+            if( (op instanceof PromocionFija && promocion instanceof PromocionProductoDTO) || (op instanceof PromocionTemporal && promocion instanceof PromocionTemporalDTO) ){
+                if( op.getNombre().equals(promocion.getNombre()) )
+                    encontrePromo = true;
+            }
         }
-        else
-            throw new ProductoExistenteException();
+
+        if(!encontrePromo){
+
+            if(promocion instanceof PromocionTemporalDTO promo){
+                PromocionTemporal promoTemporal = new PromocionTemporal(promo.getNombre(),
+                        promo.getDiasPromo(),
+                        promo.getFormaPago(),
+                        promo.getPorcentajeDescuento(),
+                        promo.isAcumulable());
+
+                promociones.add(promoTemporal);
+            }
+            else if (promocion instanceof PromocionProductoDTO promo){
+                PromocionFija promoFija = new PromocionFija(promo.getNombre(),
+                        promo.getDiasPromo(),
+                        promo.getProducto(),
+                        promo.isDosPorUno(),
+                        promo.isDtoPorCant(),
+                        promo.getDtoPorCantMin(),
+                        promo.getDtoPorCantPrecioU());
+
+                promociones.add(promoFija);
+            }
+
+            this.empresa.setPromociones(promociones);
+            persistirPromociones();
+        } else{
+            //!throw new OperarioExistenteException();
+        }
     }
 
+    public void modificaPromocion(PromocionDTO promocion) throws ProductoExistenteException {
+        Set<Promocion> promociones = this.getPromociones();
+
+        Iterator<Promocion> it = promociones.iterator();
+        boolean encontrePromo = false;
+        Promocion p = null;
+
+        while(it.hasNext() && !encontrePromo) {
+            p = it.next();
+            if( (p instanceof PromocionFija && promocion instanceof PromocionProductoDTO) || (p instanceof PromocionTemporal && promocion instanceof PromocionTemporalDTO) ){
+                if( p.getNombre().equals(promocion.getNombre()) )
+                    encontrePromo = true;
+            }
+        }
+
+        if(encontrePromo){
+
+            promociones.remove(p);
+
+            if(promocion instanceof PromocionTemporalDTO promo){
+                PromocionTemporal promoTemporal = new PromocionTemporal(promo.getNombre(),
+                                                                        promo.getDiasPromo(),
+                                                                        promo.getFormaPago(),
+                                                                        promo.getPorcentajeDescuento(),
+                                                                        promo.isAcumulable());
+
+                promociones.add(promoTemporal);
+            }
+            else if (promocion instanceof PromocionProductoDTO promo){
+                PromocionFija promoFija = new PromocionFija(promo.getNombre(),
+                                                            promo.getDiasPromo(),
+                                                            promo.getProducto(),
+                                                            promo.isDosPorUno(),
+                                                            promo.isDtoPorCant(),
+                                                            promo.getDtoPorCantMin(),
+                                                            promo.getDtoPorCantPrecioU());
+
+                promociones.add(promoFija);
+            }
+
+            this.empresa.setPromociones(promociones);
+            persistirPromociones();
+        } else{
+            //!throw new OperarioExistenteException();
+        }
+    }
+
+    public void bajaPromocion(PromocionDTO promocion) throws ProductoExistenteException {
+        Set<Promocion> promociones = this.getPromociones();
+
+        Iterator<Promocion> it = promociones.iterator();
+        boolean encontrePromo = false;
+        Promocion p = null;
+
+        while (it.hasNext() && !encontrePromo) {
+            p = it.next();
+            if ((p instanceof PromocionFija && promocion instanceof PromocionProductoDTO) || (p instanceof PromocionTemporal && promocion instanceof PromocionTemporalDTO)) {
+                if (p.getNombre().equals(promocion.getNombre()))
+                    encontrePromo = true;
+            }
+        }
+
+        if (encontrePromo) {
+            promociones.remove(p);
+            this.empresa.setPromociones(promociones);
+            persistirPromociones();
+        } else {
+            //!throw new OperarioExistenteException();
+        }
+    }
 
 
 }

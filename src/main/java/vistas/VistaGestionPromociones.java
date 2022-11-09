@@ -11,7 +11,7 @@ import modelo.promociones.Promocion;
 public class VistaGestionPromociones extends JFrame implements IVistaGestion, MouseListener{
 
 	private JFrame frmGestionDePromociones;
-	private JButton btnAltaPromo,btnBajaPromo,btnVolver;
+	private JButton btnAltaPromo,btnBajaPromo,btnModificarPromocion,btnVolver;
 	private JList<Promocion> listaPromos;
 	private ActionListener actionListener;
 
@@ -35,7 +35,7 @@ public class VistaGestionPromociones extends JFrame implements IVistaGestion, Mo
 	private void initialize() {
 		frmGestionDePromociones = new JFrame();
 		frmGestionDePromociones.setTitle("Gestion de promociones");
-		frmGestionDePromociones.setBounds(100, 100, 450, 300);
+		frmGestionDePromociones.setBounds(100, 100, 470, 300);
 		frmGestionDePromociones.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmGestionDePromociones.getContentPane().setLayout(null);
 		
@@ -56,18 +56,23 @@ public class VistaGestionPromociones extends JFrame implements IVistaGestion, Mo
 		btnAltaPromo = new JButton("Alta Promocion");
 		btnAltaPromo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAltaPromo.addActionListener(actionListener);
-		btnAltaPromo.setBounds(276, 74, 130, 32);
+		btnAltaPromo.setBounds(276, 46, 155, 32);
 		frmGestionDePromociones.getContentPane().add(btnAltaPromo);
 		
 		btnBajaPromo = new JButton("Baja Promocion");
 		btnBajaPromo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnBajaPromo.setBounds(276, 128, 130, 32);
+		btnBajaPromo.setBounds(276, 156, 155, 32);
 		frmGestionDePromociones.getContentPane().add(btnBajaPromo);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnVolver.setBounds(22, 207, 89, 32);
 		frmGestionDePromociones.getContentPane().add(btnVolver);
+		
+		btnModificarPromocion = new JButton("Modificar Promocion");
+		btnModificarPromocion.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnModificarPromocion.setBounds(276, 102, 155, 32);
+		frmGestionDePromociones.getContentPane().add(btnModificarPromocion);
 	}
 
 	@Override
@@ -75,6 +80,7 @@ public class VistaGestionPromociones extends JFrame implements IVistaGestion, Mo
 		this.actionListener = actionListener;
 		btnAltaPromo.addActionListener(actionListener);
 		btnBajaPromo.addActionListener(actionListener);
+		btnModificarPromocion.addActionListener(actionListener);
 		btnVolver.addActionListener(actionListener);
 	}
 
@@ -92,6 +98,7 @@ public class VistaGestionPromociones extends JFrame implements IVistaGestion, Mo
 	@Override
 	public void limpia() {
 		this.btnBajaPromo.setEnabled(false);
+		this.btnModificarPromocion.setEnabled(false);
 	}
 
 	@Override
@@ -112,8 +119,10 @@ public class VistaGestionPromociones extends JFrame implements IVistaGestion, Mo
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if(this.listaPromos.getSelectedValue()!=null)
+		if(this.listaPromos.getSelectedValue()!=null){
 			this.btnBajaPromo.setEnabled(true);
+			this.btnModificarPromocion.setEnabled(true);
+		}
 	}
 
 	@Override

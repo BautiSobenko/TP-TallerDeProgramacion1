@@ -4,18 +4,28 @@ import enums.Dias;
 
 import java.util.List;
 
-public class PromocionTemporalDTO {
-    private String nombre;
-    private List<Dias> dias;
-    private String formaDePago;
+public class PromocionTemporalDTO extends PromocionDTO{
+
+    private String formaPago;
     private float porcentajeDescuento;
     private boolean esAcumulable;
 
-    public PromocionTemporalDTO(String nombre, List<Dias> dias, String formaDePago, float porcentajeDescuento, boolean esAcumulable) {
-        this.nombre = nombre;
-        this.dias = dias;
-        this.formaDePago = formaDePago;
+    public PromocionTemporalDTO(String nombre, String id, boolean activo, List<Dias> diasPromo, String formaPago, float porcentajeDescuento, boolean esAcumulable) {
+        super(nombre, id, activo, diasPromo);
+        this.formaPago = formaPago;
         this.porcentajeDescuento = porcentajeDescuento;
         this.esAcumulable = esAcumulable;
+    }
+
+    public String getFormaPago() {
+        return formaPago;
+    }
+
+    public float getPorcentajeDescuento() {
+        return porcentajeDescuento;
+    }
+
+    public boolean isEsAcumulable() {
+        return esAcumulable;
     }
 }

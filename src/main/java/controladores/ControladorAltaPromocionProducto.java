@@ -35,7 +35,8 @@ public class ControladorAltaPromocionProducto implements ActionListener {
         String comando = e.getActionCommand();
 
         if(comando.equalsIgnoreCase("Finalizar")){
-            float desc;
+            float precioPromo;
+            int cantMinima;
             String nombre = vistaAltaPromocionProducto.getNombre();
             List<Dias> dias = new ArrayList<>();
             if(vistaAltaPromocionProducto.getChckbxLunes().isSelected())
@@ -54,8 +55,8 @@ public class ControladorAltaPromocionProducto implements ActionListener {
                 dias.add(Dias.DOMINGO);
             Producto prod = (Producto) vistaAltaPromocionProducto.getComboBox().getSelectedItem();
             if(vistaAltaPromocionProducto.getChckbxDesc().isSelected()){
-               desc = vistaAltaPromocionProducto.getPorcentajeDesc();
-
+               precioPromo = vistaAltaPromocionProducto.getPrecioPromo();
+               cantMinima = vistaAltaPromocionProducto.getCantMinima();
 
         }
         else{

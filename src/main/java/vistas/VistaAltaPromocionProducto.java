@@ -16,7 +16,7 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	private JTextField txtNombre;
 	private JTextField txtCantMinima;
 	private JCheckBox chckbxLunes,chckbxMartes,chckbxMiercoles,chckbxJueves,chckbxViernes,chckbxSabado,chckbxDomingo;
-	private JCheckBox chckbx2x1,chckbxDesc;
+	private JCheckBox chckbx2x1,chckbxDesc,chckbxActiva;
 	private JButton btnFinalizar,btnVolver;
 
 	JComboBox comboBox;
@@ -48,7 +48,7 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	public VistaAltaPromocionProducto() {
 		setTitle("Promocion por Producto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 698, 473);
+		setBounds(100, 100, 698, 482);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -137,12 +137,12 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnVolver.setBounds(10, 392, 107, 33);
+		btnVolver.setBounds(10, 401, 107, 33);
 		contentPane.add(btnVolver);
 		
 		btnFinalizar = new JButton("Finalizar");
 		btnFinalizar.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnFinalizar.setBounds(567, 392, 107, 33);
+		btnFinalizar.setBounds(567, 401, 107, 33);
 		contentPane.add(btnFinalizar);
 		
 		JLabel lblNewLabel_3 = new JLabel("Cantidad Minima:");
@@ -159,6 +159,11 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_4.setBounds(482, 303, 174, 14);
 		contentPane.add(lblNewLabel_4);
+		
+		chckbxActiva = new JCheckBox("Activar instantaneamente");
+		chckbxActiva.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		chckbxActiva.setBounds(25, 362, 205, 23);
+		contentPane.add(chckbxActiva);
 	}
 
 	public void setActionListener(ActionListener actionListener){
@@ -424,5 +429,13 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 
 	public void setPrecioPromo(float precioPromo) {
 		this.precioPromo = precioPromo;
+	}
+
+	public JCheckBox getChckbxActiva() {
+		return chckbxActiva;
+	}
+
+	public void setChckbxActiva(JCheckBox chckbxActiva) {
+		this.chckbxActiva = chckbxActiva;
 	}
 }

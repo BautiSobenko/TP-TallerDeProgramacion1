@@ -11,7 +11,7 @@ import modelo.promociones.Promocion;
 public class VistaGestionPromociones extends JFrame implements IVistaGestion, MouseListener{
 
 	private JFrame frmGestionDePromociones;
-	private JButton btnAltaPromo,btnBajaPromo,btnModificarPromocion,btnVolver;
+	private JButton btnAltaPromoTemporal,btnBajaPromo,btnModificarPromocion,btnVolver;
 	private JList<Promocion> listaPromos;
 	private ActionListener actionListener;
 
@@ -35,14 +35,14 @@ public class VistaGestionPromociones extends JFrame implements IVistaGestion, Mo
 	private void initialize() {
 		frmGestionDePromociones = new JFrame();
 		frmGestionDePromociones.setTitle("Gestion de promociones");
-		frmGestionDePromociones.setBounds(100, 100, 470, 300);
+		frmGestionDePromociones.setBounds(100, 100, 502, 326);
 		frmGestionDePromociones.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmGestionDePromociones.getContentPane().setLayout(null);
 		
 		JLabel lblListaPromos = new JLabel("Listado de promociones");
 		lblListaPromos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblListaPromos.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblListaPromos.setBounds(65, 21, 145, 14);
+		lblListaPromos.setBounds(65, 11, 152, 24);
 		frmGestionDePromociones.getContentPane().add(lblListaPromos);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -53,32 +53,37 @@ public class VistaGestionPromociones extends JFrame implements IVistaGestion, Mo
 		scrollPane.setViewportView(listaPromos);
 		listaPromos.addMouseListener(this);
 		
-		btnAltaPromo = new JButton("Alta Promocion");
-		btnAltaPromo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAltaPromo.addActionListener(actionListener);
-		btnAltaPromo.setBounds(276, 46, 155, 32);
-		frmGestionDePromociones.getContentPane().add(btnAltaPromo);
+		btnAltaPromoTemporal = new JButton("Alta Promocion Temporal");
+		btnAltaPromoTemporal.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAltaPromoTemporal.addActionListener(actionListener);
+		btnAltaPromoTemporal.setBounds(287, 183, 191, 42);
+		frmGestionDePromociones.getContentPane().add(btnAltaPromoTemporal);
 		
 		btnBajaPromo = new JButton("Baja Promocion");
 		btnBajaPromo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnBajaPromo.setBounds(276, 156, 155, 32);
+		btnBajaPromo.setBounds(306, 117, 172, 42);
 		frmGestionDePromociones.getContentPane().add(btnBajaPromo);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnVolver.setBounds(22, 207, 89, 32);
+		btnVolver.setBounds(26, 236, 100, 42);
 		frmGestionDePromociones.getContentPane().add(btnVolver);
 		
 		btnModificarPromocion = new JButton("Modificar Promocion");
 		btnModificarPromocion.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnModificarPromocion.setBounds(276, 102, 155, 32);
+		btnModificarPromocion.setBounds(306, 65, 172, 42);
 		frmGestionDePromociones.getContentPane().add(btnModificarPromocion);
+		
+		JButton btnAltaPromoProducto = new JButton("Alta promocion por producto");
+		btnAltaPromoProducto.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnAltaPromoProducto.setBounds(237, 236, 241, 42);
+		frmGestionDePromociones.getContentPane().add(btnAltaPromoProducto);
 	}
 
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.actionListener = actionListener;
-		btnAltaPromo.addActionListener(actionListener);
+		btnAltaPromoTemporal.addActionListener(actionListener);
 		btnBajaPromo.addActionListener(actionListener);
 		btnModificarPromocion.addActionListener(actionListener);
 		btnVolver.addActionListener(actionListener);

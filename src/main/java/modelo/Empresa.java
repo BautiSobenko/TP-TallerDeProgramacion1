@@ -1,6 +1,7 @@
 package modelo;
 
 import excepciones.*;
+import modelo.promociones.Promocion;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaXML;
 
@@ -18,6 +19,8 @@ public class Empresa {
     private Set<Mesa> mesas;
     private Set<Producto> productos;
     private Set<Operario> operarios;
+
+    private Set<Promocion> promociones;
     private double sueldoBasico;
 
     private Operario usuarioLogueado;
@@ -112,6 +115,21 @@ public class Empresa {
             persistencia.cerrarInput();
         } catch (Exception err) {
             this.mozos = new HashSet<>();
+        }
+    }
+
+    private void cargarPromociones() {
+        IPersistencia<Set<Promocion>> persistencia = new PersistenciaXML();
+
+        try { // Archivo XML "Mozos" -> Empresa
+            persistencia.abrirInput("promociones.xml");
+            this.promociones = persistencia.leer();
+            if (promociones == null) {
+                promociones = new HashSet<>();
+            }
+            persistencia.cerrarInput();
+        } catch (Exception err) {
+            this.promociones = new HashSet<>();
         }
     }
 
@@ -223,6 +241,14 @@ public class Empresa {
 
     public void setOperarios(Set<Operario> operarios) {
         this.operarios = operarios;
+    }
+
+    public Set<Promocion> getPromociones() {
+        return promociones;
+    }
+
+    public void setPromociones(Set<Promocion> promociones) {
+        this.promociones = promociones;
     }
 
     public double getSueldoBasico() {

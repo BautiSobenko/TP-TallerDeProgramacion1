@@ -7,15 +7,18 @@ import java.util.List;
 
 public class Promocion {
 
-    String nombre;
-    int idPromocion;
-    boolean activo;
-    List<Dias> diasPromo;
+    private String nombre;
+
+    private static int idSiguiente=0;
+    private int idPromocion;
+    private boolean activo;
+    private List<Dias> diasPromo;
 
     public Promocion(String nombre, List<Dias> diasPromo) {
         this.nombre = nombre;
         this.diasPromo = diasPromo;
         this.activo = true;
+        this.idPromocion = ++idSiguiente;
     }
 
     public String getNombre() {

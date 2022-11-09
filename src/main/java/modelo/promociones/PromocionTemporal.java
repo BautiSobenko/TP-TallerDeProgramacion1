@@ -7,10 +7,10 @@ import java.util.List;
 public class PromocionTemporal extends Promocion{
 
     private String formaPago;
-    private int porcentajeDescuento;
+    private float porcentajeDescuento;
     private boolean esAcumulable;
 
-    public PromocionTemporal(String nombre, List<Dias> diasPromo, String formaPago, int porcentajeDescuento, boolean esAcumulable) {
+    public PromocionTemporal(String nombre, List<Dias> diasPromo, String formaPago, float porcentajeDescuento, boolean esAcumulable) {
         super(nombre, diasPromo);
         this.formaPago = formaPago;
         this.porcentajeDescuento = porcentajeDescuento;

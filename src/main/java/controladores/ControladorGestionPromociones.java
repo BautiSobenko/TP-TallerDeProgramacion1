@@ -4,6 +4,7 @@ import excepciones.ProductoNoExistenteException;
 import modelo.Producto;
 import modelo.promociones.Promocion;
 import negocio.GestionDeProductos;
+import negocio.GestionDePromociones;
 import vistas.IVistaGestion;
 import vistas.VistaGestionProductos;
 import vistas.VistaGestionPromociones;
@@ -16,7 +17,7 @@ import java.util.Set;
 public class ControladorGestionPromociones implements ActionListener {
 
     private static VistaGestionPromociones vistaGestionPromociones;
-    private static GestionPromociones gestionPromociones;
+    private static GestionDePromociones gestionPromociones;
 
     private static ControladorGestionPromociones controladorGestionPromociones = null;
 
@@ -49,12 +50,12 @@ public class ControladorGestionPromociones implements ActionListener {
         String comando =  e.getActionCommand();
         if(comando.equals("Alta Promocion")) {
             vistaGestionPromociones.esconder();
-
+           // ControladorAltaPromocion con = ControladorAltaPromocion.get(true);
         }
         else  if( comando.equals("Baja Promocion") ){
-            Producto producto = (Producto) vistaGestionProductos.getSeleccion();
+            Promocion promo = (Promocion) vistaGestionPromociones.getSeleccion();
             try {
-                gestionProductos.bajaProducto(producto.getId());
+                gestionPromociones.bajaProducto(producto.getId());
                 Set<Producto> productos = gestionProductos.getProductos();
                 DefaultListModel<Producto> updatedList = new DefaultListModel<>();
                 productos.forEach(updatedList::addElement);

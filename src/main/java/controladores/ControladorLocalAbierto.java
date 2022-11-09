@@ -1,14 +1,19 @@
 package controladores;
 
 import enums.EstadoMesa;
+import excepciones.MesaNoExistenteException;
 import modelo.Empresa;
+import modelo.Mesa;
 import negocio.GestionDeMesas;
 import negocio.GestionDeMozos;
 import vistas.VistaAltaMesa;
 import vistas.VistaLocalAbierto;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.Set;
 
 public class ControladorLocalAbierto implements ActionListener {
 
@@ -39,7 +44,17 @@ public class ControladorLocalAbierto implements ActionListener {
         String comando = e.getActionCommand();
 
         if(comando.equalsIgnoreCase("Consumo promedio por mesa")){
-            //Muestro promedio\
+            Set<Mesa> mesas = gestionDeMesas.getMesas();
+            Iterator<Mesa> it = mesas.iterator();
+            String txt ="";
+            while (it.hasNext()){
+                try {
+                    txt+= "La mesa Nro"+ it.next().getNroMesa() + " tiene un  consumo promedio de " + gestionDeMesas.calculaConsumoPromedio(it.next().getNroMesa())+"\n";
+                } catch (MesaNoExistenteException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+            JOptionPane.showMessageDialog(null, txt, "Consumo promedio por mesa", JOptionPane.INFORMATION_MESSAGE);
         }
         else if(comando.equalsIgnoreCase("Mozo con menos ventas")){
             this.vistaLocalAbierto.success("El moso con menos ventas es "+this.gestionDeMozos.mozoMinVentas());

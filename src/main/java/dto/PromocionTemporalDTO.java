@@ -10,8 +10,8 @@ public class PromocionTemporalDTO extends PromocionDTO{
     private float porcentajeDescuento;
     private boolean acumulable;
 
-    public PromocionTemporalDTO(String nombre, String id, boolean activo, List<Dias> diasPromo, String formaPago, float porcentajeDescuento, boolean esAcumulable) {
-        super(nombre, id, activo, diasPromo);
+    public PromocionTemporalDTO(String nombre,boolean activo, List<Dias> diasPromo, String formaPago, float porcentajeDescuento, boolean esAcumulable) {
+        super(nombre,activo, diasPromo);
         this.formaPago = formaPago;
         this.porcentajeDescuento = porcentajeDescuento;
         this.acumulable = esAcumulable;

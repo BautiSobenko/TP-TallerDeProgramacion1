@@ -13,8 +13,8 @@ public class PromocionProductoDTO extends PromocionDTO{
     int dtoPorCantMin;
     double dtoPorCantPrecioU;
 
-    public PromocionProductoDTO(String nombre, String id, boolean activo, List<Dias> diasPromo, Producto producto, boolean dosPorUno, boolean dtoPorCant, int dtoPorCantMin, double dtoPorCantPrecioU) {
-        super(nombre, id, activo, diasPromo);
+    public PromocionProductoDTO(String nombre,boolean activo, List<Dias> diasPromo, Producto producto, boolean dosPorUno, boolean dtoPorCant, int dtoPorCantMin, double dtoPorCantPrecioU) {
+        super(nombre,activo, diasPromo);
         this.producto = producto;
         this.dosPorUno = dosPorUno;
         this.dtoPorCant = dtoPorCant;

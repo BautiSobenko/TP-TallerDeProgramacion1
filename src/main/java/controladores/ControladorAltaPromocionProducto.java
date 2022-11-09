@@ -1,5 +1,6 @@
 package controladores;
 
+import dto.PromocionProductoDTO;
 import enums.Dias;
 import modelo.Producto;
 import negocio.GestionDePromociones;
@@ -35,8 +36,10 @@ public class ControladorAltaPromocionProducto implements ActionListener {
         String comando = e.getActionCommand();
 
         if(comando.equalsIgnoreCase("Finalizar")){
-            float desc;
+            float precioPromo;
+            int cantMinima;
             String nombre = vistaAltaPromocionProducto.getNombre();
+            boolean activa = vistaAltaPromocionProducto.getChckbxActiva().isSelected();
             List<Dias> dias = new ArrayList<>();
             if(vistaAltaPromocionProducto.getChckbxLunes().isSelected())
                 dias.add(Dias.LUNES);
@@ -53,10 +56,15 @@ public class ControladorAltaPromocionProducto implements ActionListener {
             if(vistaAltaPromocionProducto.getChckbxDomingo().isSelected())
                 dias.add(Dias.DOMINGO);
             Producto prod = (Producto) vistaAltaPromocionProducto.getComboBox().getSelectedItem();
-            if(vistaAltaPromocionProducto.getChckbxDesc().isSelected()){
-               desc = vistaAltaPromocionProducto.getPorcentajeDesc();
-
-
+            if(vistaAltaPromocionProducto.getChckbxDesc().isSelected()) {
+                precioPromo = vistaAltaPromocionProducto.getPrecioPromo();
+                cantMinima = vistaAltaPromocionProducto.getCantMinima();
+                PromocionProductoDTO prom = new PromocionProductoDTO(nombre, activa, dias, prod, false, true, cantMinima, precioPromo);
+            }
+            else{
+                PromocionProductoDTO prom = new PromocionProductoDTO(nombre, activa, dias, prod, true, false,0, 0);
+            }
+            //Llama a gestion de promociones para agregarla
         }
         else{
             vistaAltaPromocionProducto.esconder();

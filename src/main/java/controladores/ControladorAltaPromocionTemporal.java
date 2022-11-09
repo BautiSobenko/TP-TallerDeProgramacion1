@@ -54,8 +54,9 @@ public class ControladorAltaPromocionTemporal implements ActionListener {
             String formaDePago = vistaAltaPromocionTemporal.getSelection();
             float porcentajeDesc = vistaAltaPromocionTemporal.getPorcentajeDesc();
             boolean isAcumulable = vistaAltaPromocionTemporal.getChckbxPromoAcumulable().isSelected();
+            boolean activa = vistaAltaPromocionTemporal.getChckbxPromoActiva().isSelected();
             String nombre = vistaAltaPromocionTemporal.getNombre();
-            PromocionTemporalDTO promo = new PromocionTemporalDTO(nombre,dias,formaDePago,porcentajeDesc,isAcumulable);
+            PromocionTemporalDTO promo = new PromocionTemporalDTO(nombre,activa,dias,formaDePago,porcentajeDesc,isAcumulable);
             //mandarlo a gestion de promociones
             vistaAltaPromocionTemporal.success("Se dio de alta la promocion con exito");
         }

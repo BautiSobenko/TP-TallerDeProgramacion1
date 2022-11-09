@@ -1,8 +1,10 @@
 package controladores;
 
 import excepciones.ProductoNoExistenteException;
+import excepciones.PromocionNoExistenteException;
 import modelo.Producto;
 import modelo.promociones.Promocion;
+import modelo.promociones.PromocionTemporal;
 import negocio.GestionDeProductos;
 import negocio.GestionDePromociones;
 import vistas.IVistaGestion;
@@ -48,33 +50,44 @@ public class ControladorGestionPromociones implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         String comando =  e.getActionCommand();
-        if(comando.equals("Alta Promocion")) {
+        if(comando.equals("Alta Promocion Temporal")) {
             vistaGestionPromociones.esconder();
-           // ControladorAltaPromocion con = ControladorAltaPromocion.get(true);
+            ControladorAltaPromocionTemporal con = ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal();
+        }
+        else if(comando.equalsIgnoreCase("Alta promocion por producto")){
+            vistaGestionPromociones.esconder();
+            ControladorAltaPromocionProducto con = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto();
         }
         else  if( comando.equals("Baja Promocion") ){
             Promocion promo = (Promocion) vistaGestionPromociones.getSeleccion();
             try {
-                gestionPromociones.bajaProducto(producto.getId());
-                Set<Producto> productos = gestionProductos.getProductos();
-                DefaultListModel<Producto> updatedList = new DefaultListModel<>();
-                productos.forEach(updatedList::addElement);
-                vistaGestionProductos.setModel(updatedList);
-                vistaGestionProductos.success("Producto " + producto.getNombre() + "dada de baja");
+                gestionPromociones.bajaPromocion(promo.getId());
+                Set<Promocion> promociones = gestionPromociones.getPromociones();
+                DefaultListModel<Promocion> updatedList = new DefaultListModel<Promocion>();
+                promociones.forEach(updatedList::addElement);
+                vistaGestionPromociones.setModel(updatedList);
+                vistaGestionPromociones.success("Producto " + promo.getNombre() + "dada de baja");
             } catch (ProductoNoExistenteException ignored) {
             }
         }
         else if( comando.equals("Modificar Promocion") ){
-            Producto producto = (Producto) vistaGestionProductos.getSeleccion();
+            Promocion promo = (Promocion) vistaGestionPromociones.getSeleccion();
+            ControladorAltaPromocionTemporal controladorTemporal;
+            ControladorAltaPromocionProducto controladorProducto;
             try {
-                gestionProductos.bajaProducto(producto.getId());
-                ControladorAltaProducto controladorAltaProducto = ControladorAltaProducto.getControladorAltaProducto();
-                vistaGestionProductos.success("Producto " + producto.getNombre() + "modificado");
-            } catch (ProductoNoExistenteException ignored) {
+                gestionPromociones.bajaPromocion(promo.getId());
+                if (promo instanceof PromocionTemporal)
+                    controladorTemporal = ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal();
+                else
+                    controladorProducto = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto();
+
+                vistaGestionPromociones.success("Promocion " + promo.getNombre() + "modificada");
+            }
+            catch (PromocionNoExistenteException ex) {
             }
         }
         else if( comando.equals("Volver") ){
-            vistaGestionProductos.esconder();
+            vistaGestionPromociones.esconder();
             ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);
         }
     }

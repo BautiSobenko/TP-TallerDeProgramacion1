@@ -14,16 +14,18 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 
 	private JPanel contentPane;
 	private JTextField txtNombre;
-	private JTextField txtDesc;
+	private JTextField txtCantMinima;
 	private JCheckBox chckbxLunes,chckbxMartes,chckbxMiercoles,chckbxJueves,chckbxViernes,chckbxSabado,chckbxDomingo;
-	private JCheckBox chckbx2x1,chckbxDesc;
+	private JCheckBox chckbx2x1,chckbxDesc,chckbxActiva;
 	private JButton btnFinalizar,btnVolver;
 
 	JComboBox comboBox;
 
 	private ButtonGroup tipoDesc;
 	private String nombre;
-	float porcentajeDesc=0;
+	private int cantMinima=0;
+	private float precioPromo=0;
+	private JTextField textPrecio;
 	/**
 	 * Launch the application.
 	 */
@@ -46,7 +48,7 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	public VistaAltaPromocionProducto() {
 		setTitle("Promocion por Producto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 621, 418);
+		setBounds(100, 100, 698, 482);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -79,54 +81,54 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 		
 		chckbxLunes = new JCheckBox("Lunes");
 		chckbxLunes.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		chckbxLunes.setBounds(160, 168, 99, 23);
+		chckbxLunes.setBounds(220, 168, 99, 23);
 		contentPane.add(chckbxLunes);
 		
 		chckbxMartes = new JCheckBox("Martes");
 		chckbxMartes.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		chckbxMartes.setBounds(160, 213, 99, 23);
+		chckbxMartes.setBounds(220, 213, 99, 23);
 		contentPane.add(chckbxMartes);
 		
 		chckbxMiercoles = new JCheckBox("Miercoles");
 		chckbxMiercoles.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		chckbxMiercoles.setBounds(278, 168, 99, 23);
+		chckbxMiercoles.setBounds(327, 168, 99, 23);
 		contentPane.add(chckbxMiercoles);
 		
 		chckbxJueves = new JCheckBox("Jueves");
 		chckbxJueves.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		chckbxJueves.setBounds(278, 213, 99, 23);
+		chckbxJueves.setBounds(327, 213, 99, 23);
 		contentPane.add(chckbxJueves);
 		
 		chckbxViernes = new JCheckBox("Viernes");
 		chckbxViernes.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		chckbxViernes.setBounds(391, 168, 99, 23);
+		chckbxViernes.setBounds(441, 168, 99, 23);
 		contentPane.add(chckbxViernes);
 		
 		chckbxSabado = new JCheckBox("Sabado");
 		chckbxSabado.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		chckbxSabado.setBounds(391, 213, 99, 23);
+		chckbxSabado.setBounds(441, 213, 99, 23);
 		contentPane.add(chckbxSabado);
 		
 		chckbxDomingo = new JCheckBox("Domingo");
 		chckbxDomingo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		chckbxDomingo.setBounds(502, 183, 99, 23);
+		chckbxDomingo.setBounds(557, 185, 99, 23);
 		contentPane.add(chckbxDomingo);
 		
 		chckbx2x1 = new JCheckBox("Aplica 2x1");
 		chckbx2x1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		chckbx2x1.setBounds(49, 282, 99, 23);
+		chckbx2x1.setBounds(25, 297, 99, 23);
 		contentPane.add(chckbx2x1);
 		
-		chckbxDesc = new JCheckBox("Aplica Descuento:");
+		chckbxDesc = new JCheckBox("Aplica descuento por Cantidad");
 		chckbxDesc.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		chckbxDesc.setBounds(198, 284, 157, 23);
+		chckbxDesc.setBounds(25, 328, 239, 23);
 		contentPane.add(chckbxDesc);
 		
-		txtDesc = new JTextField();
-		txtDesc.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtDesc.setColumns(10);
-		txtDesc.setBounds(361, 279, 198, 26);
-		contentPane.add(txtDesc);
+		txtCantMinima = new JTextField();
+		txtCantMinima.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtCantMinima.setColumns(10);
+		txtCantMinima.setBounds(293, 327, 126, 26);
+		contentPane.add(txtCantMinima);
 
 		tipoDesc.add(chckbxDesc);
 		tipoDesc.add(chckbx2x1);
@@ -135,13 +137,33 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnVolver.setBounds(10, 337, 107, 33);
+		btnVolver.setBounds(10, 401, 107, 33);
 		contentPane.add(btnVolver);
 		
 		btnFinalizar = new JButton("Finalizar");
 		btnFinalizar.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnFinalizar.setBounds(490, 337, 107, 33);
+		btnFinalizar.setBounds(567, 401, 107, 33);
 		contentPane.add(btnFinalizar);
+		
+		JLabel lblNewLabel_3 = new JLabel("Cantidad Minima:");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_3.setBounds(292, 303, 120, 14);
+		contentPane.add(lblNewLabel_3);
+		
+		textPrecio = new JTextField();
+		textPrecio.setBounds(482, 327, 126, 26);
+		contentPane.add(textPrecio);
+		textPrecio.setColumns(10);
+		
+		JLabel lblNewLabel_4 = new JLabel("Precio U. con descuento:");
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_4.setBounds(482, 303, 174, 14);
+		contentPane.add(lblNewLabel_4);
+		
+		chckbxActiva = new JCheckBox("Activar instantaneamente");
+		chckbxActiva.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		chckbxActiva.setBounds(25, 362, 205, 23);
+		contentPane.add(chckbxActiva);
 	}
 
 	public void setActionListener(ActionListener actionListener){
@@ -179,7 +201,8 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 							&& this.nombre.length() > 0);
 		} else if (chckbxDesc.isSelected()) {
 			try {
-				this.porcentajeDesc = Float.parseFloat(this.txtDesc.getText());
+				this.precioPromo = Float.parseFloat(this.txtCantMinima.getText());
+				this.cantMinima = Integer.parseInt(this.txtCantMinima.getText());
 				this.btnFinalizar.setEnabled(
 						this.comboBox.getSelectedItem() != null
 								&&
@@ -191,11 +214,12 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 										this.chckbxSabado.isSelected() ||
 										this.chckbxDomingo.isSelected())
 								&& this.nombre.length() > 0
-								&& this.porcentajeDesc > 0);
+								&& this.cantMinima > 0
+								&& this.precioPromo>0);
 
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(this, "Ingreso de manera erronea el descuento", "Error", JOptionPane.ERROR_MESSAGE);
-				this.txtDesc.setText("");
+				JOptionPane.showMessageDialog(this, "Ingreso de manera erronea algun valor numerico", "Error", JOptionPane.ERROR_MESSAGE);
+				this.txtCantMinima.setText("");
 			}
 		}
 	}
@@ -230,7 +254,8 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 								&& this.nombre.length() > 0);
 			} else if (chckbxDesc.isSelected()) {
 				try {
-					this.porcentajeDesc = Float.parseFloat(this.txtDesc.getText());
+					this.precioPromo = Float.parseFloat(this.txtCantMinima.getText());
+					this.cantMinima = Integer.parseInt(this.txtCantMinima.getText());
 					this.btnFinalizar.setEnabled(
 							this.comboBox.getSelectedItem() != null
 									&&
@@ -242,11 +267,12 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 											this.chckbxSabado.isSelected() ||
 											this.chckbxDomingo.isSelected())
 									&& this.nombre.length() > 0
-									&& this.porcentajeDesc > 0);
+									&& this.cantMinima > 0
+									&& this.precioPromo>0);
 
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(this, "Ingreso de manera erronea el descuento", "Error", JOptionPane.ERROR_MESSAGE);
-					this.txtDesc.setText("");
+					this.txtCantMinima.setText("");
 				}
 			}
 		}
@@ -273,7 +299,7 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	
 	public void limpiaCampos() {
 		this.txtNombre.setText("");
-		this.txtDesc.setText("");
+		this.txtCantMinima.setText("");
 		chckbx2x1.setSelected(false);
 		chckbxDesc.setSelected(false);
 		chckbxLunes.setSelected(false);
@@ -389,11 +415,27 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 		this.nombre = nombre;
 	}
 
-	public float getPorcentajeDesc() {
-		return porcentajeDesc;
+	public int getCantMinima() {
+		return cantMinima;
 	}
 
-	public void setPorcentajeDesc(float porcentajeDesc) {
-		this.porcentajeDesc = porcentajeDesc;
+	public void setCantMinima(int cantMinima) {
+		this.cantMinima = cantMinima;
+	}
+
+	public float getPrecioPromo() {
+		return precioPromo;
+	}
+
+	public void setPrecioPromo(float precioPromo) {
+		this.precioPromo = precioPromo;
+	}
+
+	public JCheckBox getChckbxActiva() {
+		return chckbxActiva;
+	}
+
+	public void setChckbxActiva(JCheckBox chckbxActiva) {
+		this.chckbxActiva = chckbxActiva;
 	}
 }

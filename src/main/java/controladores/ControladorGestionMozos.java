@@ -67,10 +67,6 @@ public class ControladorGestionMozos implements ActionListener {
             try {
                 gestionDeMozos.bajaMozo(mozo);
                 ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo();
-                Set<Mozo> mozos = gestionDeMozos.getMozos();
-                DefaultListModel<Mozo> updatedList = new DefaultListModel<>();
-                mozos.forEach(updatedList::addElement);
-                vistaGestionMozos.setModel(updatedList);
                 vistaGestionMozos.success("Mozo " + mozo.getNombreCompleto() + " ha sido modificado");
             } catch (MozoNoExistenteException | PermisoDenegadoException ignored) {}
         }

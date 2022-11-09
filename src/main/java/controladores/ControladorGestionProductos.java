@@ -52,16 +52,20 @@ public class ControladorGestionProductos implements ActionListener {
         if(comando.equals("Alta Producto")) {
             vistaGestionProductos.esconder();
             ControladorAltaProducto controladorAltaProducto = ControladorAltaProducto.getControladorAltaProducto();
-        }else
-        if( comando.equals("Baja Producto") ){
+        }
+        else  if( comando.equals("Baja Producto") ){
             Producto producto = (Producto) vistaGestionProductos.getSeleccion();
             try {
                 gestionProductos.bajaProducto(producto.getId());
+                Set<Producto> productos = gestionProductos.getProductos();
+                DefaultListModel<Producto> updatedList = new DefaultListModel<>();
+                productos.forEach(updatedList::addElement);
+                vistaGestionProductos.setModel(updatedList);
                 vistaGestionProductos.success("Producto " + producto.getNombre() + "dada de baja");
             } catch (ProductoNoExistenteException ignored) {
             }
         }
-        else{
+        else if( comando.equals("Modificar Producto") ){
             Producto producto = (Producto) vistaGestionProductos.getSeleccion();
             try {
                 gestionProductos.bajaProducto(producto.getId());
@@ -69,6 +73,10 @@ public class ControladorGestionProductos implements ActionListener {
                 vistaGestionProductos.success("Producto " + producto.getNombre() + "modificado");
             } catch (ProductoNoExistenteException ignored) {
             }
+        }
+        else if( comando.equals("Volver") ){
+            vistaGestionProductos.esconder();
+            ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);
         }
     }
 

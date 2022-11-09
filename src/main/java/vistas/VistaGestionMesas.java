@@ -17,7 +17,6 @@ public class VistaGestionMesas extends JFrame implements IVistaGestion, MouseLis
 	private JButton btnModificarMesa;
 	private JButton btnBajaMesa;
 	private JButton btnAsignarMozo;
-	private JButton btnAceptar;
 	private JButton btnVolver;
 	
 	private DefaultListModel<Mesa> mesas;
@@ -93,7 +92,6 @@ public class VistaGestionMesas extends JFrame implements IVistaGestion, MouseLis
 
 	@Override
 	public void setActionListener(ActionListener actionListener) {
-		this.btnAceptar.addActionListener(actionListener);
 		this.btnAltaMesa.addActionListener(actionListener);
 		this.btnAsignarMozo.addActionListener(actionListener);
 		this.btnBajaMesa.addActionListener(actionListener);

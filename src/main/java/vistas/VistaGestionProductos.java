@@ -12,7 +12,7 @@ import modelo.Producto;
 
 public class VistaGestionProductos extends JFrame implements IVistaGestion, MouseListener{
 
-	private JFrame frmGestionDeProductos;
+	private JFrame frmGestionDeMozos;
 	private JButton btnAltaProducto,btnBajaProducto,btnModificarProducto,btnVolver;
 	private JList<Producto> listaProductos;
 	private ActionListener actionListener;
@@ -22,7 +22,7 @@ public class VistaGestionProductos extends JFrame implements IVistaGestion, Mous
 			public void run() {
 				try {
 					VistaGestionProductos window = new VistaGestionProductos();
-					window.frmGestionDeProductos.setVisible(true);
+					window.frmGestionDeMozos.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -35,21 +35,21 @@ public class VistaGestionProductos extends JFrame implements IVistaGestion, Mous
 	}
 
 	private void initialize() {
-		frmGestionDeProductos = new JFrame();
-		frmGestionDeProductos.setTitle("Gestion de Mozos");
-		frmGestionDeProductos.setBounds(100, 100, 450, 300);
-		frmGestionDeProductos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmGestionDeProductos.getContentPane().setLayout(null);
+		frmGestionDeMozos = new JFrame();
+		frmGestionDeMozos.setTitle("Gestion de Productos");
+		frmGestionDeMozos.setBounds(100, 100, 450, 300);
+		frmGestionDeMozos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmGestionDeMozos.getContentPane().setLayout(null);
 		
 		JLabel lblListadoProductos = new JLabel("Listado de productos");
 		lblListadoProductos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblListadoProductos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblListadoProductos.setBounds(70, 11, 130, 25);
-		frmGestionDeProductos.getContentPane().add(lblListadoProductos);
+		frmGestionDeMozos.getContentPane().add(lblListadoProductos);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(26, 46, 221, 142);
-		frmGestionDeProductos.getContentPane().add(scrollPane);
+		frmGestionDeMozos.getContentPane().add(scrollPane);
 		
 		listaProductos = new JList();
 		scrollPane.setViewportView(listaProductos);
@@ -58,24 +58,24 @@ public class VistaGestionProductos extends JFrame implements IVistaGestion, Mous
 		btnAltaProducto = new JButton("Alta Producto");
 		btnAltaProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAltaProducto.setBounds(270, 46, 147, 32);
-		frmGestionDeProductos.getContentPane().add(btnAltaProducto);
+		frmGestionDeMozos.getContentPane().add(btnAltaProducto);
 		
 		btnBajaProducto = new JButton("Baja Producto");
 		btnBajaProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnBajaProducto.setBounds(270, 101, 147, 32);
 		btnBajaProducto.setEnabled(false);
-		frmGestionDeProductos.getContentPane().add(btnBajaProducto);
+		frmGestionDeMozos.getContentPane().add(btnBajaProducto);
 		
 		btnModificarProducto = new JButton("Modificar Producto");
 		btnModificarProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnModificarProducto.setBounds(270, 156, 147, 32);
 		btnModificarProducto.setEnabled(false);
-		frmGestionDeProductos.getContentPane().add(btnModificarProducto);
+		frmGestionDeMozos.getContentPane().add(btnModificarProducto);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnVolver.setBounds(26, 211, 89, 32);
-		frmGestionDeProductos.getContentPane().add(btnVolver);
+		frmGestionDeMozos.getContentPane().add(btnVolver);
 	}
 
 	@Override
@@ -89,12 +89,12 @@ public class VistaGestionProductos extends JFrame implements IVistaGestion, Mous
 
 	@Override
 	public void mostrar() {
-		this.frmGestionDeProductos.setVisible(true);
+		this.frmGestionDeMozos.setVisible(true);
 	}
 
 	@Override
 	public void esconder() {
-		this.frmGestionDeProductos.setVisible(false);
+		this.frmGestionDeMozos.setVisible(false);
 		this.limpia();
 	}
 

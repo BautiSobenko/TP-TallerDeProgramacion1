@@ -7,7 +7,7 @@
      <int>3</int>
     </void>
     <void property="estadoMozo">
-     <object class="java.lang.Enum" method="valueOf">
+     <object class="java.lang.Enum" id="EstadoMozo0" method="valueOf">
       <class>enums.EstadoMozo</class>
       <string>ACTIVO</string>
      </object>
@@ -20,6 +20,25 @@
     </void>
     <void property="nombreCompleto">
      <string>Bautista</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mozo">
+    <void property="cantidadHijos">
+     <int>2</int>
+    </void>
+    <void property="estadoMozo">
+     <object idref="EstadoMozo0"/>
+    </void>
+    <void property="fechaNacimiento">
+     <string>23</string>
+    </void>
+    <void property="id">
+     <string>49043abd-0fac-44e7-9bb3-4b389f88fd6b</string>
+    </void>
+    <void property="nombreCompleto">
+     <string>Hola</string>
     </void>
    </object>
   </void>

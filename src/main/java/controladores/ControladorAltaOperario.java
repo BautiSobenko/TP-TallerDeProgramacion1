@@ -57,8 +57,7 @@ public class ControladorAltaOperario implements ActionListener {
         }
         else{
             this.vistaAltaOperario.esconder();
-            ControladorGestionOperario con = ControladorGestionOperario.getControladorGestionOperario(true);
-
         }
+        ControladorGestionOperario con = ControladorGestionOperario.getControladorGestionOperario(true);
     }
 }

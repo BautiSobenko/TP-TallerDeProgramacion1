@@ -6,9 +6,9 @@ import java.util.List;
 
 public class PromocionDTO {
 
-    private String nombre;
-    private boolean activo;
-    private List<Dias> diasPromo;
+    protected String nombre;
+    protected boolean activo;
+    protected List<Dias> diasPromo;
 
     public PromocionDTO(String nombre,boolean activo, List<Dias> diasPromo) {
         this.nombre = nombre;

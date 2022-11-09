@@ -53,7 +53,7 @@ public class GestionDeProductos {
             throw new ProductoExistenteException();
     }
 
-    public void modificaProducto(ProductoDTO producto) throws ProductoNoExistenteException {
+    public void modificaProducto(ProductoDTO producto) {
         Set<Producto> productos = this.empresa.getProductos();
         Iterator<Producto> it = productos.iterator();
         Producto productoMod= new Producto(producto.getNombre(), producto.getPrecio(), producto.getCosto(), producto.getStock());
@@ -73,11 +73,10 @@ public class GestionDeProductos {
             this.empresa.setProductos(productos);
             persistirProductos();
         }
-        else
-            throw new ProductoNoExistenteException();
+
     }
 
-    public void bajaProducto(String id) throws ProductoNoExistenteException {
+    public void bajaProducto(String id) {
         Set<Producto> productos = this.empresa.getProductos();
         Iterator<Producto> it = productos.iterator();
         boolean encontreProducto = false;
@@ -94,8 +93,6 @@ public class GestionDeProductos {
             this.empresa.setProductos(productos);
             persistirProductos();
         }
-        else
-            throw new ProductoNoExistenteException();
     }
 
     public Set<Producto> getProductos(){

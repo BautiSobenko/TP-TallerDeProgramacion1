@@ -6,10 +6,10 @@ import java.util.UUID;
 
 public class Promocion {
 
-    private String nombre;
-    private String id;
-    private boolean activo;
-    private List<Dias> diasPromo;
+    protected String nombre;
+    protected String id;
+    protected boolean activo;
+    protected List<Dias> diasPromo;
 
     public Promocion(String nombre, List<Dias> diasPromo) {
         this.id = UUID.randomUUID().toString();

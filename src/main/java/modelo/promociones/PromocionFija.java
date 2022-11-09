@@ -21,4 +21,44 @@ public class PromocionFija extends Promocion{
         this.dtoPorCantMin = dtoPorCantMin;
         this.dtoPorCantPrecioU = dtoPorCantPrecioU;
     }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    public boolean isDosPorUno() {
+        return dosPorUno;
+    }
+
+    public void setDosPorUno(boolean dosPorUno) {
+        this.dosPorUno = dosPorUno;
+    }
+
+    public boolean isDtoPorCant() {
+        return dtoPorCant;
+    }
+
+    public void setDtoPorCant(boolean dtoPorCant) {
+        this.dtoPorCant = dtoPorCant;
+    }
+
+    public int getDtoPorCantMin() {
+        return dtoPorCantMin;
+    }
+
+    public void setDtoPorCantMin(int dtoPorCantMin) {
+        this.dtoPorCantMin = dtoPorCantMin;
+    }
+
+    public double getDtoPorCantPrecioU() {
+        return dtoPorCantPrecioU;
+    }
+
+    public void setDtoPorCantPrecioU(double dtoPorCantPrecioU) {
+        this.dtoPorCantPrecioU = dtoPorCantPrecioU;
+    }
 }

@@ -1,14 +1,13 @@
 package controladores;
 
+import dto.PromocionProductoDTO;
+import dto.PromocionTemporalDTO;
 import excepciones.ProductoNoExistenteException;
-import excepciones.PromocionNoExistenteException;
-import modelo.Producto;
+import excepciones.PromocionExistenteException;
 import modelo.promociones.Promocion;
+import modelo.promociones.PromocionFija;
 import modelo.promociones.PromocionTemporal;
-import negocio.GestionDeProductos;
 import negocio.GestionDePromociones;
-import vistas.IVistaGestion;
-import vistas.VistaGestionProductos;
 import vistas.VistaGestionPromociones;
 
 import javax.swing.*;
@@ -50,6 +49,31 @@ public class ControladorGestionPromociones implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         String comando =  e.getActionCommand();
+
+        Promocion promocion = (Promocion) vistaGestionPromociones.getSeleccion();
+        PromocionTemporalDTO promocionTemporalDTO = null;
+        PromocionProductoDTO promocionProductoDTO = null;
+
+        if( promocion instanceof PromocionTemporal ){
+            PromocionTemporal promocionTemporal = (PromocionTemporal) promocion;
+            promocionTemporalDTO = new PromocionTemporalDTO(   promocionTemporal.getNombre(),
+                    promocionTemporal.isActivo(),
+                    promocionTemporal.getDiasPromo(),
+                    promocionTemporal.getFormaPago(),
+                    promocionTemporal.getPorcentajeDescuento(),
+                    promocionTemporal.isEsAcumulable());
+        }else{
+            PromocionFija promocionFija = (PromocionFija) promocion;
+            promocionProductoDTO = new PromocionProductoDTO(   promocionFija.getNombre(),
+                    promocionFija.isActivo(),
+                    promocionFija.getDiasPromo(),
+                    promocionFija.getProducto(),
+                    promocionFija.isDosPorUno(),
+                    promocionFija.isDtoPorCant(),
+                    promocionFija.getDtoPorCantMin(),
+                    promocionFija.getDtoPorCantPrecioU());
+        }
+
         if(comando.equals("Alta Promocion Temporal")) {
             vistaGestionPromociones.esconder();
             ControladorAltaPromocionTemporal con = ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal();
@@ -59,19 +83,22 @@ public class ControladorGestionPromociones implements ActionListener {
             ControladorAltaPromocionProducto con = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto();
         }
         else  if( comando.equals("Baja Promocion") ){
-            Promocion promo = (Promocion) vistaGestionPromociones.getSeleccion();
-            try {
-                gestionPromociones.bajaPromocion(promo.getId());
-                Set<Promocion> promociones = gestionPromociones.getPromociones();
-                DefaultListModel<Promocion> updatedList = new DefaultListModel<Promocion>();
-                promociones.forEach(updatedList::addElement);
-                vistaGestionPromociones.setModel(updatedList);
-                vistaGestionPromociones.success("Producto " + promo.getNombre() + "dada de baja");
-            } catch (ProductoNoExistenteException ignored) {
-            }
+
+           if( promocion instanceof PromocionTemporal ) {
+               gestionPromociones.bajaPromocion(promocionTemporalDTO);
+               vistaGestionPromociones.success("Promocion temporal: " + promocionTemporalDTO.getNombre() + "dada de baja");
+           }else{
+               gestionPromociones.bajaPromocion(promocionProductoDTO);
+               vistaGestionPromociones.success("Promocion producto: " + promocionProductoDTO.getNombre() + "dada de baja");
+           }
+
+            Set<Promocion> promociones = gestionPromociones.getPromociones();
+            DefaultListModel<Promocion> updatedList = new DefaultListModel<Promocion>();
+            promociones.forEach(updatedList::addElement);
+            vistaGestionPromociones.setModel(updatedList);
         }
         else if( comando.equals("Modificar Promocion") ){
-            Promocion promo = (Promocion) vistaGestionPromociones.getSeleccion();
+
             ControladorAltaPromocionTemporal controladorTemporal;
             ControladorAltaPromocionProducto controladorProducto;
             try {
@@ -83,7 +110,7 @@ public class ControladorGestionPromociones implements ActionListener {
 
                 vistaGestionPromociones.success("Promocion " + promo.getNombre() + "modificada");
             }
-            catch (PromocionNoExistenteException ex) {
+            catch (PromocionExistenteException ex) {
             }
         }
         else if( comando.equals("Volver") ){

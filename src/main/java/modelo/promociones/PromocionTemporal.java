@@ -16,4 +16,28 @@ public class PromocionTemporal extends Promocion{
         this.porcentajeDescuento = porcentajeDescuento;
         this.esAcumulable = esAcumulable;
     }
+
+    public String getFormaPago() {
+        return formaPago;
+    }
+
+    public void setFormaPago(String formaPago) {
+        this.formaPago = formaPago;
+    }
+
+    public float getPorcentajeDescuento() {
+        return porcentajeDescuento;
+    }
+
+    public void setPorcentajeDescuento(float porcentajeDescuento) {
+        this.porcentajeDescuento = porcentajeDescuento;
+    }
+
+    public boolean isEsAcumulable() {
+        return esAcumulable;
+    }
+
+    public void setEsAcumulable(boolean esAcumulable) {
+        this.esAcumulable = esAcumulable;
+    }
 }

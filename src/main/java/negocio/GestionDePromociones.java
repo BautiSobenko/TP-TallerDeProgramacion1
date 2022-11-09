@@ -1,14 +1,11 @@
 package negocio;
 
-import dto.ProductoDTO;
 import dto.PromocionDTO;
 import dto.PromocionProductoDTO;
 import dto.PromocionTemporalDTO;
-import excepciones.OperarioExistenteException;
 import excepciones.ProductoExistenteException;
+import excepciones.PromocionExistenteException;
 import modelo.Empresa;
-import modelo.Operario;
-import modelo.Producto;
 import modelo.promociones.Promocion;
 import modelo.promociones.PromocionFija;
 import modelo.promociones.PromocionTemporal;
@@ -50,17 +47,17 @@ public class GestionDePromociones {
         }
     }
 
-    public void altaPromocion(PromocionDTO promocion) throws ProductoExistenteException {
+    public void altaPromocion(PromocionDTO promocion) throws PromocionExistenteException {
         Set<Promocion> promociones = this.getPromociones();
 
         Iterator<Promocion> it = promociones.iterator();
         boolean encontrePromo = false;
-        Promocion op;
+        Promocion p = null;
 
         while(it.hasNext() && !encontrePromo) {
-            op = it.next();
-            if( (op instanceof PromocionFija && promocion instanceof PromocionProductoDTO) || (op instanceof PromocionTemporal && promocion instanceof PromocionTemporalDTO) ){
-                if( op.getNombre().equals(promocion.getNombre()) )
+            p = it.next();
+            if( (p instanceof PromocionFija && promocion instanceof PromocionProductoDTO) || (p instanceof PromocionTemporal && promocion instanceof PromocionTemporalDTO) ){
+                if( p.getNombre().equals(promocion.getNombre()) )
                     encontrePromo = true;
             }
         }
@@ -91,11 +88,15 @@ public class GestionDePromociones {
             this.empresa.setPromociones(promociones);
             persistirPromociones();
         } else{
-            //!throw new OperarioExistenteException();
+            if( p instanceof PromocionFija)
+                throw new PromocionExistenteException("Ya existe una promocion fija con el nombre " + p.getNombre());
+            else
+                throw new PromocionExistenteException("Ya existe una promocion temporal con el nombre " + p.getNombre());
         }
+
     }
 
-    public void modificaPromocion(PromocionDTO promocion) throws ProductoExistenteException {
+    public void modificaPromocion(PromocionDTO promocion) {
         Set<Promocion> promociones = this.getPromociones();
 
         Iterator<Promocion> it = promociones.iterator();
@@ -137,12 +138,10 @@ public class GestionDePromociones {
 
             this.empresa.setPromociones(promociones);
             persistirPromociones();
-        } else{
-            //!throw new OperarioExistenteException();
         }
     }
 
-    public void bajaPromocion(PromocionDTO promocion) throws ProductoExistenteException {
+    public void bajaPromocion(PromocionDTO promocion) {
         Set<Promocion> promociones = this.getPromociones();
 
         Iterator<Promocion> it = promociones.iterator();
@@ -161,8 +160,6 @@ public class GestionDePromociones {
             promociones.remove(p);
             this.empresa.setPromociones(promociones);
             persistirPromociones();
-        } else {
-            //!throw new OperarioExistenteException();
         }
     }
 

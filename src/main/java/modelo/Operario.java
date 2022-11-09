@@ -27,37 +27,6 @@ public class Operario {
         return new Operario("admin", "admin", "admin1234");
     }
 
-
-    public void altaMozo(MozoDTO mozo) throws MozoExistenteException, PermisoDenegadoException {
-
-        GestionDeMozos.get().altaMozo(mozo);
-
-    }
-
-    public void modificarMozo(MozoDTO mozo) throws MozoNoExistenteException, PermisoDenegadoException {
-
-        GestionDeMozos.get().modificarMozo(mozo);
-
-    }
-
-    public void bajaMozo(Mozo mozo) throws MozoNoExistenteException, PermisoDenegadoException {
-
-        GestionDeMozos.get().bajaMozo(mozo);
-
-    }
-
-    public void modEstadoMozo(Mozo mozo, EstadoMozo nuevoEstado) throws MozoNoExistenteException {
-
-        GestionDeMozos.get().modEstadoMozo(mozo, nuevoEstado);
-
-    }
-
-    public double cierreMesa(Mesa mesa) throws MesaNoExistenteException, CierreMesaConEstadoLibreException {
-
-        return GestionDeMesas.get().cerrarMesa(mesa);
-
-    }
-
     public String getNombreCompleto() {
         return nombreCompleto;
     }

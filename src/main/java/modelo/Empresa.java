@@ -19,7 +19,6 @@ public class Empresa {
     private Set<Mesa> mesas;
     private Set<Producto> productos;
     private Set<Operario> operarios;
-
     private Set<Promocion> promociones;
     private double sueldoBasico;
 
@@ -296,4 +295,6 @@ public class Empresa {
     public void setAdmin(Operario admin) {
         this.admin = admin;
     }
+
+
 }

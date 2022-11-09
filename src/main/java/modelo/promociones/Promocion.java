@@ -1,24 +1,20 @@
 package modelo.promociones;
 
 import enums.Dias;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Promocion {
 
     private String nombre;
-
-    private static int idSiguiente=0;
-    private int idPromocion;
+    private String id;
     private boolean activo;
     private List<Dias> diasPromo;
 
     public Promocion(String nombre, List<Dias> diasPromo) {
-        this.nombre = nombre;
+        this.id = UUID.randomUUID().toString();
         this.diasPromo = diasPromo;
         this.activo = true;
-        this.idPromocion = ++idSiguiente;
     }
 
     public String getNombre() {
@@ -29,12 +25,16 @@ public class Promocion {
         this.nombre = nombre;
     }
 
-    public int getIdPromocion() {
-        return idPromocion;
+    public String getId() {
+        return id;
     }
 
-    public void setIdPromocion(int idPromocion) {
-        this.idPromocion = idPromocion;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setDiasPromo(List<Dias> diasPromo) {
+        this.diasPromo = diasPromo;
     }
 
     public boolean isActivo() {

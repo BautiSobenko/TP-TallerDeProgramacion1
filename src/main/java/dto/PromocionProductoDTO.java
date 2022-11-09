@@ -5,22 +5,40 @@ import modelo.Producto;
 
 import java.util.List;
 
-public class PromocionProductoDTO {
+public class PromocionProductoDTO extends PromocionDTO{
+
     Producto producto;
     boolean dosPorUno;
     boolean dtoPorCant;
     int dtoPorCantMin;
     double dtoPorCantPrecioU;
-    String nombre;
-    List<Dias> dias;
 
-    public PromocionProductoDTO(Producto producto, boolean dosPorUno, boolean dtoPorCant, int dtoPorCantMin, double dtoPorCantPrecioU, String nombre, List<Dias> dias) {
+    public PromocionProductoDTO(String nombre, String id, boolean activo, List<Dias> diasPromo, Producto producto, boolean dosPorUno, boolean dtoPorCant, int dtoPorCantMin, double dtoPorCantPrecioU) {
+        super(nombre, id, activo, diasPromo);
         this.producto = producto;
         this.dosPorUno = dosPorUno;
         this.dtoPorCant = dtoPorCant;
         this.dtoPorCantMin = dtoPorCantMin;
         this.dtoPorCantPrecioU = dtoPorCantPrecioU;
-        this.nombre = nombre;
-        this.dias = dias;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public boolean isDosPorUno() {
+        return dosPorUno;
+    }
+
+    public boolean isDtoPorCant() {
+        return dtoPorCant;
+    }
+
+    public int getDtoPorCantMin() {
+        return dtoPorCantMin;
+    }
+
+    public double getDtoPorCantPrecioU() {
+        return dtoPorCantPrecioU;
     }
 }

@@ -130,6 +130,7 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 		txtCantMinima.setBounds(293, 327, 126, 26);
 		contentPane.add(txtCantMinima);
 
+		tipoDesc = new ButtonGroup();
 		tipoDesc.add(chckbxDesc);
 		tipoDesc.add(chckbx2x1);
 		chckbxDesc.addMouseListener(this);

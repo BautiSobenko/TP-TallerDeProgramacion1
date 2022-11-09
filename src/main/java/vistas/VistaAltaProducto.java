@@ -120,24 +120,11 @@ public class VistaAltaProducto extends JFrame implements IGenerica, KeyListener 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		this.nombre = this.txtNombre.getText();
-		try {
-			this.precioCosto = Float.parseFloat(this.txtPrecioCosto.getText());
-			this.precioVenta = Float.parseFloat(this.txtPrecioVenta.getText());
-			this.stockInicial = Integer.parseInt(this.txtStockInicial.getText());
-		}
-		catch (Exception ex){
-			JOptionPane.showMessageDialog(null, "Ingreso mal algun valor numerico", "Error", JOptionPane.ERROR_MESSAGE);
-			this.txtPrecioCosto.setText("");
-			this.txtPrecioVenta.setText("");
-			this.txtStockInicial.setText("");
-		}
 		if( nombre.length() > 0 &&
-			precioCosto > 0 &&
-			precioVenta > 0 &&
-			stockInicial > 0) {
-			
+			txtPrecioCosto.getText().length() > 0 &&
+			txtPrecioVenta.getText().length() > 0 &&
+			txtStockInicial.getText().length() > 0) {
 			this.btnAceptar.setEnabled(true);
-			
 		}
 		
 	}
@@ -183,14 +170,37 @@ public class VistaAltaProducto extends JFrame implements IGenerica, KeyListener 
 	}
 
 	public float getPrecioCosto() {
+
+		try {
+			precioCosto = Float.parseFloat(this.txtPrecioCosto.getText());
+		}
+		catch (Exception e){
+			JOptionPane.showMessageDialog(null, "Ingreso mal el costo del producto", "Error", JOptionPane.ERROR_MESSAGE);
+			this.txtPrecioCosto.setText("");
+		}
 		return precioCosto;
 	}
 
 	public float getPrecioVenta() {
+
+		try {
+			this.precioVenta = Float.parseFloat(this.txtPrecioVenta.getText());
+		}
+		catch (Exception e){
+			JOptionPane.showMessageDialog(null, "Ingreso mal el precio de venta del producto", "Error", JOptionPane.ERROR_MESSAGE);
+			this.txtPrecioVenta.setText("");
+		}
 		return precioVenta;
 	}
 
 	public int getStockInicial() {
+		try {
+			stockInicial = Integer.parseInt(this.txtStockInicial.getText());
+		}
+		catch (Exception e){
+			JOptionPane.showMessageDialog(null, "Ingreso mal el stock inicial del producto", "Error", JOptionPane.ERROR_MESSAGE);
+			this.txtStockInicial.setText("");
+		}
 		return stockInicial;
 	}
 }

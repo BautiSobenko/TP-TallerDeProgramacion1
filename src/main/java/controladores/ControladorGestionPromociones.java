@@ -101,17 +101,17 @@ public class ControladorGestionPromociones implements ActionListener {
 
             ControladorAltaPromocionTemporal controladorTemporal;
             ControladorAltaPromocionProducto controladorProducto;
-            try {
-                gestionPromociones.bajaPromocion(promo.getId());
-                if (promo instanceof PromocionTemporal)
+           // try {
+               // gestionPromociones.bajaPromocion(promo.getId());
+              //  if (promo instanceof PromocionTemporal)
                     controladorTemporal = ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal();
-                else
+              //  else
                     controladorProducto = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto();
 
-                vistaGestionPromociones.success("Promocion " + promo.getNombre() + "modificada");
-            }
-            catch (PromocionExistenteException ex) {
-            }
+              //  vistaGestionPromociones.success("Promocion " + promo.getNombre() + "modificada");
+           // }
+          //  catch (PromocionExistenteException ex) {
+           // }
         }
         else if( comando.equals("Volver") ){
             vistaGestionPromociones.esconder();

@@ -142,5 +142,7 @@ public class GestionDeMesas {
         return this.empresa.getMesas();
     }
 
-
+    public float calculaConsumoPromedio(int nroMesa) throws MesaNoExistenteException {
+        return (float) empresa.consumoPromedioMesa(nroMesa);
+    }
 }

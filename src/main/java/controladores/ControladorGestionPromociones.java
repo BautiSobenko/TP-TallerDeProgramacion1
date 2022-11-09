@@ -92,5 +92,4 @@ public class ControladorGestionPromociones implements ActionListener {
         }
     }
 
-
 }

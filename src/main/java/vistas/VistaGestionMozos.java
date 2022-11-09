@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.awt.Font;
 
 import modelo.Mozo;
+import java.awt.event.ActionEvent;
 
 public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseListener{
 
@@ -79,7 +80,6 @@ public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseLis
 
 	@Override
 	public void setActionListener(ActionListener actionListener) {
-		// TODO Auto-generated method stub
 		this.actionListener = actionListener;
 		btnAltaMozo.addActionListener(actionListener);
 		btnModificarMozo.addActionListener(actionListener);
@@ -106,12 +106,12 @@ public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseLis
 
 	@Override
 	public void success(String msg) {
-
+		JOptionPane.showMessageDialog(this, msg, "Resultado exitoso", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	@Override
 	public void failure(String msg) {
-
+		JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	@Override

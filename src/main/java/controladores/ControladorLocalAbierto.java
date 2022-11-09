@@ -37,27 +37,27 @@ public class ControladorLocalAbierto implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
 
-        if(comando.equalsIgnoreCase("Consumo promedio por mesa"))
+        if(comando.equalsIgnoreCase("Consumo promedio por mesa")){
             //Muestro promedio\
-        else
-            if(comando.equalsIgnoreCase("Mozo con menos ventas"))
+        }
+        else if(comando.equalsIgnoreCase("Mozo con menos ventas")){
                 this.vistaLocalAbierto.success("El moso con menos ventas es "+this.gestionDeMozos.mozoMinVentas());
-            else
-                if(comando.equalsIgnoreCase("Mozo con mas Ventas"))
-                    this.vistaLocalAbierto.success("El moso con mas ventas es "+this.gestionDeMozos.mozoMaxVentas());
-                else
-                    if(comando.equalsIgnoreCase("Cerrar Mesa")
-                        this.vistaLocalAbierto.getMesaCierre().setEstadoMesa(EstadoMesa.LIBRE);
-                    else
-                        if(comando.equalsIgnoreCase("Cargar Pedido"))
+        }
+        else if(comando.equalsIgnoreCase("Mozo con mas Ventas")){
+                this.vistaLocalAbierto.success("El moso con mas ventas es "+this.gestionDeMozos.mozoMaxVentas());
+        }
+        else if(comando.equalsIgnoreCase("Cerrar Mesa")){
+                this.vistaLocalAbierto.getMesaCierre().setEstadoMesa(EstadoMesa.LIBRE);
+        }
+        else if(comando.equalsIgnoreCase("Cargar Pedido")){
 
-                        else
-                            if(comando.equalsIgnoreCase("Abrir Mesa")){
-                                this.vistaLocalAbierto.getMesaApertura().setEstadoMesa(EstadoMesa.OCUPADA);
-                            }
-
-                            else
-                                //CerrarLocal
+        }
+        else if(comando.equalsIgnoreCase("Abrir Mesa")){
+                this.vistaLocalAbierto.getMesaApertura().setEstadoMesa(EstadoMesa.OCUPADA);
+        }
+        else if(comando.equalsIgnoreCase("Cerrar Local")){
+                //CerrarLocal
+        }
 
     }
 }

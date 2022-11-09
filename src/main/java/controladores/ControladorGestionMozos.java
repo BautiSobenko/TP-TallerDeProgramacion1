@@ -54,10 +54,13 @@ public class ControladorGestionMozos implements ActionListener {
             try {
                 gestionDeMozos.bajaMozo(mozo);
                 Set<Mozo> mozos = gestionDeMozos.getMozos();
-                DefaultListModel<Mozo> listaMozos = new DefaultListModel<>();
-                mozos.forEach(listaMozos::addElement);
-                vistaGestionMozos.success("Mozo " + mozo.getNombreCompleto() + "dado de baja");
-            } catch (MozoNoExistenteException | PermisoDenegadoException ignored) {}
+                DefaultListModel<Mozo> updatedList = new DefaultListModel<>();
+                mozos.forEach(updatedList::addElement);
+                vistaGestionMozos.setModel(updatedList);
+                vistaGestionMozos.success("Mozo " + mozo.getNombreCompleto() + " dado de baja");
+            } catch (MozoNoExistenteException | PermisoDenegadoException exc) {
+
+            }
         }
         else if( comando.equals("Modificar Mozo") ){
             Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
@@ -65,8 +68,9 @@ public class ControladorGestionMozos implements ActionListener {
                 gestionDeMozos.bajaMozo(mozo);
                 ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo();
                 Set<Mozo> mozos = gestionDeMozos.getMozos();
-                DefaultListModel<Mozo> listaMozos = new DefaultListModel<>();
-                mozos.forEach(listaMozos::addElement);
+                DefaultListModel<Mozo> updatedList = new DefaultListModel<>();
+                mozos.forEach(updatedList::addElement);
+                vistaGestionMozos.setModel(updatedList);
                 vistaGestionMozos.success("Mozo " + mozo.getNombreCompleto() + " ha sido modificado");
             } catch (MozoNoExistenteException | PermisoDenegadoException ignored) {}
         }

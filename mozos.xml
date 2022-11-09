@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="16.0.2" class="java.beans.XMLDecoder">
- <object class="java.util.HashSet"/>
+ <object class="java.util.HashSet">
+  <void method="add">
+   <object class="modelo.Mozo">
+    <void property="cantidadHijos">
+     <int>3</int>
+    </void>
+    <void property="estadoMozo">
+     <object class="java.lang.Enum" method="valueOf">
+      <class>enums.EstadoMozo</class>
+      <string>ACTIVO</string>
+     </object>
+    </void>
+    <void property="fechaNacimiento">
+     <string>28/08/2000</string>
+    </void>
+    <void property="id">
+     <string>09fdc621-6b87-422f-b605-97c3f06173c9</string>
+    </void>
+    <void property="nombreCompleto">
+     <string>Bautista</string>
+    </void>
+   </object>
+  </void>
+ </object>
 </java>

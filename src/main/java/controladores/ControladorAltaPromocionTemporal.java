@@ -1,6 +1,8 @@
 package controladores;
 
+import dto.PromocionTemporalDTO;
 import enums.Dias;
+import modelo.promociones.PromocionTemporal;
 import negocio.GestionDePromociones;
 import vistas.VistaAltaPromocionTemporal;
 
@@ -53,7 +55,9 @@ public class ControladorAltaPromocionTemporal implements ActionListener {
             float porcentajeDesc = vistaAltaPromocionTemporal.getPorcentajeDesc();
             boolean isAcumulable = vistaAltaPromocionTemporal.getChckbxPromoAcumulable().isSelected();
             String nombre = vistaAltaPromocionTemporal.getNombre();
-            //Falta crear el dto y mandarlo a gestion de promociones
+            PromocionTemporalDTO promo = new PromocionTemporalDTO(nombre,dias,formaDePago,porcentajeDesc,isAcumulable);
+            //mandarlo a gestion de promociones
+            vistaAltaPromocionTemporal.success("Se dio de alta la promocion con exito");
         }
         else{
             vistaAltaPromocionTemporal.esconder();

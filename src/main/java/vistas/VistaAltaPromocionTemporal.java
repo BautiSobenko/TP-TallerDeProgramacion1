@@ -279,7 +279,8 @@ public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, Key
 	public void setActionListener(ActionListener actionListener) {
 		this.btnAceptar.addActionListener(actionListener);	
 		this.btnVolver.addActionListener(actionListener);
-		
+
+		/*
 		this.chckbxEfectivo.addActionListener(actionListener);
 		this.chckbxTarjeta.addActionListener(actionListener);
 		this.chckbxMercadoPago.addActionListener(actionListener);
@@ -294,7 +295,7 @@ public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, Key
 		this.chckbxDomingo.addActionListener(actionListener);
 		
 		this.chckbxPromoActiva.addActionListener(actionListener);
-		this.chckbxPromoAcumulable.addActionListener(actionListener);
+		this.chckbxPromoAcumulable.addActionListener(actionListener);*/
 	}
 
 	@Override

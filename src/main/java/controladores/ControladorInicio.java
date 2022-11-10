@@ -39,18 +39,23 @@ public class ControladorInicio implements ActionListener {
         String comando = e.getActionCommand();
 
         if(comando.equals("Gestionar Mozos")){
+            this.vistaInicio.esconder();
             ControladorGestionMozos controladorGestionMozos = ControladorGestionMozos.getControladorGestionMozos(true);
         }
         else if(comando.equals("Gestionar Operarios")){
+            this.vistaInicio.esconder();
             ControladorGestionOperario controladorGestionOperario = ControladorGestionOperario.getControladorGestionOperario(true);
         }
         else if(comando.equals("Gestionar Mesas")){
+            this.vistaInicio.esconder();
             ControladorGestionMesas controladorGestionMesas = ControladorGestionMesas.getControladorGestionMesas(true);
         }
         else if(comando.equals("Gestionar Productos")){
-                ControladorGestionProductos controladorGestionProductos = ControladorGestionProductos.getControladorGestionProductos(true);
+            this.vistaInicio.esconder();
+            ControladorGestionProductos controladorGestionProductos = ControladorGestionProductos.getControladorGestionProductos(true);
         }
         else if(comando.equals("Gestionar Promociones")){
+            this.vistaInicio.esconder();
             ControladorGestionPromociones controladorGestionPromociones = ControladorGestionPromociones.getControladorGestionPromociones(true);
         }
         else if(comando.equals("Abrir Local")){

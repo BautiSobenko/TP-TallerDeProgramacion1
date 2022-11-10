@@ -61,4 +61,9 @@ public class PromocionFija extends Promocion{
     public void setDtoPorCantPrecioU(double dtoPorCantPrecioU) {
         this.dtoPorCantPrecioU = dtoPorCantPrecioU;
     }
+
+    public String toString() {
+        return "Nombre: " + nombre +
+                " | Activo: " + activo;
+    }
 }

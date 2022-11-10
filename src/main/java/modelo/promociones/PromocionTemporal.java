@@ -40,4 +40,9 @@ public class PromocionTemporal extends Promocion{
     public void setEsAcumulable(boolean esAcumulable) {
         this.esAcumulable = esAcumulable;
     }
+
+    public String toString() {
+        return "Nombre: " + nombre +
+                " | Activo: " + activo;
+    }
 }

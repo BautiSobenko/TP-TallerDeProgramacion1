@@ -70,6 +70,8 @@ public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener
 		comboBoxAbrir.setBounds(10, 29, 293, 48);
 		comboBoxAbrir.addMouseListener(this);
 		panelSup.add(comboBoxAbrir);
+		comboBoxAbrir.addMouseListener(this);
+		comboBoxAbrir.setSelectedItem(null);
 		
 		btnAbrirMesa = new JButton("Abrir Mesa");
 		btnAbrirMesa.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -86,18 +88,25 @@ public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener
 		comboBoxCantidad.setBounds(313, 11, 111, 62);
 		comboBoxCantidad.addMouseListener(this);
 		panelCentral.add(comboBoxCantidad);
+		comboBoxCantidad.addMouseListener(this);
+		comboBoxCantidad.setSelectedItem(null);
 		
 		comboBoxMesa = new JComboBox();
 		comboBoxMesa.setToolTipText("Seleccione la mesa que realizo el pedido");
 		comboBoxMesa.setBounds(10, 11, 125, 62);
 		comboBoxMesa.addMouseListener(this);
 		panelCentral.add(comboBoxMesa);
+		comboBoxMesa.addMouseListener(this);
+		comboBoxMesa.setSelectedItem(null);
+
 		
 		comboBoxProducto = new JComboBox();
 		comboBoxProducto.setToolTipText("Seleccione el producto a cargar");
 		comboBoxProducto.setBounds(145, 11, 158, 62);
 		comboBoxProducto.addMouseListener(this);
 		panelCentral.add(comboBoxProducto);
+		comboBoxProducto.addMouseListener(this);
+		comboBoxProducto.setSelectedItem(null);
 		
 		btnCargarPedido = new JButton("Cargar Pedido");
 		btnCargarPedido.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -114,6 +123,8 @@ public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener
 		comboBoxCerrar.setBounds(10, 29, 296, 48);
 		comboBoxCerrar.addMouseListener(this);
 		panelInf.add(comboBoxCerrar);
+		comboBoxCerrar.addMouseListener(this);
+		comboBoxCerrar.setSelectedItem(null);
 		
 		btnCerrarMesa = new JButton("Cerrar Mesa");
 		btnCerrarMesa.setBounds(502, 27, 132, 48);
@@ -175,6 +186,11 @@ public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener
 		this.btnAbrirMesa.setEnabled(false);
 		this.btnCargarPedido.setEnabled(false);
 		this.btnCerrarMesa.setEnabled(false);
+		comboBoxAbrir.setSelectedItem(null);
+		comboBoxMesa.setSelectedItem(null);
+		comboBoxProducto.setSelectedItem(null);
+		comboBoxCantidad.setSelectedItem(null);
+		comboBoxCerrar.setSelectedItem(null);
 	}
 
 	@Override
@@ -197,6 +213,7 @@ public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+
 		if(this.comboBoxAbrir.getSelectedItem()!=null) {
 			this.mesaApertura = (Mesa) this.comboBoxAbrir.getSelectedItem();
 			this.btnAbrirMesa.setEnabled(true);
@@ -261,5 +278,45 @@ public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener
 
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
+	}
+
+	public JComboBox getComboBoxAbrir() {
+		return comboBoxAbrir;
+	}
+
+	public void setComboBoxAbrir(JComboBox comboBoxAbrir) {
+		this.comboBoxAbrir = comboBoxAbrir;
+	}
+
+	public JComboBox getComboBoxCantidad() {
+		return comboBoxCantidad;
+	}
+
+	public void setComboBoxCantidad(JComboBox comboBoxCantidad) {
+		this.comboBoxCantidad = comboBoxCantidad;
+	}
+
+	public JComboBox getComboBoxMesa() {
+		return comboBoxMesa;
+	}
+
+	public void setComboBoxMesa(JComboBox comboBoxMesa) {
+		this.comboBoxMesa = comboBoxMesa;
+	}
+
+	public JComboBox getComboBoxProducto() {
+		return comboBoxProducto;
+	}
+
+	public void setComboBoxProducto(JComboBox comboBoxProducto) {
+		this.comboBoxProducto = comboBoxProducto;
+	}
+
+	public JComboBox getComboBoxCerrar() {
+		return comboBoxCerrar;
+	}
+
+	public void setComboBoxCerrar(JComboBox comboBoxCerrar) {
+		this.comboBoxCerrar = comboBoxCerrar;
 	}
 }

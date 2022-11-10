@@ -60,4 +60,8 @@ public class Producto {
     public void setId(String id) {
         this.id = id;
     }
+
+    public String toString() {
+        return "Nombre: " + nombre;
+    }
 }

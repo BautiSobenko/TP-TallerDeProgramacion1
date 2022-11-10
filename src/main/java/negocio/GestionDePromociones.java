@@ -47,6 +47,8 @@ public class GestionDePromociones {
     }
 
     public void altaPromocion(PromocionDTO promocion) throws PromocionExistenteException {
+        PromocionTemporal promoTemporal;
+        PromocionFija promoFija;
         Set<Promocion> promociones = this.getPromociones();
 
         Iterator<Promocion> it = promociones.iterator();
@@ -64,7 +66,7 @@ public class GestionDePromociones {
         if(!encontrePromo){
 
             if(promocion instanceof PromocionTemporalDTO promo){
-                PromocionTemporal promoTemporal = new PromocionTemporal(promo.getNombre(),
+                promoTemporal = new PromocionTemporal(promo.getNombre(),
                         promo.getDiasPromo(),
                         promo.getFormaPago(),
                         promo.getPorcentajeDescuento(),
@@ -73,7 +75,7 @@ public class GestionDePromociones {
                 promociones.add(promoTemporal);
             }
             else if (promocion instanceof PromocionProductoDTO promo){
-                PromocionFija promoFija = new PromocionFija(promo.getNombre(),
+                promoFija = new PromocionFija(promo.getNombre(),
                         promo.getDiasPromo(),
                         promo.getProducto(),
                         promo.isDosPorUno(),

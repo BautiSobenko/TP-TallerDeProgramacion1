@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Enumeration;
 
 public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, KeyListener, MouseListener{
 
@@ -86,13 +87,13 @@ public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, Key
 		lblFormaDePago.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFormaDePago.setBounds(23, 76, 126, 21);
 		frmAltaPromocionTemporal.getContentPane().add(lblFormaDePago);
-		
+
 		chckbxEfectivo = new JCheckBox("Efectivo");
 		chckbxEfectivo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chckbxEfectivo.setBounds(197, 56, 88, 23);
 		chckbxEfectivo.addMouseListener(this);
 		frmAltaPromocionTemporal.getContentPane().add(chckbxEfectivo);
-		
+
 		chckbxTarjeta = new JCheckBox("Tarjeta");
 		chckbxTarjeta.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chckbxTarjeta.setBounds(197, 82, 72, 23);
@@ -430,7 +431,14 @@ public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, Key
 	}
 	
 	public String getSelection() {
-		return formaDePago.getSelection().getActionCommand();
+		AbstractButton button=null;
+		for (Enumeration<AbstractButton> buttons = formaDePago.getElements(); buttons.hasMoreElements();) {
+			button = buttons.nextElement();
+			if (button.isSelected()) {
+				return button.getText();
+			}
+		}
+		return button.getText();
 	}
 
 	public float getPorcentajeDesc() {

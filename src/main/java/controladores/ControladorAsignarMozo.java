@@ -42,7 +42,10 @@ public class ControladorAsignarMozo implements ActionListener {
         for(Mozo mozo : mozos){
             comboMozo.addItem(mozo);
         }
+
         controladorAsignarMozo.vistaAsignarMozo.setComboBox(comboMozo);
+
+        controladorAsignarMozo.vistaAsignarMozo.limpia();
 
         return controladorAsignarMozo;
     }

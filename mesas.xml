@@ -25,6 +25,28 @@
     <void property="estadoMesa">
      <object idref="EstadoMesa0"/>
     </void>
+    <void property="mozoAsignado">
+     <object class="modelo.Mozo">
+      <void property="cantidadHijos">
+       <int>9</int>
+      </void>
+      <void property="estadoMozo">
+       <object class="java.lang.Enum" method="valueOf">
+        <class>enums.EstadoMozo</class>
+        <string>ACTIVO</string>
+       </object>
+      </void>
+      <void property="fechaNacimiento">
+       <string>12/12/2012</string>
+      </void>
+      <void property="id">
+       <string>adcfd469-49c6-4264-a1a0-ce4cc4f556a5</string>
+      </void>
+      <void property="nombreCompleto">
+       <string>Awelardo</string>
+      </void>
+     </object>
+    </void>
     <void property="nroMesa">
      <int>3</int>
     </void>

@@ -4,13 +4,10 @@ import java.awt.EventQueue;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
 import java.awt.Font;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-public class VistaAsignarMozo extends JFrame implements IGenerica, MouseListener {
+public class VistaAsignarMozo extends JFrame implements IGenerica, ItemListener {
 
 	private JPanel contentPane;
 	JComboBox comboBox;
@@ -47,10 +44,8 @@ public class VistaAsignarMozo extends JFrame implements IGenerica, MouseListener
 		comboBox = new JComboBox();
 		comboBox.setBounds(10, 41, 171, 40);
 		contentPane.add(comboBox);
-		comboBox.setSelectedIndex(-1);
-		comboBox.addMouseListener(this);
+		comboBox.addItemListener(this);
 
-		
 		btnAsignar = new JButton("Asignar");
 		btnAsignar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnAsignar.setBounds(256, 40, 171, 40);
@@ -82,6 +77,7 @@ public class VistaAsignarMozo extends JFrame implements IGenerica, MouseListener
 	@Override
 	public void limpia() {
 		this.btnAsignar.setEnabled(false);
+		this.comboBox.setSelectedItem(null);
 	}
 
 	@Override
@@ -94,32 +90,6 @@ public class VistaAsignarMozo extends JFrame implements IGenerica, MouseListener
 		JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		if( this.comboBox.getSelectedItem() != null )
-			this.btnAsignar.setEnabled( true );
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-
-	}
-
 	public JComboBox getComboBox() {
 		return comboBox;
 	}
@@ -128,4 +98,10 @@ public class VistaAsignarMozo extends JFrame implements IGenerica, MouseListener
 		this.comboBox = comboBox;
 	}
 
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getStateChange() == ItemEvent.SELECTED) {
+			this.btnAsignar.setEnabled( true );
+		}
+	}
 }

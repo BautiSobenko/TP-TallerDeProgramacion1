@@ -177,6 +177,7 @@ public class VistaAltaProducto extends JFrame implements IGenerica, KeyListener 
 		catch (Exception e){
 			JOptionPane.showMessageDialog(null, "Ingreso mal el costo del producto", "Error", JOptionPane.ERROR_MESSAGE);
 			this.txtPrecioCosto.setText("");
+			return 0;
 		}
 		return precioCosto;
 	}
@@ -189,17 +190,19 @@ public class VistaAltaProducto extends JFrame implements IGenerica, KeyListener 
 		catch (Exception e){
 			JOptionPane.showMessageDialog(null, "Ingreso mal el precio de venta del producto", "Error", JOptionPane.ERROR_MESSAGE);
 			this.txtPrecioVenta.setText("");
+			return 0;
 		}
 		return precioVenta;
 	}
 
-	public int getStockInicial() {
+	public int getStockInicial(){
 		try {
 			stockInicial = Integer.parseInt(this.txtStockInicial.getText());
 		}
 		catch (Exception e){
 			JOptionPane.showMessageDialog(null, "Ingreso mal el stock inicial del producto", "Error", JOptionPane.ERROR_MESSAGE);
 			this.txtStockInicial.setText("");
+			return 0;
 		}
 		return stockInicial;
 	}

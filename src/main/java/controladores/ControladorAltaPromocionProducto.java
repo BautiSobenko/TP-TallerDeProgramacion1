@@ -49,6 +49,7 @@ public class ControladorAltaPromocionProducto implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
+        ControladorAltaPromocionProducto controladorAltaPromocionProducto1;
 
         if(comando.equalsIgnoreCase("Finalizar")){
             float precioPromo;
@@ -75,21 +76,23 @@ public class ControladorAltaPromocionProducto implements ActionListener {
             if(vistaAltaPromocionProducto.getChckbxDesc().isSelected()) {
                 precioPromo = vistaAltaPromocionProducto.getPrecioPromo();
                 cantMinima = vistaAltaPromocionProducto.getCantMinima();
-                prom = new PromocionProductoDTO(nombre, activa, dias, prod, false, true, cantMinima, precioPromo);
-            }
-            else{
-                prom = new PromocionProductoDTO(nombre, activa, dias, prod, true, false,0, 0);
-            }
-            try {
-                gestionDePromociones.altaPromocion(prom);
-                this.vistaAltaPromocionProducto.success("La promocion fija: " + prom.getNombre() + " se ha dado de alta con exito");
-            } catch (PromocionExistenteException ex) {
-                this.vistaAltaPromocionProducto.failure("La promocion fija:" + prom.getNombre() + " ya se encuentra en el sistema");
+                if (precioPromo == 0 || cantMinima == 0)
+                    controladorAltaPromocionProducto1 = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto();
+                else {
+                    prom = new PromocionProductoDTO(nombre, activa, dias, prod, false, true, cantMinima, precioPromo);
+                    try {
+                        gestionDePromociones.altaPromocion(prom);
+                        this.vistaAltaPromocionProducto.success("La promocion fija: " + prom.getNombre() + " se ha dado de alta con exito");
+                    } catch (PromocionExistenteException ex) {
+                        this.vistaAltaPromocionProducto.failure("La promocion fija:" + prom.getNombre() + " ya se encuentra en el sistema");
+                    }
+                    vistaAltaPromocionProducto.esconder();
+                }
             }
         }
         else if( comando.equals("Volver") ){
             vistaAltaPromocionProducto.esconder();
-            ControladorGestionPromociones con = ControladorGestionPromociones.getControladorGestionPromociones(true);
+            ControladorGestionPromociones controladorGestionPromociones = ControladorGestionPromociones.getControladorGestionPromociones(true);
         }
     }
 }

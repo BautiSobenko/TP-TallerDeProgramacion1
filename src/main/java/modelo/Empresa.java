@@ -136,7 +136,7 @@ public class Empresa {
     public Mozo mayorVolumenVentaMozo(){
         Iterator<Mozo> it = mozos.iterator();
         Mozo mozo, mayor = null;
-        double max = 0;
+        double max = -1;
 
         while(it.hasNext()){
             mozo = it.next();

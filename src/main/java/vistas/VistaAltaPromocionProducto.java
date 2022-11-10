@@ -22,7 +22,7 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	private JComboBox comboBox;
 
 	private ButtonGroup tipoDesc;
-	private String nombre;
+	private String nombre,cantMin,precio;
 	private int cantMinima=0;
 	private float precioPromo=0;
 	private JTextField textPrecio;
@@ -64,6 +64,7 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 		txtNombre.setBounds(220, 26, 221, 38);
 		contentPane.add(txtNombre);
 		txtNombre.setColumns(10);
+		txtNombre.addKeyListener(this);
 		
 		JLabel lblNewLabel_1 = new JLabel("Elija el producto");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -156,6 +157,7 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 		textPrecio.setBounds(482, 327, 126, 26);
 		contentPane.add(textPrecio);
 		textPrecio.setColumns(10);
+		textPrecio.addKeyListener(this);
 		
 		JLabel lblNewLabel_4 = new JLabel("Precio U. con descuento:");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -166,6 +168,7 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 		chckbxActiva.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		chckbxActiva.setBounds(25, 362, 205, 23);
 		contentPane.add(chckbxActiva);
+		chckbxActiva.addMouseListener(this);
 	}
 
 	public void setActionListener(ActionListener actionListener){
@@ -189,6 +192,8 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		this.nombre = this.txtNombre.getText();
+		this.cantMin = this.txtCantMinima.getText();
+		this.precio = this.textPrecio.getText();
 		if (chckbx2x1.isSelected()) {
 			this.btnFinalizar.setEnabled(
 					this.comboBox.getSelectedItem() != null
@@ -201,20 +206,22 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 									this.chckbxSabado.isSelected() ||
 									this.chckbxDomingo.isSelected())
 							&& this.nombre.length() > 0);
-		} else if (chckbxDesc.isSelected()) {
+		} else if (chckbxDesc.isSelected())
+		{
 				this.btnFinalizar.setEnabled(
 						this.comboBox.getSelectedItem() != null
-								&&
-								(this.chckbxLunes.isSelected() ||
-										this.chckbxMartes.isSelected() ||
-										this.chckbxMiercoles.isSelected() ||
-										this.chckbxJueves.isSelected() ||
-										this.chckbxViernes.isSelected() ||
-										this.chckbxSabado.isSelected() ||
-										this.chckbxDomingo.isSelected())
-								&& this.nombre.length() > 0
-								&& this.txtCantMinima.getText().length() > 0
-								&& this.textPrecio.getText().length()>0);
+						&&
+						(this.chckbxLunes.isSelected() ||
+								this.chckbxMartes.isSelected() ||
+								this.chckbxMiercoles.isSelected() ||
+								this.chckbxJueves.isSelected() ||
+								this.chckbxViernes.isSelected() ||
+								this.chckbxSabado.isSelected() ||
+								this.chckbxDomingo.isSelected())
+						&& this.nombre.length() > 0
+								&& this.cantMin.length() > 0
+								&& this.precio.length()>0
+								);
 		}
 	}
 
@@ -233,7 +240,9 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-			this.nombre = this.txtNombre.getText();
+		this.nombre = this.txtNombre.getText();
+		this.cantMin = this.txtCantMinima.getText();
+		this.precio = this.textPrecio.getText();
 			if (chckbx2x1.isSelected()) {
 				this.btnFinalizar.setEnabled(
 						this.comboBox.getSelectedItem() != null
@@ -258,8 +267,8 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 										this.chckbxSabado.isSelected() ||
 										this.chckbxDomingo.isSelected())
 								&& this.nombre.length() > 0
-								&& this.txtCantMinima.getText().length()>0
-								&& this.textPrecio.getText().length()>0);
+								&& this.cantMin.length() > 0
+								&& this.precio.length()>0);
 
 			}
 		}
@@ -410,6 +419,7 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 		catch(Exception e){
 			JOptionPane.showMessageDialog(this, "No ingreso correctamente la cantidad minima de pedido", "Error", JOptionPane.ERROR_MESSAGE);
 			this.txtCantMinima.setText("");
+			return 0;
 		}
 		return cantMinima;
 	}
@@ -426,6 +436,7 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 		catch(Exception e){
 			JOptionPane.showMessageDialog(this, "No ingreso correctamente el precio unitario en Promocion", "Error", JOptionPane.ERROR_MESSAGE);
 			this.textPrecio.setText("");
+			return 0;
 		}
 		return precioPromo;
 	}

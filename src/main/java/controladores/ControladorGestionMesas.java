@@ -72,9 +72,14 @@ public class ControladorGestionMesas implements ActionListener {
             mesas.forEach(updatedList::addElement);
             vistaGestionMesas.setModel(updatedList);
             vistaGestionMesas.success("Mesa " + mesa.getNroMesa() + "modificada");
-        } else{
+        } else
+            if(comando.equalsIgnoreCase("Volver")) {
                 vistaGestionMesas.esconder();
-                //!ControladorAsignarMozo ctrl = ControladorAsignarMozo.getControladorAsignarMozo();
+                ControladorInicio con = ControladorInicio.getControladorInicio(true);
+            }
+            else{
+                vistaGestionMesas.esconder();
+                //Controlador eleccion mesa
         }
     }
 }

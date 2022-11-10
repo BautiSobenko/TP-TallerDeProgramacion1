@@ -4,13 +4,39 @@
   <void method="add">
    <object class="modelo.Mesa">
     <void property="cantSillas">
-     <int>10</int>
+     <int>4</int>
     </void>
     <void property="estadoMesa">
-     <object class="java.lang.Enum" method="valueOf">
+     <object class="java.lang.Enum" id="EstadoMesa0" method="valueOf">
       <class>enums.EstadoMesa</class>
       <string>LIBRE</string>
      </object>
+    </void>
+    <void property="nroMesa">
+     <int>2</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>6</int>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa0"/>
+    </void>
+    <void property="nroMesa">
+     <int>3</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>10</int>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa0"/>
     </void>
     <void property="nroMesa">
      <int>1</int>

@@ -30,20 +30,25 @@ public class ControladorAltaProducto implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
+        ControladorAltaProducto con;
 
         if( comando.equalsIgnoreCase("Aceptar") ){
             String nombre = this.vistaAltaProducto.getNombre();
             int stock = this.vistaAltaProducto.getStockInicial();
             float precioventa = this.vistaAltaProducto.getPrecioVenta();
             float precioCosto = this.vistaAltaProducto.getPrecioCosto();
-            ProductoDTO productoDTO = new ProductoDTO(nombre,precioventa,precioCosto,stock);
-            try {
-                gestionDeProductos.altaProducto(productoDTO);
-                this.vistaAltaProducto.success("El producto se dio de alta con exito");
-            } catch (ProductoExistenteException ex) {
-                this.vistaAltaProducto.failure("El producto ya se encuentra en el sistema");
+            if(stock==0 || precioCosto==0 || precioventa==0)
+                con = ControladorAltaProducto.getControladorAltaProducto();
+            else {
+                ProductoDTO productoDTO = new ProductoDTO(nombre, precioventa, precioCosto, stock);
+                try {
+                    gestionDeProductos.altaProducto(productoDTO);
+                    this.vistaAltaProducto.success("El producto se dio de alta con exito");
+                } catch (ProductoExistenteException ex) {
+                    this.vistaAltaProducto.failure("El producto ya se encuentra en el sistema");
+                }
+                this.vistaAltaProducto.esconder();
             }
-            this.vistaAltaProducto.esconder();
         }else if( comando.equalsIgnoreCase("Volver") ){
             this.vistaAltaProducto.esconder();
         }

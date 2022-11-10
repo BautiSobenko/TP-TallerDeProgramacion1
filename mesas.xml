@@ -4,12 +4,34 @@
   <void method="add">
    <object class="modelo.Mesa">
     <void property="cantSillas">
-     <int>10</int>
+     <int>21</int>
     </void>
     <void property="estadoMesa">
      <object class="java.lang.Enum" method="valueOf">
       <class>enums.EstadoMesa</class>
       <string>LIBRE</string>
+     </object>
+    </void>
+    <void property="mozoAsignado">
+     <object class="modelo.Mozo">
+      <void property="cantidadHijos">
+       <int>9</int>
+      </void>
+      <void property="estadoMozo">
+       <object class="java.lang.Enum" method="valueOf">
+        <class>enums.EstadoMozo</class>
+        <string>ACTIVO</string>
+       </object>
+      </void>
+      <void property="fechaNacimiento">
+       <string>12/12/2012</string>
+      </void>
+      <void property="id">
+       <string>72c3f595-6580-4543-a0e8-52a5bc755e21</string>
+      </void>
+      <void property="nombreCompleto">
+       <string>Awelardo</string>
+      </void>
      </object>
     </void>
     <void property="nroMesa">

@@ -70,10 +70,6 @@ public class ControladorGestionMozos implements ActionListener {
                 vistaGestionMozos.success("Mozo " + mozo.getNombreCompleto() + " ha sido modificado");
             } catch (PermisoDenegadoException ignored) {}
         }
-        else if( comando.equals("Asignar Mozos") ) {
-            //!Realizar vista Asignar mozo
-            //!Realizar controlador Asignar mozo
-        }
         else if( comando.equals("Volver") ) {
             ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);
             vistaGestionMozos.esconder();

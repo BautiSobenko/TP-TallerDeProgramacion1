@@ -1,5 +1,6 @@
 package controladores;
 
+import dto.MesaDTO;
 import excepciones.MesaNoExistenteException;
 import excepciones.OperarioNoExistenteException;
 import excepciones.PermisoDenegadoException;
@@ -66,15 +67,21 @@ public class ControladorGestionMesas implements ActionListener {
             if( comando.equals("Modificar Mesa") ){
             Mesa mesa = (Mesa) vistaGestionMesas.getSeleccion();
             gestionDeMesas.bajaMesa(mesa.getNroMesa());
+            vistaGestionMesas.esconder();
             ControladorAltaMesa con = ControladorAltaMesa.getControladorAltaMesa();
+
             Set<Mesa> mesas = gestionDeMesas.getMesas();
             DefaultListModel<Mesa> updatedList = new DefaultListModel<>();
             mesas.forEach(updatedList::addElement);
             vistaGestionMesas.setModel(updatedList);
             vistaGestionMesas.success("Mesa " + mesa.getNroMesa() + "modificada");
-        } else{
+        } else if( comando.equals("Asignar Mozo")){
                 vistaGestionMesas.esconder();
-                //!ControladorAsignarMozo ctrl = ControladorAsignarMozo.getControladorAsignarMozo();
-        }
+                Mesa mesa = (Mesa) vistaGestionMesas.getSeleccion();
+                ControladorAsignarMozo ctrl = ControladorAsignarMozo.getControladorAsignarMozo( new MesaDTO(mesa.getNroMesa(), mesa.getCantSillas()) );
+        }else{
+                vistaGestionMesas.esconder();
+                ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);
+            }
     }
 }

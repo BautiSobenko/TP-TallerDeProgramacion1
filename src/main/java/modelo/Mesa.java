@@ -82,6 +82,7 @@ public class Mesa {
     @Override
     public String toString() {
         return "Mesa: " + nroMesa +
-                "| Sillas: " + cantSillas;
+                " | Sillas: " + cantSillas +
+                " | Mozo Asignado: " + mozoAsignado;
     }
 }

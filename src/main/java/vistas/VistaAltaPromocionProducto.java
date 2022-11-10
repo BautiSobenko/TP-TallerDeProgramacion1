@@ -258,14 +258,12 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 		}
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+
 	}
 	
 	public void mostrar() {
@@ -280,6 +278,7 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	public void limpiaCampos() {
 		this.txtNombre.setText("");
 		this.txtCantMinima.setText("");
+		this.textPrecio.setText("");
 		chckbx2x1.setSelected(false);
 		chckbxDesc.setSelected(false);
 		chckbxLunes.setSelected(false);
@@ -432,7 +431,6 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	public void setChckbxActiva(JCheckBox chckbxActiva) {
 		this.chckbxActiva = chckbxActiva;
 	}
-
 
 
 }

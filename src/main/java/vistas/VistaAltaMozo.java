@@ -19,7 +19,7 @@ public class VistaAltaMozo extends JFrame implements IGenerica, KeyListener{
 	
 	private String nombre = null;
 	private String fechaNacimiento = null;
-	private String cantHijos;
+	private int cantHijos;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -106,10 +106,9 @@ public class VistaAltaMozo extends JFrame implements IGenerica, KeyListener{
 	@Override
 	public void keyReleased(KeyEvent e) {
 
-		this.cantHijos = this.txtCantHijos.getText();
 		this.nombre = this.txtNombre.getText();
 		this.fechaNacimiento = this.txtFechaNacimiento.getText();
-		if( nombre.length() > 0 && fechaNacimiento.length() > 0 && cantHijos.length() > 0) {
+		if( nombre.length() > 0 && fechaNacimiento.length() > 0 && txtCantHijos.getText().length() > 0) {
 			this.btnAceptar.setEnabled(true);
 		}
 	}
@@ -159,7 +158,15 @@ public class VistaAltaMozo extends JFrame implements IGenerica, KeyListener{
 		return fechaNacimiento;
 	}
 
-	public String getCantHijos() {
+	public int getCantHijos() {
+		try {
+			cantHijos = Integer.parseInt(txtCantHijos.getText());
+		}
+		catch (Exception e){
+			JOptionPane.showMessageDialog(null, "Ingreso mal el costo del producto", "Error", JOptionPane.ERROR_MESSAGE);
+			this.txtCantHijos.setText("");
+		}
+
 		return cantHijos;
 	}
 }

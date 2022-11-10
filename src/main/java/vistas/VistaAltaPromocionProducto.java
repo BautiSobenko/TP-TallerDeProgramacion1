@@ -18,17 +18,15 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	private JCheckBox chckbxLunes,chckbxMartes,chckbxMiercoles,chckbxJueves,chckbxViernes,chckbxSabado,chckbxDomingo;
 	private JCheckBox chckbx2x1,chckbxDesc,chckbxActiva;
 	private JButton btnFinalizar,btnVolver;
-
-	JComboBox comboBox;
-
-	private ButtonGroup tipoDesc;
-	private String nombre;
-	private int cantMinima=0;
-	private float precioPromo=0;
 	private JTextField textPrecio;
-	/**
-	 * Launch the application.
-	 */
+	private ButtonGroup tipoDesc;
+	private JComboBox comboBox;
+
+	private String nombre;
+	private int cantMinima = 0;
+	private float precioPromo = 0;
+
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -227,19 +225,14 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 			this.nombre = this.txtNombre.getText();
 			if (chckbx2x1.isSelected()) {
 				this.btnFinalizar.setEnabled(
@@ -255,8 +248,6 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 								&& this.nombre.length() > 0);
 			} else if (chckbxDesc.isSelected()) {
 				try {
-					this.precioPromo = Float.parseFloat(this.txtCantMinima.getText());
-					this.cantMinima = Integer.parseInt(this.txtCantMinima.getText());
 					this.btnFinalizar.setEnabled(
 							this.comboBox.getSelectedItem() != null
 									&&
@@ -268,8 +259,8 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 											this.chckbxSabado.isSelected() ||
 											this.chckbxDomingo.isSelected())
 									&& this.nombre.length() > 0
-									&& this.cantMinima > 0
-									&& this.precioPromo>0);
+									&& this.txtCantMinima.getText().length() > 0
+									&& this.textPrecio.getText().length() > 0);
 
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(this, "Ingreso de manera erronea el descuento", "Error", JOptionPane.ERROR_MESSAGE);
@@ -417,6 +408,13 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	}
 
 	public int getCantMinima() {
+		try {
+			cantMinima = Integer.parseInt(this.txtCantMinima.getText());
+		}
+		catch (Exception e){
+			JOptionPane.showMessageDialog(null, "Ingreso mal la Cantidad Minima", "Error", JOptionPane.ERROR_MESSAGE);
+			this.txtCantMinima.setText("");
+		}
 		return cantMinima;
 	}
 
@@ -425,6 +423,13 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	}
 
 	public float getPrecioPromo() {
+		try {
+			precioPromo = Integer.parseInt(this.textPrecio.getText());
+		}
+		catch (Exception e){
+			JOptionPane.showMessageDialog(null, "Ingreso mal el Precio de la promocion", "Error", JOptionPane.ERROR_MESSAGE);
+			this.textPrecio.setText("");
+		}
 		return precioPromo;
 	}
 
@@ -439,4 +444,6 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	public void setChckbxActiva(JCheckBox chckbxActiva) {
 		this.chckbxActiva = chckbxActiva;
 	}
+
+
 }

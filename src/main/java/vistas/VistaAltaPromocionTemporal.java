@@ -254,7 +254,6 @@ public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, Key
 	@Override
 	public void keyReleased(KeyEvent e) {
 		try {
-		this.porcentajeDesc = Float.parseFloat(this.txtPorcentajeDesc.getText());
 		this.nombre = this.txtNombrePromocion.getText();
 		this.btnAceptar.setEnabled(formaDePago.getSelection()!=null
 									 &&
@@ -267,7 +266,7 @@ public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, Key
 									 this.chckbxDomingo.isSelected() )
 									 && 
 									 this.nombre.length() > 0 
-									 && this.porcentajeDesc>0);
+									 && this.txtPorcentajeDesc.getText().length() > 0);
 		}
 		catch(Exception ex) {
 			JOptionPane.showMessageDialog(this, "Ingreso de manera erronea el descuento", "Error", JOptionPane.ERROR_MESSAGE);
@@ -454,6 +453,13 @@ public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, Key
 	}
 
 	public float getPorcentajeDesc() {
+		try {
+			porcentajeDesc = Float.parseFloat(this.txtPorcentajeDesc.getText());
+		}
+		catch (Exception e){
+			JOptionPane.showMessageDialog(null, "Ingreso mal el Porcentaje de descuento", "Error", JOptionPane.ERROR_MESSAGE);
+			this.txtPorcentajeDesc.setText("");
+		}
 		return porcentajeDesc;
 	}
 

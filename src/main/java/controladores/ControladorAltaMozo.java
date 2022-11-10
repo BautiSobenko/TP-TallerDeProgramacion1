@@ -4,6 +4,7 @@ package controladores;
 import dto.MozoDTO;
 import excepciones.MozoExistenteException;
 import excepciones.PermisoDenegadoException;
+import modelo.Mozo;
 import negocio.GestionDeMozos;
 import vistas.VistaAltaMozo;
 
@@ -14,6 +15,8 @@ public class ControladorAltaMozo implements ActionListener {
     private static ControladorAltaMozo controladorAltaMozo = null;
     private final GestionDeMozos gestionDeMozos;
     private final VistaAltaMozo vistaAltaMozo;
+    private String op;
+    private Mozo mozo;
 
     private ControladorAltaMozo() {
         this.vistaAltaMozo = new VistaAltaMozo();
@@ -21,11 +24,24 @@ public class ControladorAltaMozo implements ActionListener {
         this.gestionDeMozos = GestionDeMozos.get();
     }
 
-    public static ControladorAltaMozo getControladorAltaMozo() {
+    public static ControladorAltaMozo getControladorAltaMozo(String op) {
         if (controladorAltaMozo == null) {
             controladorAltaMozo = new ControladorAltaMozo();
         }
+        controladorAltaMozo.op = op;
         controladorAltaMozo.vistaAltaMozo.mostrar();
+
+        return controladorAltaMozo;
+    }
+
+    public static ControladorAltaMozo getControladorAltaMozo(String op, Mozo mozo) {
+        if (controladorAltaMozo == null) {
+            controladorAltaMozo = new ControladorAltaMozo();
+        }
+        controladorAltaMozo.op = op;
+        controladorAltaMozo.mozo = mozo;
+        controladorAltaMozo.vistaAltaMozo.mostrar();
+
         return controladorAltaMozo;
     }
 
@@ -39,10 +55,16 @@ public class ControladorAltaMozo implements ActionListener {
             String fecha = this.vistaAltaMozo.getFechaNacimiento();
             MozoDTO mozoDTO = new MozoDTO(nombre,fecha,hijos);
             try {
-                gestionDeMozos.altaMozo(mozoDTO);
-                this.vistaAltaMozo.success("El mozo se dio de alta con exito");
+                if(op.equalsIgnoreCase("Alta")){
+                    gestionDeMozos.altaMozo(mozoDTO);
+                    this.vistaAltaMozo.success("El mozo: " + mozoDTO.getNombreCompleto() + " fue dado de alta con exito");
+                }else{
+                    gestionDeMozos.bajaMozo(mozo);
+                    gestionDeMozos.altaMozo(mozoDTO);
+                    this.vistaAltaMozo.success("El mozo: " + mozoDTO.getNombreCompleto() + " fue modificado con exito");
+                }
             } catch (MozoExistenteException | PermisoDenegadoException ex) {
-                this.vistaAltaMozo.failure("El mozo ya se encuentra en el sistema");
+                this.vistaAltaMozo.failure("El mozo: " + mozoDTO.getNombreCompleto() + " ya se encuentra en el sistema");
             }
             this.vistaAltaMozo.esconder();
         }else if( comando.equalsIgnoreCase("Volver") ){

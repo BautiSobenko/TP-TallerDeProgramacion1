@@ -69,7 +69,6 @@ public class ControladorGestionMesas implements ActionListener {
             gestionDeMesas.bajaMesa(mesa.getNroMesa());
             vistaGestionMesas.esconder();
             ControladorAltaMesa con = ControladorAltaMesa.getControladorAltaMesa();
-
             Set<Mesa> mesas = gestionDeMesas.getMesas();
             DefaultListModel<Mesa> updatedList = new DefaultListModel<>();
             mesas.forEach(updatedList::addElement);

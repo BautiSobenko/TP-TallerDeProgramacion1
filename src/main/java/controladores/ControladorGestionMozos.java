@@ -47,7 +47,7 @@ public class ControladorGestionMozos implements ActionListener {
 
         String comando =  e.getActionCommand();
         if(comando.equals("Alta Mozo")) {
-           ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo();
+           ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo("Alta");
         }
         else if( comando.equals("Baja Mozo") ){
             Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
@@ -64,11 +64,7 @@ public class ControladorGestionMozos implements ActionListener {
         }
         else if( comando.equals("Modificar Mozo") ){
             Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
-            try {
-                gestionDeMozos.bajaMozo(mozo);
-                ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo();
-                vistaGestionMozos.success("Mozo " + mozo.getNombreCompleto() + " ha sido modificado");
-            } catch (PermisoDenegadoException ignored) {}
+            ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo("Modificar", mozo);
         }
         else if( comando.equals("Volver") ) {
             ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);

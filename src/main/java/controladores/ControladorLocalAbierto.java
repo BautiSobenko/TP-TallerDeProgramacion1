@@ -78,6 +78,8 @@ public class ControladorLocalAbierto implements ActionListener {
         }
         vistaLocalAbierto.setComboBoxCantidad(comboI);
 
+        vistaLocalAbierto.limpia();
+
         controladorLocalAbierto.vistaLocalAbierto.mostrar();
 
         return controladorLocalAbierto;
@@ -122,7 +124,6 @@ public class ControladorLocalAbierto implements ActionListener {
                 Producto prod = this.vistaLocalAbierto.getProductoElegido();
                 Mesa mesa = this.vistaLocalAbierto.getMesaPedido();
                 int cantidad= this.vistaLocalAbierto.getCantidad();
-                if()
         }
         else if(comando.equalsIgnoreCase("Abrir Mesa")){
             if(this.vistaLocalAbierto.getMesaApertura().getEstadoMesa()==EstadoMesa.OCUPADA) {

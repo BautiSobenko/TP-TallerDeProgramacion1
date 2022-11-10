@@ -1,6 +1,7 @@
 package negocio;
 
 import dto.MesaDTO;
+import dto.MozoDTO;
 import enums.EstadoMesa;
 import excepciones.CierreMesaConEstadoLibreException;
 import excepciones.MesaExistenteException;
@@ -20,9 +21,11 @@ public class GestionDeMesas {
 
     private final Empresa empresa;
     private static GestionDeMesas gestionDeMesas = null;
+    private Set<Mozo> mozos;
 
     private GestionDeMesas() {
         this.empresa = Empresa.getEmpresa();
+        this.mozos = Empresa.getEmpresa().getMozos();
     }
 
     public static GestionDeMesas get() {
@@ -91,26 +94,22 @@ public class GestionDeMesas {
         }
     }
 
-    public void asignarMozoMesa(Mozo mozo, Mesa mesa) throws MozoNoExistenteException, MesaNoExistenteException {
+    public void asignarMozoMesa(MozoDTO mozo, MesaDTO mesa) {
 
-        boolean existeMozo = this.empresa.getMozos().stream().anyMatch(m -> m.getId().equalsIgnoreCase(mozo.getId()) );
+        boolean existeMozo = this.empresa.getMozos().stream().anyMatch(m -> m.getNombreCompleto().equalsIgnoreCase(mozo.getNombreCompleto()) );
         boolean existeMesa;
 
-        if( !existeMozo )
-            throw new MozoNoExistenteException();
-        else{
             Set<Mesa> mesas = this.empresa.getMesas();
             existeMesa = mesas.stream().anyMatch(m -> m.getNroMesa() == mesa.getNroMesa());
-            if( !existeMesa )
-                throw new MesaNoExistenteException();
-            else{
-                mesas.remove(mesa);
-                mesa.setMozoAsignado(mozo);
-                mesas.add(mesa);
+            if( existeMesa ){
+                Mesa mesaM = new Mesa(mesa.getNroMesa(), mesa.getCantSillas());
+                Mozo mozoA = new Mozo(mozo.getNombreCompleto(),mozo.getFechaNacimiento(),mozo.getCantidadHijos());
+                mesas.removeIf(m -> m.getNroMesa() == mesaM.getNroMesa());
+                mesaM.setMozoAsignado(mozoA);
+                mesas.add(mesaM);
                 this.empresa.setMesas(mesas);
                 persistirMesas();
             }
-        }
     }
 
     public double cerrarMesa(Mesa mesa) throws MesaNoExistenteException, CierreMesaConEstadoLibreException {
@@ -140,5 +139,13 @@ public class GestionDeMesas {
 
     public float calculaConsumoPromedio(int nroMesa) throws MesaNoExistenteException {
         return (float) empresa.consumoPromedioMesa(nroMesa);
+    }
+
+    public Set<Mozo> getMozos() {
+        return mozos;
+    }
+
+    public void setMozos(Set<Mozo> mozos) {
+        this.mozos = mozos;
     }
 }

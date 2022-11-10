@@ -53,11 +53,12 @@ public class ControladorGestionMesas implements ActionListener {
         String comando =  e.getActionCommand();
         if(comando.equals("Alta Mesa")) {
             vistaGestionMesas.esconder();
-            ControladorAltaMesa con = ControladorAltaMesa.getControladorAltaMesa();
+            ControladorAltaMesa con = ControladorAltaMesa.getControladorAltaMesa("Alta");
         }else
             if( comando.equals("Baja Mesa") ){
             Mesa mesa = (Mesa) vistaGestionMesas.getSeleccion();
             gestionDeMesas.bajaMesa(mesa.getNroMesa());
+
             Set<Mesa> mesas = gestionDeMesas.getMesas();
             DefaultListModel<Mesa> updatedList = new DefaultListModel<>();
             mesas.forEach(updatedList::addElement);
@@ -65,15 +66,14 @@ public class ControladorGestionMesas implements ActionListener {
             vistaGestionMesas.success("Mesa " + mesa.getNroMesa() + "dada de baja");
         } else
             if( comando.equals("Modificar Mesa") ){
-            Mesa mesa = (Mesa) vistaGestionMesas.getSeleccion();
-            gestionDeMesas.bajaMesa(mesa.getNroMesa());
             vistaGestionMesas.esconder();
-            ControladorAltaMesa con = ControladorAltaMesa.getControladorAltaMesa();
+            Mesa mesa = (Mesa) vistaGestionMesas.getSeleccion();
+            ControladorAltaMesa con = ControladorAltaMesa.getControladorAltaMesa("Modificar", mesa);
+
             Set<Mesa> mesas = gestionDeMesas.getMesas();
             DefaultListModel<Mesa> updatedList = new DefaultListModel<>();
             mesas.forEach(updatedList::addElement);
             vistaGestionMesas.setModel(updatedList);
-            vistaGestionMesas.success("Mesa " + mesa.getNroMesa() + "modificada");
         } else if( comando.equals("Asignar Mozo")){
                 vistaGestionMesas.esconder();
                 Mesa mesa = (Mesa) vistaGestionMesas.getSeleccion();

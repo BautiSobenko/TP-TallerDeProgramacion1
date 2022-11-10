@@ -55,7 +55,7 @@ public class ControladorGestionOperario implements ActionListener {
         String comando =  e.getActionCommand();
         if(comando.equals("Alta Operario")) {
             vistaGestionOperarios.esconder();
-            ControladorAltaOperario con = ControladorAltaOperario.getControladorAltaOperario(true);
+            ControladorAltaOperario con = ControladorAltaOperario.getControladorAltaOperario("Alta");
         }
         else if( comando.equals("Baja Operario") ){
                 Operario op = (Operario) vistaGestionOperarios.getSeleccion();
@@ -70,14 +70,8 @@ public class ControladorGestionOperario implements ActionListener {
             }
         else if( comando.equals("Modificar Operario")){
                 Operario op = (Operario) vistaGestionOperarios.getSeleccion();
-                try {
                     vistaGestionOperarios.esconder();
-                    gestionOp.bajaOperario(op.getUsername());
-                    ControladorAltaOperario controladorAltaOperario = ControladorAltaOperario.getControladorAltaOperario(true);
-                    vistaGestionOperarios.success("Operario " + op.getUsername() + "modificado");
-                } catch (PermisoDenegadoException ignored) {
-
-                }
+                    ControladorAltaOperario controladorAltaOperario = ControladorAltaOperario.getControladorAltaOperario("Modificar", op);
             }
         else if( comando.equals("Volver") ){
             ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);

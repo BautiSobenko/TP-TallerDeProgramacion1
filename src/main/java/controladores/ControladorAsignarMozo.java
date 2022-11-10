@@ -44,7 +44,6 @@ public class ControladorAsignarMozo implements ActionListener {
         }
 
         controladorAsignarMozo.vistaAsignarMozo.setComboBox(comboMozo);
-
         controladorAsignarMozo.vistaAsignarMozo.limpia();
 
         return controladorAsignarMozo;

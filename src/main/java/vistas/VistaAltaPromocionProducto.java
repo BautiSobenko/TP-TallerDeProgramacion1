@@ -444,4 +444,27 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 		this.chckbxActiva = chckbxActiva;
 	}
 
+	public JTextField getTxtNombre() {
+		return txtNombre;
+	}
+
+	public void setTxtNombre(JTextField txtNombre) {
+		this.txtNombre = txtNombre;
+	}
+
+	public JTextField getTxtCantMinima() {
+		return txtCantMinima;
+	}
+
+	public void setTxtCantMinima(JTextField txtCantMinima) {
+		this.txtCantMinima = txtCantMinima;
+	}
+
+	public JTextField getTextPrecio() {
+		return textPrecio;
+	}
+
+	public void setTextPrecio(JTextField textPrecio) {
+		this.textPrecio = textPrecio;
+	}
 }

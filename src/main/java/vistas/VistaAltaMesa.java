@@ -141,4 +141,19 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener{
 		return cantSillas;
 	}
 
+	public JTextField getTxtNumeroMesa() {
+		return txtNumeroMesa;
+	}
+
+	public void setTxtNumeroMesa(JTextField txtNumeroMesa) {
+		this.txtNumeroMesa = txtNumeroMesa;
+	}
+
+	public JTextField getTxtCantSillas() {
+		return txtCantSillas;
+	}
+
+	public void setTxtCantSillas(JTextField txtCantSillas) {
+		this.txtCantSillas = txtCantSillas;
+	}
 }

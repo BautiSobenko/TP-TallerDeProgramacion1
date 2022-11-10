@@ -448,4 +448,20 @@ public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, Key
 	public void setPorcentajeDesc(float porcentajeDesc) {
 		this.porcentajeDesc = porcentajeDesc;
 	}
+
+	public JTextField getTxtNombrePromocion() {
+		return txtNombrePromocion;
+	}
+
+	public void setTxtNombrePromocion(JTextField txtNombrePromocion) {
+		this.txtNombrePromocion = txtNombrePromocion;
+	}
+
+	public JTextField getTxtPorcentajeDesc() {
+		return txtPorcentajeDesc;
+	}
+
+	public void setTxtPorcentajeDesc(JTextField txtPorcentajeDesc) {
+		this.txtPorcentajeDesc = txtPorcentajeDesc;
+	}
 }

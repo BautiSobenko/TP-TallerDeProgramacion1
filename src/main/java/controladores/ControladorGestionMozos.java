@@ -57,7 +57,7 @@ public class ControladorGestionMozos implements ActionListener {
                 DefaultListModel<Mozo> updatedList = new DefaultListModel<>();
                 mozos.forEach(updatedList::addElement);
                 vistaGestionMozos.setModel(updatedList);
-                vistaGestionMozos.success("Mozo " + mozo.getNombreCompleto() + " dado de baja");
+                vistaGestionMozos.success("El Mozo: " + mozo.getNombreCompleto() + " fue dado de baja con exito");
             } catch (PermisoDenegadoException exc) {
 
             }

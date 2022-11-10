@@ -218,4 +218,20 @@ public class VistaAltaOperario extends JFrame implements IAltaOperario, KeyListe
 	public String getEstado() {
 		return estado;
 	}
+
+	public JTextField getTxtNombre() {
+		return txtNombre;
+	}
+
+	public void setTxtNombre(JTextField txtNombre) {
+		this.txtNombre = txtNombre;
+	}
+
+	public JTextField getTxtNombreUsuario() {
+		return txtNombreUsuario;
+	}
+
+	public void setTxtNombreUsuario(JTextField txtNombreUsuario) {
+		this.txtNombreUsuario = txtNombreUsuario;
+	}
 }

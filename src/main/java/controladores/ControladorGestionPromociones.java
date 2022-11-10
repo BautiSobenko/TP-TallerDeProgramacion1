@@ -52,11 +52,11 @@ public class ControladorGestionPromociones implements ActionListener {
 
         if(comando.equals("Alta Promocion Temporal")) {
             vistaGestionPromociones.esconder();
-            ControladorAltaPromocionTemporal con = ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal();
+            ControladorAltaPromocionTemporal con = ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal("Alta");
         }
         else if(comando.equals("Alta promocion por producto")){
             vistaGestionPromociones.esconder();
-            ControladorAltaPromocionProducto con = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto();
+            ControladorAltaPromocionProducto con = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto("Alta");
         }
         else if( comando.equals("Baja Promocion") || comando.equals("Modificar Promocion")) {
 
@@ -99,13 +99,12 @@ public class ControladorGestionPromociones implements ActionListener {
                 promociones.forEach(updatedList::addElement);
                 vistaGestionPromociones.setModel(updatedList);
             } else if (comando.equals("Modificar Promocion")) {
+                vistaGestionPromociones.esconder();
 
-                if (promocion instanceof PromocionTemporal) {
-                    ControladorAltaPromocionTemporal controladorTemporal = ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal();
-                    vistaGestionPromociones.success("Promocion temporal: " + promocion.getNombre() + "modificada");
+                if (promocion instanceof PromocionTemporal){
+                    ControladorAltaPromocionTemporal controladorTemporal = ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal("Modificar", promocionTemporalDTO);
                 } else {
-                    ControladorAltaPromocionProducto controladorProducto = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto();
-                    vistaGestionPromociones.success("Promocion fija: " + promocion.getNombre() + "modificada");
+                    ControladorAltaPromocionProducto controladorProducto = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto("Modificar", promocionProductoDTO);
                 }
             }
         }else if( comando.equals("Volver") ){

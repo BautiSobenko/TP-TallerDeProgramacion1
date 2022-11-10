@@ -17,6 +17,8 @@ public class ControladorAltaPromocionTemporal implements ActionListener {
     private GestionDePromociones gestionDePromociones;
     private static ControladorAltaPromocionTemporal controladorAltaPromocionTemporal = null;
     private VistaAltaPromocionTemporal vistaAltaPromocionTemporal;
+    private String op;
+    private PromocionTemporalDTO promocionTemporal;
 
     public ControladorAltaPromocionTemporal(){
         vistaAltaPromocionTemporal = new VistaAltaPromocionTemporal();
@@ -24,11 +26,24 @@ public class ControladorAltaPromocionTemporal implements ActionListener {
         this.gestionDePromociones = GestionDePromociones.get();
     }
 
-    public static ControladorAltaPromocionTemporal getControladorAltaPromocionTemporal() {
+    public static ControladorAltaPromocionTemporal getControladorAltaPromocionTemporal(String op) {
         if (controladorAltaPromocionTemporal == null) {
             controladorAltaPromocionTemporal = new ControladorAltaPromocionTemporal();
         }
+        controladorAltaPromocionTemporal.op = op;
         controladorAltaPromocionTemporal.vistaAltaPromocionTemporal.mostrar();
+
+        return controladorAltaPromocionTemporal;
+    }
+
+    public static ControladorAltaPromocionTemporal getControladorAltaPromocionTemporal(String op, PromocionTemporalDTO promocionTemporal) {
+        if (controladorAltaPromocionTemporal == null) {
+            controladorAltaPromocionTemporal = new ControladorAltaPromocionTemporal();
+        }
+        controladorAltaPromocionTemporal.op = op;
+        controladorAltaPromocionTemporal.promocionTemporal = promocionTemporal;
+        controladorAltaPromocionTemporal.vistaAltaPromocionTemporal.mostrar();
+
         return controladorAltaPromocionTemporal;
     }
 
@@ -55,26 +70,34 @@ public class ControladorAltaPromocionTemporal implements ActionListener {
                 dias.add(Dias.DOMINGO);
             String formaDePago = vistaAltaPromocionTemporal.getSelection();
             float porcentajeDesc = vistaAltaPromocionTemporal.getPorcentajeDesc();
-            if(porcentajeDesc==0)
-                ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal();
+            if(porcentajeDesc == 0){
+                //!Lanzar excepcion
+            }
             else {
                 boolean isAcumulable = vistaAltaPromocionTemporal.getChckbxPromoAcumulable().isSelected();
                 boolean activa = vistaAltaPromocionTemporal.getChckbxPromoActiva().isSelected();
                 String nombre = vistaAltaPromocionTemporal.getNombre();
                 PromocionTemporalDTO promo = new PromocionTemporalDTO(nombre, activa, dias, formaDePago, porcentajeDesc, isAcumulable);
                 try {
-                    gestionDePromociones.altaPromocion(promo);
-                    this.vistaAltaPromocionTemporal.success("La promocion " + promo.getNombre() + " se ha dado de alta con exito");
-                    ControladorGestionPromociones.getControladorGestionPromociones(true);
+
+                    if(op.equalsIgnoreCase("Alta")){
+                        gestionDePromociones.altaPromocion(promo);
+                        vistaAltaPromocionTemporal.success("La promocion fija: " + promo.getNombre() + " se ha dado de alta con exito");
+                    }else{
+                        gestionDePromociones.bajaPromocion(promocionTemporal);
+                        gestionDePromociones.altaPromocion(promo);
+                        vistaAltaPromocionTemporal.success("La promocion fija: " + promo.getNombre() + " se ha modificado con exito");
+                    }
+
                 } catch (PromocionExistenteException ex) {
                     this.vistaAltaPromocionTemporal.failure("La promocion " + promo.getNombre() + " ya se encuentra en el sistema");
-                    vistaAltaPromocionTemporal.limpia();
                 }
+                vistaAltaPromocionTemporal.esconder();
             }
         }
         else if( comando.equals("Volver")) {
             vistaAltaPromocionTemporal.esconder();
-            ControladorGestionPromociones con = ControladorGestionPromociones.getControladorGestionPromociones(true);
         }
+            ControladorGestionPromociones con = ControladorGestionPromociones.getControladorGestionPromociones(true);
     }
 }

@@ -51,7 +51,7 @@ public class ControladorGestionProductos implements ActionListener {
         String comando =  e.getActionCommand();
         if(comando.equals("Alta Producto")) {
             vistaGestionProductos.esconder();
-            ControladorAltaProducto controladorAltaProducto = ControladorAltaProducto.getControladorAltaProducto();
+            ControladorAltaProducto controladorAltaProducto = ControladorAltaProducto.getControladorAltaProducto("Alta");
         }
         else  if( comando.equals("Baja Producto") ){
             Producto producto = (Producto) vistaGestionProductos.getSeleccion();
@@ -65,8 +65,7 @@ public class ControladorGestionProductos implements ActionListener {
         else if( comando.equals("Modificar Producto") ){
             Producto producto = (Producto) vistaGestionProductos.getSeleccion();
             gestionProductos.bajaProducto(producto.getId());
-            ControladorAltaProducto controladorAltaProducto = ControladorAltaProducto.getControladorAltaProducto();
-            vistaGestionProductos.success("Producto " + producto.getNombre() + "modificado");
+            ControladorAltaProducto controladorAltaProducto = ControladorAltaProducto.getControladorAltaProducto("Modificar", producto);
         }
         else if( comando.equals("Volver") ){
             vistaGestionProductos.esconder();

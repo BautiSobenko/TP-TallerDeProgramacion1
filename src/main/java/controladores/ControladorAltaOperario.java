@@ -16,22 +16,37 @@ public class ControladorAltaOperario implements ActionListener {
     private static ControladorAltaOperario controladorAltaOperario = null;
     private Empresa empresa;
     private IAltaOperario vistaAltaOperario;
-    private GestionDeOperarios op;
+    private GestionDeOperarios gestionDeOperarios;
+    private String op;
+    private Operario operario;
 
     private ControladorAltaOperario() {
         this.vistaAltaOperario = new VistaAltaOperario();
-        this.op = GestionDeOperarios.get();
+        this.gestionDeOperarios = GestionDeOperarios.get();
         this.vistaAltaOperario.setActionListener(this);
     }
 
-    public static ControladorAltaOperario getControladorAltaOperario(boolean mostrar) {
+    public static ControladorAltaOperario getControladorAltaOperario(String op) {
         if (controladorAltaOperario == null) {
             controladorAltaOperario = new ControladorAltaOperario();
         }
-        if( mostrar )
-            controladorAltaOperario.vistaAltaOperario.mostrar();
+        controladorAltaOperario.op = op;
+        controladorAltaOperario.vistaAltaOperario.mostrar();
+
         return controladorAltaOperario;
     }
+
+    public static ControladorAltaOperario getControladorAltaOperario(String op, Operario operario) {
+        if (controladorAltaOperario == null) {
+            controladorAltaOperario = new ControladorAltaOperario();
+        }
+        controladorAltaOperario.op = op;
+        controladorAltaOperario.operario = operario;
+        controladorAltaOperario.vistaAltaOperario.mostrar();
+
+        return controladorAltaOperario;
+    }
+
 
     public IGenerica getVistaAltaOperario() {
         return vistaAltaOperario;
@@ -47,7 +62,14 @@ public class ControladorAltaOperario implements ActionListener {
             String password = this.vistaAltaOperario.getPassword();
             OperarioDTO operarioDTO = new OperarioDTO(nombre, username, password);
             try {
-                this.op.altaOperario(operarioDTO);
+                if(op.equalsIgnoreCase("Alta")){
+                    gestionDeOperarios.altaOperario(operarioDTO);
+                    this.vistaAltaOperario.success("El operario: " + operarioDTO.getNombreCompleto() + " fue dado de alta con exito");
+                }else{
+                    gestionDeOperarios.bajaOperario(operario.getNombreCompleto());
+                    gestionDeOperarios.altaOperario(operarioDTO);
+                    this.vistaAltaOperario.success("El operario: " + operarioDTO.getNombreCompleto() + " fue modificado con exito");
+                }
             } catch (OperarioExistenteException ex) {
                 throw new RuntimeException(ex);
             } catch (PermisoDenegadoException ex) {

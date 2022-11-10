@@ -2,6 +2,7 @@ package controladores;
 
 import dto.MesaDTO;
 import excepciones.MesaExistenteException;
+import modelo.Mesa;
 import modelo.Operario;
 import negocio.GestionDeMesas;
 import vistas.VistaAltaMesa;
@@ -13,6 +14,8 @@ public class ControladorAltaMesa implements ActionListener {
     private static ControladorAltaMesa controladorAltaMesa = null;
     private final GestionDeMesas gestionDeMesas;
     private final VistaAltaMesa vistaAltaMesa;
+    private String op;
+    private Mesa mesa;
 
     private ControladorAltaMesa() {
         this.vistaAltaMesa = new VistaAltaMesa();
@@ -20,11 +23,24 @@ public class ControladorAltaMesa implements ActionListener {
         this.gestionDeMesas = GestionDeMesas.get();
     }
 
-    public static ControladorAltaMesa getControladorAltaMesa() {
+    public static ControladorAltaMesa getControladorAltaMesa(String op) {
         if (controladorAltaMesa == null) {
             controladorAltaMesa = new ControladorAltaMesa();
         }
+        controladorAltaMesa.op = op;
         controladorAltaMesa.vistaAltaMesa.mostrar();
+
+        return controladorAltaMesa;
+    }
+
+    public static ControladorAltaMesa getControladorAltaMesa(String op, Mesa mesa) {
+        if (controladorAltaMesa == null) {
+            controladorAltaMesa = new ControladorAltaMesa();
+        }
+        controladorAltaMesa.op = op;
+        controladorAltaMesa.mesa = mesa;
+        controladorAltaMesa.vistaAltaMesa.mostrar();
+
         return controladorAltaMesa;
     }
 
@@ -37,12 +53,17 @@ public class ControladorAltaMesa implements ActionListener {
             int cantSilla = Integer.parseInt(this.vistaAltaMesa.getCantSillas());
             MesaDTO mesaDTO = new MesaDTO(nroMesa, cantSilla);
             try {
-                gestionDeMesas.altaMesa(mesaDTO);
-                this.vistaAltaMesa.success("La mesa se dio de alta con exito");
+                    if(op.equalsIgnoreCase("Alta")){
+                        gestionDeMesas.altaMesa(mesaDTO);
+                        this.vistaAltaMesa.success("La mesa: " + mesaDTO.getNroMesa() + " fue dada de alta con exito");
+                    }else{
+                        gestionDeMesas.bajaMesa(mesa.getNroMesa());
+                        gestionDeMesas.altaMesa(mesaDTO);
+                        this.vistaAltaMesa.success("La mesa: " + mesaDTO.getNroMesa() + " fue modificada con exito");
+                    }
             } catch (MesaExistenteException ex) {
-                this.vistaAltaMesa.failure("La mesa ya se encuentra en el sistema");
+                    this.vistaAltaMesa.failure("La mesa: " + mesaDTO.getNroMesa() + " ya se encuentra en el sistema");
             }
-            this.vistaAltaMesa.esconder();
         }else if( comando.equalsIgnoreCase("Volver") ){
             this.vistaAltaMesa.esconder();
         }

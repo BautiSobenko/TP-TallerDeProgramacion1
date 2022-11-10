@@ -2,6 +2,7 @@ package controladores;
 
 import dto.ProductoDTO;
 import excepciones.ProductoExistenteException;
+import modelo.Producto;
 import negocio.GestionDeProductos;
 import vistas.VistaAltaProducto;
 
@@ -12,6 +13,8 @@ public class ControladorAltaProducto implements ActionListener {
     private static ControladorAltaProducto controladorAltaProducto = null;
     private final GestionDeProductos gestionDeProductos;
     private final VistaAltaProducto vistaAltaProducto;
+    private String op;
+    private Producto producto;
 
     private ControladorAltaProducto() {
         this.vistaAltaProducto = new VistaAltaProducto();
@@ -19,11 +22,24 @@ public class ControladorAltaProducto implements ActionListener {
         this.gestionDeProductos = GestionDeProductos.get();
     }
 
-    public static ControladorAltaProducto getControladorAltaProducto() {
+    public static ControladorAltaProducto getControladorAltaProducto(String op) {
         if (controladorAltaProducto == null) {
             controladorAltaProducto = new ControladorAltaProducto();
         }
+        controladorAltaProducto.op = op;
         controladorAltaProducto.vistaAltaProducto.mostrar();
+
+        return controladorAltaProducto;
+    }
+
+    public static ControladorAltaProducto getControladorAltaProducto(String op, Producto producto) {
+        if (controladorAltaProducto == null) {
+            controladorAltaProducto = new ControladorAltaProducto();
+        }
+        controladorAltaProducto.op = op;
+        controladorAltaProducto.producto = producto;
+        controladorAltaProducto.vistaAltaProducto.mostrar();
+
         return controladorAltaProducto;
     }
 
@@ -37,15 +53,22 @@ public class ControladorAltaProducto implements ActionListener {
             int stock = this.vistaAltaProducto.getStockInicial();
             float precioventa = this.vistaAltaProducto.getPrecioVenta();
             float precioCosto = this.vistaAltaProducto.getPrecioCosto();
-            if(stock==0 || precioCosto==0 || precioventa==0)
-                con = ControladorAltaProducto.getControladorAltaProducto();
+            if( stock == 0 ){
+                //! Lanzar excepcion, no puede ingresar un stock negativo
+            }
             else {
                 ProductoDTO productoDTO = new ProductoDTO(nombre, precioventa, precioCosto, stock);
                 try {
-                    gestionDeProductos.altaProducto(productoDTO);
-                    this.vistaAltaProducto.success("El producto se dio de alta con exito");
+                    if(op.equalsIgnoreCase("Alta")){
+                        gestionDeProductos.altaProducto(productoDTO);
+                        this.vistaAltaProducto.success("El producto: " + productoDTO.getNombre() + " fue dado de alta con exito");
+                    }else{
+                        gestionDeProductos.bajaProducto(producto.getId());
+                        gestionDeProductos.altaProducto(productoDTO);
+                        this.vistaAltaProducto.success("El producto: " + productoDTO.getNombre() + " fue modificado con exito");
+                    }
                 } catch (ProductoExistenteException ex) {
-                    this.vistaAltaProducto.failure("El producto ya se encuentra en el sistema");
+                    this.vistaAltaProducto.failure("El producto: " + productoDTO.getNombre() + " ya se encuentra en el sistema");
                 }
                 this.vistaAltaProducto.esconder();
             }

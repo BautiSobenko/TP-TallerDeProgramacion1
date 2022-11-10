@@ -169,4 +169,28 @@ public class VistaAltaMozo extends JFrame implements IGenerica, KeyListener{
 
 		return cantHijos;
 	}
+
+	public JTextField getTxtNombre() {
+		return txtNombre;
+	}
+
+	public void setTxtNombre(JTextField txtNombre) {
+		this.txtNombre = txtNombre;
+	}
+
+	public JTextField getTxtFechaNacimiento() {
+		return txtFechaNacimiento;
+	}
+
+	public void setTxtFechaNacimiento(JTextField txtFechaNacimiento) {
+		this.txtFechaNacimiento = txtFechaNacimiento;
+	}
+
+	public JTextField getTxtCantHijos() {
+		return txtCantHijos;
+	}
+
+	public void setTxtCantHijos(JTextField txtCantHijos) {
+		this.txtCantHijos = txtCantHijos;
+	}
 }

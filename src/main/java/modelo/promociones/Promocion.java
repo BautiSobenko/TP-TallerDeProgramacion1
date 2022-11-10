@@ -13,6 +13,7 @@ public class Promocion {
 
     public Promocion(String nombre, List<Dias> diasPromo) {
         this.id = UUID.randomUUID().toString();
+        this.nombre = nombre;
         this.diasPromo = diasPromo;
         this.activo = true;
     }

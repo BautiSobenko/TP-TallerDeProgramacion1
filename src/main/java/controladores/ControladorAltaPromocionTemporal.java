@@ -65,6 +65,7 @@ public class ControladorAltaPromocionTemporal implements ActionListener {
                 try {
                     gestionDePromociones.altaPromocion(promo);
                     this.vistaAltaPromocionTemporal.success("La promocion " + promo.getNombre() + " se ha dado de alta con exito");
+                    vistaAltaPromocionTemporal.esconder();
                     ControladorGestionPromociones.getControladorGestionPromociones(true);
                 } catch (PromocionExistenteException ex) {
                     this.vistaAltaPromocionTemporal.failure("La promocion " + promo.getNombre() + " ya se encuentra en el sistema");

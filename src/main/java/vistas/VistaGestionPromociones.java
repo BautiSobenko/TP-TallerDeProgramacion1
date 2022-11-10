@@ -78,6 +78,9 @@ public class VistaGestionPromociones extends JFrame implements IVistaGestion, Mo
 		btnAltaPromoProducto.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnAltaPromoProducto.setBounds(237, 236, 241, 42);
 		frmGestionDePromociones.getContentPane().add(btnAltaPromoProducto);
+
+		btnBajaPromo.setEnabled(false);
+		btnModificarPromocion.setEnabled(false);
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class ControladorAltaPromocionTemporal implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
 
-        if(comando.equalsIgnoreCase("Finalizar")){
+        if(comando.equalsIgnoreCase("Aceptar")){
             List<Dias> dias = new ArrayList<>();
             if(vistaAltaPromocionTemporal.getChckbxLunes().isSelected())
                 dias.add(Dias.LUNES);
@@ -55,15 +55,21 @@ public class ControladorAltaPromocionTemporal implements ActionListener {
                 dias.add(Dias.DOMINGO);
             String formaDePago = vistaAltaPromocionTemporal.getSelection();
             float porcentajeDesc = vistaAltaPromocionTemporal.getPorcentajeDesc();
-            boolean isAcumulable = vistaAltaPromocionTemporal.getChckbxPromoAcumulable().isSelected();
-            boolean activa = vistaAltaPromocionTemporal.getChckbxPromoActiva().isSelected();
-            String nombre = vistaAltaPromocionTemporal.getNombre();
-            PromocionTemporalDTO promo = new PromocionTemporalDTO(nombre,activa,dias,formaDePago,porcentajeDesc,isAcumulable);
-            try {
-                gestionDePromociones.altaPromocion(promo);
-                this.vistaAltaPromocionTemporal.success("La promocion " + promo.getNombre() + " se ha dado de alta con exito");
-            } catch (PromocionExistenteException ex) {
-                this.vistaAltaPromocionTemporal.failure("La promocion " + promo.getNombre() + " ya se encuentra en el sistema");
+            if(porcentajeDesc==0)
+                ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal();
+            else {
+                boolean isAcumulable = vistaAltaPromocionTemporal.getChckbxPromoAcumulable().isSelected();
+                boolean activa = vistaAltaPromocionTemporal.getChckbxPromoActiva().isSelected();
+                String nombre = vistaAltaPromocionTemporal.getNombre();
+                PromocionTemporalDTO promo = new PromocionTemporalDTO(nombre, activa, dias, formaDePago, porcentajeDesc, isAcumulable);
+                try {
+                    gestionDePromociones.altaPromocion(promo);
+                    this.vistaAltaPromocionTemporal.success("La promocion " + promo.getNombre() + " se ha dado de alta con exito");
+                    ControladorGestionPromociones.getControladorGestionPromociones(true);
+                } catch (PromocionExistenteException ex) {
+                    this.vistaAltaPromocionTemporal.failure("La promocion " + promo.getNombre() + " ya se encuentra en el sistema");
+                    vistaAltaPromocionTemporal.limpia();
+                }
             }
         }
         else if( comando.equals("Volver")) {

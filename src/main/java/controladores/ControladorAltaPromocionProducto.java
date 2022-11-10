@@ -36,7 +36,8 @@ public class ControladorAltaPromocionProducto implements ActionListener {
             controladorAltaPromocionProducto = new ControladorAltaPromocionProducto();
         }
         Set<Producto> productos = gestionDeProductos.getProductos();
-        JComboBox<Producto> comboP = new JComboBox<>();
+        JComboBox<Producto> comboP = vistaAltaPromocionProducto.getComboBox();
+        comboP.removeAllItems();
         for(Producto prod : productos){
             comboP.addItem(prod);
         }

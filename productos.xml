@@ -4,6 +4,25 @@
   <void method="add">
    <object class="modelo.Producto">
     <void property="costo">
+     <float>10.0</float>
+    </void>
+    <void property="id">
+     <string>da1103aa-acb8-49f4-a786-f2d133206b52</string>
+    </void>
+    <void property="nombre">
+     <string>Banana1</string>
+    </void>
+    <void property="precio">
+     <float>30.0</float>
+    </void>
+    <void property="stock">
+     <int>50</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Producto">
+    <void property="costo">
      <float>30.0</float>
     </void>
     <void property="id">
@@ -17,25 +36,6 @@
     </void>
     <void property="stock">
      <int>30</int>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="modelo.Producto">
-    <void property="costo">
-     <float>15.0</float>
-    </void>
-    <void property="id">
-     <string>68cba187-8ab7-4ccc-89c5-041dbd9db819</string>
-    </void>
-    <void property="nombre">
-     <string>Banana</string>
-    </void>
-    <void property="precio">
-     <float>30.0</float>
-    </void>
-    <void property="stock">
-     <int>50</int>
     </void>
    </object>
   </void>

@@ -171,6 +171,7 @@ public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, Key
 		
 		chckbxPromoActiva = new JCheckBox("");
 		chckbxPromoActiva.setBounds(117, 219, 27, 23);
+		chckbxPromoActiva.addMouseListener(this);
 		frmAltaPromocionTemporal.getContentPane().add(chckbxPromoActiva);
 		
 		JLabel lblFormaDePago_1_1 = new JLabel("Activa");
@@ -180,6 +181,7 @@ public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, Key
 		
 		chckbxPromoAcumulable = new JCheckBox("");
 		chckbxPromoAcumulable.setBounds(439, 219, 27, 23);
+		chckbxPromoAcumulable.addMouseListener(this);
 		frmAltaPromocionTemporal.getContentPane().add(chckbxPromoAcumulable);
 		
 		JLabel lblFormaDePago_1_1_1 = new JLabel("Acumulable");
@@ -195,6 +197,7 @@ public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, Key
 		txtPorcentajeDesc = new JTextField();
 		txtPorcentajeDesc.setBounds(197, 177, 192, 32);
 		frmAltaPromocionTemporal.getContentPane().add(txtPorcentajeDesc);
+		txtPorcentajeDesc.addKeyListener(this);
 		txtPorcentajeDesc.setColumns(10);
 		
 		limpia();
@@ -213,18 +216,19 @@ public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, Key
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		this.btnAceptar.setEnabled( formaDePago.getSelection()!=null
-									 &&
-								   ( this.chckbxLunes.isSelected()       || 
-									 this.chckbxMartes.isSelected()      || 
-									 this.chckbxMiercoles.isSelected()   || 
-									 this.chckbxJueves.isSelected()      || 
-									 this.chckbxViernes.isSelected()     || 
-									 this.chckbxSabado.isSelected()      || 
-									 this.chckbxDomingo.isSelected() )
-									 && 
-									 this.nombre.length() > 0 
-									 && this.porcentajeDesc>0);
+		this.nombre = this.txtNombrePromocion.getText();
+		this.btnAceptar.setEnabled(formaDePago.getSelection()!=null
+				&&
+				( this.chckbxLunes.isSelected()       ||
+						this.chckbxMartes.isSelected()      ||
+						this.chckbxMiercoles.isSelected()   ||
+						this.chckbxJueves.isSelected()      ||
+						this.chckbxViernes.isSelected()     ||
+						this.chckbxSabado.isSelected()      ||
+						this.chckbxDomingo.isSelected() )
+				&&
+				this.nombre.length() > 0
+				&& this.txtPorcentajeDesc.getText().length() > 0);
 	}
 
 	@Override
@@ -253,7 +257,6 @@ public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, Key
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		try {
 		this.nombre = this.txtNombrePromocion.getText();
 		this.btnAceptar.setEnabled(formaDePago.getSelection()!=null
 									 &&
@@ -267,34 +270,12 @@ public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, Key
 									 && 
 									 this.nombre.length() > 0 
 									 && this.txtPorcentajeDesc.getText().length() > 0);
-		}
-		catch(Exception ex) {
-			JOptionPane.showMessageDialog(this, "Ingreso de manera erronea el descuento", "Error", JOptionPane.ERROR_MESSAGE);
-			this.txtPorcentajeDesc.setText("");
-		}
 	}
 
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.btnAceptar.addActionListener(actionListener);	
 		this.btnVolver.addActionListener(actionListener);
-
-		/*
-		this.chckbxEfectivo.addActionListener(actionListener);
-		this.chckbxTarjeta.addActionListener(actionListener);
-		this.chckbxMercadoPago.addActionListener(actionListener);
-		this.chckbxCuentaDNI.addActionListener(actionListener);
-		
-		this.chckbxLunes.addActionListener(actionListener);
-		this.chckbxMartes.addActionListener(actionListener);
-		this.chckbxMiercoles.addActionListener(actionListener);
-		this.chckbxJueves.addActionListener(actionListener);
-		this.chckbxViernes.addActionListener(actionListener);
-		this.chckbxSabado.addActionListener(actionListener);
-		this.chckbxDomingo.addActionListener(actionListener);
-		
-		this.chckbxPromoActiva.addActionListener(actionListener);
-		this.chckbxPromoAcumulable.addActionListener(actionListener);*/
 	}
 
 	@Override
@@ -459,6 +440,7 @@ public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, Key
 		catch (Exception e){
 			JOptionPane.showMessageDialog(null, "Ingreso mal el Porcentaje de descuento", "Error", JOptionPane.ERROR_MESSAGE);
 			this.txtPorcentajeDesc.setText("");
+			return 0;
 		}
 		return porcentajeDesc;
 	}

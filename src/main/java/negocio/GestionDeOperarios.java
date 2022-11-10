@@ -67,7 +67,7 @@ public class GestionDeOperarios {
     }
 
 
-    public void modificarOperario(Operario operario) throws OperarioNoExistenteException, PermisoDenegadoException {
+    public void modificarOperario(Operario operario) throws PermisoDenegadoException {
         if (this.empresa.getUsuarioLogueado().getUsername().equals("admin")){
             Set<Operario> operarios = this.empresa.getOperarios();
             Iterator<Operario> it = operarios.iterator();
@@ -87,13 +87,12 @@ public class GestionDeOperarios {
                 operarios.add(opMod);
                 this.empresa.setOperarios(operarios);
                 persistirOperarios();
-            }else
-                throw new OperarioNoExistenteException();
+            }
         }else
             throw new PermisoDenegadoException();
     }
 
-    public void bajaOperario(String nombre) throws OperarioNoExistenteException, PermisoDenegadoException {
+    public void bajaOperario(String nombre) throws PermisoDenegadoException {
         if (this.empresa.getUsuarioLogueado().getUsername().equals("admin")){
             Set<Operario> operarios = this.empresa.getOperarios();
             Iterator<Operario> it = operarios.iterator();
@@ -111,8 +110,7 @@ public class GestionDeOperarios {
                 operarios.remove(op);
                 this.empresa.setOperarios(operarios);
                 persistirOperarios();
-            }else
-                throw new OperarioNoExistenteException();
+            }
         }else
             throw new PermisoDenegadoException();
     }

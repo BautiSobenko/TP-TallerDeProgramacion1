@@ -58,7 +58,7 @@ public class GestionDeMozos {
             throw new PermisoDenegadoException();
     }
 
-    public void modificarMozo(MozoDTO mozo) throws MozoNoExistenteException, PermisoDenegadoException {
+    public void modificarMozo(MozoDTO mozo) throws PermisoDenegadoException {
 
         if (this.empresa.getUsuarioLogueado().getUsername().equals("admin")){
             Set<Mozo> mozos = this.empresa.getMozos();
@@ -66,9 +66,7 @@ public class GestionDeMozos {
             Mozo mozoMod = new Mozo(mozo.getNombreCompleto(),mozo.getFechaNacimiento(),mozo.getCantidadHijos());
 
             boolean existeMozo = mozos.stream().anyMatch(m -> m.getNombreCompleto().equalsIgnoreCase(mozo.getNombreCompleto()) );
-            if( !existeMozo )
-                throw new MozoNoExistenteException();
-            else{
+            if( existeMozo ){
                 mozos.remove(mozoMod);
                 mozos.add(mozoMod);
                 this.empresa.setMozos(mozos);
@@ -78,15 +76,13 @@ public class GestionDeMozos {
             throw new PermisoDenegadoException();
     }
 
-    public void bajaMozo(Mozo mozo) throws MozoNoExistenteException, PermisoDenegadoException {
+    public void bajaMozo(Mozo mozo) throws PermisoDenegadoException {
 
         if (this.empresa.getUsuarioLogueado().getUsername().equals("admin")){
             Set<Mozo> mozos = this.empresa.getMozos();
 
             boolean existeMozo = mozos.stream().anyMatch(m -> m.getId().equalsIgnoreCase(mozo.getId()) );
-            if( !existeMozo )
-                throw new MozoNoExistenteException();
-            else{
+            if( existeMozo ){
                 mozos.remove(mozo);
                 this.empresa.setMozos(mozos);
                 persistirMozos();

@@ -22,7 +22,6 @@ public class GestionDePromociones {
     private static GestionDePromociones gestionDePromociones = null;
 
     private GestionDePromociones() {
-
         this.empresa = Empresa.getEmpresa();
     }
 

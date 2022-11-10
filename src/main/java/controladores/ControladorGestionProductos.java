@@ -55,24 +55,18 @@ public class ControladorGestionProductos implements ActionListener {
         }
         else  if( comando.equals("Baja Producto") ){
             Producto producto = (Producto) vistaGestionProductos.getSeleccion();
-            try {
-                gestionProductos.bajaProducto(producto.getId());
-                Set<Producto> productos = gestionProductos.getProductos();
-                DefaultListModel<Producto> updatedList = new DefaultListModel<>();
-                productos.forEach(updatedList::addElement);
-                vistaGestionProductos.setModel(updatedList);
-                vistaGestionProductos.success("Producto " + producto.getNombre() + "dada de baja");
-            } catch (ProductoNoExistenteException ignored) {
-            }
+            gestionProductos.bajaProducto(producto.getId());
+            Set<Producto> productos = gestionProductos.getProductos();
+            DefaultListModel<Producto> updatedList = new DefaultListModel<>();
+            productos.forEach(updatedList::addElement);
+            vistaGestionProductos.setModel(updatedList);
+            vistaGestionProductos.success("Producto " + producto.getNombre() + "dada de baja");
         }
         else if( comando.equals("Modificar Producto") ){
             Producto producto = (Producto) vistaGestionProductos.getSeleccion();
-            try {
-                gestionProductos.bajaProducto(producto.getId());
-                ControladorAltaProducto controladorAltaProducto = ControladorAltaProducto.getControladorAltaProducto();
-                vistaGestionProductos.success("Producto " + producto.getNombre() + "modificado");
-            } catch (ProductoNoExistenteException ignored) {
-            }
+            gestionProductos.bajaProducto(producto.getId());
+            ControladorAltaProducto controladorAltaProducto = ControladorAltaProducto.getControladorAltaProducto();
+            vistaGestionProductos.success("Producto " + producto.getNombre() + "modificado");
         }
         else if( comando.equals("Volver") ){
             vistaGestionProductos.esconder();

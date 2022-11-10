@@ -11,7 +11,7 @@ import modelo.promociones.Promocion;
 public class VistaGestionPromociones extends JFrame implements IVistaGestion, MouseListener{
 
 	private JFrame frmGestionDePromociones;
-	private JButton btnAltaPromoTemporal,btnBajaPromo,btnModificarPromocion,btnVolver;
+	private JButton btnAltaPromoTemporal,btnBajaPromo, btnAltaPromoProducto, btnModificarPromocion,btnVolver;
 	private JList<Promocion> listaPromos;
 	private ActionListener actionListener;
 
@@ -74,7 +74,7 @@ public class VistaGestionPromociones extends JFrame implements IVistaGestion, Mo
 		btnModificarPromocion.setBounds(306, 65, 172, 42);
 		frmGestionDePromociones.getContentPane().add(btnModificarPromocion);
 		
-		JButton btnAltaPromoProducto = new JButton("Alta promocion por producto");
+		btnAltaPromoProducto = new JButton("Alta promocion por producto");
 		btnAltaPromoProducto.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnAltaPromoProducto.setBounds(237, 236, 241, 42);
 		frmGestionDePromociones.getContentPane().add(btnAltaPromoProducto);
@@ -87,6 +87,7 @@ public class VistaGestionPromociones extends JFrame implements IVistaGestion, Mo
 		btnBajaPromo.addActionListener(actionListener);
 		btnModificarPromocion.addActionListener(actionListener);
 		btnVolver.addActionListener(actionListener);
+		btnAltaPromoProducto.addActionListener(actionListener);
 	}
 
 	@Override

@@ -57,7 +57,7 @@ public class GestionDeMesas {
             throw new MesaExistenteException();
     }
 
-    public void modificaMesa(MesaDTO mesa) throws MesaNoExistenteException {
+    public void modificaMesa(MesaDTO mesa)  {
         Set<Mesa> mesas = this.empresa.getMesas();
         Iterator<Mesa> it = mesas.iterator();
 
@@ -78,11 +78,9 @@ public class GestionDeMesas {
             this.empresa.setMesas(mesas);
             persistirMesas();
         }
-        else
-            throw new MesaNoExistenteException();
     }
 
-    public void bajaMesa(int nroMesa) throws MesaNoExistenteException {
+    public void bajaMesa(int nroMesa) {
         Set<Mesa> mesas = this.empresa.getMesas();
         Optional<Mesa> mesa = mesas.stream().filter(m -> m.getNroMesa() == nroMesa).findFirst();
 
@@ -91,8 +89,6 @@ public class GestionDeMesas {
             this.empresa.setMesas(mesas);
             persistirMesas();
         }
-        else
-            throw new MesaNoExistenteException();
     }
 
     public void asignarMozoMesa(Mozo mozo, Mesa mesa) throws MozoNoExistenteException, MesaNoExistenteException {

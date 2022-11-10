@@ -51,7 +51,7 @@ public class ControladorInicio implements ActionListener {
                 ControladorGestionProductos controladorGestionProductos = ControladorGestionProductos.getControladorGestionProductos(true);
         }
         else if(comando.equals("Gestionar Promociones")){
-            //!ControladorGestionPromociones controladorGestionPromociones = ControladorGestionPromociones.getControladorGestionPromociones(true);
+            ControladorGestionPromociones controladorGestionPromociones = ControladorGestionPromociones.getControladorGestionPromociones(true);
         }
         else if(comando.equals("Abrir Local")){
             this.vistaInicio.esconder();

@@ -50,73 +50,67 @@ public class ControladorGestionPromociones implements ActionListener {
 
         String comando =  e.getActionCommand();
 
-        Promocion promocion = (Promocion) vistaGestionPromociones.getSeleccion();
-        PromocionTemporalDTO promocionTemporalDTO = null;
-        PromocionProductoDTO promocionProductoDTO = null;
-
-        if( promocion instanceof PromocionTemporal ){
-            PromocionTemporal promocionTemporal = (PromocionTemporal) promocion;
-            promocionTemporalDTO = new PromocionTemporalDTO(   promocionTemporal.getNombre(),
-                    promocionTemporal.isActivo(),
-                    promocionTemporal.getDiasPromo(),
-                    promocionTemporal.getFormaPago(),
-                    promocionTemporal.getPorcentajeDescuento(),
-                    promocionTemporal.isEsAcumulable());
-        }else{
-            PromocionFija promocionFija = (PromocionFija) promocion;
-            promocionProductoDTO = new PromocionProductoDTO(   promocionFija.getNombre(),
-                    promocionFija.isActivo(),
-                    promocionFija.getDiasPromo(),
-                    promocionFija.getProducto(),
-                    promocionFija.isDosPorUno(),
-                    promocionFija.isDtoPorCant(),
-                    promocionFija.getDtoPorCantMin(),
-                    promocionFija.getDtoPorCantPrecioU());
-        }
-
         if(comando.equals("Alta Promocion Temporal")) {
             vistaGestionPromociones.esconder();
             ControladorAltaPromocionTemporal con = ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal();
         }
-        else if(comando.equalsIgnoreCase("Alta promocion por producto")){
+        else if(comando.equals("Alta promocion por producto")){
             vistaGestionPromociones.esconder();
             ControladorAltaPromocionProducto con = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto();
         }
-        else  if( comando.equals("Baja Promocion") ){
+        else if( comando.equals("Baja Promocion") || comando.equals("Modificar Promocion")) {
 
-           if( promocion instanceof PromocionTemporal ) {
-               gestionPromociones.bajaPromocion(promocionTemporalDTO);
-               vistaGestionPromociones.success("Promocion temporal: " + promocionTemporalDTO.getNombre() + "dada de baja");
-           }else{
-               gestionPromociones.bajaPromocion(promocionProductoDTO);
-               vistaGestionPromociones.success("Promocion producto: " + promocionProductoDTO.getNombre() + "dada de baja");
-           }
+            Promocion promocion = (Promocion) vistaGestionPromociones.getSeleccion();
+            PromocionTemporalDTO promocionTemporalDTO = null;
+            PromocionProductoDTO promocionProductoDTO = null;
 
-            Set<Promocion> promociones = gestionPromociones.getPromociones();
-            DefaultListModel<Promocion> updatedList = new DefaultListModel<Promocion>();
-            promociones.forEach(updatedList::addElement);
-            vistaGestionPromociones.setModel(updatedList);
-        }
-        else if( comando.equals("Modificar Promocion") ){
-
-            ControladorAltaPromocionTemporal controladorTemporal;
-            ControladorAltaPromocionProducto controladorProducto;
-            try {
-                gestionPromociones.bajaPromocion(promo.getId());
-                if (promo instanceof PromocionTemporal)
-                    controladorTemporal = ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal();
-                else
-                    controladorProducto = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto();
-
-                vistaGestionPromociones.success("Promocion " + promo.getNombre() + "modificada");
+            if (promocion instanceof PromocionTemporal) {
+                PromocionTemporal promocionTemporal = (PromocionTemporal) promocion;
+                promocionTemporalDTO = new PromocionTemporalDTO(promocionTemporal.getNombre(),
+                        promocionTemporal.isActivo(),
+                        promocionTemporal.getDiasPromo(),
+                        promocionTemporal.getFormaPago(),
+                        promocionTemporal.getPorcentajeDescuento(),
+                        promocionTemporal.isEsAcumulable());
+            } else {
+                PromocionFija promocionFija = (PromocionFija) promocion;
+                promocionProductoDTO = new PromocionProductoDTO(promocionFija.getNombre(),
+                        promocionFija.isActivo(),
+                        promocionFija.getDiasPromo(),
+                        promocionFija.getProducto(),
+                        promocionFija.isDosPorUno(),
+                        promocionFija.isDtoPorCant(),
+                        promocionFija.getDtoPorCantMin(),
+                        promocionFija.getDtoPorCantPrecioU());
             }
-            catch (PromocionExistenteException ex) {
+
+            if (comando.equals("Baja Promocion")) {
+
+                if (promocion instanceof PromocionTemporal) {
+                    gestionPromociones.bajaPromocion(promocionTemporalDTO);
+                    vistaGestionPromociones.success("Promocion temporal: " + promocionTemporalDTO.getNombre() + "dada de baja");
+                } else {
+                    gestionPromociones.bajaPromocion(promocionProductoDTO);
+                    vistaGestionPromociones.success("Promocion producto: " + promocionProductoDTO.getNombre() + "dada de baja");
+                }
+
+                Set<Promocion> promociones = gestionPromociones.getPromociones();
+                DefaultListModel<Promocion> updatedList = new DefaultListModel<Promocion>();
+                promociones.forEach(updatedList::addElement);
+                vistaGestionPromociones.setModel(updatedList);
+            } else if (comando.equals("Modificar Promocion")) {
+
+                if (promocion instanceof PromocionTemporal) {
+                    ControladorAltaPromocionTemporal controladorTemporal = ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal();
+                    vistaGestionPromociones.success("Promocion temporal: " + promocion.getNombre() + "modificada");
+                } else {
+                    ControladorAltaPromocionProducto controladorProducto = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto();
+                    vistaGestionPromociones.success("Promocion fija: " + promocion.getNombre() + "modificada");
+                }
             }
-        }
-        else if( comando.equals("Volver") ){
+        }else if( comando.equals("Volver") ){
             vistaGestionPromociones.esconder();
             ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);
         }
     }
-
 }

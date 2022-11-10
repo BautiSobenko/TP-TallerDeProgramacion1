@@ -56,26 +56,22 @@ public class ControladorGestionMesas implements ActionListener {
         }else
             if( comando.equals("Baja Mesa") ){
             Mesa mesa = (Mesa) vistaGestionMesas.getSeleccion();
-            try {
-                gestionDeMesas.bajaMesa(mesa.getNroMesa());
-                Set<Mesa> mesas = gestionDeMesas.getMesas();
-                DefaultListModel<Mesa> updatedList = new DefaultListModel<>();
-                mesas.forEach(updatedList::addElement);
-                vistaGestionMesas.setModel(updatedList);
-                vistaGestionMesas.success("Mesa " + mesa.getNroMesa() + "dada de baja");
-            } catch (MesaNoExistenteException ignored) {}
+            gestionDeMesas.bajaMesa(mesa.getNroMesa());
+            Set<Mesa> mesas = gestionDeMesas.getMesas();
+            DefaultListModel<Mesa> updatedList = new DefaultListModel<>();
+            mesas.forEach(updatedList::addElement);
+            vistaGestionMesas.setModel(updatedList);
+            vistaGestionMesas.success("Mesa " + mesa.getNroMesa() + "dada de baja");
         } else
             if( comando.equals("Modificar Mesa") ){
             Mesa mesa = (Mesa) vistaGestionMesas.getSeleccion();
-            try {
-                gestionDeMesas.bajaMesa(mesa.getNroMesa());
-                ControladorAltaMesa con = ControladorAltaMesa.getControladorAltaMesa();
-                Set<Mesa> mesas = gestionDeMesas.getMesas();
-                DefaultListModel<Mesa> updatedList = new DefaultListModel<>();
-                mesas.forEach(updatedList::addElement);
-                vistaGestionMesas.setModel(updatedList);
-                vistaGestionMesas.success("Mesa " + mesa.getNroMesa() + "modificada");
-            } catch (MesaNoExistenteException ignored) {}
+            gestionDeMesas.bajaMesa(mesa.getNroMesa());
+            ControladorAltaMesa con = ControladorAltaMesa.getControladorAltaMesa();
+            Set<Mesa> mesas = gestionDeMesas.getMesas();
+            DefaultListModel<Mesa> updatedList = new DefaultListModel<>();
+            mesas.forEach(updatedList::addElement);
+            vistaGestionMesas.setModel(updatedList);
+            vistaGestionMesas.success("Mesa " + mesa.getNroMesa() + "modificada");
         } else{
                 vistaGestionMesas.esconder();
                 //!ControladorAsignarMozo ctrl = ControladorAsignarMozo.getControladorAsignarMozo();

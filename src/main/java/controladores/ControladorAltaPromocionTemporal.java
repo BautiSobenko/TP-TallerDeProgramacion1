@@ -2,6 +2,7 @@ package controladores;
 
 import dto.PromocionTemporalDTO;
 import enums.Dias;
+import excepciones.PromocionExistenteException;
 import modelo.promociones.PromocionTemporal;
 import negocio.GestionDePromociones;
 import vistas.VistaAltaPromocionTemporal;
@@ -14,12 +15,13 @@ import java.util.List;
 public class ControladorAltaPromocionTemporal implements ActionListener {
 
     private GestionDePromociones gestionDePromociones;
-    private static ControladorAltaPromocionTemporal controladorAltaPromocionTemporal=null;
+    private static ControladorAltaPromocionTemporal controladorAltaPromocionTemporal = null;
     private VistaAltaPromocionTemporal vistaAltaPromocionTemporal;
 
     public ControladorAltaPromocionTemporal(){
-        this.gestionDePromociones = GestionDePromociones.get();
         vistaAltaPromocionTemporal = new VistaAltaPromocionTemporal();
+        vistaAltaPromocionTemporal.setActionListener(this);
+        this.gestionDePromociones = GestionDePromociones.get();
     }
 
     public static ControladorAltaPromocionTemporal getControladorAltaPromocionTemporal() {
@@ -57,10 +59,14 @@ public class ControladorAltaPromocionTemporal implements ActionListener {
             boolean activa = vistaAltaPromocionTemporal.getChckbxPromoActiva().isSelected();
             String nombre = vistaAltaPromocionTemporal.getNombre();
             PromocionTemporalDTO promo = new PromocionTemporalDTO(nombre,activa,dias,formaDePago,porcentajeDesc,isAcumulable);
-            //mandarlo a gestion de promociones
-            vistaAltaPromocionTemporal.success("Se dio de alta la promocion con exito");
+            try {
+                gestionDePromociones.altaPromocion(promo);
+                this.vistaAltaPromocionTemporal.success("La promocion " + promo.getNombre() + " se ha dado de alta con exito");
+            } catch (PromocionExistenteException ex) {
+                this.vistaAltaPromocionTemporal.failure("La promocion " + promo.getNombre() + " ya se encuentra en el sistema");
+            }
         }
-        else{
+        else if( comando.equals("Volver")) {
             vistaAltaPromocionTemporal.esconder();
             ControladorGestionPromociones con = ControladorGestionPromociones.getControladorGestionPromociones(true);
         }

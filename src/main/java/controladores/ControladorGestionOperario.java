@@ -66,7 +66,7 @@ public class ControladorGestionOperario implements ActionListener {
                     operarios.forEach(updatedList::addElement);
                     vistaGestionOperarios.setModel(updatedList);
                     vistaGestionOperarios.success("Operario " + op.getUsername() + "dado de baja");
-                } catch (OperarioNoExistenteException | PermisoDenegadoException ignored) {}
+                } catch (PermisoDenegadoException ignored) {}
             }
         else if( comando.equals("Modificar Operario")){
                 Operario op = (Operario) vistaGestionOperarios.getSeleccion();
@@ -75,7 +75,7 @@ public class ControladorGestionOperario implements ActionListener {
                     gestionOp.bajaOperario(op.getUsername());
                     ControladorAltaOperario controladorAltaOperario = ControladorAltaOperario.getControladorAltaOperario(true);
                     vistaGestionOperarios.success("Operario " + op.getUsername() + "modificado");
-                } catch (OperarioNoExistenteException | PermisoDenegadoException ignored) {
+                } catch (PermisoDenegadoException ignored) {
 
                 }
             }

@@ -58,7 +58,7 @@ public class ControladorGestionMozos implements ActionListener {
                 mozos.forEach(updatedList::addElement);
                 vistaGestionMozos.setModel(updatedList);
                 vistaGestionMozos.success("Mozo " + mozo.getNombreCompleto() + " dado de baja");
-            } catch (MozoNoExistenteException | PermisoDenegadoException exc) {
+            } catch (PermisoDenegadoException exc) {
 
             }
         }
@@ -68,7 +68,7 @@ public class ControladorGestionMozos implements ActionListener {
                 gestionDeMozos.bajaMozo(mozo);
                 ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo();
                 vistaGestionMozos.success("Mozo " + mozo.getNombreCompleto() + " ha sido modificado");
-            } catch (MozoNoExistenteException | PermisoDenegadoException ignored) {}
+            } catch (PermisoDenegadoException ignored) {}
         }
         else if( comando.equals("Asignar Mozos") ) {
             //!Realizar vista Asignar mozo

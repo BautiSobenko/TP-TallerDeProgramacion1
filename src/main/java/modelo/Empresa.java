@@ -37,6 +37,7 @@ public class Empresa {
         cargarMozos();
         cargarProductos();
         cargarOperarios();
+        cargarPromociones();
     }
 
 

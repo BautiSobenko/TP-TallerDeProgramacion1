@@ -127,7 +127,7 @@ public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener
 		
 		btnMaxVentas = new JButton("Mozo con mas Ventas");
 		btnMaxVentas.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnMaxVentas.setBounds(24, 11, 179, 79);
+		btnMaxVentas.setBounds(10, 11, 213, 79);
 		panelEstadisticas.add(btnMaxVentas);
 		
 		btnMinVentas = new JButton("Mozo con menos ventas");
@@ -154,6 +154,9 @@ public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener
 		this.btnCargarPedido.addActionListener(actionListener);
 		this.btnCerrarLocal.addActionListener(actionListener);
 		this.btnCerrarMesa.addActionListener(actionListener);
+		this.btnConsumoPromedio.addActionListener(actionListener);
+		this.btnMaxVentas.addActionListener(actionListener);
+		this.btnMinVentas.addActionListener(actionListener);
 	}
 
 	@Override
@@ -176,7 +179,7 @@ public class VistaLocalAbierto extends JFrame implements IGenerica,MouseListener
 
 	@Override
 	public void success(String msg) {
-		JOptionPane.showMessageDialog(this, msg, "Estadisticas", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, msg, "Estadisticas", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	@Override

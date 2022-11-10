@@ -54,13 +54,15 @@ public class ControladorLocalAbierto implements ActionListener {
                     throw new RuntimeException(ex);
                 }
             }
-            JOptionPane.showMessageDialog(null, txt, "Consumo promedio por mesa", JOptionPane.INFORMATION_MESSAGE);
+            this.vistaLocalAbierto.success(txt);
         }
         else if(comando.equalsIgnoreCase("Mozo con menos ventas")){
-            this.vistaLocalAbierto.success("El moso con menos ventas es "+this.gestionDeMozos.mozoMinVentas());
+            String msg = "El mozo con menos ventas es " + this.gestionDeMozos.mozoMinVentas();
+            this.vistaLocalAbierto.success(msg);
         }
         else if(comando.equalsIgnoreCase("Mozo con mas Ventas")){
-            this.vistaLocalAbierto.success("El moso con mas ventas es "+this.gestionDeMozos.mozoMaxVentas());
+            String msg = "El mozo con mas ventas es " + this.gestionDeMozos.mozoMaxVentas();
+            this.vistaLocalAbierto.success(msg);
         }
         else if(comando.equalsIgnoreCase("Cerrar Mesa")){
             this.vistaLocalAbierto.getMesaCierre().setEstadoMesa(EstadoMesa.LIBRE);

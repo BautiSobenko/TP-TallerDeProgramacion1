@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="16.0.2" class="java.beans.XMLDecoder">
+ <object class="java.util.HashSet">
+  <void method="add">
+   <object class="modelo.Producto">
+    <void property="costo">
+     <float>15.0</float>
+    </void>
+    <void property="id">
+     <string>68cba187-8ab7-4ccc-89c5-041dbd9db819</string>
+    </void>
+    <void property="nombre">
+     <string>Banana</string>
+    </void>
+    <void property="precio">
+     <float>30.0</float>
+    </void>
+    <void property="stock">
+     <int>50</int>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

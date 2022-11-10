@@ -203,4 +203,6 @@ public class VistaAltaProducto extends JFrame implements IGenerica, KeyListener 
 		}
 		return stockInicial;
 	}
+
+
 }

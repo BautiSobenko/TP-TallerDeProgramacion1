@@ -19,7 +19,7 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	private JCheckBox chckbx2x1,chckbxDesc,chckbxActiva;
 	private JButton btnFinalizar,btnVolver;
 
-	JComboBox comboBox;
+	private JComboBox comboBox;
 
 	private ButtonGroup tipoDesc;
 	private String nombre;
@@ -145,6 +145,7 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 		btnFinalizar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnFinalizar.setBounds(567, 401, 107, 33);
 		contentPane.add(btnFinalizar);
+		btnFinalizar.setEnabled(false);
 		
 		JLabel lblNewLabel_3 = new JLabel("Cantidad Minima:");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -201,9 +202,6 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 									this.chckbxDomingo.isSelected())
 							&& this.nombre.length() > 0);
 		} else if (chckbxDesc.isSelected()) {
-			try {
-				this.precioPromo = Float.parseFloat(this.txtCantMinima.getText());
-				this.cantMinima = Integer.parseInt(this.txtCantMinima.getText());
 				this.btnFinalizar.setEnabled(
 						this.comboBox.getSelectedItem() != null
 								&&
@@ -215,13 +213,8 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 										this.chckbxSabado.isSelected() ||
 										this.chckbxDomingo.isSelected())
 								&& this.nombre.length() > 0
-								&& this.cantMinima > 0
-								&& this.precioPromo>0);
-
-			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(this, "Ingreso de manera erronea algun valor numerico", "Error", JOptionPane.ERROR_MESSAGE);
-				this.txtCantMinima.setText("");
-			}
+								&& this.txtCantMinima.getText().length() > 0
+								&& this.textPrecio.getText().length()>0);
 		}
 	}
 
@@ -254,27 +247,20 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 										this.chckbxDomingo.isSelected())
 								&& this.nombre.length() > 0);
 			} else if (chckbxDesc.isSelected()) {
-				try {
-					this.precioPromo = Float.parseFloat(this.txtCantMinima.getText());
-					this.cantMinima = Integer.parseInt(this.txtCantMinima.getText());
-					this.btnFinalizar.setEnabled(
-							this.comboBox.getSelectedItem() != null
-									&&
-									(this.chckbxLunes.isSelected() ||
-											this.chckbxMartes.isSelected() ||
-											this.chckbxMiercoles.isSelected() ||
-											this.chckbxJueves.isSelected() ||
-											this.chckbxViernes.isSelected() ||
-											this.chckbxSabado.isSelected() ||
-											this.chckbxDomingo.isSelected())
-									&& this.nombre.length() > 0
-									&& this.cantMinima > 0
-									&& this.precioPromo>0);
+				this.btnFinalizar.setEnabled(
+						this.comboBox.getSelectedItem() != null
+								&&
+								(this.chckbxLunes.isSelected() ||
+										this.chckbxMartes.isSelected() ||
+										this.chckbxMiercoles.isSelected() ||
+										this.chckbxJueves.isSelected() ||
+										this.chckbxViernes.isSelected() ||
+										this.chckbxSabado.isSelected() ||
+										this.chckbxDomingo.isSelected())
+								&& this.nombre.length() > 0
+								&& this.txtCantMinima.getText().length()>0
+								&& this.textPrecio.getText().length()>0);
 
-				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(this, "Ingreso de manera erronea el descuento", "Error", JOptionPane.ERROR_MESSAGE);
-					this.txtCantMinima.setText("");
-				}
 			}
 		}
 	@Override
@@ -417,6 +403,14 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	}
 
 	public int getCantMinima() {
+
+		try{
+			this.cantMinima = Integer.parseInt(this.txtCantMinima.getText());
+		}
+		catch(Exception e){
+			JOptionPane.showMessageDialog(this, "No ingreso correctamente la cantidad minima de pedido", "Error", JOptionPane.ERROR_MESSAGE);
+			this.txtCantMinima.setText("");
+		}
 		return cantMinima;
 	}
 
@@ -425,6 +419,14 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	}
 
 	public float getPrecioPromo() {
+
+		try{
+			this.precioPromo = Float.parseFloat(this.textPrecio.getText());
+		}
+		catch(Exception e){
+			JOptionPane.showMessageDialog(this, "No ingreso correctamente el precio unitario en Promocion", "Error", JOptionPane.ERROR_MESSAGE);
+			this.textPrecio.setText("");
+		}
 		return precioPromo;
 	}
 
@@ -439,4 +441,5 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	public void setChckbxActiva(JCheckBox chckbxActiva) {
 		this.chckbxActiva = chckbxActiva;
 	}
+
 }

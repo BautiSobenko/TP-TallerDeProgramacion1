@@ -143,7 +143,8 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 		btnFinalizar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnFinalizar.setBounds(567, 401, 107, 33);
 		contentPane.add(btnFinalizar);
-		
+		btnFinalizar.setEnabled(false);
+
 		JLabel lblNewLabel_3 = new JLabel("Cantidad Minima:");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_3.setBounds(292, 303, 120, 14);
@@ -199,9 +200,6 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 									this.chckbxDomingo.isSelected())
 							&& this.nombre.length() > 0);
 		} else if (chckbxDesc.isSelected()) {
-			try {
-				this.precioPromo = Float.parseFloat(this.txtCantMinima.getText());
-				this.cantMinima = Integer.parseInt(this.txtCantMinima.getText());
 				this.btnFinalizar.setEnabled(
 						this.comboBox.getSelectedItem() != null
 								&&
@@ -213,13 +211,8 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 										this.chckbxSabado.isSelected() ||
 										this.chckbxDomingo.isSelected())
 								&& this.nombre.length() > 0
-								&& this.cantMinima > 0
-								&& this.precioPromo>0);
-
-			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(this, "Ingreso de manera erronea algun valor numerico", "Error", JOptionPane.ERROR_MESSAGE);
-				this.txtCantMinima.setText("");
-			}
+								&& this.txtCantMinima.getText().length() > 0
+								&& this.textPrecio.getText().length()>0);
 		}
 	}
 
@@ -247,25 +240,20 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 										this.chckbxDomingo.isSelected())
 								&& this.nombre.length() > 0);
 			} else if (chckbxDesc.isSelected()) {
-				try {
-					this.btnFinalizar.setEnabled(
-							this.comboBox.getSelectedItem() != null
-									&&
-									(this.chckbxLunes.isSelected() ||
-											this.chckbxMartes.isSelected() ||
-											this.chckbxMiercoles.isSelected() ||
-											this.chckbxJueves.isSelected() ||
-											this.chckbxViernes.isSelected() ||
-											this.chckbxSabado.isSelected() ||
-											this.chckbxDomingo.isSelected())
-									&& this.nombre.length() > 0
-									&& this.txtCantMinima.getText().length() > 0
-									&& this.textPrecio.getText().length() > 0);
+				this.btnFinalizar.setEnabled(
+						this.comboBox.getSelectedItem() != null
+								&&
+								(this.chckbxLunes.isSelected() ||
+										this.chckbxMartes.isSelected() ||
+										this.chckbxMiercoles.isSelected() ||
+										this.chckbxJueves.isSelected() ||
+										this.chckbxViernes.isSelected() ||
+										this.chckbxSabado.isSelected() ||
+										this.chckbxDomingo.isSelected())
+								&& this.nombre.length() > 0
+								&& this.txtCantMinima.getText().length()>0
+								&& this.textPrecio.getText().length()>0);
 
-				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(this, "Ingreso de manera erronea el descuento", "Error", JOptionPane.ERROR_MESSAGE);
-					this.txtCantMinima.setText("");
-				}
 			}
 		}
 	@Override
@@ -444,6 +432,7 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	public void setChckbxActiva(JCheckBox chckbxActiva) {
 		this.chckbxActiva = chckbxActiva;
 	}
+
 
 
 }

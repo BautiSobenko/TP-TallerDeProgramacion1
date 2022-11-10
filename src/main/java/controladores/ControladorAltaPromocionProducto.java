@@ -3,24 +3,30 @@ package controladores;
 import dto.PromocionProductoDTO;
 import enums.Dias;
 import excepciones.PromocionExistenteException;
+import modelo.Mesa;
 import modelo.Producto;
+import negocio.GestionDeProductos;
 import negocio.GestionDePromociones;
 import vistas.VistaAltaPromocionProducto;
-import vistas.VistaAltaPromocionTemporal;
 
+import javax.swing.*;
+import javax.swing.event.ListDataListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class ControladorAltaPromocionProducto implements ActionListener {
 
     private GestionDePromociones gestionDePromociones;
+    private static GestionDeProductos gestionDeProductos;
     private static ControladorAltaPromocionProducto controladorAltaPromocionProducto = null;
     private static VistaAltaPromocionProducto vistaAltaPromocionProducto;
 
-    private void ControladorAltaPromocionProducto(){
+    private ControladorAltaPromocionProducto(){
         this.gestionDePromociones = GestionDePromociones.get();
+        this.gestionDeProductos = GestionDeProductos.get();
         vistaAltaPromocionProducto = new VistaAltaPromocionProducto();
         vistaAltaPromocionProducto.setActionListener(this);
     }
@@ -29,6 +35,12 @@ public class ControladorAltaPromocionProducto implements ActionListener {
         if (controladorAltaPromocionProducto == null) {
             controladorAltaPromocionProducto = new ControladorAltaPromocionProducto();
         }
+        Set<Producto> productos = gestionDeProductos.getProductos();
+        JComboBox<Producto> comboP = vistaAltaPromocionProducto.getComboBox();
+        for(Producto prod : productos){
+            comboP.addItem(prod);
+        }
+        vistaAltaPromocionProducto.setComboBox(comboP);
         vistaAltaPromocionProducto.mostrar();
 
         return controladorAltaPromocionProducto;

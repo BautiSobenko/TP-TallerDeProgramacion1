@@ -41,6 +41,13 @@ public class GestionDeOperarios {
         }
     }
 
+    /**
+     * Da del alta operario
+     * precondition: operarioDTO!=null
+     * @param operario
+     * @throws OperarioExistenteException
+     * @throws PermisoDenegadoException
+     */
     public void altaOperario(OperarioDTO operario) throws OperarioExistenteException, PermisoDenegadoException {
         if (this.empresa.getUsuarioLogueado().getUsername().equals("admin")){
             Set<Operario> operarios = this.empresa.getOperarios();
@@ -67,6 +74,11 @@ public class GestionDeOperarios {
     }
 
 
+    /**
+     * Operario!=null
+     * @param operario
+     * @throws PermisoDenegadoException
+     */
     public void modificarOperario(Operario operario) throws PermisoDenegadoException {
         if (this.empresa.getUsuarioLogueado().getUsername().equals("admin")){
             Set<Operario> operarios = this.empresa.getOperarios();
@@ -92,6 +104,11 @@ public class GestionDeOperarios {
             throw new PermisoDenegadoException();
     }
 
+    /**
+     * precondition: String!=null
+     * @param nombre
+     * @throws PermisoDenegadoException
+     */
     public void bajaOperario(String nombre) throws PermisoDenegadoException {
         if (this.empresa.getUsuarioLogueado().getUsername().equals("admin")){
             Set<Operario> operarios = this.empresa.getOperarios();

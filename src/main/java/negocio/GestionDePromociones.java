@@ -45,6 +45,11 @@ public class GestionDePromociones {
         }
     }
 
+    /**
+     * precondition: promocion!=null
+     * @param promocion
+     * @throws PromocionExistenteException
+     */
     public void altaPromocion(PromocionDTO promocion) throws PromocionExistenteException {
         PromocionTemporal promoTemporal;
         PromocionFija promoFija;
@@ -96,6 +101,10 @@ public class GestionDePromociones {
 
     }
 
+    /**
+     * precondition promocion!=null
+     * @param promocion
+     */
     public void modificaPromocion(PromocionDTO promocion) {
         Set<Promocion> promociones = this.getPromociones();
 
@@ -141,6 +150,10 @@ public class GestionDePromociones {
         }
     }
 
+    /**
+     * promocion!=null
+     * @param promocion
+     */
     public void bajaPromocion(PromocionDTO promocion) {
         Set<Promocion> promociones = this.getPromociones();
 

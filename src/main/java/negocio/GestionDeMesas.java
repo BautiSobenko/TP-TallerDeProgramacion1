@@ -8,6 +8,7 @@ import excepciones.MesaExistenteException;
 import excepciones.MesaNoExistenteException;
 import excepciones.MozoNoExistenteException;
 import modelo.*;
+import org.jetbrains.annotations.NotNull;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaXML;
 
@@ -34,6 +35,9 @@ public class GestionDeMesas {
         return gestionDeMesas;
     }
 
+    /**
+     * Persistencia de la coleccion de mesas
+     */
     public void persistirMesas(){
         IPersistencia<Set<Mesa>> persistencia = new PersistenciaXML();
         try {
@@ -45,6 +49,12 @@ public class GestionDeMesas {
         }
     }
 
+    /**
+     * Carga la mesa ala coleccion
+     * precondition: MesaDTO!=null
+     * @param mesa
+     * @throws MesaExistenteException
+     */
     public void altaMesa(MesaDTO mesa) throws MesaExistenteException {
 
         Set<Mesa> mesas = this.empresa.getMesas();
@@ -60,6 +70,11 @@ public class GestionDeMesas {
             throw new MesaExistenteException();
     }
 
+    /**
+     * Elimina una mesa recibida y la vuelve a agregar
+     * precondition: MesaDTO!=null
+     * @param mesa
+     */
     public void modificaMesa(MesaDTO mesa)  {
         Set<Mesa> mesas = this.empresa.getMesas();
         Iterator<Mesa> it = mesas.iterator();
@@ -83,6 +98,10 @@ public class GestionDeMesas {
         }
     }
 
+    /**
+     * Elimina la mesa seleccionada
+     * @param nroMesa
+     */
     public void bajaMesa(int nroMesa) {
         Set<Mesa> mesas = this.empresa.getMesas();
         Optional<Mesa> mesa = mesas.stream().filter(m -> m.getNroMesa() == nroMesa).findFirst();
@@ -94,13 +113,19 @@ public class GestionDeMesas {
         }
     }
 
+    /**
+     * Asigna el mozo enviado a la mesa enviada
+     * precondition: MesaDTO!=null && MozoDTO!=null
+     * @param mozo
+     * @param mesa
+     */
+
     public void asignarMozoMesa(MozoDTO mozo, MesaDTO mesa) {
 
         boolean existeMozo = this.empresa.getMozos().stream().anyMatch(m -> m.getNombreCompleto().equalsIgnoreCase(mozo.getNombreCompleto()) );
-        boolean existeMesa;
+        Set<Mesa> mesas = this.empresa.getMesas();
+        boolean existeMesa = mesas.stream().anyMatch(m -> m.getNroMesa() == mesa.getNroMesa());
 
-            Set<Mesa> mesas = this.empresa.getMesas();
-            existeMesa = mesas.stream().anyMatch(m -> m.getNroMesa() == mesa.getNroMesa());
             if( existeMesa ){
                 Mesa mesaM = new Mesa(mesa.getNroMesa(), mesa.getCantSillas());
                 Mozo mozoA = new Mozo(mozo.getNombreCompleto(),mozo.getFechaNacimiento(),mozo.getCantidadHijos());
@@ -112,31 +137,34 @@ public class GestionDeMesas {
             }
     }
 
-    public double cerrarMesa(Mesa mesa) throws MesaNoExistenteException, CierreMesaConEstadoLibreException {
+    /**
+     * Cierra la mesa enviada
+     * precondition: mesa!=null
+     * @param mesa
+     * @return
+     */
+    public double cerrarMesa(Mesa mesa){
 
-        boolean existeMesa = this.empresa.getMesas().stream().anyMatch(m -> m.getNroMesa() == mesa.getNroMesa());
-        if( !existeMesa )
-            throw new MesaNoExistenteException();
-        else{
-            if( mesa.getEstadoMesa() == EstadoMesa.LIBRE ){
-                throw new CierreMesaConEstadoLibreException();
-            }else{
                 List<Pedido> pedidosMesa = mesa.getComanda().getPedidos();
                 mesa.setEstadoMesa(EstadoMesa.LIBRE);
-                //mesa.setComanda(null); ?
+                mesa.setComanda(null);
                 persistirMesas();
 
                 return pedidosMesa.stream()
                         .mapToDouble(p -> p.getProducto().getPrecio())
                         .sum();
-            }
-        }
     }
 
     public Set<Mesa> getMesas(){
         return this.empresa.getMesas();
     }
 
+    /**
+     * trae el consumo promedio de una mesa
+     * @param nroMesa
+     * @return consumo promedio de la mesa enviada
+     * @throws MesaNoExistenteException
+     */
     public float calculaConsumoPromedio(int nroMesa) throws MesaNoExistenteException {
         return (float) empresa.consumoPromedioMesa(nroMesa);
     }

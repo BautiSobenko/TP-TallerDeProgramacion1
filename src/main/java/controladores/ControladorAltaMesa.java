@@ -25,6 +25,9 @@ public class ControladorAltaMesa implements ActionListener {
         this.gestionDeMesas = GestionDeMesas.get();
     }
 
+    /*
+    
+     */
     public static ControladorAltaMesa getControladorAltaMesa(String op) {
         if (controladorAltaMesa == null) {
             controladorAltaMesa = new ControladorAltaMesa();

@@ -4,6 +4,7 @@ import dto.ProductoDTO;
 import excepciones.CambioNombreException;
 import excepciones.ProductoExistenteException;
 import excepciones.ProductoNoExistenteException;
+import excepciones.StockInsuficienteException;
 import modelo.Empresa;
 import modelo.Operario;
 import modelo.Pedido;
@@ -41,6 +42,11 @@ public class GestionDeProductos {
         }
     }
 
+    /**
+     * precondition: productoDTO!=null
+     * @param producto
+     * @throws ProductoExistenteException
+     */
     public void altaProducto(ProductoDTO producto) throws ProductoExistenteException {
         Set<Producto> productos = this.empresa.getProductos();
         Producto productoNuevo = new Producto(producto.getNombre(), producto.getPrecio(), producto.getCosto(), producto.getStock());
@@ -55,6 +61,11 @@ public class GestionDeProductos {
             throw new ProductoExistenteException();
     }
 
+    /**
+     * precondition:Producto!=null
+     * @param producto
+     * @throws CambioNombreException
+     */
     public void modificaProducto(ProductoDTO producto) throws CambioNombreException {
         Set<Producto> productos = this.empresa.getProductos();
         Iterator<Producto> it = productos.iterator();
@@ -80,6 +91,10 @@ public class GestionDeProductos {
 
     }
 
+    /**
+     * precondition: id!=null
+     * @param id
+     */
     public void bajaProducto(String id) {
         Set<Producto> productos = this.empresa.getProductos();
         Iterator<Producto> it = productos.iterator();
@@ -103,7 +118,7 @@ public class GestionDeProductos {
         return this.empresa.getProductos();
     }
 
-    public boolean descuentarStock(Pedido pedido) {
+    public boolean descuentarStock(Pedido pedido) throws StockInsuficienteException {
         Set<Producto> productos = this.empresa.getProductos();
         Iterator<Producto> it = productos.iterator();
 
@@ -125,6 +140,8 @@ public class GestionDeProductos {
                 this.empresa.setProductos(productos);
                 stockActualizado = true;
             }
+            else
+                throw new StockInsuficienteException();
 
         return stockActualizado;
     }

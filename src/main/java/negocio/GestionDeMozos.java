@@ -40,6 +40,13 @@ public class GestionDeMozos {
         }
     }
 
+    /**
+     * Se da de alta un mozo
+     * precondition: mozo!=null
+     * @param mozo
+     * @throws MozoExistenteException
+     * @throws PermisoDenegadoException
+     */
     public void altaMozo(MozoDTO mozo) throws MozoExistenteException, PermisoDenegadoException {
 
         if (this.empresa.getUsuarioLogueado().getUsername().equals("admin")){
@@ -58,6 +65,12 @@ public class GestionDeMozos {
             throw new PermisoDenegadoException();
     }
 
+    /**
+     * Modifica el mozo recibido
+     * precondition: mozo!=null
+     * @param mozo
+     * @throws PermisoDenegadoException
+     */
     public void modificarMozo(MozoDTO mozo) throws PermisoDenegadoException {
 
         if (this.empresa.getUsuarioLogueado().getUsername().equals("admin")){
@@ -76,6 +89,12 @@ public class GestionDeMozos {
             throw new PermisoDenegadoException();
     }
 
+    /**
+     * Da de baja el mozo enviado
+     *  precondition: mozo!=null
+     * @param mozo
+     * @throws PermisoDenegadoException
+     */
     public void bajaMozo(Mozo mozo) throws PermisoDenegadoException {
 
         if (this.empresa.getUsuarioLogueado().getUsername().equals("admin")){
@@ -92,6 +111,12 @@ public class GestionDeMozos {
 
     }
 
+    /**
+     * precondition: mozo!=null && EstadoMozo!=null
+     * @param mozo
+     * @param nuevoEstado
+     * @throws MozoNoExistenteException
+     */
     public void modEstadoMozo(Mozo mozo, EstadoMozo nuevoEstado) throws MozoNoExistenteException {
 
         Set<Mozo> mozos = this.empresa.getMozos();

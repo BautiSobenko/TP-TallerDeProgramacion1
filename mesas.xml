@@ -4,7 +4,7 @@
   <void method="add">
    <object class="modelo.Mesa">
     <void property="cantSillas">
-     <int>2</int>
+     <int>7</int>
     </void>
     <void property="estadoMesa">
      <object class="java.lang.Enum" id="EstadoMesa0" method="valueOf">
@@ -12,30 +12,21 @@
       <string>LIBRE</string>
      </object>
     </void>
-    <void property="mozoAsignado">
-     <object class="modelo.Mozo">
-      <void property="cantidadHijos">
-       <int>3</int>
-      </void>
-      <void property="estadoMozo">
-       <object class="java.lang.Enum" id="EstadoMozo0" method="valueOf">
-        <class>enums.EstadoMozo</class>
-        <string>ACTIVO</string>
-       </object>
-      </void>
-      <void property="fechaNacimiento">
-       <string>2</string>
-      </void>
-      <void property="id">
-       <string>73b5d75e-9203-4d35-a362-068cb53047ac</string>
-      </void>
-      <void property="nombreCompleto">
-       <string>Jorge</string>
-      </void>
-     </object>
+    <void property="nroMesa">
+     <int>4</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>12</int>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa0"/>
     </void>
     <void property="nroMesa">
-     <int>15</int>
+     <int>5</int>
     </void>
    </object>
   </void>
@@ -53,7 +44,10 @@
        <int>4</int>
       </void>
       <void property="estadoMozo">
-       <object idref="EstadoMozo0"/>
+       <object class="java.lang.Enum" id="EstadoMozo0" method="valueOf">
+        <class>enums.EstadoMozo</class>
+        <string>ACTIVO</string>
+       </object>
       </void>
       <void property="fechaNacimiento">
        <string>3</string>
@@ -68,6 +62,38 @@
     </void>
     <void property="nroMesa">
      <int>12</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>2</int>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa0"/>
+    </void>
+    <void property="mozoAsignado">
+     <object class="modelo.Mozo">
+      <void property="cantidadHijos">
+       <int>3</int>
+      </void>
+      <void property="estadoMozo">
+       <object idref="EstadoMozo0"/>
+      </void>
+      <void property="fechaNacimiento">
+       <string>2</string>
+      </void>
+      <void property="id">
+       <string>73b5d75e-9203-4d35-a362-068cb53047ac</string>
+      </void>
+      <void property="nombreCompleto">
+       <string>Jorge</string>
+      </void>
+     </object>
+    </void>
+    <void property="nroMesa">
+     <int>15</int>
     </void>
    </object>
   </void>

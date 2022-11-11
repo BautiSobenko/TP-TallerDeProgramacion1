@@ -71,7 +71,7 @@ public class ControladorAltaOperario implements ActionListener {
                     gestionDeOperarios.altaOperario(operarioDTO);
                     this.vistaAltaOperario.success("El operario: " + operarioDTO.getNombreCompleto() + " fue dado de alta con exito");
                 }else{
-                    boolean existeOperario = gestionDeOperarios.getOperarios().stream().anyMatch(o -> o.getNombreCompleto().equalsIgnoreCase(operario.getNombreCompleto()) );
+                    boolean existeOperario = gestionDeOperarios.getOperarios().stream().anyMatch(o -> o.getNombreCompleto().equalsIgnoreCase(operarioDTO.getNombreCompleto()) );
                     if( !existeOperario ){
                         gestionDeOperarios.bajaOperario(operario.getNombreCompleto());
                         gestionDeOperarios.altaOperario(operarioDTO);

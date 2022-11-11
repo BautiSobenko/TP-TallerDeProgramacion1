@@ -1,6 +1,7 @@
 package controladores;
 
 import dto.ProductoDTO;
+import excepciones.CambioNombreException;
 import excepciones.ProductoExistenteException;
 import modelo.Producto;
 import negocio.GestionDeProductos;
@@ -53,32 +54,42 @@ public class ControladorAltaProducto implements ActionListener {
             int stock = this.vistaAltaProducto.getStockInicial();
             float precioventa = this.vistaAltaProducto.getPrecioVenta();
             float precioCosto = this.vistaAltaProducto.getPrecioCosto();
-            if( stock == 0 ){
-                //! Lanzar excepcion, no puede ingresar un stock negativo
+            if( stock == 0 || precioCosto==0 || precioventa==0){
+                if(op.equalsIgnoreCase("Alta"))
+                    ControladorAltaProducto.getControladorAltaProducto(op);
+                else
+                    ControladorAltaProducto.getControladorAltaProducto(op,producto);
             }
             else {
                 ProductoDTO productoDTO = new ProductoDTO(nombre, precioventa, precioCosto, stock);
-                try {
                     if(op.equalsIgnoreCase("Alta")){
-                        gestionDeProductos.altaProducto(productoDTO);
-                        this.vistaAltaProducto.success("El producto: " + productoDTO.getNombre() + " fue dado de alta con exito");
-                    }else{
-                        boolean existeProducto = gestionDeProductos.getProductos().stream().anyMatch(p -> p.getNombre().equals(productoDTO.getNombre()));
-                        if( !existeProducto ){
-                            gestionDeProductos.bajaProducto(producto.getId());
+                        try {
                             gestionDeProductos.altaProducto(productoDTO);
+                            this.vistaAltaProducto.success("El producto: " + productoDTO.getNombre() + " fue dado de alta con exito");
+                            this.vistaAltaProducto.esconder();
+                            ControladorGestionProductos CProd = ControladorGestionProductos.getControladorGestionProductos(true);
+                        }catch (ProductoExistenteException ex) {
+                            this.vistaAltaProducto.failure("El producto: " + productoDTO.getNombre() + " ya se encuentra en el sistema");
+                            this.vistaAltaProducto.esconder();
+                            ControladorGestionProductos CProd = ControladorGestionProductos.getControladorGestionProductos(true);
+                        }
+                    }else{
+                        try {
+                            gestionDeProductos.modificaProducto(productoDTO);
                             this.vistaAltaProducto.success("El producto: " + productoDTO.getNombre() + " fue modificado con exito");
-                        }else
-                            throw new ProductoExistenteException();
+                            this.vistaAltaProducto.esconder();
+                            ControladorGestionProductos CProd = ControladorGestionProductos.getControladorGestionProductos(true);
+                        }
+                        catch (CambioNombreException ex) {
+                            this.vistaAltaProducto.failure("No se puede cambiar el nombre del producto a modificar");
+                            vistaAltaProducto.limpia();
+                            ControladorAltaProducto.getControladorAltaProducto(op,producto);
+                        }
                     }
-                } catch (ProductoExistenteException ex) {
-                    this.vistaAltaProducto.failure("El producto: " + productoDTO.getNombre() + " ya se encuentra en el sistema");
-                }
-                this.vistaAltaProducto.esconder();
             }
         }else if( comando.equalsIgnoreCase("Volver") ){
             this.vistaAltaProducto.esconder();
+            ControladorGestionProductos CProd = ControladorGestionProductos.getControladorGestionProductos(true);
         }
-        ControladorGestionProductos CProd = ControladorGestionProductos.getControladorGestionProductos(true);
     }
 }

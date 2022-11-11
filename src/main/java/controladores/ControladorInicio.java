@@ -1,6 +1,7 @@
 package controladores;
 
 import modelo.Empresa;
+import negocio.GestionDeMozos;
 import vistas.IGenerica;
 import vistas.VistaInicio;
 
@@ -59,8 +60,11 @@ public class ControladorInicio implements ActionListener {
             ControladorGestionPromociones controladorGestionPromociones = ControladorGestionPromociones.getControladorGestionPromociones(true);
         }
         else if(comando.equals("Abrir Local")){
-            this.vistaInicio.esconder();
-            ControladorLocalAbierto controladorLocalAbierto = ControladorLocalAbierto.getControladorLocalAbierto();
+            if( GestionDeMozos.get().hayMozosActivos() ) {
+                this.vistaInicio.esconder();
+                ControladorLocalAbierto controladorLocalAbierto = ControladorLocalAbierto.getControladorLocalAbierto();
+            }else
+                this.vistaInicio.failure("No hay mozos activos en el sistema");
         }
         else if(comando.equals("Cerrar Sesion")){
             this.vistaInicio.esconder();

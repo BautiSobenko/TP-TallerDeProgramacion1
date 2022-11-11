@@ -2,7 +2,6 @@ package controladores;
 
 import dto.MesaDTO;
 import enums.EstadoMesa;
-import excepciones.CierreMesaConEstadoLibreException;
 import excepciones.MesaNoExistenteException;
 import excepciones.StockInsuficienteException;
 import modelo.*;

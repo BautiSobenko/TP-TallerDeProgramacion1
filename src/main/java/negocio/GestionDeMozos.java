@@ -65,6 +65,17 @@ public class GestionDeMozos {
             throw new PermisoDenegadoException();
     }
 
+    public boolean hayMozosActivos(){
+        Set<Mozo> mozos = this.getMozos();
+
+        for ( Mozo mozo : mozos ) {
+            if( mozo.getEstadoMozo() == EstadoMozo.ACTIVO ){
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Modifica el mozo recibido
      * precondition: mozo!=null

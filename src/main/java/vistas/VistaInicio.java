@@ -2,10 +2,8 @@ package vistas;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.BorderLayout;
-import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.GridLayout;
@@ -151,11 +149,12 @@ public class VistaInicio extends JFrame implements IGenerica {
 
 	@Override
 	public void success(String msg) {
-
+		JOptionPane.showMessageDialog(this, msg, "Resultado exitoso", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	@Override
 	public void failure(String msg) {
-
+		JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
 	}
+
 }

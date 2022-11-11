@@ -77,6 +77,7 @@ public class Mozo {
     public String toString() {
         return "Nombre: " + nombreCompleto +
                 " | Cantidad de hijos: " + cantidadHijos +
-                " | Fecha de nacimiento: " +  fechaNacimiento;
+                " | Fecha de nacimiento: " +  fechaNacimiento +
+                " | Estado: " + estadoMozo;
     }
 }

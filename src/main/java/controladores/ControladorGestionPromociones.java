@@ -36,7 +36,6 @@ public class ControladorGestionPromociones implements ActionListener {
         Set<Promocion> promociones = gestionPromociones.getPromociones();
         DefaultListModel<Promocion> listaPromociones = new DefaultListModel<>();
         promociones.forEach(listaPromociones::addElement);
-
         vistaGestionPromociones.setModel(listaPromociones);
 
         if( mostrar )

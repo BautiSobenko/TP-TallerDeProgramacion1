@@ -84,9 +84,13 @@ public class ControladorAltaPromocionTemporal implements ActionListener {
                         gestionDePromociones.altaPromocion(promo);
                         vistaAltaPromocionTemporal.success("La promocion fija: " + promo.getNombre() + " se ha dado de alta con exito");
                     }else{
-                        gestionDePromociones.bajaPromocion(promocionTemporal);
-                        gestionDePromociones.altaPromocion(promo);
-                        vistaAltaPromocionTemporal.success("La promocion fija: " + promo.getNombre() + " se ha modificado con exito");
+                        boolean existePromocion = gestionDePromociones.getPromociones().stream().anyMatch(p -> p.getNombre().equals(promo.getNombre()));
+                        if( !existePromocion ){
+                            gestionDePromociones.bajaPromocion(promocionTemporal);
+                            gestionDePromociones.altaPromocion(promo);
+                            vistaAltaPromocionTemporal.success("La promocion fija: " + promo.getNombre() + " se ha modificado con exito");
+                        }else
+                            throw new PromocionExistenteException(promo.getNombre());
                     }
 
                 } catch (PromocionExistenteException ex) {

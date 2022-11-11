@@ -5,11 +5,13 @@ public class OperarioDTO {
     private String nombreCompleto;
     private String username;
     private String password;
+    private boolean activo;
 
-    public OperarioDTO(String nombreCompleto, String username, String password) {
+    public OperarioDTO(String nombreCompleto, String username, String password, boolean activo) {
         this.nombreCompleto = nombreCompleto;
         this.username = username;
         this.password = password;
+        this.activo = activo;
     }
 
     public String getNombreCompleto() {

@@ -83,7 +83,7 @@ public class GestionDeOperarios {
             }
             if(encontreOperario) {
                 operarios.remove(op);
-                Operario opMod = new Operario(operario.getNombreCompleto(),operario.getUsername(),operario.getPassword());
+                Operario opMod = new Operario(operario.getNombreCompleto(),operario.getUsername(),operario.getPassword(), operario.getActivo());
                 operarios.add(opMod);
                 this.empresa.setOperarios(operarios);
                 persistirOperarios();

@@ -2,6 +2,7 @@ package controladores;
 
 
 import dto.MozoDTO;
+import excepciones.MesaExistenteException;
 import excepciones.MozoExistenteException;
 import excepciones.PermisoDenegadoException;
 import modelo.Mozo;
@@ -59,9 +60,13 @@ public class ControladorAltaMozo implements ActionListener {
                     gestionDeMozos.altaMozo(mozoDTO);
                     this.vistaAltaMozo.success("El mozo: " + mozoDTO.getNombreCompleto() + " fue dado de alta con exito");
                 }else{
-                    gestionDeMozos.bajaMozo(mozo);
-                    gestionDeMozos.altaMozo(mozoDTO);
-                    this.vistaAltaMozo.success("El mozo: " + mozoDTO.getNombreCompleto() + " fue modificado con exito");
+                    boolean existeMozo = gestionDeMozos.getMozos().stream().anyMatch(m -> m.getNombreCompleto().equalsIgnoreCase(mozoDTO.getNombreCompleto()) );
+                    if( !existeMozo ){
+                        gestionDeMozos.bajaMozo(mozo);
+                        gestionDeMozos.altaMozo(mozoDTO);
+                        this.vistaAltaMozo.success("El mozo: " + mozoDTO.getNombreCompleto() + " fue modificado con exito");
+                    }else
+                        throw new MozoExistenteException();
                 }
             } catch (MozoExistenteException | PermisoDenegadoException ex) {
                 this.vistaAltaMozo.failure("El mozo: " + mozoDTO.getNombreCompleto() + " ya se encuentra en el sistema");

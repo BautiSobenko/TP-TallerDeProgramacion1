@@ -112,9 +112,13 @@ public class ControladorAltaPromocionProducto implements ActionListener {
                             gestionDePromociones.altaPromocion(prom);
                             vistaAltaPromocionProducto.success("La promocion fija: " + prom.getNombre() + " se ha dado de alta con exito");
                         }else{
-                            gestionDePromociones.bajaPromocion(promocionFija);
-                            gestionDePromociones.altaPromocion(prom);
-                            vistaAltaPromocionProducto.success("La promocion fija: " + prom.getNombre() + " se ha modificado con exito");
+                            boolean existePromocion = gestionDePromociones.getPromociones().stream().anyMatch(p -> p.getNombre().equals(prom.getNombre()));
+                            if( !existePromocion ){
+                                gestionDePromociones.bajaPromocion(promocionFija);
+                                gestionDePromociones.altaPromocion(prom);
+                                vistaAltaPromocionProducto.success("La promocion fija: " + prom.getNombre() + " se ha modificado con exito");
+                            }else
+                                throw new PromocionExistenteException(prom.getNombre());
                         }
                     } catch (PromocionExistenteException ex) {
                         vistaAltaPromocionProducto.failure("La promocion fija:" + prom.getNombre() + " ya se encuentra en el sistema");

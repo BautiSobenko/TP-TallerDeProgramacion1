@@ -13,13 +13,13 @@
      </object>
     </void>
     <void property="fechaNacimiento">
-     <string>3</string>
+     <string>4</string>
     </void>
     <void property="id">
-     <string>cc5ed966-ce8c-40d9-bcf2-066af9ad72a3</string>
+     <string>b0a197ec-a28e-41b3-803f-0cca05549085</string>
     </void>
     <void property="nombreCompleto">
-     <string>Hola</string>
+     <string>4</string>
     </void>
    </object>
   </void>
@@ -32,13 +32,13 @@
      <object idref="EstadoMozo0"/>
     </void>
     <void property="fechaNacimiento">
-     <string>2</string>
+     <string>3</string>
     </void>
     <void property="id">
-     <string>e0198712-74d8-406b-96aa-bb618b73f41c</string>
+     <string>2c9e3f48-c939-4345-8670-c2749e395304</string>
     </void>
     <void property="nombreCompleto">
-     <string>Jorge</string>
+     <string>3</string>
     </void>
    </object>
   </void>

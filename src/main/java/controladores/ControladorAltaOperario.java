@@ -60,19 +60,26 @@ public class ControladorAltaOperario implements ActionListener {
             String nombre = this.vistaAltaOperario.getNombre();
             String username = this.vistaAltaOperario.getUsername();
             String password = this.vistaAltaOperario.getPassword();
-            OperarioDTO operarioDTO = new OperarioDTO(nombre, username, password);
+            boolean activo;
+            if( this.vistaAltaOperario.getEstado().equalsIgnoreCase("activo") )
+                activo = true;
+            else
+                activo = false;
+            OperarioDTO operarioDTO = new OperarioDTO(nombre, username, password, activo);
             try {
                 if(op.equalsIgnoreCase("Alta")){
                     gestionDeOperarios.altaOperario(operarioDTO);
                     this.vistaAltaOperario.success("El operario: " + operarioDTO.getNombreCompleto() + " fue dado de alta con exito");
                 }else{
-                    gestionDeOperarios.bajaOperario(operario.getNombreCompleto());
-                    gestionDeOperarios.altaOperario(operarioDTO);
-                    this.vistaAltaOperario.success("El operario: " + operarioDTO.getNombreCompleto() + " fue modificado con exito");
+                    boolean existeOperario = gestionDeOperarios.getOperarios().stream().anyMatch(o -> o.getNombreCompleto().equalsIgnoreCase(operario.getNombreCompleto()) );
+                    if( !existeOperario ){
+                        gestionDeOperarios.bajaOperario(operario.getNombreCompleto());
+                        gestionDeOperarios.altaOperario(operarioDTO);
+                        this.vistaAltaOperario.success("El operario: " + operarioDTO.getNombreCompleto() + " fue modificado con exito");
+                    }else
+                        throw new OperarioExistenteException();
                 }
-            } catch (OperarioExistenteException ex) {
-                throw new RuntimeException(ex);
-            } catch (PermisoDenegadoException ex) {
+            } catch (OperarioExistenteException | PermisoDenegadoException ex) {
                 throw new RuntimeException(ex);
             }
             this.vistaAltaOperario.esconder();

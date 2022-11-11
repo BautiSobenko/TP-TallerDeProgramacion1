@@ -1,5 +1,7 @@
 package dto;
 
+import modelo.Mozo;
+
 public class MesaDTO {
 
     /*
@@ -8,6 +10,7 @@ public class MesaDTO {
      */
     private int nroMesa;
     private int cantSillas;
+    private Mozo mozoAsignado;
 
     public MesaDTO(int nroMesa, int cantSillas) {
         this.nroMesa = nroMesa;
@@ -28,5 +31,13 @@ public class MesaDTO {
 
     public void setCantSillas(int cantSillas) {
         this.cantSillas = cantSillas;
+    }
+
+    public Mozo getMozoAsignado() {
+        return mozoAsignado;
+    }
+
+    public void setMozoAsignado(Mozo mozoAsignado) {
+        this.mozoAsignado = mozoAsignado;
     }
 }

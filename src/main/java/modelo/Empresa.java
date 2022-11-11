@@ -121,7 +121,7 @@ public class Empresa {
     private void cargarPromociones() {
         IPersistencia<Set<Promocion>> persistencia = new PersistenciaXML();
 
-        try { // Archivo XML "Mozos" -> Empresa
+        try { // Archivo XML "Promociones" -> Empresa
             persistencia.abrirInput("promociones.xml");
             this.promociones = persistencia.leer();
             if (promociones == null) {

@@ -22,10 +22,10 @@ public class VistaAltaOperario extends JFrame implements IAltaOperario, KeyListe
 	private JPasswordField txtPassword;
 	private ButtonGroup grupoEstado;
 	
-	private String nombre = null;
-	private String username = null;
-	private String password = null;
-	private String estado = null;
+	private String nombre;
+	private String username;
+	private String password;
+	private String estado;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -96,12 +96,14 @@ public class VistaAltaOperario extends JFrame implements IAltaOperario, KeyListe
 		rdbtnOperarioActivo.setBounds(201, 154, 72, 23);
 		grupoEstado.add(rdbtnOperarioActivo);
 		frmAltaDeOperario.getContentPane().add(rdbtnOperarioActivo);
+		rdbtnOperarioActivo.addMouseListener(this);
 		
 		rdbtnOperarioNoActivo = new JRadioButton("No Activo");
 		rdbtnOperarioNoActivo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		rdbtnOperarioNoActivo.setBounds(299, 154, 85, 23);
 		grupoEstado.add(rdbtnOperarioNoActivo);
 		frmAltaDeOperario.getContentPane().add(rdbtnOperarioNoActivo);
+		rdbtnOperarioNoActivo.addMouseListener(this);
 		
 		lblPassword = new JLabel("Contrase\u00F1a");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));

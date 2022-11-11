@@ -20,6 +20,13 @@ public class Operario {
         this.activo = true;
     }
 
+    public Operario(String nombreCompleto, String username, String password, boolean activo) {
+        this.nombreCompleto = nombreCompleto;
+        this.username = username;
+        this.password = password;
+        this.activo = activo;
+    }
+
     public Operario() {
     }
 

@@ -63,9 +63,13 @@ public class ControladorAltaProducto implements ActionListener {
                         gestionDeProductos.altaProducto(productoDTO);
                         this.vistaAltaProducto.success("El producto: " + productoDTO.getNombre() + " fue dado de alta con exito");
                     }else{
-                        gestionDeProductos.bajaProducto(producto.getId());
-                        gestionDeProductos.altaProducto(productoDTO);
-                        this.vistaAltaProducto.success("El producto: " + productoDTO.getNombre() + " fue modificado con exito");
+                        boolean existeProducto = gestionDeProductos.getProductos().stream().anyMatch(p -> p.getNombre().equals(productoDTO.getNombre()));
+                        if( !existeProducto ){
+                            gestionDeProductos.bajaProducto(producto.getId());
+                            gestionDeProductos.altaProducto(productoDTO);
+                            this.vistaAltaProducto.success("El producto: " + productoDTO.getNombre() + " fue modificado con exito");
+                        }else
+                            throw new ProductoExistenteException();
                     }
                 } catch (ProductoExistenteException ex) {
                     this.vistaAltaProducto.failure("El producto: " + productoDTO.getNombre() + " ya se encuentra en el sistema");

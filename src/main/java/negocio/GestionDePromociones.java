@@ -39,7 +39,7 @@ public class GestionDePromociones {
         IPersistencia<Set<Promocion>> persistencia = new PersistenciaXML();
         try {
             persistencia.abrirOutput("promociones.xml");
-            persistencia.escribir(this.getPromociones());
+            persistencia.escribir(this.empresa.getPromociones());
             persistencia.cerrarOutput();
         } catch (IOException e) {
 

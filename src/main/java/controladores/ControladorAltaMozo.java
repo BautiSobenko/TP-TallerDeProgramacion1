@@ -75,6 +75,6 @@ public class ControladorAltaMozo implements ActionListener {
         }else if( comando.equalsIgnoreCase("Volver") ){
             this.vistaAltaMozo.esconder();
         }
-        ControladorGestionMozos CMosos = ControladorGestionMozos.getControladorGestionMozos(true);
+        ControladorGestionMozos CMosos = ControladorGestionMozos.getControladorGestionMozos();
     }
 }

@@ -37,23 +37,22 @@ public class ControladorCambioEstadoMozo implements ActionListener {
 
         if(comando.equalsIgnoreCase("Aceptar")) {
             String nuevoEstado = this.vistaCambioEstadoMozo.getSelection();
-            try{
             if (nuevoEstado.equalsIgnoreCase("Activo"))
                 gestionDeMozos.modEstadoMozo(mozo, EstadoMozo.ACTIVO);
-            else if (comando.equalsIgnoreCase("Ausente"))
+
+            else if (nuevoEstado.equalsIgnoreCase("Ausente"))
                 gestionDeMozos.modEstadoMozo(mozo, EstadoMozo.AUSENTE);
+
             else
                 gestionDeMozos.modEstadoMozo(mozo, EstadoMozo.FRANCO);
-            }
-            catch (MozoNoExistenteException ignored){
-            }
+
             vistaCambioEstadoMozo.success("Se actualizo el estado de mozo a "+nuevoEstado);
             vistaCambioEstadoMozo.esconder();
-            ControladorGestionMozos.getControladorGestionMozos(true);
+            ControladorGestionMozos.getControladorGestionMozos();
         }
         else {
             this.vistaCambioEstadoMozo.esconder();
-            ControladorGestionMozos.getControladorGestionMozos(true);
+            ControladorGestionMozos.getControladorGestionMozos();
         }
     }
 }

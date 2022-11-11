@@ -26,7 +26,7 @@ public class ControladorGestionMozos implements ActionListener {
         gestionDeMozos = GestionDeMozos.get();
     }
 
-    public static ControladorGestionMozos getControladorGestionMozos(boolean mostrar) {
+    public static ControladorGestionMozos getControladorGestionMozos() {
         if (controladorGestionMozos == null)
             controladorGestionMozos = new ControladorGestionMozos();
 
@@ -36,8 +36,7 @@ public class ControladorGestionMozos implements ActionListener {
 
         ControladorGestionMozos.vistaGestionMozos.setModel(listaMozos);
 
-        if( mostrar )
-            vistaGestionMozos.mostrar();
+        vistaGestionMozos.mostrar();
 
         return controladorGestionMozos;
     }

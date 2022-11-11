@@ -65,7 +65,7 @@ public class VistaCambioEstadoMozo extends JFrame implements MouseListener {
 		chckbxDeFranco.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		chckbxDeFranco.setBounds(195, 134, 99, 23);
 		contentPane.add(chckbxDeFranco);
-		chckbxAusente.addMouseListener(this);
+		chckbxDeFranco.addMouseListener(this);
 		
 		JCheckBox chckbxActivo = new JCheckBox("Activo");
 		chckbxActivo.setFont(new Font("Tahoma", Font.PLAIN, 16));

@@ -41,7 +41,7 @@ public class ControladorInicio implements ActionListener {
 
         if(comando.equals("Gestionar Mozos")){
             this.vistaInicio.esconder();
-            ControladorGestionMozos controladorGestionMozos = ControladorGestionMozos.getControladorGestionMozos(true);
+            ControladorGestionMozos controladorGestionMozos = ControladorGestionMozos.getControladorGestionMozos();
         }
         else if(comando.equals("Gestionar Operarios")){
             this.vistaInicio.esconder();

@@ -126,23 +126,20 @@ public class GestionDeMozos {
      * precondition: mozo!=null && EstadoMozo!=null
      * @param mozo
      * @param nuevoEstado
-     * @throws MozoNoExistenteException
      */
-    public void modEstadoMozo(Mozo mozo, EstadoMozo nuevoEstado) throws MozoNoExistenteException {
+    public void modEstadoMozo(Mozo mozo, EstadoMozo nuevoEstado) {
 
         Set<Mozo> mozos = this.empresa.getMozos();
         Optional<Mozo> mozoMod = mozos.stream()
                 .filter(m -> m.getId().equals(mozo.getId()))
                 .findFirst();
 
-        if( mozoMod.isPresent() ){
+        if (mozoMod.isPresent()) {
             mozoMod.get().setEstadoMozo(nuevoEstado);
             mozos.remove(mozoMod.get());
             mozos.add(mozoMod.get());
             persistirMozos();
-        } else
-            throw new MozoNoExistenteException();
-
+        }
     }
 
     public Set<Mozo> getMozos(){

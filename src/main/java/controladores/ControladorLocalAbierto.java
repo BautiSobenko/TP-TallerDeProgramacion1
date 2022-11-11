@@ -4,6 +4,7 @@ import dto.MesaDTO;
 import enums.EstadoMesa;
 import excepciones.CierreMesaConEstadoLibreException;
 import excepciones.MesaNoExistenteException;
+import excepciones.StockInsuficienteException;
 import modelo.*;
 import negocio.GestionDeComandas;
 import negocio.GestionDeMesas;
@@ -95,9 +96,11 @@ public class ControladorLocalAbierto implements ActionListener {
             Set<Mesa> mesas = gestionDeMesas.getMesas();
             Iterator<Mesa> it = mesas.iterator();
             String txt ="";
+            Mesa mesa;
             while (it.hasNext()){
+                mesa = it.next();
                 try {
-                    txt += "La mesa "+ it.next().getNroMesa() + " tiene un  consumo promedio de " + gestionDeMesas.calculaConsumoPromedio(it.next().getNroMesa())+"\n";
+                    txt += "La mesa "+ mesa.getNroMesa() + " tiene un consumo promedio de: " + gestionDeMesas.calculaConsumoPromedio(mesa.getNroMesa())+"\n";
                 } catch (MesaNoExistenteException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -120,7 +123,6 @@ public class ControladorLocalAbierto implements ActionListener {
                 ControladorLocalAbierto con = ControladorLocalAbierto.getControladorLocalAbierto();
             } else {
                 MesaDTO mesaDTO = new MesaDTO( mesa.getNroMesa(), mesa.getCantSillas());
-                mesaDTO.setEstadoMesa( mesa.getEstadoMesa() );
                 mesaDTO.setCantCuentasCerradas( mesa.getCantCuentasCerradas()  );
                 mesaDTO.setComanda(mesa.getComanda());
                 mesaDTO.setMozoAsignado(mesa.getMozoAsignado());
@@ -136,7 +138,11 @@ public class ControladorLocalAbierto implements ActionListener {
 
             if( mesa.getEstadoMesa() == EstadoMesa.OCUPADA ){
                 Pedido pedido = new Pedido(prod, cantidad);
-                gestionDeComandas.cargarPedido( mesa , pedido );
+                try {
+                    gestionDeComandas.cargarPedido( mesa , pedido );
+                } catch (StockInsuficienteException ex) {
+                    vistaLocalAbierto.failure("Stock insuficiente del producto " + pedido.getProducto().getNombre());
+                }
                 vistaLocalAbierto.success("Pedido agregado con exito a la mesa " + mesa.getNroMesa());
             }else{
                 vistaLocalAbierto.failure("La mesa " + mesa.getNroMesa() + " no se encuentra ocupada. Presione Abrir Mesa");

@@ -1,6 +1,5 @@
 package negocio;
 
-import dto.ProductoDTO;
 import enums.EstadoMesa;
 import excepciones.StockInsuficienteException;
 import modelo.Comanda;
@@ -9,7 +8,6 @@ import modelo.Mesa;
 import modelo.Pedido;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 public class GestionDeComandas {
@@ -58,7 +56,7 @@ public class GestionDeComandas {
         Iterator<Mesa> it = mesas.iterator();
 
         Comanda comanda = mesa.getComanda();
-        if(GestionDeProductos.get().descuentarStock( pedido )){
+        if(GestionDeProductos.get().descontarStock( pedido )){
             comanda.getPedidos().add(pedido);
             mesas.remove(mesa);
             mesa.setComanda( comanda );

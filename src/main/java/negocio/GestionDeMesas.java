@@ -89,14 +89,13 @@ public class GestionDeMesas {
             }
         }
         if(encontreMesa) {
-            mesaMod.setEstadoMesa( EstadoMesa.LIBRE );
-            mesaMod.setMozoAsignado(mesa.getMozoAsignado());
-            mesaMod.setComanda(mesa.getComanda());
-            mesaMod.setVentas( mesa.getVentas() + this.totalMesa(mesaMod) );
-            mesaMod.setCantCuentasCerradas( mesa.getCantCuentasCerradas() + 1);
-            mesaMod.setComanda(null);
             mesas.remove(m);
-            mesas.add(mesaMod);
+            m.setEstadoMesa( EstadoMesa.LIBRE );
+            m.setMozoAsignado(mesa.getMozoAsignado());
+            m.setVentas( mesa.getVentas() + this.totalMesa(m) );
+            m.setCantCuentasCerradas( mesa.getCantCuentasCerradas() + 1);
+            m.setComanda(null);
+            mesas.add(m);
             this.empresa.setMesas(mesas);
         }
 
@@ -179,8 +178,8 @@ public class GestionDeMesas {
         List<Pedido> pedidosMesa = mesa.getComanda().getPedidos();
 
         return pedidosMesa.stream()
-                .mapToDouble(p -> p.getProducto().getPrecio())
-                .sum();
+                .mapToDouble(p -> p.getProducto().getPrecio() * p.getCantidad() )
+                .sum() ;
 
     }
 

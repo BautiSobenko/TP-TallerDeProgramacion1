@@ -177,10 +177,10 @@ public class Empresa {
      * @return: Devuelve el consumo promedio del numero de mesa ingresada
      * @throws MesaNoExistenteException
      */
-    public double consumoPromedioMesa(int nroMesa) throws MesaNoExistenteException{
+    public double consumoPromedioMesa(int nroMesa) {
         Iterator<Mesa> it = mesas.iterator();
         boolean encontreMesa = false;
-        double consumo = 0;
+        double consumo = 0.;
         Mesa mesa = null;
 
         while (it.hasNext() && !encontreMesa) {
@@ -191,9 +191,12 @@ public class Empresa {
         }
 
         if (encontreMesa)
-            consumo = mesa.getVentas() / mesa.getCantCuentasCerradas();
-
-        return  consumo;
+            if( mesa.getCantCuentasCerradas() != 0 )
+                return mesa.getVentas() / mesa.getCantCuentasCerradas();
+            else
+                return 0;
+        else
+            return 0;
 
     }
 

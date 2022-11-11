@@ -3,10 +3,8 @@ package negocio;
 import dto.ProductoDTO;
 import excepciones.CambioNombreException;
 import excepciones.ProductoExistenteException;
-import excepciones.ProductoNoExistenteException;
 import excepciones.StockInsuficienteException;
 import modelo.Empresa;
-import modelo.Operario;
 import modelo.Pedido;
 import modelo.Producto;
 import persistencia.IPersistencia;
@@ -118,7 +116,7 @@ public class GestionDeProductos {
         return this.empresa.getProductos();
     }
 
-    public boolean descuentarStock(Pedido pedido) throws StockInsuficienteException {
+    public boolean descontarStock(Pedido pedido) {
         Set<Producto> productos = this.empresa.getProductos();
         Iterator<Producto> it = productos.iterator();
 
@@ -131,18 +129,16 @@ public class GestionDeProductos {
                 encontreProducto = true;
             }
         }
-        boolean stockActualizado = false;
+        boolean puedeActualizar = false;
         if (encontreProducto)
             if (prod.getStock() - pedido.getCantidad() >= 0) {
                 productos.remove(prod);
                 prod.setStock(prod.getStock() - pedido.getCantidad());
                 productos.add(prod);
                 this.empresa.setProductos(productos);
-                stockActualizado = true;
+                puedeActualizar = true;
             }
-            else
-                throw new StockInsuficienteException();
 
-        return stockActualizado;
+        return puedeActualizar;
     }
 }

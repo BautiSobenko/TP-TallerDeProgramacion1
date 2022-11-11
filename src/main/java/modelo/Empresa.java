@@ -178,7 +178,6 @@ public class Empresa {
             return mesa.getVentas() / mesa.getCantCuentasCerradas();
         else
             throw new MesaNoExistenteException();
-
     }
 
     public double calculaSueldo(String id) throws MozoNoExistenteException{

@@ -32,7 +32,7 @@ public class GestionDeComandas {
         Set<Mesa> mesas = empresa.getMesas();
 
         mesas.remove(mesa);
-        mesa.setComanda(new Comanda(mesa));
+        mesa.setComanda(new Comanda());
         mesa.setEstadoMesa(EstadoMesa.OCUPADA);
         mesas.add(mesa);
         this.empresa.setMesas(mesas);

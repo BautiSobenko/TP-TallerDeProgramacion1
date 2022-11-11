@@ -10,12 +10,10 @@ import java.util.List;
 public class Comanda {
 
     private Instant fecha;
-    private Mesa mesa;
     private List<Pedido> pedidos;
     private EstadoComanda estado;
 
-    public Comanda(Mesa mesa) {
-        this.mesa = mesa;
+    public Comanda() {
         this.pedidos = new ArrayList<>();
         this.estado = EstadoComanda.ABIERTA;
     }
@@ -42,13 +40,5 @@ public class Comanda {
 
     public void setEstado(EstadoComanda estado) {
         this.estado = estado;
-    }
-
-    public Mesa getMesa() {
-        return mesa;
-    }
-
-    public void setMesa(Mesa mesa) {
-        this.mesa = mesa;
     }
 }

@@ -4,6 +4,25 @@
   <void method="add">
    <object class="modelo.Producto">
     <void property="costo">
+     <float>50.0</float>
+    </void>
+    <void property="id">
+     <string>ad5cdebc-7fa5-47c6-bdc2-f1d493092f68</string>
+    </void>
+    <void property="nombre">
+     <string>Carne</string>
+    </void>
+    <void property="precio">
+     <float>250.0</float>
+    </void>
+    <void property="stock">
+     <int>20</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Producto">
+    <void property="costo">
      <float>10.0</float>
     </void>
     <void property="id">
@@ -23,19 +42,95 @@
   <void method="add">
    <object class="modelo.Producto">
     <void property="costo">
+     <float>30.0</float>
+    </void>
+    <void property="id">
+     <string>3e342c7c-d741-42dd-a527-28e5574a07f9</string>
+    </void>
+    <void property="nombre">
+     <string>Flan</string>
+    </void>
+    <void property="precio">
+     <float>125.0</float>
+    </void>
+    <void property="stock">
+     <int>20</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Producto">
+    <void property="costo">
+     <float>20.0</float>
+    </void>
+    <void property="id">
+     <string>e9dd11ae-6e7d-4c67-81a6-56dea34ec143</string>
+    </void>
+    <void property="nombre">
+     <string>Ensalada</string>
+    </void>
+    <void property="precio">
+     <float>100.0</float>
+    </void>
+    <void property="stock">
+     <int>30</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Producto">
+    <void property="costo">
+     <float>20.0</float>
+    </void>
+    <void property="id">
+     <string>1e1e411b-810a-497b-a366-db0b0b8727bf</string>
+    </void>
+    <void property="nombre">
+     <string>Fideos</string>
+    </void>
+    <void property="precio">
+     <float>150.0</float>
+    </void>
+    <void property="stock">
+     <int>20</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Producto">
+    <void property="costo">
      <float>10.0</float>
     </void>
     <void property="id">
-     <string>da1103aa-acb8-49f4-a786-f2d133206b52</string>
+     <string>12aaa7cb-c976-4078-b61d-4a86b40abb1b</string>
     </void>
     <void property="nombre">
-     <string>Banana1</string>
+     <string>Coca-cola</string>
     </void>
     <void property="precio">
      <float>30.0</float>
     </void>
     <void property="stock">
      <int>50</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Producto">
+    <void property="costo">
+     <float>40.0</float>
+    </void>
+    <void property="id">
+     <string>581d47e3-afd3-4700-a910-f99f6e18f8d3</string>
+    </void>
+    <void property="nombre">
+     <string>Milanesa</string>
+    </void>
+    <void property="precio">
+     <float>200.0</float>
+    </void>
+    <void property="stock">
+     <int>20</int>
     </void>
    </object>
   </void>

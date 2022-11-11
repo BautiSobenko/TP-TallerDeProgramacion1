@@ -64,6 +64,7 @@ public class ControladorAltaMesa implements ActionListener {
                         MesaDTO mesaDTO = new MesaDTO(nroMesa, cantSilla);
                         gestionDeMesas.altaMesa(mesaDTO);
                         this.vistaAltaMesa.success("La mesa: " + mesaDTO.getNroMesa() + " fue dada de alta con exito");
+                        this.vistaAltaMesa.esconder();
                         ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas(true);
                     } else {
                         MesaDTO mesaDTO = new MesaDTO(nroMesa, cantSilla);
@@ -75,6 +76,7 @@ public class ControladorAltaMesa implements ActionListener {
                                 gestionDeMesas.asignarMozoMesa(new MozoDTO(mozoA.getNombreCompleto(), mozoA.getFechaNacimiento(), mozoA.getCantidadHijos()), mesaDTO);
                             gestionDeMesas.altaMesa(mesaDTO);
                             this.vistaAltaMesa.success("La mesa: " + mesaDTO.getNroMesa() + " fue modificada con exito");
+                            this.vistaAltaMesa.esconder();
                             ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas(true);
                         } else
                             throw new MesaExistenteException();

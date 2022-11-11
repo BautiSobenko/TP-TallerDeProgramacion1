@@ -3,7 +3,6 @@ package negocio;
 import dto.PromocionDTO;
 import dto.PromocionProductoDTO;
 import dto.PromocionTemporalDTO;
-import excepciones.ProductoExistenteException;
 import excepciones.PromocionExistenteException;
 import modelo.Empresa;
 import modelo.promociones.Promocion;

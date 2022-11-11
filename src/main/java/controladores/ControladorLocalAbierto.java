@@ -1,11 +1,11 @@
 package controladores;
 
+import dto.MesaDTO;
+import dto.PedidoDTO;
 import enums.EstadoMesa;
 import excepciones.MesaNoExistenteException;
-import modelo.Comanda;
-import modelo.Empresa;
-import modelo.Mesa;
-import modelo.Producto;
+import modelo.*;
+import negocio.GestionDeComandas;
 import negocio.GestionDeMesas;
 import negocio.GestionDeMozos;
 import negocio.GestionDeProductos;
@@ -24,14 +24,17 @@ public class ControladorLocalAbierto implements ActionListener {
     private static GestionDeMozos gestionDeMozos;
     private static GestionDeProductos gestionDeProductos;
     private static  GestionDeMesas gestionDeMesas;
+    private static GestionDeComandas gestionDeComandas;
     private static VistaLocalAbierto vistaLocalAbierto;
 
+
     private ControladorLocalAbierto() {
-        this.vistaLocalAbierto = new VistaLocalAbierto();
-        this.vistaLocalAbierto.setActionListener(this);
-        this.gestionDeMesas = GestionDeMesas.get();
-        this.gestionDeMozos = GestionDeMozos.get();
-        this.gestionDeProductos = GestionDeProductos.get();
+        vistaLocalAbierto = new VistaLocalAbierto();
+        vistaLocalAbierto.setActionListener(this);
+        gestionDeMesas = GestionDeMesas.get();
+        gestionDeMozos = GestionDeMozos.get();
+        gestionDeProductos = GestionDeProductos.get();
+        gestionDeComandas = GestionDeComandas.get();
     }
 
     public static ControladorLocalAbierto getControladorLocalAbierto() {
@@ -80,7 +83,7 @@ public class ControladorLocalAbierto implements ActionListener {
 
         vistaLocalAbierto.limpia();
 
-        controladorLocalAbierto.vistaLocalAbierto.mostrar();
+        vistaLocalAbierto.mostrar();
 
         return controladorLocalAbierto;
     }
@@ -100,44 +103,53 @@ public class ControladorLocalAbierto implements ActionListener {
                     throw new RuntimeException(ex);
                 }
             }
-            this.vistaLocalAbierto.success(txt);
+            vistaLocalAbierto.success(txt);
         }
         else if(comando.equalsIgnoreCase("Mozo con menos ventas")){
-            String msg = "El mozo con menos ventas es " + this.gestionDeMozos.mozoMinVentas();
-            this.vistaLocalAbierto.success(msg);
+            String msg = "El mozo con menos ventas es " + gestionDeMozos.mozoMinVentas();
+            vistaLocalAbierto.success(msg);
         }
         else if(comando.equalsIgnoreCase("Mozo con mas Ventas")){
-            String msg = "El mozo con mas ventas es " + this.gestionDeMozos.mozoMaxVentas();
-            this.vistaLocalAbierto.success(msg);
+            String msg = "El mozo con mas ventas es " + gestionDeMozos.mozoMaxVentas();
+            vistaLocalAbierto.success(msg);
         }
         else if(comando.equalsIgnoreCase("Cerrar Mesa")) {
-            if (this.vistaLocalAbierto.getMesaApertura().getEstadoMesa() == EstadoMesa.LIBRE) {
-                this.vistaLocalAbierto.failure("La mesa nunca fue abierta");
-                this.vistaLocalAbierto.limpia();
+            if (vistaLocalAbierto.getMesaApertura().getEstadoMesa() == EstadoMesa.LIBRE) {
+                vistaLocalAbierto.failure("La mesa nunca fue abierta");
+                vistaLocalAbierto.limpia();
                 ControladorLocalAbierto con = ControladorLocalAbierto.getControladorLocalAbierto();
             } else {
-                this.vistaLocalAbierto.getMesaCierre().setEstadoMesa(EstadoMesa.LIBRE);
-                this.vistaLocalAbierto.success("Mesa cerrada con exito");
+                vistaLocalAbierto.getMesaCierre().setEstadoMesa(EstadoMesa.LIBRE);
+                vistaLocalAbierto.success("Mesa cerrada con exito");
             }
         }
         else if(comando.equalsIgnoreCase("Cargar Pedido")){
-                Producto prod = this.vistaLocalAbierto.getProductoElegido();
-                Mesa mesa = this.vistaLocalAbierto.getMesaPedido();
-                int cantidad= this.vistaLocalAbierto.getCantidad();
+            Producto prod = vistaLocalAbierto.getProductoElegido();
+            Mesa mesa = vistaLocalAbierto.getMesaPedido();
+            int cantidad = vistaLocalAbierto.getCantidad();
+
+            System.out.println(mesa.getEstadoMesa());
+            if( mesa.getEstadoMesa() == EstadoMesa.OCUPADA ){
+                Pedido pedido = new Pedido(prod, cantidad);
+                gestionDeComandas.cargarPedido( mesa , pedido );
+                vistaLocalAbierto.success("Pedido agregado con exito a la mesa " + mesa.getNroMesa());
+            }else{
+                vistaLocalAbierto.failure("La mesa " + mesa.getNroMesa() + " no se encuentra ocupada. Presione Abrir Mesa");
+            }
         }
         else if(comando.equalsIgnoreCase("Abrir Mesa")){
-            if(this.vistaLocalAbierto.getMesaApertura().getEstadoMesa()==EstadoMesa.OCUPADA) {
-                this.vistaLocalAbierto.failure("La mesa esta ocupada");
-                this.vistaLocalAbierto.limpia();
-                ControladorLocalAbierto con = ControladorLocalAbierto.getControladorLocalAbierto();
+            if( vistaLocalAbierto.getMesaApertura().getEstadoMesa() == EstadoMesa.OCUPADA) {
+                vistaLocalAbierto.failure("La mesa esta ocupada");
+                vistaLocalAbierto.limpia();
             }
             else {
-                this.vistaLocalAbierto.getMesaApertura().setEstadoMesa(EstadoMesa.OCUPADA);
-                this.vistaLocalAbierto.success("Mesa abierta con exito");
+                Mesa mesa = vistaLocalAbierto.getMesaApertura();
+                gestionDeComandas.abrirComanda( mesa );
+                vistaLocalAbierto.success("Mesa abierta con exito");
             }
         }
         else if(comando.equalsIgnoreCase("Cerrar Local")){
-            this.vistaLocalAbierto.esconder();
+            vistaLocalAbierto.esconder();
             ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);
         }
 

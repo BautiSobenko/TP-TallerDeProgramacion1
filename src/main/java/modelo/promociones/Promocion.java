@@ -11,6 +11,9 @@ public class Promocion {
     protected boolean activo;
     protected List<Dias> diasPromo;
 
+    public Promocion() {
+    }
+
     public Promocion(String nombre, List<Dias> diasPromo) {
         this.id = UUID.randomUUID().toString();
         this.nombre = nombre;
@@ -58,4 +61,10 @@ public class Promocion {
         if(this.diasPromo.contains(diaPromo))
             this.diasPromo.remove(diaPromo);
     }
+
+
+
+
+
+
 }

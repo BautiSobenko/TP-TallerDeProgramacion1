@@ -62,6 +62,7 @@ public class Producto {
     }
 
     public String toString() {
-        return "Nombre: " + nombre;
+        return "Nombre: " + nombre +
+                " | Stock: " + stock;
     }
 }

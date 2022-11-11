@@ -1,6 +1,7 @@
 package modelo;
 
 import enums.EstadoComanda;
+import modelo.promociones.Promocion;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -9,15 +10,17 @@ import java.util.List;
 public class Cuenta {
 
     private List<Pedido> pedidos;
-    private EstadoComanda estadoPedido;
-    private Instant apertura;
-    private Instant cierre;
+    private Mesa mesa;
+    private String formaDePago;
+    private List<Promocion> promociones;
+    private Float total;
+    private Instant fecha;
 
-    public Cuenta() {
+    public Cuenta(Mesa mesa, String formaDePago, Float total, List<Promocion> promociones) {
         pedidos = new ArrayList<>();
-        estadoPedido = EstadoComanda.ABIERTA;
-        apertura = Instant.now();
-        cierre = null;
+        this.mesa = mesa;
+        this.formaDePago = formaDePago;
+        this.promociones = promociones;
     }
 
     public List<Pedido> getPedidos() {
@@ -28,27 +31,43 @@ public class Cuenta {
         this.pedidos = pedidos;
     }
 
-    public EstadoComanda getEstadoPedido() {
-        return estadoPedido;
+    public Mesa getMesa() {
+        return mesa;
     }
 
-    public void setEstadoPedido(EstadoComanda estadoPedido) {
-        this.estadoPedido = estadoPedido;
+    public void setMesa(Mesa mesa) {
+        this.mesa = mesa;
     }
 
-    public Instant getApertura() {
-        return apertura;
+    public String getFormaDePago() {
+        return formaDePago;
     }
 
-    public Instant getCierre() {
-        return cierre;
+    public void setFormaDePago(String formaDePago) {
+        this.formaDePago = formaDePago;
     }
 
-    public void setCierre(Instant cierre) {
-        this.cierre = cierre;
+    public List<Promocion> getPromociones() {
+        return promociones;
     }
 
-    public void setApertura(Instant apertura) {
-        this.apertura = apertura;
+    public void setPromociones(List<Promocion> promociones) {
+        this.promociones = promociones;
+    }
+
+    public Float getTotal() {
+        return total;
+    }
+
+    public void setTotal(Float total) {
+        this.total = total;
+    }
+
+    public Instant getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Instant fecha) {
+        this.fecha = fecha;
     }
 }

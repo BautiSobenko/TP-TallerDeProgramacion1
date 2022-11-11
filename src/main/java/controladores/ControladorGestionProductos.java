@@ -64,7 +64,6 @@ public class ControladorGestionProductos implements ActionListener {
         }
         else if( comando.equals("Modificar Producto") ){
             Producto producto = (Producto) vistaGestionProductos.getSeleccion();
-            gestionProductos.bajaProducto(producto.getId());
             ControladorAltaProducto controladorAltaProducto = ControladorAltaProducto.getControladorAltaProducto("Modificar", producto);
         }
         else if( comando.equals("Volver") ){

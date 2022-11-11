@@ -8,7 +8,7 @@ public class Mesa {
     private int cantSillas;
     private EstadoMesa estadoMesa;
     private Mozo mozoAsignado;
-    private Cuenta comanda;
+    private Comanda comanda;
     private double Ventas;
     private int cantCuentasCerradas;
 
@@ -69,15 +69,13 @@ public class Mesa {
         this.mozoAsignado = mozoAsignado;
     }
 
-    public Cuenta getComanda() {
+    public Comanda getComanda() {
         return comanda;
     }
 
-    public void setComanda(Cuenta comanda) {
+    public void setComanda(Comanda comanda) {
         this.comanda = comanda;
     }
-
-
 
     @Override
     public String toString() {

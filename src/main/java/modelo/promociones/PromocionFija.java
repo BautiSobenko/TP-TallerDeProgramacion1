@@ -66,4 +66,6 @@ public class PromocionFija extends Promocion{
         return "Nombre: " + nombre +
                 " | Activo: " + activo;
     }
+
+
 }

@@ -5,6 +5,7 @@ import excepciones.ProductoExistenteException;
 import excepciones.ProductoNoExistenteException;
 import modelo.Empresa;
 import modelo.Operario;
+import modelo.Pedido;
 import modelo.Producto;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaXML;
@@ -99,6 +100,29 @@ public class GestionDeProductos {
         return this.empresa.getProductos();
     }
 
+    public boolean descuentarStock(Pedido pedido) {
+        Set<Producto> productos = this.empresa.getProductos();
+        Iterator<Producto> it = productos.iterator();
 
+        boolean encontreProducto = false;
+        Producto prod = null;
 
+        while (it.hasNext() && !encontreProducto) {
+            prod = it.next();
+            if (prod.getNombre().equals(pedido.getProducto().getNombre())) {
+                encontreProducto = true;
+            }
+        }
+        boolean stockActualizado = false;
+        if (encontreProducto)
+            if (prod.getStock() - pedido.getCantidad() >= 0) {
+                productos.remove(prod);
+                prod.setStock(prod.getStock() - pedido.getCantidad());
+                productos.add(prod);
+                this.empresa.setProductos(productos);
+                stockActualizado = true;
+            }
+
+        return stockActualizado;
+    }
 }

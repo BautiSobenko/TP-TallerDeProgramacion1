@@ -45,4 +45,7 @@ public class PromocionTemporal extends Promocion{
         return "Nombre: " + nombre +
                 " | Activo: " + activo;
     }
+
+
+
 }

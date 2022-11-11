@@ -148,20 +148,24 @@ public class ControladorLocalAbierto implements ActionListener {
             }
         }
         else if(comando.equalsIgnoreCase("Abrir Mesa")){
-            if( vistaLocalAbierto.getMesaApertura().getEstadoMesa() == EstadoMesa.OCUPADA) {
-                vistaLocalAbierto.failure("La mesa esta ocupada");
+            Mesa mesa = vistaLocalAbierto.getMesaApertura();
+            if( mesa.getMozoAsignado() == null ) {
+                vistaLocalAbierto.failure("Esta mesa no tiene mozo asignado");
                 vistaLocalAbierto.limpia();
-            }
-            else {
-                Mesa mesa = vistaLocalAbierto.getMesaApertura();
-                gestionDeComandas.abrirComanda( mesa );
-                vistaLocalAbierto.success("Mesa abierta con exito");
+            }else{
+                if( mesa.getEstadoMesa() == EstadoMesa.OCUPADA) {
+                    vistaLocalAbierto.failure("La mesa esta ocupada");
+                    vistaLocalAbierto.limpia();
+                }
+                else {
+                    gestionDeComandas.abrirComanda( mesa );
+                    vistaLocalAbierto.success("Mesa abierta con exito");
+                }
             }
         }
         else if(comando.equalsIgnoreCase("Cerrar Local")){
             vistaLocalAbierto.esconder();
             ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);
         }
-
     }
 }

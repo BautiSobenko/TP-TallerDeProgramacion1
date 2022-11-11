@@ -2,6 +2,7 @@ package controladores;
 
 import dto.MesaDTO;
 import dto.MozoDTO;
+import enums.EstadoMozo;
 import excepciones.MozoExistenteException;
 import excepciones.PermisoDenegadoException;
 import modelo.Empresa;
@@ -40,7 +41,8 @@ public class ControladorAsignarMozo implements ActionListener {
         JComboBox<Mozo> comboMozo = controladorAsignarMozo.vistaAsignarMozo.getComboBox();
         comboMozo.removeAllItems();
         for(Mozo mozo : mozos){
-            comboMozo.addItem(mozo);
+            if( mozo.getEstadoMozo() == EstadoMozo.ACTIVO )
+                comboMozo.addItem(mozo);
         }
 
         controladorAsignarMozo.vistaAsignarMozo.setComboBox(comboMozo);

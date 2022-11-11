@@ -70,6 +70,11 @@ public class ControladorGestionMozos implements ActionListener {
             ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);
             vistaGestionMozos.esconder();
         }
+        else{
+            Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
+            ControladorCambioEstadoMozo.getControladorCambioEstadoMozo(mozo);
+            vistaGestionMozos.esconder();
+        }
 
     }
 }

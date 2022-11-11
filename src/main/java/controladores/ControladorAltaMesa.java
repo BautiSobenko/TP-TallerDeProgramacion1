@@ -51,33 +51,43 @@ public class ControladorAltaMesa implements ActionListener {
         String comando = e.getActionCommand();
 
         if( comando.equalsIgnoreCase("Aceptar") ){
-            int nroMesa = Integer.parseInt(this.vistaAltaMesa.getNumeroMesa());
-            int cantSilla = Integer.parseInt(this.vistaAltaMesa.getCantSillas());
-            try {
-                    if(op.equalsIgnoreCase("Alta")){
+            int nroMesa = vistaAltaMesa.getNumeroMesa();
+            int cantSilla = vistaAltaMesa.getCantSillas();
+            if(nroMesa==0 || cantSilla==0)
+                if(op.equalsIgnoreCase("Alta"))
+                    ControladorAltaMesa.getControladorAltaMesa(op);
+                else
+                    ControladorAltaMesa.getControladorAltaMesa(op,mesa);
+            else {
+                try {
+                    if (op.equalsIgnoreCase("Alta")) {
                         MesaDTO mesaDTO = new MesaDTO(nroMesa, cantSilla);
                         gestionDeMesas.altaMesa(mesaDTO);
                         this.vistaAltaMesa.success("La mesa: " + mesaDTO.getNroMesa() + " fue dada de alta con exito");
-                    }else{
+                        ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas(true);
+                    } else {
                         MesaDTO mesaDTO = new MesaDTO(nroMesa, cantSilla);
                         Mozo mozoA = mesa.getMozoAsignado();
                         boolean existeMesa = gestionDeMesas.getMesas().stream().anyMatch(m -> m.getNroMesa() == mesaDTO.getNroMesa());
-                        if( !existeMesa ){
+                        if (!existeMesa) {
                             gestionDeMesas.bajaMesa(mesa.getNroMesa());
-                            if( mozoA != null)
+                            if (mozoA != null)
                                 gestionDeMesas.asignarMozoMesa(new MozoDTO(mozoA.getNombreCompleto(), mozoA.getFechaNacimiento(), mozoA.getCantidadHijos()), mesaDTO);
                             gestionDeMesas.altaMesa(mesaDTO);
                             this.vistaAltaMesa.success("La mesa: " + mesaDTO.getNroMesa() + " fue modificada con exito");
-                        }else
+                            ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas(true);
+                        } else
                             throw new MesaExistenteException();
                     }
-            } catch (MesaExistenteException ex) {
+                } catch (MesaExistenteException ex) {
                     this.vistaAltaMesa.failure("La mesa: " + nroMesa + " ya se encuentra en el sistema");
+                    ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas(true);
+                }
             }
         }else if( comando.equalsIgnoreCase("Volver") ){
             this.vistaAltaMesa.esconder();
+            ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas(true);
         }
-        ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas(true);
     }
 
 }

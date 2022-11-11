@@ -7,6 +7,25 @@
      <float>10.0</float>
     </void>
     <void property="id">
+     <string>98e7c3bc-036a-427e-9c84-94622587bdaf</string>
+    </void>
+    <void property="nombre">
+     <string>Manzana</string>
+    </void>
+    <void property="precio">
+     <float>10.0</float>
+    </void>
+    <void property="stock">
+     <int>10</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Producto">
+    <void property="costo">
+     <float>10.0</float>
+    </void>
+    <void property="id">
      <string>da1103aa-acb8-49f4-a786-f2d133206b52</string>
     </void>
     <void property="nombre">
@@ -17,25 +36,6 @@
     </void>
     <void property="stock">
      <int>50</int>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="modelo.Producto">
-    <void property="costo">
-     <float>30.0</float>
-    </void>
-    <void property="id">
-     <string>6157672a-7991-4c43-8b77-9b08c510a3c2</string>
-    </void>
-    <void property="nombre">
-     <string>Manzana</string>
-    </void>
-    <void property="precio">
-     <float>90.0</float>
-    </void>
-    <void property="stock">
-     <int>30</int>
     </void>
    </object>
   </void>

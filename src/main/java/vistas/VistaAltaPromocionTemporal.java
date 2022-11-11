@@ -293,6 +293,7 @@ public class VistaAltaPromocionTemporal extends JFrame implements IGenerica, Key
 	@Override
 	public void limpia() {
 		this.txtNombrePromocion.setText("");
+		this.txtPorcentajeDesc.setText("");
 		this.btnAceptar.setEnabled(false);
 		
 		this.chckbxEfectivo.setSelected(false);

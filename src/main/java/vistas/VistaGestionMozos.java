@@ -16,6 +16,7 @@ public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseLis
 	private JButton btnVolver,btnModificarMozo,btnBajaMozo,btnAltaMozo;
 	private JList<Mozo> listaMozos;
 	private ActionListener actionListener;
+	private JButton btnCambioEstado;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -76,6 +77,12 @@ public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseLis
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnVolver.setBounds(26, 211, 89, 32);
 		frmGestionDeMozos.getContentPane().add(btnVolver);
+		
+		btnCambioEstado = new JButton("Cambio Estado");
+		btnCambioEstado.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCambioEstado.setBounds(276, 199, 130, 32);
+		frmGestionDeMozos.getContentPane().add(btnCambioEstado);
+		btnCambioEstado.setEnabled(false);
 	}
 
 	@Override
@@ -85,6 +92,7 @@ public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseLis
 		btnModificarMozo.addActionListener(actionListener);
 		btnBajaMozo.addActionListener(actionListener);
 		btnVolver.addActionListener(actionListener);
+		btnCambioEstado.addActionListener(actionListener);
 	}
 
 	@Override
@@ -102,6 +110,7 @@ public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseLis
 	public void limpia() {
 		this.btnBajaMozo.setEnabled(false);
 		this.btnModificarMozo.setEnabled(false);
+		this.btnCambioEstado.setEnabled(false);
 	}
 
 	@Override
@@ -131,6 +140,7 @@ public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseLis
 		if(this.listaMozos.getSelectedValue()!=null) {
 			this.btnBajaMozo.setEnabled(true);
 			this.btnModificarMozo.setEnabled(true);
+			this.btnCambioEstado.setEnabled(true);
 		}
 	}
 

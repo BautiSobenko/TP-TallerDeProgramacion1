@@ -16,9 +16,8 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener{
 	private JButton btnVolver;
 	private JTextField txtCantSillas;
 	
-	private String numeroMesa = null;
-	private String cantSillas = null;
-
+	private int numeroMesa;
+	private int cantSillas;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -127,17 +126,30 @@ public class VistaAltaMesa extends JFrame implements IGenerica, KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		this.numeroMesa = txtNumeroMesa.getText();
-		this.cantSillas = txtCantSillas.getText();
-		
-		this.btnAceptar.setEnabled( this.numeroMesa.length() > 0 && this.cantSillas.length() > 0 );
+		this.btnAceptar.setEnabled( this.txtCantSillas.getText().length() > 0 && this.txtNumeroMesa.getText().length() > 0 );
 	}
 
-	public String getNumeroMesa() {
+	public int getNumeroMesa() {
+		try {
+			this.numeroMesa = Integer.parseInt(this.txtNumeroMesa.getText());
+		}
+		catch (Exception e){
+			JOptionPane.showMessageDialog(null, "Ingreso mal el numero de mesa", "Error", JOptionPane.ERROR_MESSAGE);
+			this.txtNumeroMesa.setText("");
+			return 0;
+		}
 		return numeroMesa;
 	}
 
-	public String getCantSillas() {
+	public int getCantSillas() {
+		try {
+			this.cantSillas = Integer.parseInt(this.txtCantSillas.getText());
+		}
+		catch (Exception e){
+			JOptionPane.showMessageDialog(null, "Ingreso mal la cantidad de sillas", "Error", JOptionPane.ERROR_MESSAGE);
+			this.txtCantSillas.setText("");
+			return 0;
+		}
 		return cantSillas;
 	}
 

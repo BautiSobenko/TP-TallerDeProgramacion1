@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Enumeration;
 
 public class VistaAltaOperario extends JFrame implements IAltaOperario, KeyListener, MouseListener{
 
@@ -133,12 +134,17 @@ public class VistaAltaOperario extends JFrame implements IAltaOperario, KeyListe
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		if( nombre.length() > 0 &&
+				username.length() > 0 &&
+				password.length() > 0
+				&& this.grupoEstado.getSelection()!=null){
+			this.btnAceptar.setEnabled(true);
+		}
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		this.estado = this.grupoEstado.getSelection().getActionCommand();
+
 	}
 
 	@Override
@@ -192,7 +198,13 @@ public class VistaAltaOperario extends JFrame implements IAltaOperario, KeyListe
 
 	@Override
 	public void limpia() {
+
 		this.btnAceptar.setEnabled(false);
+		this.txtNombre.setText("");
+		this.txtNombreUsuario.setText("");
+		this.txtPassword.setText("");
+		this.grupoEstado.clearSelection();
+
 	}
 
 	@Override
@@ -218,7 +230,14 @@ public class VistaAltaOperario extends JFrame implements IAltaOperario, KeyListe
 	}
 
 	public String getEstado() {
-		return estado;
+		AbstractButton button=null;
+		for (Enumeration<AbstractButton> buttons = grupoEstado.getElements(); buttons.hasMoreElements();) {
+			button = buttons.nextElement();
+			if (button.isSelected()) {
+				return button.getText();
+			}
+		}
+		return button.getText();
 	}
 
 	public JTextField getTxtNombre() {

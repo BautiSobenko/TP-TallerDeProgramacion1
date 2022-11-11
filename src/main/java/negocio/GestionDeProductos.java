@@ -1,6 +1,7 @@
 package negocio;
 
 import dto.ProductoDTO;
+import excepciones.CambioNombreException;
 import excepciones.ProductoExistenteException;
 import excepciones.ProductoNoExistenteException;
 import modelo.Empresa;
@@ -43,7 +44,7 @@ public class GestionDeProductos {
     public void altaProducto(ProductoDTO producto) throws ProductoExistenteException {
         Set<Producto> productos = this.empresa.getProductos();
         Producto productoNuevo = new Producto(producto.getNombre(), producto.getPrecio(), producto.getCosto(), producto.getStock());
-        boolean existeProducto = productos.stream().anyMatch(p -> p.getId().equals(productoNuevo.getId()));
+        boolean existeProducto = productos.stream().anyMatch(p -> p.getNombre().equalsIgnoreCase(productoNuevo.getNombre()));
 
         if(!existeProducto){
             productos.add(productoNuevo);
@@ -54,7 +55,7 @@ public class GestionDeProductos {
             throw new ProductoExistenteException();
     }
 
-    public void modificaProducto(ProductoDTO producto) {
+    public void modificaProducto(ProductoDTO producto) throws CambioNombreException {
         Set<Producto> productos = this.empresa.getProductos();
         Iterator<Producto> it = productos.iterator();
         Producto productoMod= new Producto(producto.getNombre(), producto.getPrecio(), producto.getCosto(), producto.getStock());
@@ -64,7 +65,7 @@ public class GestionDeProductos {
 
         while(it.hasNext() && !encontreProducto) {
             prod = it.next();
-            if(prod.getId().equals(productoMod.getId())){
+            if(prod.getNombre().equalsIgnoreCase(productoMod.getNombre())){
                 encontreProducto = true;
             }
         }
@@ -74,6 +75,8 @@ public class GestionDeProductos {
             this.empresa.setProductos(productos);
             persistirProductos();
         }
+        else
+            throw new CambioNombreException();
 
     }
 

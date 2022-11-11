@@ -4,7 +4,7 @@
   <void method="add">
    <object class="modelo.Mesa">
     <void property="cantSillas">
-     <int>7</int>
+     <int>2</int>
     </void>
     <void property="estadoMesa">
      <object class="java.lang.Enum" id="EstadoMesa0" method="valueOf">
@@ -13,14 +13,79 @@
      </object>
     </void>
     <void property="nroMesa">
-     <int>4</int>
+     <int>1</int>
     </void>
    </object>
   </void>
   <void method="add">
    <object class="modelo.Mesa">
     <void property="cantSillas">
-     <int>12</int>
+     <int>4</int>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa0"/>
+    </void>
+    <void property="nroMesa">
+     <int>3</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>4</int>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa0"/>
+    </void>
+    <void property="nroMesa">
+     <int>7</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>4</int>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa0"/>
+    </void>
+    <void property="nroMesa">
+     <int>2</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>2</int>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa0"/>
+    </void>
+    <void property="nroMesa">
+     <int>6</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>3</int>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa0"/>
+    </void>
+    <void property="nroMesa">
+     <int>8</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>6</int>
     </void>
     <void property="estadoMesa">
      <object idref="EstadoMesa0"/>
@@ -33,67 +98,39 @@
   <void method="add">
    <object class="modelo.Mesa">
     <void property="cantSillas">
-     <int>3</int>
+     <int>6</int>
     </void>
     <void property="estadoMesa">
      <object idref="EstadoMesa0"/>
     </void>
-    <void property="mozoAsignado">
-     <object class="modelo.Mozo">
-      <void property="cantidadHijos">
-       <int>4</int>
-      </void>
-      <void property="estadoMozo">
-       <object class="java.lang.Enum" id="EstadoMozo0" method="valueOf">
-        <class>enums.EstadoMozo</class>
-        <string>ACTIVO</string>
-       </object>
-      </void>
-      <void property="fechaNacimiento">
-       <string>3</string>
-      </void>
-      <void property="id">
-       <string>51948944-7d46-4171-bc0d-a4d14953f08f</string>
-      </void>
-      <void property="nombreCompleto">
-       <string>Hola</string>
-      </void>
-     </object>
-    </void>
     <void property="nroMesa">
-     <int>12</int>
+     <int>9</int>
     </void>
    </object>
   </void>
   <void method="add">
    <object class="modelo.Mesa">
     <void property="cantSillas">
-     <int>2</int>
+     <int>6</int>
     </void>
     <void property="estadoMesa">
      <object idref="EstadoMesa0"/>
     </void>
-    <void property="mozoAsignado">
-     <object class="modelo.Mozo">
-      <void property="cantidadHijos">
-       <int>3</int>
-      </void>
-      <void property="estadoMozo">
-       <object idref="EstadoMozo0"/>
-      </void>
-      <void property="fechaNacimiento">
-       <string>2</string>
-      </void>
-      <void property="id">
-       <string>73b5d75e-9203-4d35-a362-068cb53047ac</string>
-      </void>
-      <void property="nombreCompleto">
-       <string>Jorge</string>
-      </void>
-     </object>
+    <void property="nroMesa">
+     <int>10</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mesa">
+    <void property="cantSillas">
+     <int>6</int>
+    </void>
+    <void property="estadoMesa">
+     <object idref="EstadoMesa0"/>
     </void>
     <void property="nroMesa">
-     <int>15</int>
+     <int>4</int>
     </void>
    </object>
   </void>

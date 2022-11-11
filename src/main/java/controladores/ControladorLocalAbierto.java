@@ -1,7 +1,6 @@
 package controladores;
 
 import dto.MesaDTO;
-import dto.PedidoDTO;
 import enums.EstadoMesa;
 import excepciones.MesaNoExistenteException;
 import modelo.*;
@@ -9,7 +8,6 @@ import negocio.GestionDeComandas;
 import negocio.GestionDeMesas;
 import negocio.GestionDeMozos;
 import negocio.GestionDeProductos;
-import vistas.VistaAltaMesa;
 import vistas.VistaLocalAbierto;
 
 import javax.swing.*;
@@ -98,7 +96,7 @@ public class ControladorLocalAbierto implements ActionListener {
             String txt ="";
             while (it.hasNext()){
                 try {
-                    txt += "La mesa Nro"+ it.next().getNroMesa() + " tiene un  consumo promedio de " + gestionDeMesas.calculaConsumoPromedio(it.next().getNroMesa())+"\n";
+                    txt += "La mesa "+ it.next().getNroMesa() + " tiene un  consumo promedio de " + gestionDeMesas.calculaConsumoPromedio(it.next().getNroMesa())+"\n";
                 } catch (MesaNoExistenteException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -114,12 +112,19 @@ public class ControladorLocalAbierto implements ActionListener {
             vistaLocalAbierto.success(msg);
         }
         else if(comando.equalsIgnoreCase("Cerrar Mesa")) {
-            if (vistaLocalAbierto.getMesaApertura().getEstadoMesa() == EstadoMesa.LIBRE) {
+            Mesa mesa = vistaLocalAbierto.getMesaApertura();
+            if ( mesa.getEstadoMesa() == EstadoMesa.LIBRE) {
                 vistaLocalAbierto.failure("La mesa nunca fue abierta");
                 vistaLocalAbierto.limpia();
                 ControladorLocalAbierto con = ControladorLocalAbierto.getControladorLocalAbierto();
             } else {
-                vistaLocalAbierto.getMesaCierre().setEstadoMesa(EstadoMesa.LIBRE);
+                MesaDTO mesaDTO = new MesaDTO( mesa.getNroMesa(), mesa.getCantSillas());
+                mesaDTO.setEstadoMesa( mesa.getEstadoMesa() );
+                mesaDTO.setCantCuentasCerradas( mesa.getCantCuentasCerradas()  );
+                mesaDTO.setComanda(mesa.getComanda());
+                mesaDTO.setMozoAsignado(mesa.getMozoAsignado());
+                mesaDTO.setVentas( mesa.getVentas() );
+                gestionDeMesas.cerrarMesa( mesaDTO );
                 vistaLocalAbierto.success("Mesa cerrada con exito");
             }
         }

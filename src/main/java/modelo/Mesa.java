@@ -9,7 +9,7 @@ public class Mesa {
     private EstadoMesa estadoMesa;
     private Mozo mozoAsignado;
     private Comanda comanda;
-    private double Ventas;
+    private double ventas;
     private int cantCuentasCerradas;
 
     public Mesa() {
@@ -19,14 +19,16 @@ public class Mesa {
         this.nroMesa = nroMesa;
         this.cantSillas = cantSillas;
         this.estadoMesa = EstadoMesa.LIBRE;
+        this.ventas = 0;
+        this.cantCuentasCerradas = 0;
     }
 
     public double getVentas() {
-        return Ventas;
+        return ventas;
     }
 
     public void setVentas(double ventas) {
-        Ventas = ventas;
+        this.ventas = ventas;
     }
 
     public int getCantCuentasCerradas() {

@@ -163,22 +163,26 @@ public class Empresa {
         return menor;
     }
 
-    public double consumoPromedioMesa(int nroMesa) throws MesaNoExistenteException{
+    public double consumoPromedioMesa(int nroMesa) {
         Iterator<Mesa> it = mesas.iterator();
         boolean encontreMesa = false;
+        double consumo = 0;
         Mesa mesa = null;
 
-        while(it.hasNext() && !encontreMesa) {
+        while (it.hasNext() && !encontreMesa) {
             mesa = it.next();
-            if(mesa.getNroMesa() == nroMesa){
+            if (mesa.getNroMesa() == nroMesa) {
                 encontreMesa = true;
             }
         }
-        if(encontreMesa)
-            return mesa.getVentas() / mesa.getCantCuentasCerradas();
-        else
-            throw new MesaNoExistenteException();
+
+        if (encontreMesa)
+            consumo = mesa.getVentas() / mesa.getCantCuentasCerradas();
+        
+        return  consumo;
+
     }
+    
 
     public double calculaSueldo(String id) throws MozoNoExistenteException{
 

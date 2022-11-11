@@ -3,10 +3,8 @@ package negocio;
 import dto.MesaDTO;
 import dto.MozoDTO;
 import enums.EstadoMesa;
-import excepciones.CierreMesaConEstadoLibreException;
 import excepciones.MesaExistenteException;
 import excepciones.MesaNoExistenteException;
-import excepciones.MozoNoExistenteException;
 import modelo.*;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaXML;
@@ -60,14 +58,15 @@ public class GestionDeMesas {
             throw new MesaExistenteException();
     }
 
-    public void modificaMesa(MesaDTO mesa)  {
+    public void cerrarMesa(MesaDTO mesa){
+
         Set<Mesa> mesas = this.empresa.getMesas();
         Iterator<Mesa> it = mesas.iterator();
 
         Mesa mesaMod = new Mesa(mesa.getNroMesa(),mesa.getCantSillas());
 
         boolean encontreMesa = false;
-        Mesa m;
+        Mesa m = null;
 
         while(it.hasNext() && !encontreMesa) {
             m = it.next();
@@ -76,7 +75,41 @@ public class GestionDeMesas {
             }
         }
         if(encontreMesa) {
-            mesas.remove(it.next());
+            mesaMod.setEstadoMesa( EstadoMesa.LIBRE );
+            mesaMod.setMozoAsignado(mesa.getMozoAsignado());
+            mesaMod.setComanda(mesa.getComanda());
+            mesaMod.setVentas( mesa.getVentas() + this.totalMesa(mesaMod) );
+            mesaMod.setCantCuentasCerradas( mesa.getCantCuentasCerradas() + 1);
+            mesaMod.setComanda(null);
+            mesas.remove(m);
+            mesas.add(mesaMod);
+            this.empresa.setMesas(mesas);
+        }
+
+    }
+
+    public void modificaMesa(MesaDTO mesa)  {
+        Set<Mesa> mesas = this.empresa.getMesas();
+        Iterator<Mesa> it = mesas.iterator();
+
+        Mesa mesaMod = new Mesa(mesa.getNroMesa(),mesa.getCantSillas());
+
+        boolean encontreMesa = false;
+        Mesa m = null;
+
+        while(it.hasNext() && !encontreMesa) {
+            m = it.next();
+            if(m.getNroMesa() == mesaMod.getNroMesa()){
+                encontreMesa = true;
+            }
+        }
+        if(encontreMesa) {
+            mesaMod.setEstadoMesa( mesa.getEstadoMesa() );
+            mesaMod.setCantCuentasCerradas( mesa.getCantCuentasCerradas() );
+            mesaMod.setComanda(mesa.getComanda());
+            mesaMod.setMozoAsignado(mesa.getMozoAsignado());
+            mesaMod.setVentas(mesa.getVentas());
+            mesas.remove(m);
             mesas.add(mesaMod);
             this.empresa.setMesas(mesas);
             persistirMesas();
@@ -108,29 +141,17 @@ public class GestionDeMesas {
                 mesaM.setMozoAsignado(mozoA);
                 mesas.add(mesaM);
                 this.empresa.setMesas(mesas);
-                persistirMesas();
             }
     }
 
-    public double cerrarMesa(Mesa mesa) throws MesaNoExistenteException, CierreMesaConEstadoLibreException {
+    public double totalMesa(Mesa mesa){
 
-        boolean existeMesa = this.empresa.getMesas().stream().anyMatch(m -> m.getNroMesa() == mesa.getNroMesa());
-        if( !existeMesa )
-            throw new MesaNoExistenteException();
-        else{
-            if( mesa.getEstadoMesa() == EstadoMesa.LIBRE ){
-                throw new CierreMesaConEstadoLibreException();
-            }else{
-                List<Pedido> pedidosMesa = mesa.getComanda().getPedidos();
-                mesa.setEstadoMesa(EstadoMesa.LIBRE);
-                //mesa.setComanda(null); ?
-                persistirMesas();
+        List<Pedido> pedidosMesa = mesa.getComanda().getPedidos();
 
-                return pedidosMesa.stream()
-                        .mapToDouble(p -> p.getProducto().getPrecio())
-                        .sum();
-            }
-        }
+        return pedidosMesa.stream()
+                .mapToDouble(p -> p.getProducto().getPrecio())
+                .sum();
+
     }
 
     public Set<Mesa> getMesas(){

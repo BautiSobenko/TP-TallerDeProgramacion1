@@ -2,6 +2,7 @@ package controladores;
 
 import dto.MesaDTO;
 import enums.EstadoMesa;
+import excepciones.CierreMesaConEstadoLibreException;
 import excepciones.MesaNoExistenteException;
 import modelo.*;
 import negocio.GestionDeComandas;
@@ -133,7 +134,6 @@ public class ControladorLocalAbierto implements ActionListener {
             Mesa mesa = vistaLocalAbierto.getMesaPedido();
             int cantidad = vistaLocalAbierto.getCantidad();
 
-            System.out.println(mesa.getEstadoMesa());
             if( mesa.getEstadoMesa() == EstadoMesa.OCUPADA ){
                 Pedido pedido = new Pedido(prod, cantidad);
                 gestionDeComandas.cargarPedido( mesa , pedido );

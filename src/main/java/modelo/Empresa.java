@@ -133,6 +133,10 @@ public class Empresa {
         }
     }
 
+    /**
+     *
+     * @return: Mozo con mayor cantidad de ventas
+     */
     public Mozo mayorVolumenVentaMozo(){
         Iterator<Mozo> it = mozos.iterator();
         Mozo mozo, mayor = null;
@@ -148,6 +152,10 @@ public class Empresa {
         return mayor;
     }
 
+    /**
+     *
+     * @return: Mozo con menor cantidad de ventas
+     */
     public Mozo menorVolumenVentaMozo(){
         Iterator<Mozo> it = mozos.iterator();
         Mozo mozo, menor = null;
@@ -163,7 +171,13 @@ public class Empresa {
         return menor;
     }
 
-    public double consumoPromedioMesa(int nroMesa) {
+    /**
+     *
+     * @param nroMesa
+     * @return: Devuelve el consumo promedio del numero de mesa ingresada
+     * @throws MesaNoExistenteException
+     */
+    public double consumoPromedioMesa(int nroMesa) throws MesaNoExistenteException{
         Iterator<Mesa> it = mesas.iterator();
         boolean encontreMesa = false;
         double consumo = 0;
@@ -178,12 +192,17 @@ public class Empresa {
 
         if (encontreMesa)
             consumo = mesa.getVentas() / mesa.getCantCuentasCerradas();
-        
+
         return  consumo;
 
     }
-    
 
+    /**
+     * precondition: id!=null
+     * @param id
+     * @return: sueldo del mozo referenciado por el id
+     * @throws MozoNoExistenteException
+     */
     public double calculaSueldo(String id) throws MozoNoExistenteException{
 
         Iterator<Mozo> it = mozos.iterator();

@@ -2,6 +2,7 @@ package negocio;
 
 import dto.ProductoDTO;
 import enums.EstadoMesa;
+import excepciones.StockInsuficienteException;
 import modelo.Comanda;
 import modelo.Empresa;
 import modelo.Mesa;
@@ -27,6 +28,12 @@ public class GestionDeComandas {
         return gestionDeComandas;
     }
 
+    /**
+     * Crea una comando de forma simultanea a la apertura de la mesa
+     * precondition: mesa!=null && mesa.getEstado()!=Estado.Ocupado
+     * postcondition: mesa.getEstado()==Estado.Ocupado
+     * @param mesa
+     */
     public void abrirComanda(Mesa mesa){
 
         Set<Mesa> mesas = empresa.getMesas();
@@ -39,7 +46,13 @@ public class GestionDeComandas {
 
     }
 
-    public void cargarPedido(Mesa mesa,  Pedido pedido){
+    /**
+     * Se agrega un pedido a una mesa
+     * precondition: mesa.getEstado()==Estado.Ocupada
+     * @param mesa: mesa donde se agregara el pedido
+     * @param pedido: pedido a cargar
+     */
+    public void cargarPedido(Mesa mesa,  Pedido pedido) throws StockInsuficienteException {
 
         Set<Mesa> mesas = empresa.getMesas();
         Iterator<Mesa> it = mesas.iterator();
@@ -52,7 +65,7 @@ public class GestionDeComandas {
             mesas.add(mesa);
             this.empresa.setMesas(mesas);
         }else{
-            //!Throw excepcion No hay stock disponible del producto
+            throw new StockInsuficienteException();
         }
         }
     }

@@ -32,6 +32,9 @@ public class GestionDeMesas {
         return gestionDeMesas;
     }
 
+    /**
+     * Persistencia de la coleccion de mesas
+     */
     public void persistirMesas(){
         IPersistencia<Set<Mesa>> persistencia = new PersistenciaXML();
         try {
@@ -43,6 +46,12 @@ public class GestionDeMesas {
         }
     }
 
+    /**
+     * Carga la mesa ala coleccion
+     * precondition: MesaDTO!=null
+     * @param mesa
+     * @throws MesaExistenteException
+     */
     public void altaMesa(MesaDTO mesa) throws MesaExistenteException {
 
         Set<Mesa> mesas = this.empresa.getMesas();
@@ -58,6 +67,11 @@ public class GestionDeMesas {
             throw new MesaExistenteException();
     }
 
+    /**
+     * Elimina una mesa recibida y la vuelve a agregar
+     * precondition: MesaDTO!=null
+     * @param mesa
+     */
     public void cerrarMesa(MesaDTO mesa){
 
         Set<Mesa> mesas = this.empresa.getMesas();
@@ -116,6 +130,10 @@ public class GestionDeMesas {
         }
     }
 
+    /**
+     * Elimina la mesa seleccionada
+     * @param nroMesa
+     */
     public void bajaMesa(int nroMesa) {
         Set<Mesa> mesas = this.empresa.getMesas();
         Optional<Mesa> mesa = mesas.stream().filter(m -> m.getNroMesa() == nroMesa).findFirst();
@@ -127,13 +145,19 @@ public class GestionDeMesas {
         }
     }
 
+    /**
+     * Asigna el mozo enviado a la mesa enviada
+     * precondition: MesaDTO!=null && MozoDTO!=null
+     * @param mozo
+     * @param mesa
+     */
+
     public void asignarMozoMesa(MozoDTO mozo, MesaDTO mesa) {
 
         boolean existeMozo = this.empresa.getMozos().stream().anyMatch(m -> m.getNombreCompleto().equalsIgnoreCase(mozo.getNombreCompleto()) );
-        boolean existeMesa;
+        Set<Mesa> mesas = this.empresa.getMesas();
+        boolean existeMesa = mesas.stream().anyMatch(m -> m.getNroMesa() == mesa.getNroMesa());
 
-            Set<Mesa> mesas = this.empresa.getMesas();
-            existeMesa = mesas.stream().anyMatch(m -> m.getNroMesa() == mesa.getNroMesa());
             if( existeMesa ){
                 Mesa mesaM = new Mesa(mesa.getNroMesa(), mesa.getCantSillas());
                 Mozo mozoA = new Mozo(mozo.getNombreCompleto(),mozo.getFechaNacimiento(),mozo.getCantidadHijos());
@@ -144,6 +168,12 @@ public class GestionDeMesas {
             }
     }
 
+    /**
+     * Cierra la mesa enviada
+     * precondition: mesa!=null
+     * @param mesa
+     * @return
+     */
     public double totalMesa(Mesa mesa){
 
         List<Pedido> pedidosMesa = mesa.getComanda().getPedidos();
@@ -158,6 +188,12 @@ public class GestionDeMesas {
         return this.empresa.getMesas();
     }
 
+    /**
+     * trae el consumo promedio de una mesa
+     * @param nroMesa
+     * @return consumo promedio de la mesa enviada
+     * @throws MesaNoExistenteException
+     */
     public float calculaConsumoPromedio(int nroMesa) throws MesaNoExistenteException {
         return (float) empresa.consumoPromedioMesa(nroMesa);
     }

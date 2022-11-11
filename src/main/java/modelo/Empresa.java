@@ -32,7 +32,6 @@ public class Empresa {
     }
 
     private Empresa() {
-        cargarAdmin();
         cargarMesas();
         cargarMozos();
         cargarProductos();
@@ -45,22 +44,6 @@ public class Empresa {
         usuarioLogueado = null;
     }
 
-    private void cargarAdmin(){
-        Operario admin = Operario.admin();
-        this.operarios = new HashSet<>();
-        this.operarios.add(admin);
-
-        IPersistencia persistencia = new PersistenciaXML();
-        try {
-            persistencia.abrirOutput("operarios.xml");
-            persistencia.escribir(this.operarios);
-            persistencia.cerrarOutput();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
     private void cargarOperarios() {
         IPersistencia<Set<Operario>> persistencia = new PersistenciaXML();
 
@@ -69,7 +52,9 @@ public class Empresa {
             this.operarios = persistencia.leer();
             persistencia.cerrarInput();
         } catch (Exception err) {
+            Operario admin = Operario.admin();
             this.operarios = new HashSet<>();
+            this.operarios.add(admin);
         }
     }
 

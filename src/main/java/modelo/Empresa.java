@@ -2,6 +2,8 @@ package modelo;
 
 import excepciones.*;
 import modelo.promociones.Promocion;
+import modelo.promociones.PromocionFija;
+import modelo.promociones.PromocionTemporal;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaXML;
 
@@ -19,7 +21,8 @@ public class Empresa {
     private Set<Mesa> mesas;
     private Set<Producto> productos;
     private Set<Operario> operarios;
-    private Set<Promocion> promociones;
+    private Set<PromocionFija> promocionesFijas;
+    private Set<PromocionTemporal> promocionesTemporales;
     private double sueldoBasico;
 
     private Operario usuarioLogueado;
@@ -36,7 +39,8 @@ public class Empresa {
         cargarMozos();
         cargarProductos();
         cargarOperarios();
-        cargarPromociones();
+        cargarPromocionesFijas();
+        cargarPromocionesTemporales();
     }
 
 
@@ -103,18 +107,33 @@ public class Empresa {
         }
     }
 
-    private void cargarPromociones() {
-        IPersistencia<Set<Promocion>> persistencia = new PersistenciaXML();
+    private void cargarPromocionesFijas() {
+        IPersistencia<Set<PromocionFija>> persistencia = new PersistenciaXML();
 
         try { // Archivo XML "Promociones" -> Empresa
-            persistencia.abrirInput("promociones.xml");
-            this.promociones = persistencia.leer();
-            if (promociones == null) {
-                promociones = new HashSet<>();
+            persistencia.abrirInput("promociones-fijas.xml");
+            promocionesFijas = persistencia.leer();
+            if (promocionesFijas == null) {
+                promocionesFijas = new HashSet<>();
             }
             persistencia.cerrarInput();
         } catch (Exception err) {
-            this.promociones = new HashSet<>();
+            this.promocionesFijas = new HashSet<>();
+        }
+    }
+
+    private void cargarPromocionesTemporales() {
+        IPersistencia<Set<PromocionTemporal>> persistencia = new PersistenciaXML();
+
+        try { // Archivo XML "Promociones" -> Empresa
+            persistencia.abrirInput("promociones-temporales.xml");
+            promocionesTemporales = persistencia.leer();
+            if (promocionesTemporales == null) {
+                promocionesTemporales = new HashSet<>();
+            }
+            persistencia.cerrarInput();
+        } catch (Exception err) {
+            this.promocionesTemporales = new HashSet<>();
         }
     }
 
@@ -253,12 +272,20 @@ public class Empresa {
         this.operarios = operarios;
     }
 
-    public Set<Promocion> getPromociones() {
-        return promociones;
+    public Set<PromocionFija> getPromocionesFijas() {
+        return promocionesFijas;
     }
 
-    public void setPromociones(Set<Promocion> promociones) {
-        this.promociones = promociones;
+    public void setPromocionesFijas(Set<PromocionFija> promocionesFijas) {
+        this.promocionesFijas = promocionesFijas;
+    }
+
+    public Set<PromocionTemporal> getPromocionesTemporales() {
+        return promocionesTemporales;
+    }
+
+    public void setPromocionesTemporales(Set<PromocionTemporal> promocionesTemporales) {
+        this.promocionesTemporales = promocionesTemporales;
     }
 
     public double getSueldoBasico() {

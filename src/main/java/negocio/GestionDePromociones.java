@@ -3,6 +3,7 @@ package negocio;
 import dto.PromocionDTO;
 import dto.PromocionProductoDTO;
 import dto.PromocionTemporalDTO;
+import enums.Dias;
 import excepciones.PromocionExistenteException;
 import modelo.Empresa;
 import modelo.promociones.Promocion;
@@ -13,6 +14,7 @@ import persistencia.PersistenciaXML;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 public class GestionDePromociones {
@@ -221,6 +223,31 @@ public class GestionDePromociones {
             this.empresa.setPromociones(promociones);
             persistirPromociones();
         }
+    }
+
+    /**
+     * Devuelve si el dia pasado por parametro se encuentra en la promocion pasada por parametro
+     * precondition: promo!=null && dia!=null && dia!=""
+     * @param promo
+     * @param dia
+     * @return
+     */
+    public boolean isDiaIncluido(Promocion promo,String dia){
+
+        List<Dias> dias = promo.getDiasPromo();
+        Iterator<Dias> it = dias.iterator();
+        boolean res = false;
+
+        while (it.hasNext() && res==false){
+            String diaLista = it.next().toString();
+            if(dia.startsWith("s") && diaLista.startsWith("S"))
+                res = true;
+            else
+                res = diaLista.equalsIgnoreCase(dia);
+        }
+
+        return res;
+
     }
 
 

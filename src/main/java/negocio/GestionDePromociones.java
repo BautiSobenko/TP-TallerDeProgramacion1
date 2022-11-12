@@ -40,21 +40,23 @@ public class GestionDePromociones {
         return this.empresa.getPromocionesTemporales();
     }
 
-    public void persistirPromociones(){
+    public void persistirPromocionesTemporales() {
+        IPersistencia<Set<PromocionTemporal>> persistencia = new PersistenciaXML();
+        try {
+            persistencia.abrirOutput("promociones-temporales.xml");
+            persistencia.escribir(this.getPromocionesTemporales());
+            persistencia.cerrarOutput();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void persistirPromocionesFijas(){
         IPersistencia<Set<PromocionFija>> persistencia1 = new PersistenciaXML();
         try {
             persistencia1.abrirOutput("promociones-fijas.xml");
             persistencia1.escribir(this.getPromocionesFijas());
             persistencia1.cerrarOutput();
-        } catch (IOException e) {
-
-        }
-
-        IPersistencia<Set<PromocionFija>> persistencia2 = new PersistenciaXML();
-        try {
-            persistencia2.abrirOutput("promociones-temporales.xml");
-            persistencia2.escribir(this.getPromocionesTemporales());
-            persistencia2.cerrarOutput();
         } catch (IOException e) {
 
         }
@@ -86,19 +88,10 @@ public class GestionDePromociones {
 
             promociones.add(promoFija);
             this.empresa.setPromocionesFijas(promociones);
-            persistirPromociones();
+            persistirPromocionesFijas();
 
-
-
-
-
-        } else{
-            if( p instanceof PromocionFija)
-                throw new PromocionExistenteException("Ya existe una promocion fija con el nombre " + p.getNombre());
-            else
-                throw new PromocionExistenteException("Ya existe una promocion temporal con el nombre " + p.getNombre());
-        }
-
+        }else
+            throw new PromocionExistenteException("Ya existe una promocion fija con el nombre " + promocion.getNombre());
     }
 
     /**
@@ -107,134 +100,129 @@ public class GestionDePromociones {
      * @throws PromocionExistenteException
      */
     public void altaPromocionTemporal(PromocionTemporalDTO promocion) throws PromocionExistenteException {
-        PromocionFija promoFija;
-        Set<PromocionFija> promociones = this.getPromocionesFijas();
+        PromocionTemporal promoTemporal;
+        Set<PromocionTemporal> promociones = this.getPromocionesTemporales();
 
         boolean existePromo = promociones.stream().anyMatch(p -> p.getNombre().equalsIgnoreCase(promocion.getNombre()));
 
         if(!existePromo){
 
-            promoFija = new PromocionFija(
-                    promocion.getNombre(),
+            promoTemporal = new PromocionTemporal(promocion.getNombre(),
                     promocion.getDiasPromo(),
-                    promocion.getProducto(),
-                    promocion.isDosPorUno(),
-                    promocion.isDtoPorCant(),
-                    promocion.getDtoPorCantMin(),
-                    promocion.getDtoPorCantPrecioU()
+                    promocion.getFormaPago(),
+                    promocion.getPorcentajeDescuento(),
+                    promocion.isAcumulable()
             );
 
-            promociones.add(promoFija);
-            this.empresa.setPromocionesTemporales(promoFija);
-            persistirPromociones();
+            promociones.add(promoTemporal);
+            this.empresa.setPromocionesTemporales(promociones);
+            persistirPromocionesTemporales();
 
-
-            if(promocion instanceof PromocionTemporalDTO promo){
-                promoTemporal = new PromocionTemporal(promo.getNombre(),
-                        promo.getDiasPromo(),
-                        promo.getFormaPago(),
-                        promo.getPorcentajeDescuento(),
-                        promo.isAcumulable());
-
-                promociones.add(promoTemporal);
-                this.empresa.setPromocionesTemporales(promoci);
-            }
-
-
-        } else{
-            if( p instanceof PromocionFija)
-                throw new PromocionExistenteException("Ya existe una promocion fija con el nombre " + p.getNombre());
-            else
-                throw new PromocionExistenteException("Ya existe una promocion temporal con el nombre " + p.getNombre());
-        }
-
+        } else
+            throw new PromocionExistenteException("Ya existe una promocion temporal con el nombre " + promocion.getNombre());
     }
 
-    /**
-     * precondition promocion!=null
-     * @param promocion
-     */
-    public void modificaPromocion(PromocionDTO promocion) {
-        Set<Promocion> promociones = this.getPromociones();
+        /**
+         * precondition promocion!=null
+         * @param promocion
+         */
+    public void modificaPromocionFija(PromocionProductoDTO promocion) {
 
-        Iterator<Promocion> it = promociones.iterator();
+        Set<PromocionFija> promociones = this.getPromocionesFijas();
+
+        Iterator<PromocionFija> it = promociones.iterator();
         boolean encontrePromo = false;
         Promocion p = null;
 
         while(it.hasNext() && !encontrePromo) {
             p = it.next();
-            if( (p instanceof PromocionFija && promocion instanceof PromocionProductoDTO) || (p instanceof PromocionTemporal && promocion instanceof PromocionTemporalDTO) ){
-                if( p.getNombre().equals(promocion.getNombre()) )
-                    encontrePromo = true;
-            }
+            if( p.getNombre().equals(promocion.getNombre()) )
+                encontrePromo = true;
         }
 
         if(encontrePromo){
 
             promociones.remove(p);
 
-            if(promocion instanceof PromocionTemporalDTO promo){
-                PromocionTemporal promoTemporal = new PromocionTemporal(promo.getNombre(),
-                                                                        promo.getDiasPromo(),
-                                                                        promo.getFormaPago(),
-                                                                        promo.getPorcentajeDescuento(),
-                                                                        promo.isAcumulable());
+            PromocionFija promoFija = new PromocionFija(promocion.getNombre(),
+                                                        promocion.getDiasPromo(),
+                                                        promocion.getProducto(),
+                                                        promocion.isDosPorUno(),
+                                                        promocion.isDtoPorCant(),
+                                                        promocion.getDtoPorCantMin(),
+                                                        promocion.getDtoPorCantPrecioU()
+           );
 
-                promociones.add(promoTemporal);
-            }
-            else if (promocion instanceof PromocionProductoDTO promo){
-                PromocionFija promoFija = new PromocionFija(promo.getNombre(),
-                                                            promo.getDiasPromo(),
-                                                            promo.getProducto(),
-                                                            promo.isDosPorUno(),
-                                                            promo.isDtoPorCant(),
-                                                            promo.getDtoPorCantMin(),
-                                                            promo.getDtoPorCantPrecioU());
+            promociones.add(promoFija);
+            this.empresa.setPromocionesFijas(promociones);
+            persistirPromocionesFijas();
 
-                promociones.add(promoFija);
-            }
-
-            this.empresa.setPromociones(promociones);
-            persistirPromociones();
         }
+
     }
 
+
     /**
-     * promocion!=null
+     * precondition promocion!=null
      * @param promocion
      */
-    public void bajaPromocion(PromocionDTO promocion) {
-        Set<Promocion> promociones = this.getPromociones();
+    public void modificaPromocionTemporal(PromocionTemporalDTO promocion) {
+            Set<PromocionTemporal> promociones = this.getPromocionesTemporales();
 
-        Iterator<Promocion> it = promociones.iterator();
-        boolean encontrePromo = false;
-        Promocion p = null;
+            Iterator<PromocionTemporal> it = promociones.iterator();
+            boolean encontrePromo = false;
+            Promocion p = null;
 
-        while (it.hasNext() && !encontrePromo) {
-            p = it.next();
-            if ((p instanceof PromocionFija && promocion instanceof PromocionProductoDTO) || (p instanceof PromocionTemporal && promocion instanceof PromocionTemporalDTO)) {
-                if (p.getNombre().equals(promocion.getNombre()))
+            while(it.hasNext() && !encontrePromo) {
+                p = it.next();
+                if( p.getNombre().equals(promocion.getNombre()) )
                     encontrePromo = true;
             }
-        }
 
-        if (encontrePromo) {
-            promociones.remove(p);
-            this.empresa.setPromociones(promociones);
-            persistirPromociones();
-        }
+            if(encontrePromo){
+
+                promociones.remove(p);
+
+                PromocionTemporal promoTemporal = new PromocionTemporal(promocion.getNombre(),
+                                                                        promocion.getDiasPromo(),
+                                                                        promocion.getFormaPago(),
+                                                                        promocion.getPorcentajeDescuento(),
+                                                                        promocion.isAcumulable()
+                );
+
+                promociones.add(promoTemporal);
+                this.empresa.setPromocionesTemporales(promociones);
+                persistirPromocionesTemporales();
+            }
+    }
+
+
+    public void bajaPromocionFija( String id ) {
+
+        this.empresa.getPromocionesFijas().removeIf( p -> p.getId().equalsIgnoreCase(id) );
+
+        persistirPromocionesFijas();
+
+    }
+
+    public void bajaPromocionTemporal( String id ) {
+
+        this.empresa.getPromocionesTemporales().removeIf( p -> p.getId().equalsIgnoreCase(id) );
+
+        persistirPromocionesTemporales();
+
     }
 
     /**
      * Devuelve si el dia pasado por parametro se encuentra en la promocion pasada por parametro
      * precondition: promo!=null && dia!=null && dia!=""
-     * @param promo
+     * @param promocion
      * @param dia
      * @return
      */
-    public boolean isDiaIncluido(Promocion promo,String dia){
+    public boolean isDiaIncluido(Promocion promocion,String dia){
 
-        List<Dias> dias = promo.getDiasPromo();
+        List<Dias> dias = promocion.getDiasPromo();
         Iterator<Dias> it = dias.iterator();
         boolean res = false;
 

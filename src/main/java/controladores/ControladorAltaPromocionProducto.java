@@ -109,13 +109,13 @@ public class ControladorAltaPromocionProducto implements ActionListener {
                     prom = new PromocionProductoDTO(nombre, activa, dias, prod, false, true, cantMinima, precioPromo);
                     try {
                         if(op.equalsIgnoreCase("Alta")){
-                            gestionDePromociones.altaPromocion(prom);
+                            gestionDePromociones.altaPromocionFija(prom);
                             vistaAltaPromocionProducto.success("La promocion fija: " + prom.getNombre() + " se ha dado de alta con exito");
                         }else{
-                            boolean existePromocion = gestionDePromociones.getPromociones().stream().anyMatch(p -> p.getNombre().equals(prom.getNombre()));
+                            boolean existePromocion = gestionDePromociones.getPromocionesFijas().stream().anyMatch(p -> p.getNombre().equals(prom.getNombre()));
                             if( !existePromocion ){
-                                gestionDePromociones.bajaPromocion(promocionFija);
-                                gestionDePromociones.altaPromocion(prom);
+                                gestionDePromociones.bajaPromocionFija(promocionFija.getId());
+                                gestionDePromociones.altaPromocionFija(prom);
                                 vistaAltaPromocionProducto.success("La promocion fija: " + prom.getNombre() + " se ha modificado con exito");
                             }else
                                 throw new PromocionExistenteException(prom.getNombre());

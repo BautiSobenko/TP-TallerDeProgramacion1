@@ -28,4 +28,16 @@ public class PromocionTemporalDTO extends PromocionDTO{
     public boolean isAcumulable() {
         return acumulable;
     }
+
+    public void setFormaPago(String formaPago) {
+        this.formaPago = formaPago;
+    }
+
+    public void setPorcentajeDescuento(float porcentajeDescuento) {
+        this.porcentajeDescuento = porcentajeDescuento;
+    }
+
+    public void setAcumulable(boolean acumulable) {
+        this.acumulable = acumulable;
+    }
 }

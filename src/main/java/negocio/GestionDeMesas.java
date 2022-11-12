@@ -7,6 +7,7 @@ import excepciones.MesaExistenteException;
 import excepciones.MesaNoExistenteException;
 import modelo.*;
 import modelo.promociones.Promocion;
+import modelo.promociones.PromocionFija;
 import modelo.promociones.PromocionTemporal;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaXML;
@@ -76,8 +77,9 @@ public class GestionDeMesas {
      * precondition: MesaDTO!=null
      * @param mesa
      */
-    public void cerrarMesa(MesaDTO mesa){
+    public double cerrarMesa(MesaDTO mesa,String medioDePago){
 
+        double total = 0;
         Set<Mesa> mesas = this.empresa.getMesas();
         Iterator<Mesa> it = mesas.iterator();
 
@@ -93,16 +95,17 @@ public class GestionDeMesas {
             }
         }
         if(encontreMesa) {
+            total = this.totalMesa(m,medioDePago);
             mesas.remove(m);
             m.setEstadoMesa( EstadoMesa.LIBRE );
             m.setMozoAsignado(mesa.getMozoAsignado());
-            m.setVentas( mesa.getVentas() + this.totalMesa(m) );
+            m.setVentas( mesa.getVentas() + total );
             m.setCantCuentasCerradas( mesa.getCantCuentasCerradas() + 1);
             m.setComanda(null);
             mesas.add(m);
             this.empresa.setMesas(mesas);
         }
-
+        return total;
     }
 
     public void modificaMesa(MesaDTO mesa)  {
@@ -177,35 +180,66 @@ public class GestionDeMesas {
      * @param mesa
      * @return
      */
-    public double totalMesa(Mesa mesa){
+    public double totalMesa(Mesa mesa,String medioDePago){
+        DateFormat dateFormat = new SimpleDateFormat("EEEEE");
+        String dia = dateFormat.format(Calendar.getInstance().getTime());//Dia de hoy en letras
+        boolean seAplicoPromo = false; //Uso global para saber si ya se aplico alguna promocion y si se estan acumulando o no promociones
+        boolean aplique; //Uso local del while para aniadir el costo si no se aplico ninguna promo
 
-        double total;
+        double total=0,bruto=0;
         List<Pedido> pedidosMesa = mesa.getComanda().getPedidos();
+        Iterator<Pedido> itPedidos = pedidosMesa.iterator();
+        Pedido pedido;
 
-        double bruto =  pedidosMesa.stream()
-                .mapToDouble(p -> p.getProducto().getPrecio() * p.getCantidad() )
-                .sum() ;
-
-        Set<Promocion> promociones = empresa.getPromociones();
-
-        Iterator<Promocion> it = promociones.iterator();
-        Set<Promocion> promocionesAplicables = new HashSet<>();
-        Promocion promo;
-        while (it.hasNext()) {
-            promo = it.next();
-            if (promo.isActivo()) {
-                    DateFormat dateFormat = new SimpleDateFormat("EEEEE");
-                    String dia = dateFormat.format(Calendar.getInstance().getTime());
-                    if (gestionDePromociones.isDiaIncluido(promo, dia)) {
-                        total = bruto * (1 - (((PromocionTemporal) promo).getPorcentajeDescuento() / 100));
-                    }
-                } else {
-                    Producto prod = promo.getProducto();
+        while(itPedidos.hasNext()) {
+            pedido = itPedidos.next();
+            Set<PromocionFija> promocionesFijas = empresa.getPromocionesFijas();
+            Iterator<PromocionFija> itPF = promocionesFijas.iterator();
+            PromocionFija promoT;
+            aplique = false;
+            while (itPF.hasNext()) {
+                promoT = itPF.next();
+                if(promoT.isActivo() && gestionDePromociones.isDiaIncluido(promoT,dia) && promoT.getProducto()==pedido.getProducto()) {
+                    if (promoT.isDosPorUno()) {
+                        if (pedido.getCantidad() % 2 == 0) {
+                            bruto += pedido.getProducto().getPrecio() * pedido.getCantidad() * 0.5; //2x1 de una cantidad par = %50 de descuento
+                            seAplicoPromo = true;
+                            aplique = true;
+                        }
+                        else {
+                            bruto += (pedido.getProducto().getPrecio() * (pedido.getCantidad() - 1) * 0.5) + pedido.getProducto().getPrecio(); //Le sumo el impar
+                            seAplicoPromo = true;
+                            aplique = true;
+                        }
+                        } else if (pedido.getCantidad() > promoT.getDtoPorCantMin()) { //Si supero la cant minima
+                            bruto += pedido.getCantidad() * promoT.getDtoPorCantPrecioU();
+                             seAplicoPromo = true;
+                             aplique = true;
+                        }
+                        else
+                            bruto += pedido.getCantidad() * pedido.getProducto().getPrecio();
                 }
+            }
+            if(!aplique)
+                bruto += pedido.getCantidad() * pedido.getProducto().getPrecio();
+        }
+
+
+
+        //Calculo final de promociones temporales
+        Set<PromocionTemporal> promocionesTemporales = empresa.getPromocionesTemporales();
+        Iterator<PromocionTemporal> itPT = promocionesTemporales.iterator();
+        PromocionTemporal promo;
+        while (itPT.hasNext()) {
+            promo = itPT.next();
+            if (promo.isActivo() && gestionDePromociones.isDiaIncluido(promo, dia) && promo.getFormaPago().equalsIgnoreCase(medioDePago)) {
+                    if (promo.isEsAcumulable() || seAplicoPromo==false) {
+                        total = bruto * (1 - (promo.getPorcentajeDescuento() / 100));
+                    }
             }
         }
 
-        return bruto;
+        return total;
     }
 
     public Set<Mesa> getMesas(){

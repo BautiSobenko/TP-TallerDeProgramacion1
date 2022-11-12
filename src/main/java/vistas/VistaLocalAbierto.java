@@ -16,12 +16,13 @@ public class VistaLocalAbierto extends JFrame implements IGenerica, ItemListener
 
 	private JPanel contentPane;
 	private JButton btnCerrarLocal,btnCerrarMesa,btnCargarPedido,btnAbrirMesa;
-	private JComboBox comboBoxAbrir,comboBoxCantidad,comboBoxMesa,comboBoxProducto,comboBoxCerrar;
+	private JComboBox comboBoxAbrir,comboBoxCantidad,comboBoxMesa,comboBoxProducto,comboBoxCerrar,comboBoxMedioDePago;
 	private ActionListener actionListener;
 	private JPanel panelEstadisticas;
 	private JButton btnMaxVentas;
 	private JButton btnMinVentas;
 	private JButton btnConsumoPromedio;
+	private String medioDePago;
 
 	private Mesa mesaApertura,mesaCierre,mesaPedido;
 	private Producto productoElegido;
@@ -106,7 +107,7 @@ public class VistaLocalAbierto extends JFrame implements IGenerica, ItemListener
 		
 		comboBoxCerrar = new JComboBox();
 		comboBoxCerrar.setToolTipText("Seleccione la mesa que desea cerrar");
-		comboBoxCerrar.setBounds(10, 29, 296, 48);
+		comboBoxCerrar.setBounds(10, 29, 205, 48);
 		comboBoxCerrar.addItemListener(this);
 		panelInf.add(comboBoxCerrar);
 
@@ -115,6 +116,11 @@ public class VistaLocalAbierto extends JFrame implements IGenerica, ItemListener
 		btnCerrarMesa.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnCerrarMesa.setEnabled(false);
 		panelInf.add(btnCerrarMesa);
+		
+		comboBoxMedioDePago = new JComboBox();
+		comboBoxMedioDePago.setBounds(244, 29, 205, 48);
+		panelInf.add(comboBoxMedioDePago);
+		comboBoxMedioDePago.addItemListener(this);
 		
 		panelEstadisticas = new JPanel();
 		panelGeneral.add(panelEstadisticas);
@@ -176,6 +182,7 @@ public class VistaLocalAbierto extends JFrame implements IGenerica, ItemListener
 		comboBoxProducto.setSelectedItem(null);
 		comboBoxCantidad.setSelectedItem(null);
 		comboBoxCerrar.setSelectedItem(null);
+		comboBoxMedioDePago.setSelectedItem(null);
 	}
 
 	@Override
@@ -267,6 +274,24 @@ public class VistaLocalAbierto extends JFrame implements IGenerica, ItemListener
 	public void setComboBoxCerrar(JComboBox comboBoxCerrar) {
 		this.comboBoxCerrar = comboBoxCerrar;
 	}
+	
+	
+
+	public JComboBox getComboBoxMedioDePago() {
+		return comboBoxMedioDePago;
+	}
+
+	public void setComboBoxMedioDePago(JComboBox comboBoxMedioDePago) {
+		this.comboBoxMedioDePago = comboBoxMedioDePago;
+	}
+
+	public String getMedioDePago() {
+		return medioDePago;
+	}
+
+	public void setMedioDePago(String medioDePago) {
+		this.medioDePago = medioDePago;
+	}
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
@@ -275,9 +300,12 @@ public class VistaLocalAbierto extends JFrame implements IGenerica, ItemListener
 				this.btnAbrirMesa.setEnabled(true);
 				this.mesaApertura = (Mesa) this.comboBoxAbrir.getSelectedItem();
 			}
-			else if (e.getSource() == comboBoxCerrar) {
+			else if (e.getSource() == comboBoxCerrar || e.getSource() == comboBoxMedioDePago) {
+				if(comboBoxCerrar.getSelectedItem() != null && comboBoxMedioDePago.getSelectedItem() != null) {
 				this.mesaCierre = (Mesa) this.comboBoxCerrar.getSelectedItem();
+				this.medioDePago = (String) this.comboBoxMedioDePago.getSelectedItem();
 				this.btnCerrarMesa.setEnabled(true);
+				}
 			}
 			else if( (e.getSource() == comboBoxCantidad) || (e.getSource() == comboBoxMesa) || (e.getSource() == comboBoxProducto) ){
 				if( comboBoxMesa.getSelectedItem() != null && comboBoxCantidad.getSelectedItem() != null && comboBoxProducto.getSelectedItem() != null){

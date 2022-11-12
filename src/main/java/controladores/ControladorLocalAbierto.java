@@ -80,6 +80,14 @@ public class ControladorLocalAbierto implements ActionListener {
         }
         vistaLocalAbierto.setComboBoxCantidad(comboI);
 
+        String[] medios = {"Efectivo","Cuenta DNI","Mercado Pago","Tarjeta"};
+        JComboBox<String> comboMedios = vistaLocalAbierto.getComboBoxMedioDePago();
+        comboMedios.removeAllItems();
+        for(String medio : medios) {
+            comboMedios.addItem(medio);
+        }
+        vistaLocalAbierto.setComboBoxMedioDePago(comboMedios);
+
         vistaLocalAbierto.limpia();
 
         vistaLocalAbierto.mostrar();
@@ -126,8 +134,9 @@ public class ControladorLocalAbierto implements ActionListener {
                 mesaDTO.setComanda(mesa.getComanda());
                 mesaDTO.setMozoAsignado(mesa.getMozoAsignado());
                 mesaDTO.setVentas( mesa.getVentas() );
-                gestionDeMesas.cerrarMesa( mesaDTO );
-                vistaLocalAbierto.success("Mesa cerrada con exito");
+                String medioDePago = vistaLocalAbierto.getMedioDePago();
+                double total = gestionDeMesas.cerrarMesa( mesaDTO, medioDePago);
+                vistaLocalAbierto.success("Mesa cerrada con exito con un total de: " + total);
             }
         }
         else if(comando.equalsIgnoreCase("Cargar Pedido")){

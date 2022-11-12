@@ -53,7 +53,7 @@ public class GestionDePromociones {
         IPersistencia<Set<PromocionFija>> persistencia2 = new PersistenciaXML();
         try {
             persistencia2.abrirOutput("promociones-temporales.xml");
-            persistencia2.escribir(this.getPromocionesTemporales()t());
+            persistencia2.escribir(this.getPromocionesTemporales());
             persistencia2.cerrarOutput();
         } catch (IOException e) {
 

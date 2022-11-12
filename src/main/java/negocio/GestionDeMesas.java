@@ -6,24 +6,28 @@ import enums.EstadoMesa;
 import excepciones.MesaExistenteException;
 import excepciones.MesaNoExistenteException;
 import modelo.*;
+import modelo.promociones.Promocion;
+import modelo.promociones.PromocionTemporal;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaXML;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class GestionDeMesas {
 
     private final Empresa empresa;
     private static GestionDeMesas gestionDeMesas = null;
+
+    private static GestionDePromociones gestionDePromociones = null;
     private Set<Mozo> mozos;
 
     private GestionDeMesas() {
         this.empresa = Empresa.getEmpresa();
         this.mozos = Empresa.getEmpresa().getMozos();
+        this.gestionDePromociones = GestionDePromociones.get();
     }
 
     public static GestionDeMesas get() {
@@ -175,12 +179,33 @@ public class GestionDeMesas {
      */
     public double totalMesa(Mesa mesa){
 
+        double total;
         List<Pedido> pedidosMesa = mesa.getComanda().getPedidos();
 
-        return pedidosMesa.stream()
+        double bruto =  pedidosMesa.stream()
                 .mapToDouble(p -> p.getProducto().getPrecio() * p.getCantidad() )
                 .sum() ;
 
+        Set<Promocion> promociones = empresa.getPromociones();
+
+        Iterator<Promocion> it = promociones.iterator();
+        Set<Promocion> promocionesAplicables = new HashSet<>();
+        Promocion promo;
+        while (it.hasNext()) {
+            promo = it.next();
+            if (promo.isActivo()) {
+                    DateFormat dateFormat = new SimpleDateFormat("EEEEE");
+                    String dia = dateFormat.format(Calendar.getInstance().getTime());
+                    if (gestionDePromociones.isDiaIncluido(promo, dia)) {
+                        total = bruto * (1 - (((PromocionTemporal) promo).getPorcentajeDescuento() / 100));
+                    }
+                } else {
+                    Producto prod = promo.getProducto();
+                }
+            }
+        }
+
+        return bruto;
     }
 
     public Set<Mesa> getMesas(){

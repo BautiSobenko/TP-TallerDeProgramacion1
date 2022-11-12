@@ -25,9 +25,6 @@ public class ControladorAltaMesa implements ActionListener {
         this.gestionDeMesas = GestionDeMesas.get();
     }
 
-    /*
-    
-     */
     public static ControladorAltaMesa getControladorAltaMesa(String op) {
         if (controladorAltaMesa == null) {
             controladorAltaMesa = new ControladorAltaMesa();
@@ -56,7 +53,7 @@ public class ControladorAltaMesa implements ActionListener {
         if( comando.equalsIgnoreCase("Aceptar") ){
             int nroMesa = vistaAltaMesa.getNumeroMesa();
             int cantSilla = vistaAltaMesa.getCantSillas();
-            if(nroMesa==0 || cantSilla==0)
+            if( nroMesa == 0 || cantSilla == 0 )
                 if(op.equalsIgnoreCase("Alta"))
                     ControladorAltaMesa.getControladorAltaMesa(op);
                 else

@@ -84,7 +84,7 @@ public class ControladorGestionPromociones implements ActionListener {
                         promocionTemporal.getPorcentajeDescuento(),
                         promocionTemporal.isEsAcumulable()
                 );
-                promocionProductoDTO.setId(promocion.getId());
+                promocionTemporalDTO.setId(promocion.getId());
 
                 ControladorAltaPromocionTemporal controladorTemporal = ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal("Modificar", promocionTemporalDTO);
 

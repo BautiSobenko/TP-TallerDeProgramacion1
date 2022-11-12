@@ -10,6 +10,8 @@ public class PromocionTemporal extends Promocion{
     private float porcentajeDescuento;
     private boolean esAcumulable;
 
+    public PromocionTemporal(){}
+
     public PromocionTemporal(String nombre, List<Dias> diasPromo, String formaPago, float porcentajeDescuento, boolean esAcumulable) {
         super(nombre, diasPromo);
         this.formaPago = formaPago;
@@ -45,7 +47,6 @@ public class PromocionTemporal extends Promocion{
         return "Nombre: " + nombre +
                 " | Activo: " + activo;
     }
-
 
 
 }

@@ -3,6 +3,7 @@ package controladores;
 import dto.PromocionTemporalDTO;
 import enums.Dias;
 import excepciones.PromocionExistenteException;
+import modelo.Producto;
 import modelo.promociones.PromocionTemporal;
 import negocio.GestionDePromociones;
 import vistas.VistaAltaPromocionTemporal;
@@ -81,13 +82,13 @@ public class ControladorAltaPromocionTemporal implements ActionListener {
                 try {
 
                     if(op.equalsIgnoreCase("Alta")){
-                        gestionDePromociones.altaPromocion(promo);
+                        gestionDePromociones.altaPromocionTemporal(promo);
                         vistaAltaPromocionTemporal.success("La promocion fija: " + promo.getNombre() + " se ha dado de alta con exito");
                     }else{
-                        boolean existePromocion = gestionDePromociones.getPromociones().stream().anyMatch(p -> p.getNombre().equals(promo.getNombre()));
+                        boolean existePromocion = gestionDePromociones.getPromocionesTemporales().stream().anyMatch(p -> p.getNombre().equals(promo.getNombre()));
                         if( !existePromocion ){
-                            gestionDePromociones.bajaPromocion(promocionTemporal);
-                            gestionDePromociones.altaPromocion(promo);
+                            gestionDePromociones.bajaPromocionTemporal(promocionTemporal.getId());
+                            gestionDePromociones.altaPromocionTemporal(promo);
                             vistaAltaPromocionTemporal.success("La promocion fija: " + promo.getNombre() + " se ha modificado con exito");
                         }else
                             throw new PromocionExistenteException(promo.getNombre());

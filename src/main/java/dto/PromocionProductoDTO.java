@@ -41,4 +41,26 @@ public class PromocionProductoDTO extends PromocionDTO{
     public double getDtoPorCantPrecioU() {
         return dtoPorCantPrecioU;
     }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    public void setDosPorUno(boolean dosPorUno) {
+        this.dosPorUno = dosPorUno;
+    }
+
+    public void setDtoPorCant(boolean dtoPorCant) {
+        this.dtoPorCant = dtoPorCant;
+    }
+
+    public void setDtoPorCantMin(int dtoPorCantMin) {
+        this.dtoPorCantMin = dtoPorCantMin;
+    }
+
+    public void setDtoPorCantPrecioU(double dtoPorCantPrecioU) {
+        this.dtoPorCantPrecioU = dtoPorCantPrecioU;
+    }
+
+
 }

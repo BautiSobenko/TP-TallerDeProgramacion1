@@ -9,6 +9,7 @@ public class PromocionDTO {
     protected String nombre;
     protected boolean activo;
     protected List<Dias> diasPromo;
+    String id;
 
     public PromocionDTO(String nombre,boolean activo, List<Dias> diasPromo) {
         this.nombre = nombre;
@@ -26,5 +27,25 @@ public class PromocionDTO {
 
     public List<Dias> getDiasPromo() {
         return diasPromo;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public void setDiasPromo(List<Dias> diasPromo) {
+        this.diasPromo = diasPromo;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

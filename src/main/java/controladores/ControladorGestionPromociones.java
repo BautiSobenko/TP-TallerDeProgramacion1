@@ -33,16 +33,24 @@ public class ControladorGestionPromociones implements ActionListener {
         if (controladorGestionPromociones == null)
             controladorGestionPromociones = new ControladorGestionPromociones();
 
-        Set<Promocion> promociones = gestionPromociones.getPromociones();
-        DefaultListModel<Promocion> listaPromociones = new DefaultListModel<>();
-        promociones.forEach(listaPromociones::addElement);
-        vistaGestionPromociones.setModel(listaPromociones);
+        controladorGestionPromociones.actualizarListaPromos();
 
         if( mostrar )
             vistaGestionPromociones.mostrar();
 
         return controladorGestionPromociones;
     }
+
+    public void actualizarListaPromos() {
+        Set<PromocionFija> promocionesFijas = gestionPromociones.getPromocionesFijas();
+        Set<PromocionTemporal> promocionesTemporales = gestionPromociones.getPromocionesTemporales();
+        DefaultListModel<Promocion> listaPromociones = new DefaultListModel<>();
+        promocionesFijas.forEach(listaPromociones::addElement);
+        promocionesTemporales.forEach(listaPromociones::addElement);
+        vistaGestionPromociones.setModel(listaPromociones);
+    }
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -52,16 +60,18 @@ public class ControladorGestionPromociones implements ActionListener {
         if(comando.equals("Alta Promocion Temporal")) {
             vistaGestionPromociones.esconder();
             ControladorAltaPromocionTemporal con = ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal("Alta");
+            this.actualizarListaPromos();
         }
         else if(comando.equals("Alta promocion por producto")){
             vistaGestionPromociones.esconder();
             ControladorAltaPromocionProducto con = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto("Alta");
+            this.actualizarListaPromos();
         }
         else if( comando.equals("Modificar Promocion")) {
 
             Promocion promocion = (Promocion) vistaGestionPromociones.getSeleccion();
-            PromocionTemporalDTO promocionTemporalDTO;
-            PromocionProductoDTO promocionProductoDTO;
+            PromocionTemporalDTO promocionTemporalDTO = null;
+            PromocionProductoDTO promocionProductoDTO = null;
 
             vistaGestionPromociones.esconder();
 
@@ -74,6 +84,8 @@ public class ControladorGestionPromociones implements ActionListener {
                         promocionTemporal.getPorcentajeDescuento(),
                         promocionTemporal.isEsAcumulable()
                 );
+                promocionProductoDTO.setId(promocion.getId());
+
                 ControladorAltaPromocionTemporal controladorTemporal = ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal("Modificar", promocionTemporalDTO);
 
             } else {
@@ -87,10 +99,11 @@ public class ControladorGestionPromociones implements ActionListener {
                         promocionFija.getDtoPorCantMin(),
                         promocionFija.getDtoPorCantPrecioU()
                 );
+                promocionProductoDTO.setId(promocion.getId());
                 ControladorAltaPromocionProducto controladorProducto = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto("Modificar", promocionProductoDTO);
 
             }
-
+            this.actualizarListaPromos();
         }
         else if (comando.equals("Baja Promocion")) {
 
@@ -104,13 +117,8 @@ public class ControladorGestionPromociones implements ActionListener {
                 vistaGestionPromociones.success("Promocion fija: " + promocion.getNombre() + "dada de baja");
             }
 
-            Set<Promocion> promociones = gestionPromociones.getPromociones();
-            DefaultListModel<Promocion> updatedList = new DefaultListModel<Promocion>();
-            promociones.forEach(updatedList::addElement);
-            vistaGestionPromociones.setModel(updatedList);
-        } else if (comando.equals("Modificar Promocion")) {
+            this.actualizarListaPromos();
 
-            }
         }else if( comando.equals("Volver") ){
             vistaGestionPromociones.esconder();
             ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);

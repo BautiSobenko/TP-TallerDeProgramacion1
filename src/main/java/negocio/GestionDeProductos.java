@@ -3,7 +3,6 @@ package negocio;
 import dto.ProductoDTO;
 import excepciones.CambioNombreException;
 import excepciones.ProductoExistenteException;
-import excepciones.StockInsuficienteException;
 import modelo.Empresa;
 import modelo.Pedido;
 import modelo.Producto;

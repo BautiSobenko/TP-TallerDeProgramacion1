@@ -13,6 +13,8 @@ public class PromocionFija extends Promocion{
     int dtoPorCantMin;
     double dtoPorCantPrecioU;
 
+    public PromocionFija(){}
+
     public PromocionFija(String nombre, List<Dias> diasPromo, Producto producto, boolean dosPorUno, boolean dtoPorCant, int dtoPorCantMin, double dtoPorCantPrecioU) {
         super(nombre, diasPromo);
         this.producto = producto;

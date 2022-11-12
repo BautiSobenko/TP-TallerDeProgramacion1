@@ -126,6 +126,26 @@ public class ControladorAltaPromocionProducto implements ActionListener {
                     vistaAltaPromocionProducto.esconder();
                 }
             }
+            else{
+                prom = new PromocionProductoDTO(nombre, activa, dias, prod, true, true, 0, 0);
+                try {
+                    if(op.equalsIgnoreCase("Alta")){
+                        gestionDePromociones.altaPromocionFija(prom);
+                        vistaAltaPromocionProducto.success("La promocion fija: " + prom.getNombre() + " se ha dado de alta con exito");
+                    }else{
+                        boolean existePromocion = gestionDePromociones.getPromocionesFijas().stream().anyMatch(p -> p.getNombre().equals(prom.getNombre()));
+                        if( !existePromocion ){
+                            gestionDePromociones.bajaPromocionFija(promocionFija.getId());
+                            gestionDePromociones.altaPromocionFija(prom);
+                            vistaAltaPromocionProducto.success("La promocion fija: " + prom.getNombre() + " se ha modificado con exito");
+                        }else
+                            throw new PromocionExistenteException(prom.getNombre());
+                    }
+                } catch (PromocionExistenteException ex) {
+                    vistaAltaPromocionProducto.failure("La promocion fija:" + prom.getNombre() + " ya se encuentra en el sistema");
+                }
+                vistaAltaPromocionProducto.esconder();
+            }
         }
         else if( comando.equals("Volver") ){
             vistaAltaPromocionProducto.esconder();

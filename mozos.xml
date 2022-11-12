@@ -3,10 +3,32 @@
  <object class="java.util.HashSet">
   <void method="add">
    <object class="modelo.Mozo">
+    <void property="cantidadHijos">
+     <int>5</int>
+    </void>
     <void property="estadoMozo">
      <object class="java.lang.Enum" id="EstadoMozo0" method="valueOf">
       <class>enums.EstadoMozo</class>
       <string>FRANCO</string>
+     </object>
+    </void>
+    <void property="fechaNacimiento">
+     <string>20/10/2000</string>
+    </void>
+    <void property="id">
+     <string>b18e4c3e-0a9f-4e24-9aa9-217684e80d6e</string>
+    </void>
+    <void property="nombreCompleto">
+     <string>Bautista</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mozo">
+    <void property="estadoMozo">
+     <object class="java.lang.Enum" id="EstadoMozo1" method="valueOf">
+      <class>enums.EstadoMozo</class>
+      <string>ACTIVO</string>
      </object>
     </void>
     <void property="fechaNacimiento">
@@ -17,6 +39,41 @@
     </void>
     <void property="nombreCompleto">
      <string>Hasbulla</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mozo">
+    <void property="cantidadHijos">
+     <int>2</int>
+    </void>
+    <void property="estadoMozo">
+     <object idref="EstadoMozo0"/>
+    </void>
+    <void property="fechaNacimiento">
+     <string>07/06/2001</string>
+    </void>
+    <void property="id">
+     <string>f248e393-f7a3-4a88-a4ef-0e53bd27750f</string>
+    </void>
+    <void property="nombreCompleto">
+     <string>Agustin</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.Mozo">
+    <void property="estadoMozo">
+     <object idref="EstadoMozo1"/>
+    </void>
+    <void property="fechaNacimiento">
+     <string>08/02/1980</string>
+    </void>
+    <void property="id">
+     <string>650a35b4-e1a5-426e-9203-ea61496f835d</string>
+    </void>
+    <void property="nombreCompleto">
+     <string>Ronaldinho</string>
     </void>
    </object>
   </void>
@@ -41,41 +98,6 @@
   </void>
   <void method="add">
    <object class="modelo.Mozo">
-    <void property="estadoMozo">
-     <object idref="EstadoMozo0"/>
-    </void>
-    <void property="fechaNacimiento">
-     <string>08/02/1980</string>
-    </void>
-    <void property="id">
-     <string>650a35b4-e1a5-426e-9203-ea61496f835d</string>
-    </void>
-    <void property="nombreCompleto">
-     <string>Ronaldinho</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="modelo.Mozo">
-    <void property="cantidadHijos">
-     <int>5</int>
-    </void>
-    <void property="estadoMozo">
-     <object idref="EstadoMozo0"/>
-    </void>
-    <void property="fechaNacimiento">
-     <string>20/10/2000</string>
-    </void>
-    <void property="id">
-     <string>b18e4c3e-0a9f-4e24-9aa9-217684e80d6e</string>
-    </void>
-    <void property="nombreCompleto">
-     <string>Bautista</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="modelo.Mozo">
     <void property="cantidadHijos">
      <int>1</int>
     </void>
@@ -90,25 +112,6 @@
     </void>
     <void property="nombreCompleto">
      <string>Roberto</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="modelo.Mozo">
-    <void property="cantidadHijos">
-     <int>2</int>
-    </void>
-    <void property="estadoMozo">
-     <object idref="EstadoMozo0"/>
-    </void>
-    <void property="fechaNacimiento">
-     <string>07/06/2001</string>
-    </void>
-    <void property="id">
-     <string>f248e393-f7a3-4a88-a4ef-0e53bd27750f</string>
-    </void>
-    <void property="nombreCompleto">
-     <string>Agustin</string>
     </void>
    </object>
   </void>

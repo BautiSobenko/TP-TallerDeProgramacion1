@@ -11,6 +11,38 @@
       <void method="add">
        <object class="java.lang.Enum" method="valueOf">
         <class>enums.Dias</class>
+        <string>SABADO</string>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void property="esAcumulable">
+     <boolean>true</boolean>
+    </void>
+    <void property="formaPago">
+     <string>Efectivo</string>
+    </void>
+    <void property="id">
+     <string>347c3760-a39b-4bc3-a6e7-97ddd05e79b5</string>
+    </void>
+    <void property="nombre">
+     <string>Clientes</string>
+    </void>
+    <void property="porcentajeDescuento">
+     <float>20.0</float>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="modelo.promociones.PromocionTemporal">
+    <void property="activo">
+     <boolean>true</boolean>
+    </void>
+    <void property="diasPromo">
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object class="java.lang.Enum" method="valueOf">
+        <class>enums.Dias</class>
         <string>MIERCOLES</string>
        </object>
       </void>

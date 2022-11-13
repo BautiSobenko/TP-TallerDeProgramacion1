@@ -95,15 +95,32 @@ public class GestionDeMesas {
             }
         }
         if(encontreMesa) {
-            total = this.totalMesa(m,medioDePago);
+            total = this.totalMesa(m, medioDePago);
             mesas.remove(m);
-            m.setEstadoMesa( EstadoMesa.LIBRE );
+            m.setEstadoMesa(EstadoMesa.LIBRE);
             m.setMozoAsignado(mesa.getMozoAsignado());
-            m.setVentas( mesa.getVentas() + total );
-            m.setCantCuentasCerradas( mesa.getCantCuentasCerradas() + 1);
+            m.setVentas(mesa.getVentas() + total);
+            m.setCantCuentasCerradas(mesa.getCantCuentasCerradas() + 1);
             m.setComanda(null);
             mesas.add(m);
             this.empresa.setMesas(mesas);
+
+            //Actualizo las ventas del mozo
+
+            Set<Mozo> mozos = empresa.getMozos();
+            Iterator<Mozo> itMozos = mozos.iterator();
+            boolean encontre = false;
+            Mozo mGenerico;
+            while (itMozos.hasNext() && !encontre) {
+                mGenerico = itMozos.next();
+                if (mGenerico.getNombreCompleto().equalsIgnoreCase(mesa.getMozoAsignado().getNombreCompleto())) {
+                    mozos.remove(mGenerico);
+                    mGenerico.setVentas(mGenerico.getVentas() + total);
+                    encontre = true;
+                    mozos.add(mGenerico);
+                }
+            }
+            empresa.setMozos(mozos);
         }
         return total;
     }
@@ -228,13 +245,17 @@ public class GestionDeMesas {
         Set<PromocionTemporal> promocionesTemporales = empresa.getPromocionesTemporales();
         Iterator<PromocionTemporal> itPT = promocionesTemporales.iterator();
         PromocionTemporal promo;
-        while (itPT.hasNext()) {
+        aplique=false;
+        while (itPT.hasNext() && aplique==false) {
             promo = itPT.next();
             if (promo.isActivo() && gestionDePromociones.isDiaIncluido(promo, dia) && promo.getFormaPago().equalsIgnoreCase(medioDePago)) {
                     if (promo.isEsAcumulable() || seAplicoPromo==false) {
                         total = bruto * (1 - (promo.getPorcentajeDescuento() / 100));
+                        aplique=true;
                     }
             }
+            else
+                total = bruto;
         }
 
         return total;

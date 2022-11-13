@@ -45,9 +45,8 @@ public class GestionDeMozos {
      * precondition: mozo!=null
      * @param mozo
      * @throws MozoExistenteException
-     * @throws PermisoDenegadoException
      */
-    public void altaMozo(MozoDTO mozo) throws MozoExistenteException, PermisoDenegadoException {
+    public void altaMozo(MozoDTO mozo) throws MozoExistenteException {
 
         if (this.empresa.getUsuarioLogueado().getUsername().equals("admin")){
             Set<Mozo> mozos = this.empresa.getMozos();
@@ -61,8 +60,7 @@ public class GestionDeMozos {
                 this.empresa.setMozos(mozos);
                 persistirMozos();
             }
-        }else
-            throw new PermisoDenegadoException();
+        }
     }
 
     public boolean hayMozosActivos(){
@@ -80,9 +78,8 @@ public class GestionDeMozos {
      * Modifica el mozo recibido
      * precondition: mozo!=null
      * @param mozo
-     * @throws PermisoDenegadoException
      */
-    public void modificarMozo(MozoDTO mozo) throws PermisoDenegadoException {
+    public void modificarMozo(MozoDTO mozo) {
 
         if (this.empresa.getUsuarioLogueado().getUsername().equals("admin")){
             Set<Mozo> mozos = this.empresa.getMozos();
@@ -96,17 +93,15 @@ public class GestionDeMozos {
                 this.empresa.setMozos(mozos);
                 persistirMozos();
             }
-        }else
-            throw new PermisoDenegadoException();
+        }
     }
 
     /**
      * Da de baja el mozo enviado
      *  precondition: mozo!=null
      * @param mozo
-     * @throws PermisoDenegadoException
      */
-    public void bajaMozo(Mozo mozo) throws PermisoDenegadoException {
+    public void bajaMozo(Mozo mozo) {
 
         if (this.empresa.getUsuarioLogueado().getUsername().equals("admin")){
             Set<Mozo> mozos = this.empresa.getMozos();
@@ -117,9 +112,7 @@ public class GestionDeMozos {
                 this.empresa.setMozos(mozos);
                 persistirMozos();
             }
-        }else
-            throw new PermisoDenegadoException();
-
+        }
     }
 
     /**

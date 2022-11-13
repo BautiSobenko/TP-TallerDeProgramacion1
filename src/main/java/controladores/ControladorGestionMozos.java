@@ -30,15 +30,18 @@ public class ControladorGestionMozos implements ActionListener {
         if (controladorGestionMozos == null)
             controladorGestionMozos = new ControladorGestionMozos();
 
-        Set<Mozo> mozos = gestionDeMozos.getMozos();
-        DefaultListModel<Mozo> listaMozos = new DefaultListModel<>();
-        mozos.forEach(listaMozos::addElement);
-
-        ControladorGestionMozos.vistaGestionMozos.setModel(listaMozos);
+        controladorGestionMozos.actualizaListaMozos();
 
         vistaGestionMozos.mostrar();
 
         return controladorGestionMozos;
+    }
+
+    public void actualizaListaMozos(){
+        Set<Mozo> mozos = gestionDeMozos.getMozos();
+        DefaultListModel<Mozo> listaMozos = new DefaultListModel<>();
+        mozos.forEach(listaMozos::addElement);
+        ControladorGestionMozos.vistaGestionMozos.setModel(listaMozos);
     }
 
     @Override
@@ -46,22 +49,18 @@ public class ControladorGestionMozos implements ActionListener {
 
         String comando =  e.getActionCommand();
         if(comando.equals("Alta Mozo")) {
+            vistaGestionMozos.esconder();
            ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo("Alta");
         }
         else if( comando.equals("Baja Mozo") ){
             Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
-            try {
-                gestionDeMozos.bajaMozo(mozo);
-                Set<Mozo> mozos = gestionDeMozos.getMozos();
-                DefaultListModel<Mozo> updatedList = new DefaultListModel<>();
-                mozos.forEach(updatedList::addElement);
-                vistaGestionMozos.setModel(updatedList);
-                vistaGestionMozos.success("El Mozo: " + mozo.getNombreCompleto() + " fue dado de baja con exito");
-            } catch (PermisoDenegadoException exc) {
+            gestionDeMozos.bajaMozo(mozo);
+            vistaGestionMozos.success("El Mozo: " + mozo.getNombreCompleto() + " fue dado de baja con exito");
 
-            }
+            this.actualizaListaMozos();
         }
         else if( comando.equals("Modificar Mozo") ){
+            vistaGestionMozos.esconder();
             Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
             ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo("Modificar", mozo);
         }
@@ -71,8 +70,8 @@ public class ControladorGestionMozos implements ActionListener {
         }
         else{
             Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
-            ControladorCambioEstadoMozo.getControladorCambioEstadoMozo(mozo);
             vistaGestionMozos.esconder();
+            ControladorCambioEstadoMozo.getControladorCambioEstadoMozo(mozo);
         }
 
     }

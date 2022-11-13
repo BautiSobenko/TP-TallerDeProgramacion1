@@ -29,20 +29,22 @@ public class ControladorGestionProductos implements ActionListener {
         gestionProductos = GestionDeProductos.get();
     }
 
-    public static ControladorGestionProductos getControladorGestionProductos(boolean mostrar) {
+    public static ControladorGestionProductos getControladorGestionProductos() {
         if (controladorGestionProductos == null)
             controladorGestionProductos = new ControladorGestionProductos();
 
+        controladorGestionProductos.actualizarListaProductos();
+
+        vistaGestionProductos.mostrar();
+
+        return controladorGestionProductos;
+    }
+
+    public void actualizarListaProductos(){
         Set<Producto> productos = gestionProductos.getProductos();
         DefaultListModel<Producto> listaProductos = new DefaultListModel<>();
         productos.forEach(listaProductos::addElement);
-
         ControladorGestionProductos.vistaGestionProductos.setModel(listaProductos);
-
-        if( mostrar )
-            vistaGestionProductos.mostrar();
-
-        return controladorGestionProductos;
     }
 
     @Override
@@ -56,11 +58,9 @@ public class ControladorGestionProductos implements ActionListener {
         else  if( comando.equals("Baja Producto") ){
             Producto producto = (Producto) vistaGestionProductos.getSeleccion();
             gestionProductos.bajaProducto(producto.getId());
-            Set<Producto> productos = gestionProductos.getProductos();
-            DefaultListModel<Producto> updatedList = new DefaultListModel<>();
-            productos.forEach(updatedList::addElement);
-            vistaGestionProductos.setModel(updatedList);
             vistaGestionProductos.success("Producto " + producto.getNombre() + "dada de baja");
+
+            this.actualizarListaProductos();
         }
         else if( comando.equals("Modificar Producto") ){
             Producto producto = (Producto) vistaGestionProductos.getSeleccion();

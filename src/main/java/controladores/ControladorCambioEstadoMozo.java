@@ -36,7 +36,7 @@ public class ControladorCambioEstadoMozo implements ActionListener {
         String comando = e.getActionCommand();
 
         if(comando.equalsIgnoreCase("Aceptar")) {
-            String nuevoEstado = this.vistaCambioEstadoMozo.getSelection();
+            String nuevoEstado = vistaCambioEstadoMozo.getSelection();
             if (nuevoEstado.equalsIgnoreCase("Activo"))
                 gestionDeMozos.modEstadoMozo(mozo, EstadoMozo.ACTIVO);
 
@@ -51,7 +51,7 @@ public class ControladorCambioEstadoMozo implements ActionListener {
             ControladorGestionMozos.getControladorGestionMozos();
         }
         else {
-            this.vistaCambioEstadoMozo.esconder();
+            vistaCambioEstadoMozo.esconder();
             ControladorGestionMozos.getControladorGestionMozos();
         }
     }

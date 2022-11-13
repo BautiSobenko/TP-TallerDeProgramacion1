@@ -80,13 +80,19 @@ public class ControladorAltaOperario implements ActionListener {
                         throw new OperarioExistenteException();
                 }
             } catch (OperarioExistenteException | PermisoDenegadoException ex) {
-                throw new RuntimeException(ex);
+                if( ex instanceof OperarioExistenteException ){
+                    this.vistaAltaOperario.failure("El operario ya se encuentra ingresado en el sistema");
+                    ControladorGestionOperario.getControladorGestionOperario();
+                }else{
+                    this.vistaAltaOperario.failure("No tiene permisos para realizar el alta de un operario");
+                    ControladorGestionOperario.getControladorGestionOperario();
+                }
             }
             this.vistaAltaOperario.esconder();
         }
         else{
             this.vistaAltaOperario.esconder();
         }
-        ControladorGestionOperario con = ControladorGestionOperario.getControladorGestionOperario(true);
+        ControladorGestionOperario con = ControladorGestionOperario.getControladorGestionOperario();
     }
 }

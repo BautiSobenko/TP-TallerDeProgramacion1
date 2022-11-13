@@ -29,14 +29,13 @@ public class ControladorGestionPromociones implements ActionListener {
         gestionPromociones = GestionDePromociones.get();
     }
 
-    public static ControladorGestionPromociones getControladorGestionPromociones(boolean mostrar) {
+    public static ControladorGestionPromociones getControladorGestionPromociones() {
         if (controladorGestionPromociones == null)
             controladorGestionPromociones = new ControladorGestionPromociones();
 
         controladorGestionPromociones.actualizarListaPromos();
 
-        if( mostrar )
-            vistaGestionPromociones.mostrar();
+        vistaGestionPromociones.mostrar();
 
         return controladorGestionPromociones;
     }
@@ -60,12 +59,10 @@ public class ControladorGestionPromociones implements ActionListener {
         if(comando.equals("Alta Promocion Temporal")) {
             vistaGestionPromociones.esconder();
             ControladorAltaPromocionTemporal con = ControladorAltaPromocionTemporal.getControladorAltaPromocionTemporal("Alta");
-            this.actualizarListaPromos();
         }
         else if(comando.equals("Alta promocion por producto")){
             vistaGestionPromociones.esconder();
             ControladorAltaPromocionProducto con = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto("Alta");
-            this.actualizarListaPromos();
         }
         else if( comando.equals("Modificar Promocion")) {
 
@@ -103,7 +100,6 @@ public class ControladorGestionPromociones implements ActionListener {
                 ControladorAltaPromocionProducto controladorProducto = ControladorAltaPromocionProducto.getControladorAltaPromocionProducto("Modificar", promocionProductoDTO);
 
             }
-            this.actualizarListaPromos();
         }
         else if (comando.equals("Baja Promocion")) {
 

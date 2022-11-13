@@ -55,23 +55,28 @@ public class ControladorAltaMozo implements ActionListener {
             int hijos = this.vistaAltaMozo.getCantHijos();
             String fecha = this.vistaAltaMozo.getFechaNacimiento();
             MozoDTO mozoDTO = new MozoDTO(nombre,fecha,hijos);
-            try {
-                if(op.equalsIgnoreCase("Alta")){
-                    gestionDeMozos.altaMozo(mozoDTO);
-                    this.vistaAltaMozo.success("El mozo: " + mozoDTO.getNombreCompleto() + " fue dado de alta con exito");
-                }else{
-                    boolean existeMozo = gestionDeMozos.getMozos().stream().anyMatch(m -> m.getNombreCompleto().equalsIgnoreCase(mozoDTO.getNombreCompleto()) );
-                    if( !existeMozo ){
-                        gestionDeMozos.bajaMozo(mozo);
+            if( hijos < 0 ){
+                vistaAltaMozo.failure("La CANTIDAD DE HIJOS deber ser mayor o igual a cero");
+                vistaAltaMozo.getTxtCantHijos().setText("");
+            }else{
+                try {
+                    if(op.equalsIgnoreCase("Alta")){
                         gestionDeMozos.altaMozo(mozoDTO);
-                        this.vistaAltaMozo.success("El mozo: " + mozoDTO.getNombreCompleto() + " fue modificado con exito");
-                    }else
-                        throw new MozoExistenteException();
+                        this.vistaAltaMozo.success("El mozo: " + mozoDTO.getNombreCompleto() + " fue dado de alta con exito");
+                    }else{
+                        boolean existeMozo = gestionDeMozos.getMozos().stream().anyMatch(m -> m.getNombreCompleto().equalsIgnoreCase(mozoDTO.getNombreCompleto()) );
+                        if( !existeMozo ){
+                            gestionDeMozos.bajaMozo(mozo);
+                            gestionDeMozos.altaMozo(mozoDTO);
+                            this.vistaAltaMozo.success("El mozo: " + mozoDTO.getNombreCompleto() + " fue modificado con exito");
+                        }else
+                            throw new MozoExistenteException();
+                    }
+                } catch (MozoExistenteException ex) {
+                    this.vistaAltaMozo.failure("El mozo: " + mozoDTO.getNombreCompleto() + " ya se encuentra en el sistema");
                 }
-            } catch (MozoExistenteException | PermisoDenegadoException ex) {
-                this.vistaAltaMozo.failure("El mozo: " + mozoDTO.getNombreCompleto() + " ya se encuentra en el sistema");
+                this.vistaAltaMozo.esconder();
             }
-            this.vistaAltaMozo.esconder();
         }else if( comando.equalsIgnoreCase("Volver") ){
             this.vistaAltaMozo.esconder();
         }

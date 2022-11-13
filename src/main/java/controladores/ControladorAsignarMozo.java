@@ -65,6 +65,6 @@ public class ControladorAsignarMozo implements ActionListener {
         else if( comando.equalsIgnoreCase("Volver") ){
             this.vistaAsignarMozo.esconder();
         }
-        ControladorGestionMesas controladorGestionMesas = ControladorGestionMesas.getControladorGestionMesas(true);
+        ControladorGestionMesas controladorGestionMesas = ControladorGestionMesas.getControladorGestionMesas();
     }
 }

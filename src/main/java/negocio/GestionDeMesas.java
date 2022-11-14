@@ -212,12 +212,12 @@ public class GestionDeMesas {
             pedido = itPedidos.next();
             Set<PromocionFija> promocionesFijas = empresa.getPromocionesFijas();
             Iterator<PromocionFija> itPF = promocionesFijas.iterator();
-            PromocionFija promoT;
+            PromocionFija promoFija;
             aplique = false;
             while (itPF.hasNext()) {
-                promoT = itPF.next();
-                if(promoT.isActivo() && gestionDePromociones.isDiaIncluido(promoT,dia) && promoT.getProducto()==pedido.getProducto()) {
-                    if (promoT.isDosPorUno()) {
+                promoFija = itPF.next();
+                if(promoFija.isActivo() && gestionDePromociones.isDiaIncluido(promoFija,dia) && promoFija.getProducto()==pedido.getProducto()) {
+                    if (promoFija.isDosPorUno()) {
                         if (pedido.getCantidad() % 2 == 0) {
                             bruto += pedido.getProducto().getPrecio() * pedido.getCantidad() * 0.5; //2x1 de una cantidad par = %50 de descuento
                             seAplicoPromo = true;
@@ -228,8 +228,8 @@ public class GestionDeMesas {
                             seAplicoPromo = true;
                             aplique = true;
                         }
-                        } else if (pedido.getCantidad() > promoT.getDtoPorCantMin()) { //Si supero la cant minima
-                            bruto += pedido.getCantidad() * promoT.getDtoPorCantPrecioU();
+                        } else if (pedido.getCantidad() > promoFija.getDtoPorCantMin()) { //Si supero la cant minima
+                            bruto += pedido.getCantidad() * promoFija.getDtoPorCantPrecioU();
                              seAplicoPromo = true;
                              aplique = true;
                         }

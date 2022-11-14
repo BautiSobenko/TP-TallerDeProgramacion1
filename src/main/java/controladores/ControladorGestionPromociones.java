@@ -112,7 +112,7 @@ public class ControladorGestionPromociones implements ActionListener {
                 gestionPromociones.bajaPromocionFija(promocion.getId());
                 vistaGestionPromociones.success("Promocion fija: " + promocion.getNombre() + "dada de baja");
             }
-
+            vistaGestionPromociones.limpia();
             this.actualizarListaPromos();
 
         }else if( comando.equals("Volver") ){

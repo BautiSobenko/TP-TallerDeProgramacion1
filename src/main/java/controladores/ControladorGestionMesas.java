@@ -61,7 +61,7 @@ public class ControladorGestionMesas implements ActionListener {
             Mesa mesa = (Mesa) vistaGestionMesas.getSeleccion();
             gestionDeMesas.bajaMesa(mesa.getNroMesa());
             vistaGestionMesas.success("Mesa " + mesa.getNroMesa() + "dada de baja");
-
+            vistaGestionMesas.limpia();
             this.actualizaListaMesas();
         }
         else if( comando.equals("Modificar Mesa") ){

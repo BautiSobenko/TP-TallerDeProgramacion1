@@ -13,7 +13,7 @@ import java.awt.event.ActionEvent;
 public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseListener{
 
 	private JFrame frmGestionDeMozos;
-	private JButton btnVolver,btnModificarMozo,btnBajaMozo,btnAltaMozo;
+	private JButton btnVolver,btnModificarMozo,btnBajaMozo,btnAltaMozo,btnCalculoSueldo;
 	private JList<Mozo> listaMozos;
 	private ActionListener actionListener;
 	private JButton btnCambioEstado;
@@ -75,14 +75,20 @@ public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseLis
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnVolver.setBounds(26, 211, 89, 32);
+		btnVolver.setBounds(26, 211, 100, 32);
 		frmGestionDeMozos.getContentPane().add(btnVolver);
 		
 		btnCambioEstado = new JButton("Cambio Estado");
 		btnCambioEstado.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnCambioEstado.setBounds(276, 199, 130, 32);
+		btnCambioEstado.setBounds(276, 211, 130, 32);
 		frmGestionDeMozos.getContentPane().add(btnCambioEstado);
 		btnCambioEstado.setEnabled(false);
+		
+		btnCalculoSueldo = new JButton("Calculo Sueldo");
+		btnCalculoSueldo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCalculoSueldo.setBounds(136, 213, 130, 32);
+		frmGestionDeMozos.getContentPane().add(btnCalculoSueldo);
+		btnCalculoSueldo.setEnabled(false);
 	}
 
 	@Override
@@ -93,6 +99,7 @@ public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseLis
 		btnBajaMozo.addActionListener(actionListener);
 		btnVolver.addActionListener(actionListener);
 		btnCambioEstado.addActionListener(actionListener);
+		btnCalculoSueldo.addActionListener(actionListener);
 	}
 
 	@Override
@@ -111,6 +118,7 @@ public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseLis
 		this.btnBajaMozo.setEnabled(false);
 		this.btnModificarMozo.setEnabled(false);
 		this.btnCambioEstado.setEnabled(false);
+		this.btnCalculoSueldo.setEnabled(false);
 	}
 
 	@Override
@@ -141,6 +149,7 @@ public class VistaGestionMozos extends JFrame implements IVistaGestion, MouseLis
 			this.btnBajaMozo.setEnabled(true);
 			this.btnModificarMozo.setEnabled(true);
 			this.btnCambioEstado.setEnabled(true);
+			this.btnCalculoSueldo.setEnabled(true);
 		}
 	}
 

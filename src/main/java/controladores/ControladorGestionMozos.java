@@ -50,13 +50,13 @@ public class ControladorGestionMozos implements ActionListener {
         String comando =  e.getActionCommand();
         if(comando.equals("Alta Mozo")) {
             vistaGestionMozos.esconder();
-           ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo("Alta");
+            ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo("Alta");
         }
         else if( comando.equals("Baja Mozo") ){
             Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
             gestionDeMozos.bajaMozo(mozo);
             vistaGestionMozos.success("El Mozo: " + mozo.getNombreCompleto() + " fue dado de baja con exito");
-
+            vistaGestionMozos.limpia();
             this.actualizaListaMozos();
         }
         else if( comando.equals("Modificar Mozo") ){
@@ -68,11 +68,18 @@ public class ControladorGestionMozos implements ActionListener {
             ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);
             vistaGestionMozos.esconder();
         }
-        else{
-            Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
-            vistaGestionMozos.esconder();
-            ControladorCambioEstadoMozo.getControladorCambioEstadoMozo(mozo);
+        else {
+                if (comando.equalsIgnoreCase("Calculo sueldo")) {
+                    Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
+                    double sueldo = gestionDeMozos.calculaSueldo(mozo);
+                    vistaGestionMozos.success("El mozo "+ mozo.getNombreCompleto()+" tiene un sueldo de $"+sueldo);
+                    vistaGestionMozos.limpia();
+                } else {
+                    Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
+                    ControladorCambioEstadoMozo.getControladorCambioEstadoMozo(mozo);
+                    vistaGestionMozos.esconder();
+                }
+            }
         }
 
-    }
 }

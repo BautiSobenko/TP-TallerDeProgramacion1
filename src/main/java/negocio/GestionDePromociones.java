@@ -13,6 +13,9 @@ import persistencia.IPersistencia;
 import persistencia.PersistenciaXML;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -236,6 +239,28 @@ public class GestionDePromociones {
 
         return res;
 
+    }
+
+    /**
+     * Devuelve si hay suficientes promociones por prodcuto para abrir el local
+     * preconditions: listaDePromociones!=null
+     * @return
+     */
+    public boolean hayPromocionesHoy(){
+        DateFormat dateFormat = new SimpleDateFormat("EEEEE");
+        String dia = dateFormat.format(Calendar.getInstance().getTime());//Dia de hoy en letras
+
+        Set<PromocionFija> promocionesFijas = empresa.getPromocionesFijas();
+        Iterator<PromocionFija> itPF = promocionesFijas.iterator();
+        PromocionFija promoFija;
+        int cont=0;
+        while (itPF.hasNext() && cont<2) {
+            promoFija = itPF.next();
+            if (promoFija.isActivo() && gestionDePromociones.isDiaIncluido(promoFija, dia)) {
+                cont++;
+            }
+        }
+        return cont==2;
     }
 
 

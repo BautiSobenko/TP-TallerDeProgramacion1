@@ -48,8 +48,9 @@ public class ControladorGestionMozos implements ActionListener {
         if(comando.equals("Alta Mozo")) {
            ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo("Alta");
         }
-        else if( comando.equals("Baja Mozo") ){
+        else{
             Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
+            if( comando.equals("Baja Mozo") ){
             try {
                 gestionDeMozos.bajaMozo(mozo);
                 Set<Mozo> mozos = gestionDeMozos.getMozos();
@@ -62,17 +63,21 @@ public class ControladorGestionMozos implements ActionListener {
             }
         }
         else if( comando.equals("Modificar Mozo") ){
-            Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
             ControladorAltaMozo ctrl = ControladorAltaMozo.getControladorAltaMozo("Modificar", mozo);
         }
         else if( comando.equals("Volver") ) {
             ControladorInicio controladorInicio = ControladorInicio.getControladorInicio(true);
             vistaGestionMozos.esconder();
         }
-        else{
-            Mozo mozo = (Mozo) vistaGestionMozos.getSeleccion();
-            ControladorCambioEstadoMozo.getControladorCambioEstadoMozo(mozo);
-            vistaGestionMozos.esconder();
+        else {
+                if (comando.equalsIgnoreCase("Calculo sueldo")) {
+                    double sueldo = gestionDeMozos.calculaSueldo(mozo);
+                    vistaGestionMozos.success("El mozo "+ mozo.getNombreCompleto()+" tiene un sueldo de $"+sueldo);
+                } else {
+                    ControladorCambioEstadoMozo.getControladorCambioEstadoMozo(mozo);
+                    vistaGestionMozos.esconder();
+                }
+            }
         }
 
     }

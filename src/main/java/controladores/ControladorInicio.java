@@ -2,6 +2,7 @@ package controladores;
 
 import modelo.Empresa;
 import negocio.GestionDeMozos;
+import negocio.GestionDePromociones;
 import vistas.IGenerica;
 import vistas.VistaInicio;
 
@@ -60,11 +61,15 @@ public class ControladorInicio implements ActionListener {
             ControladorGestionPromociones controladorGestionPromociones = ControladorGestionPromociones.getControladorGestionPromociones(true);
         }
         else if(comando.equals("Abrir Local")){
-            if( GestionDeMozos.get().hayMozosActivos() ) {
-                this.vistaInicio.esconder();
-                ControladorLocalAbierto controladorLocalAbierto = ControladorLocalAbierto.getControladorLocalAbierto();
-            }else
-                this.vistaInicio.failure("No hay mozos activos en el sistema");
+            if(GestionDePromociones.get().hayPromocionesHoy()) {
+                if (GestionDeMozos.get().hayMozosActivos()) {
+                    this.vistaInicio.esconder();
+                    ControladorLocalAbierto controladorLocalAbierto = ControladorLocalAbierto.getControladorLocalAbierto();
+                } else
+                    this.vistaInicio.failure("No hay mozos activos en el sistema");
+            }
+            else
+                this.vistaInicio.failure("No hay suficientes promociones por producto para abrir el local");
         }
         else if(comando.equals("Cerrar Sesion")){
             this.vistaInicio.esconder();

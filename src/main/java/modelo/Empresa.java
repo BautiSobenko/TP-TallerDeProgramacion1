@@ -23,7 +23,7 @@ public class Empresa {
     private Set<Operario> operarios;
     private Set<PromocionFija> promocionesFijas;
     private Set<PromocionTemporal> promocionesTemporales;
-    private double sueldoBasico;
+    private double sueldoBasico=1000;
 
     private Operario usuarioLogueado;
 
@@ -210,7 +210,7 @@ public class Empresa {
      * @return: sueldo del mozo referenciado por el id
      * @throws MozoNoExistenteException
      */
-    public double calculaSueldo(String id) throws MozoNoExistenteException{
+    public double calculaSueldo(String id){
 
         Iterator<Mozo> it = mozos.iterator();
         boolean sale = false;
@@ -222,10 +222,7 @@ public class Empresa {
                 sale = true;
             }
         }
-        if(sale)
-            return this.sueldoBasico * (1 + 0.05 * mozo.getCantidadHijos());
-        else
-            throw new MozoNoExistenteException();
+        return this.sueldoBasico * (1 + 0.05 * mozo.getCantidadHijos());
     }
 
     public static void setEmpresa(Empresa empresa) {

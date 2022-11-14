@@ -154,6 +154,8 @@ public class GestionDeMozos {
         return  this.empresa.menorVolumenVentaMozo().getNombreCompleto();
     }
 
-
+    public double calculaSueldo(Mozo mozo){
+        return empresa.calculaSueldo(mozo.getId());
+    }
 
 }

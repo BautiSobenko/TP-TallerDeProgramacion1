@@ -64,7 +64,7 @@ public class ControladorGestionOperario implements ActionListener {
                 try {
                     gestionOp.bajaOperario(op.getUsername());
                     vistaGestionOperarios.success("Operario " + op.getUsername() + "dado de baja");
-
+                    vistaGestionOperarios.limpia();
                     this.actualizaListaOperarios();
                 } catch (PermisoDenegadoException ex) {
                     vistaGestionOperarios.failure("No tiene permisos para dar de baja a un Operario");

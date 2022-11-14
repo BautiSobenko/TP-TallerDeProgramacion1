@@ -287,7 +287,7 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 		this.txtNombre.setText("");
 		this.txtCantMinima.setText("");
 		this.textPrecio.setText("");
-		chckbx2x1.setSelected(false);
+		tipoDesc.clearSelection();
 		chckbxDesc.setSelected(false);
 		chckbxLunes.setSelected(false);
 		chckbxMartes.setSelected(false);
@@ -296,6 +296,7 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 		chckbxViernes.setSelected(false);
 		chckbxSabado.setSelected(false);
 		chckbxDomingo.setSelected(false);
+		this.chckbxActiva.setSelected(false);
 	}
 	
 	public void success(String msg) {

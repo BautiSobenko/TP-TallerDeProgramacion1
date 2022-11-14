@@ -67,6 +67,7 @@ public class ControladorAltaPromocionProducto implements ActionListener {
 
         controladorAltaPromocionProducto.op = op;
         controladorAltaPromocionProducto.promocionFija = promocionFija;
+        vistaAltaPromocionProducto.limpiaCampos();
         vistaAltaPromocionProducto.mostrar();
 
         return controladorAltaPromocionProducto;

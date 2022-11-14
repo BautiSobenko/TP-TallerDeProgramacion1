@@ -49,5 +49,4 @@ public class PromocionTemporal extends Promocion{
     }
 
 
-
 }

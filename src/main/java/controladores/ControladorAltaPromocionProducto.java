@@ -102,8 +102,15 @@ public class ControladorAltaPromocionProducto implements ActionListener {
             if(vistaAltaPromocionProducto.getChckbxDesc().isSelected()) {
                 precioPromo = vistaAltaPromocionProducto.getPrecioPromo();
                 cantMinima = vistaAltaPromocionProducto.getCantMinima();
-                if (precioPromo == 0 || cantMinima == 0){
-                    //!Lanzar excepcion
+                if (precioPromo <= 0 || cantMinima <= 0){
+                    if( precioPromo <= 0 ){
+                        vistaAltaPromocionProducto.failure("El PRECIO DE LA PROMOCION debe ser un numero mayor a cero");
+                        vistaAltaPromocionProducto.getTextPrecio().setText("");
+                    }
+                    if( cantMinima <= 0 ){
+                        vistaAltaPromocionProducto.failure("La CANTIDAD MINIMA debe ser un numero mayor a cero");
+                        vistaAltaPromocionProducto.getTxtCantMinima().setText("");
+                    }
                 }
                 else {
                     prom = new PromocionProductoDTO(nombre, activa, dias, prod, false, true, cantMinima, precioPromo);
@@ -150,6 +157,6 @@ public class ControladorAltaPromocionProducto implements ActionListener {
         else if( comando.equals("Volver") ){
             vistaAltaPromocionProducto.esconder();
         }
-            ControladorGestionPromociones controladorGestionPromociones = ControladorGestionPromociones.getControladorGestionPromociones(true);
+            ControladorGestionPromociones controladorGestionPromociones = ControladorGestionPromociones.getControladorGestionPromociones();
     }
 }

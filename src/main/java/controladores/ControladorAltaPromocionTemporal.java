@@ -71,8 +71,9 @@ public class ControladorAltaPromocionTemporal implements ActionListener {
                 dias.add(Dias.DOMINGO);
             String formaDePago = vistaAltaPromocionTemporal.getSelection();
             float porcentajeDesc = vistaAltaPromocionTemporal.getPorcentajeDesc();
-            if(porcentajeDesc == 0){
-                //!Lanzar excepcion
+            if(porcentajeDesc <= 0){
+                this.vistaAltaPromocionTemporal.failure("El PORCENTAJE DE DESCUENTO debe ser mayor a cero ");
+                this.vistaAltaPromocionTemporal.getTxtPorcentajeDesc().setText("");
             }
             else {
                 boolean isAcumulable = vistaAltaPromocionTemporal.getChckbxPromoAcumulable().isSelected();
@@ -103,6 +104,6 @@ public class ControladorAltaPromocionTemporal implements ActionListener {
         else if( comando.equals("Volver")) {
             vistaAltaPromocionTemporal.esconder();
         }
-            ControladorGestionPromociones con = ControladorGestionPromociones.getControladorGestionPromociones(true);
+            ControladorGestionPromociones con = ControladorGestionPromociones.getControladorGestionPromociones();
     }
 }

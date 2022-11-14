@@ -1,6 +1,5 @@
 package negocio;
 
-import dto.PromocionDTO;
 import dto.PromocionProductoDTO;
 import dto.PromocionTemporalDTO;
 import enums.Dias;

@@ -30,14 +30,13 @@ public class ControladorLogin implements ActionListener {
 		return empresa;
 	}
 
-	public static ControladorLogin getControladorLogin(boolean mostrar) {
+	public static ControladorLogin getControladorLogin() {
 		if (controladorLogin == null) {
 			controladorLogin = new ControladorLogin();
 		}
 		logueado = null;
 
-		if( mostrar )
-			controladorLogin.vistaLogin.mostrar();
+		controladorLogin.vistaLogin.mostrar();
 
 		return controladorLogin;
 	}
@@ -57,14 +56,12 @@ public class ControladorLogin implements ActionListener {
 					this.vistaLogin.esconder();
 					this.vistaLogin.limpiaCampos();
 					ControladorInicio con = ControladorInicio.getControladorInicio(true);
-					//ControladorAltaProducto ctrl = ControladorAltaProducto.getControladorAltaProducto();
 				}
 			} catch (UsuarioIncorrectoException err) {
 				this.vistaLogin.usuarioNoEncontrado();
 			} catch (ContrasenaIncorrectaException err) {
 				this.vistaLogin.contrasenaIncorrecta();
 			}
-
 
 
 	}

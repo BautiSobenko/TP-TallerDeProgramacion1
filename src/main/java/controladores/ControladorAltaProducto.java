@@ -54,11 +54,28 @@ public class ControladorAltaProducto implements ActionListener {
             int stock = this.vistaAltaProducto.getStockInicial();
             float precioventa = this.vistaAltaProducto.getPrecioVenta();
             float precioCosto = this.vistaAltaProducto.getPrecioCosto();
-            if( stock == 0 || precioCosto==0 || precioventa==0){
-                if(op.equalsIgnoreCase("Alta"))
-                    ControladorAltaProducto.getControladorAltaProducto(op);
+            if( stock <= 0 || precioCosto <= 0 || precioventa <= 0 || precioventa < precioCosto){
+                if(op.equalsIgnoreCase("Alta")){
+                    if( stock <= 0 ){
+                        vistaAltaProducto.failure("El STOCK debe ser un numero mayor a cero");
+                        this.vistaAltaProducto.getTxtStockInicial().setText("");
+                    }
+                    if( precioCosto <= 0 ){
+                        vistaAltaProducto.failure("El PRECIO DE COSTO debe ser un numero mayor a cero");
+                        this.vistaAltaProducto.getTxtPrecioCosto().setText("");
+                    }
+                    if( precioventa <= 0 ){
+                        vistaAltaProducto.failure("El PRECIO DE VENTA debe ser un numero mayor a cero");
+                        this.vistaAltaProducto.getTxtPrecioVenta().setText("");
+                    }
+                    if( precioventa < precioCosto ){
+                        vistaAltaProducto.failure("El PRECIO DE VENTA debe ser mayor al PRECIO DE COSTO");
+                        this.vistaAltaProducto.getTxtPrecioVenta().setText("");
+                        this.vistaAltaProducto.getTxtPrecioCosto().setText("");
+                    }
+                }
                 else
-                    ControladorAltaProducto.getControladorAltaProducto(op,producto);
+                    ControladorGestionProductos.getControladorGestionProductos();
             }
             else {
                 ProductoDTO productoDTO = new ProductoDTO(nombre, precioventa, precioCosto, stock);
@@ -67,18 +84,18 @@ public class ControladorAltaProducto implements ActionListener {
                             gestionDeProductos.altaProducto(productoDTO);
                             this.vistaAltaProducto.success("El producto: " + productoDTO.getNombre() + " fue dado de alta con exito");
                             this.vistaAltaProducto.esconder();
-                            ControladorGestionProductos CProd = ControladorGestionProductos.getControladorGestionProductos(true);
+                            ControladorGestionProductos CProd = ControladorGestionProductos.getControladorGestionProductos();
                         }catch (ProductoExistenteException ex) {
                             this.vistaAltaProducto.failure("El producto: " + productoDTO.getNombre() + " ya se encuentra en el sistema");
                             this.vistaAltaProducto.esconder();
-                            ControladorGestionProductos CProd = ControladorGestionProductos.getControladorGestionProductos(true);
+                            ControladorGestionProductos CProd = ControladorGestionProductos.getControladorGestionProductos();
                         }
                     }else{
                         try {
                             gestionDeProductos.modificaProducto(productoDTO);
                             this.vistaAltaProducto.success("El producto: " + productoDTO.getNombre() + " fue modificado con exito");
                             this.vistaAltaProducto.esconder();
-                            ControladorGestionProductos CProd = ControladorGestionProductos.getControladorGestionProductos(true);
+                            ControladorGestionProductos CProd = ControladorGestionProductos.getControladorGestionProductos();
                         }
                         catch (CambioNombreException ex) {
                             this.vistaAltaProducto.failure("No se puede cambiar el nombre del producto a modificar");
@@ -89,7 +106,7 @@ public class ControladorAltaProducto implements ActionListener {
             }
         }else if( comando.equalsIgnoreCase("Volver") ){
             this.vistaAltaProducto.esconder();
-            ControladorGestionProductos CProd = ControladorGestionProductos.getControladorGestionProductos(true);
+            ControladorGestionProductos CProd = ControladorGestionProductos.getControladorGestionProductos();
         }
     }
 }

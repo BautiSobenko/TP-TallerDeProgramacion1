@@ -25,9 +25,6 @@ public class ControladorAltaMesa implements ActionListener {
         this.gestionDeMesas = GestionDeMesas.get();
     }
 
-    /*
-    
-     */
     public static ControladorAltaMesa getControladorAltaMesa(String op) {
         if (controladorAltaMesa == null) {
             controladorAltaMesa = new ControladorAltaMesa();
@@ -56,11 +53,19 @@ public class ControladorAltaMesa implements ActionListener {
         if( comando.equalsIgnoreCase("Aceptar") ){
             int nroMesa = vistaAltaMesa.getNumeroMesa();
             int cantSilla = vistaAltaMesa.getCantSillas();
-            if(nroMesa==0 || cantSilla==0)
-                if(op.equalsIgnoreCase("Alta"))
-                    ControladorAltaMesa.getControladorAltaMesa(op);
+            if( nroMesa < 0 || cantSilla <= 0 )
+                if(op.equalsIgnoreCase("Alta")){
+                    if( nroMesa <  0 ){
+                        vistaAltaMesa.failure("El NUMERO DE MESA debe ser mayor o igual a cero");
+                        this.vistaAltaMesa.getTxtNumeroMesa().setText("");
+                    }
+                    if( cantSilla <= 0 ){
+                        vistaAltaMesa.failure("La CANTIDAD DE SILLAS debe ser mayor a cero");
+                        this.vistaAltaMesa.getTxtCantSillas().setText("");
+                    }
+                }
                 else
-                    ControladorAltaMesa.getControladorAltaMesa(op,mesa);
+                    ControladorGestionMesas.getControladorGestionMesas();
             else {
                 try {
                     if (op.equalsIgnoreCase("Alta")) {
@@ -68,7 +73,7 @@ public class ControladorAltaMesa implements ActionListener {
                         gestionDeMesas.altaMesa(mesaDTO);
                         this.vistaAltaMesa.success("La mesa: " + mesaDTO.getNroMesa() + " fue dada de alta con exito");
                         this.vistaAltaMesa.esconder();
-                        ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas(true);
+                        ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas();
                     } else {
                         MesaDTO mesaDTO = new MesaDTO(nroMesa, cantSilla);
                         Mozo mozoA = mesa.getMozoAsignado();
@@ -80,18 +85,18 @@ public class ControladorAltaMesa implements ActionListener {
                             gestionDeMesas.altaMesa(mesaDTO);
                             this.vistaAltaMesa.success("La mesa: " + mesaDTO.getNroMesa() + " fue modificada con exito");
                             this.vistaAltaMesa.esconder();
-                            ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas(true);
+                            ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas();
                         } else
                             throw new MesaExistenteException();
                     }
                 } catch (MesaExistenteException ex) {
                     this.vistaAltaMesa.failure("La mesa: " + nroMesa + " ya se encuentra en el sistema");
-                    ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas(true);
+                    ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas();
                 }
             }
         }else if( comando.equalsIgnoreCase("Volver") ){
             this.vistaAltaMesa.esconder();
-            ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas(true);
+            ControladorGestionMesas CMesas = ControladorGestionMesas.getControladorGestionMesas();
         }
     }
 

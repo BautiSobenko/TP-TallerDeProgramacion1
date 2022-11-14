@@ -34,19 +34,21 @@ public class ControladorGestionOperario implements ActionListener {
         return empresa;
     }
 
-    public static ControladorGestionOperario getControladorGestionOperario(boolean mostrar) {
+    public static ControladorGestionOperario getControladorGestionOperario() {
         if (controladorGestionOperario == null)
             controladorGestionOperario = new ControladorGestionOperario();
 
+        controladorGestionOperario.actualizaListaOperarios();
+        vistaGestionOperarios.mostrar();
+
+        return controladorGestionOperario;
+    }
+
+    public void actualizaListaOperarios(){
         Set<Operario> operarios = gestionOp.getOperarios();
         DefaultListModel<Operario> lista = new DefaultListModel<>();
         operarios.forEach(lista::addElement);
-
         ControladorGestionOperario.vistaGestionOperarios.setModel(lista);
-
-        if( mostrar )
-            vistaGestionOperarios.mostrar();
-        return controladorGestionOperario;
     }
 
     @Override
@@ -61,12 +63,12 @@ public class ControladorGestionOperario implements ActionListener {
                 Operario op = (Operario) vistaGestionOperarios.getSeleccion();
                 try {
                     gestionOp.bajaOperario(op.getUsername());
-                    Set<Operario> operarios = gestionOp.getOperarios();
-                    DefaultListModel<Operario> updatedList = new DefaultListModel<>();
-                    operarios.forEach(updatedList::addElement);
-                    vistaGestionOperarios.setModel(updatedList);
                     vistaGestionOperarios.success("Operario " + op.getUsername() + "dado de baja");
-                } catch (PermisoDenegadoException ignored) {}
+
+                    this.actualizaListaOperarios();
+                } catch (PermisoDenegadoException ex) {
+                    vistaGestionOperarios.failure("No tiene permisos para dar de baja a un Operario");
+                }
             }
         else if( comando.equals("Modificar Operario")){
                 Operario op = (Operario) vistaGestionOperarios.getSeleccion();

@@ -241,8 +241,6 @@ public class GestionDeMesas {
                 bruto += pedido.getCantidad() * pedido.getProducto().getPrecio();
         }
 
-
-
         //Calculo final de promociones temporales
         Set<PromocionTemporal> promocionesTemporales = empresa.getPromocionesTemporales();
         Iterator<PromocionTemporal> itPT = promocionesTemporales.iterator();

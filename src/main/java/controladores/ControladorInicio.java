@@ -46,19 +46,19 @@ public class ControladorInicio implements ActionListener {
         }
         else if(comando.equals("Gestionar Operarios")){
             this.vistaInicio.esconder();
-            ControladorGestionOperario controladorGestionOperario = ControladorGestionOperario.getControladorGestionOperario(true);
+            ControladorGestionOperario controladorGestionOperario = ControladorGestionOperario.getControladorGestionOperario();
         }
         else if(comando.equals("Gestionar Mesas")){
             this.vistaInicio.esconder();
-            ControladorGestionMesas controladorGestionMesas = ControladorGestionMesas.getControladorGestionMesas(true);
+            ControladorGestionMesas controladorGestionMesas = ControladorGestionMesas.getControladorGestionMesas();
         }
         else if(comando.equals("Gestionar Productos")){
             this.vistaInicio.esconder();
-            ControladorGestionProductos controladorGestionProductos = ControladorGestionProductos.getControladorGestionProductos(true);
+            ControladorGestionProductos controladorGestionProductos = ControladorGestionProductos.getControladorGestionProductos();
         }
         else if(comando.equals("Gestionar Promociones")){
             this.vistaInicio.esconder();
-            ControladorGestionPromociones controladorGestionPromociones = ControladorGestionPromociones.getControladorGestionPromociones(true);
+            ControladorGestionPromociones controladorGestionPromociones = ControladorGestionPromociones.getControladorGestionPromociones();
         }
         else if(comando.equals("Abrir Local")){
             if(GestionDePromociones.get().hayPromocionesHoy()) {
@@ -73,7 +73,7 @@ public class ControladorInicio implements ActionListener {
         }
         else if(comando.equals("Cerrar Sesion")){
             this.vistaInicio.esconder();
-            ControladorLogin controladorLogin = ControladorLogin.getControladorLogin(true);
+            ControladorLogin controladorLogin = ControladorLogin.getControladorLogin();
         }
 
 

@@ -467,4 +467,6 @@ public class VistaAltaPromocionProducto extends JFrame implements MouseListener,
 	public void setTextPrecio(JTextField textPrecio) {
 		this.textPrecio = textPrecio;
 	}
+
+
 }

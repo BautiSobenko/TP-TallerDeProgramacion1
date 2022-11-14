@@ -53,7 +53,7 @@ public class GestionDeMesas {
 
     /**
      * Carga la mesa ala coleccion
-     * precondition: MesaDTO!=null
+     * precondition: MesaDTO != null && mesas != null
      * @param mesa
      * @throws MesaExistenteException
      */

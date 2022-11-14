@@ -18,9 +18,9 @@ import static org.junit.Assert.*;
 public class GestionDeComandasTest {
 
 
-    Set<Producto> productos;
     EscenarioMesaConDatos escenario;
     GestionDeComandas gestionDeComandas;
+
     @Before
     public void setUp() throws Exception {
         gestionDeComandas = GestionDeComandas.get();

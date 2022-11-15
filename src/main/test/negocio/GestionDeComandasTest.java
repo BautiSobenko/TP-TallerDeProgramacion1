@@ -49,7 +49,8 @@ public class GestionDeComandasTest {
 
         try {
             gestionDeComandas.cargarPedido(mesa,pedido);
-        } catch (StockInsuficienteException ignored) {
+        } catch (StockInsuficienteException e) {
+            fail("No deberia lanzar excepcion" + e.getMessage());
         }
 
         Pedido segundoPedido = mesa.getComanda().getPedidos().get(0);

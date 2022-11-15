@@ -6,9 +6,6 @@ import modelo.Mesa;
 import modelo.Mozo;
 import modelo.Producto;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class EscenarioMesaConDatos {
 
     Empresa empresa;
@@ -34,7 +31,7 @@ public class EscenarioMesaConDatos {
 
     }
 
-    public void borrarMesa(){
+    public void borrarEscenario(){
         empresa.getProductos().remove(this.prod);
         empresa.getMesas().remove(this.mesa);
     }

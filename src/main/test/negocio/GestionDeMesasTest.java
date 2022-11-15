@@ -42,7 +42,9 @@ public class GestionDeMesasTest {
         MesaDTO mesaDTO = new MesaDTO( 1 , 3 );
         try {
             this.gestionDeMesas.altaMesa(mesaDTO);
-        } catch (MesaExistenteException ignored) {}
+        } catch (MesaExistenteException e) {
+            fail("No deberia lanzar excepcion" + e.getMessage());
+        }
 
         Boolean seAgrego = this.gestionDeMesas.getMesas().stream().anyMatch( m -> m.getNroMesa() == mesaDTO.getNroMesa() );
         this.gestionDeMesas.bajaMesa(mesaDTO.getNroMesa());
@@ -80,7 +82,8 @@ public class GestionDeMesasTest {
         gestionDeComandas.abrirComanda(mesaEscenario);
         try {
             gestionDeComandas.cargarPedido(mesaEscenario,pedido);
-        } catch (StockInsuficienteException ignored) {
+        } catch (StockInsuficienteException e) {
+            fail("No deberia lanzar excepcion" + e.getMessage());
         }
 
         mesaDTO.setComanda(mesaEscenario.getComanda());

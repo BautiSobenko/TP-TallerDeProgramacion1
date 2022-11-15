@@ -41,8 +41,8 @@ public class GestionDeMozosTest {
         MozoDTO mozoDTO = new MozoDTO( "Jorge" , "31/12/1999" , 1);
         try {
             this.gestionDeMozos.altaMozo(mozoDTO);
-        } catch (MozoExistenteException ignored) {
-
+        } catch (MozoExistenteException e) {
+            fail("No deberia lanzar excepcion" + e.getMessage());
         }
 
         Boolean seAgrego = this.gestionDeMozos.getMozos().stream().anyMatch( m -> m.getNombreCompleto().equals(mozoDTO.getNombreCompleto())  );
@@ -71,7 +71,7 @@ public class GestionDeMozosTest {
 
         gestionDeMozos.modEstadoMozo(mozoEscenario, estadoMod);
 
-        Optional<Mozo> mozoModificado = gestionDeMozos.getMozos().stream().filter(m -> m.getNombreCompleto() == mozoEscenario.getNombreCompleto()).findFirst();
+        Optional<Mozo> mozoModificado = gestionDeMozos.getMozos().stream().filter(m -> m.getNombreCompleto().equals(mozoEscenario.getNombreCompleto())).findFirst();
 
         if(mozoModificado.isPresent())
             assertEquals("No se modifico el estado correctamente",mozoEscenario.getEstadoMozo(), estadoMod);

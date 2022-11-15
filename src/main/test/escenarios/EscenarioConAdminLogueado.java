@@ -3,10 +3,7 @@ package escenarios;
 import enums.EstadoMesa;
 import excepciones.ContrasenaIncorrectaException;
 import excepciones.UsuarioIncorrectoException;
-import modelo.Empresa;
-import modelo.Mesa;
-import modelo.Mozo;
-import modelo.Producto;
+import modelo.*;
 
 public class EscenarioConAdminLogueado {
 
@@ -14,6 +11,7 @@ public class EscenarioConAdminLogueado {
     Producto prod;
     Mesa mesa;
     Mozo mozo;
+    Operario operario;
 
     public EscenarioConAdminLogueado( ) {
         this.empresa = Empresa.getEmpresa();
@@ -26,6 +24,9 @@ public class EscenarioConAdminLogueado {
         } catch (UsuarioIncorrectoException | ContrasenaIncorrectaException ignored) {
         }
 
+
+        this.operario = new Operario("Luca", "luca", "123" );
+
         this.mozo = new Mozo("Juan", "28/08/2000", 2);
 
         this.mesa = new Mesa(10, 5);
@@ -37,6 +38,8 @@ public class EscenarioConAdminLogueado {
         this.empresa.getProductos().add(prod);
         this.empresa.getMesas().add(mesa);
         this.empresa.getMozos().add(mozo);
+        this.empresa.getOperarios().add(operario);
+
 
     }
 
@@ -44,6 +47,7 @@ public class EscenarioConAdminLogueado {
         empresa.getProductos().remove(this.prod);
         empresa.getMesas().remove(this.mesa);
         empresa.getMozos().remove(this.mozo);
+        empresa.getOperarios().remove(this.operario);
         empresa.logout();
     }
 
@@ -57,5 +61,9 @@ public class EscenarioConAdminLogueado {
 
     public Mozo getMozo() {
         return mozo;
+    }
+
+    public Operario getOperario() {
+        return operario;
     }
 }

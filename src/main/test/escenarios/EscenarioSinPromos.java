@@ -14,31 +14,28 @@ import java.util.Set;
 public class EscenarioSinPromos {
 
     Empresa empresa;
-    Producto prod;
-    PromocionFija promoFija;
-    PromocionTemporal promocionTemporal;
+
+    Set<PromocionFija> promosFijasViejas;
+
+    Set<PromocionTemporal> promosTemporalesViejas;
 
     public void aplicarEscenarioSinPromos(){
 
+        empresa = Empresa.getEmpresa();
         Set<PromocionFija> promosFijas = new HashSet<>();
         Set<PromocionTemporal> promosTemporales = new HashSet<>();
 
+        promosFijasViejas = empresa.getPromocionesFijas();
+        promosTemporalesViejas = empresa.getPromocionesTemporales();
 
+        empresa.setPromocionesFijas(promosFijas);
+        empresa.setPromocionesTemporales(promosTemporales);
     }
 
     public void borrarEscenario(){
-        empresa.getProductos().remove(this.prod);
-        empresa.getPromocionesTemporales().remove(promocionTemporal);
-        empresa.getPromocionesFijas().remove(promoFija);
+        empresa.setPromocionesTemporales(promosTemporalesViejas);
+        empresa.setPromocionesFijas(promosFijasViejas);
     }
-
-    public Producto getProd() {
-        return prod;
-    }
-
-    public PromocionFija getPromoFija(){return promoFija;}
-
-    public PromocionTemporal getPromoTemporal(){return  promocionTemporal;}
 
 
 }
